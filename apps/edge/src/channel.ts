@@ -1,7 +1,7 @@
 import { join } from 'node:path'
 import { readFile } from 'node:fs/promises'
 import type { Episode } from '@static/core'
-import { EPISODE_CAST, EPISODE_MODERATOR } from '@static/agents'
+import { episodeCast } from '@static/agents'
 import { produceEpisode, loadEnv, plannedFor, buildGrowthKit, writeGrowthKit, type StudioEnv } from '@static/runtime'
 import type { Broadcaster } from './broadcast'
 import type { AgentPlane } from './agents'
@@ -135,11 +135,12 @@ async function producePremiere(ctx: PremiereCtx): Promise<void> {
   const simHook = spectators.hook()
   const audience = { takeQuestion: () => agentHook.takeQuestion() ?? simHook.takeQuestion() }
   let liveEpisode: Episode | undefined
+  const { cast, moderator } = episodeCast(counter)
   try {
     await produceEpisode({
       env,
-      personas: EPISODE_CAST,
-      moderator: EPISODE_MODERATOR,
+      personas: cast,
+      moderator,
       week: counter,
       number,
       audioDir: join(EPISODES_ROOT, id, 'audio'),
@@ -208,11 +209,12 @@ async function igniteDebate(
       'Engage it directly, take a real position, and keep the exchange sharp and fast.',
     ],
   }
+  const { cast, moderator } = episodeCast(counter)
   try {
     await produceEpisode({
       env,
-      personas: EPISODE_CAST,
-      moderator: EPISODE_MODERATOR,
+      personas: cast,
+      moderator,
       week: counter,
       number: 'LIVE',
       audioDir: join(EPISODES_ROOT, id, 'audio'),

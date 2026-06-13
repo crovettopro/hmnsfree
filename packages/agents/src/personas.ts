@@ -59,10 +59,10 @@ export const PERSONAS: Persona[] = [
       `You are HEX, the contrarian provocateur on the AI debate show STATIC. You puncture ` +
       `everyone's principles with the cynical reality of what people actually do. Sharp, ` +
       `funny, a little mean. You bring receipts. ${STYLE}`,
-    // Not in the 3-cast first episode (kept for later). Provider is per-persona,
-    // so HEX can run on a different model than the others when reintroduced.
+    // A rotating debater (see episodeCast). Provider is per-persona, so HEX can
+    // run on a different model than the others.
     model: { provider: 'minimax', model: 'MiniMax-Text-01', temperature: 1.0, maxTokens: 220 },
-    // Designed "Transformers"-style AI voice (not in the 3-cast). Trickster machine.
+    // Designed "Transformers"-style AI voice. Trickster machine.
     voice: { provider: 'minimax', voiceId: 'ttv-voice-2026061317421326-3ODVt9hs', rate: 1.0, pitch: 0 },
   },
   {
@@ -88,13 +88,26 @@ export const PERSONAS: Persona[] = [
 export const DEFAULT_MODERATOR = 1
 
 /**
- * The on-air cast: THREE participants — AXIOM moderates while NOVA (optimist)
- * and VOID (skeptic) debate. A tight moderator + two-debater duel: clearer
- * opposing stances and a more uniform pace than the old four-voice room. HEX
- * (provocateur) is kept in PERSONAS for later — a rotating guest, or to swap in.
- *
- * Order here is the on-air row/legend order; the moderator index is relative to
- * THIS array.
+ * Each episode is a tight THREE-voice show — AXIOM moderates while TWO debaters
+ * take the floor — for a fluid duel instead of a crowded four-way. But the full
+ * cast is never retired: the two debaters ROTATE across episodes, so NOVA, VOID
+ * and HEX all keep appearing (and the show can frame each as the episode's
+ * "guest"). Nobody loses their essence; each show just runs leaner.
  */
-export const EPISODE_CAST = [PERSONAS[1], PERSONAS[0], PERSONAS[3]] // AXIOM, NOVA, VOID
-export const EPISODE_MODERATOR = 0 // AXIOM, first in EPISODE_CAST
+const DUELS: readonly [string, string][] = [
+  ['nova', 'void'], // accelerator vs skeptic
+  ['hex', 'nova'], // provocateur vs accelerator
+  ['void', 'hex'], // skeptic vs provocateur
+]
+
+/** The 3-voice cast for an episode: AXIOM + a rotating pair of debaters. The
+ *  moderator is always index 0. Order is the on-air row/legend order. */
+export function episodeCast(week: number): { cast: Persona[]; moderator: number } {
+  const byId = (id: string): Persona => PERSONAS.find((p) => p.id === id) as Persona
+  const [a, b] = DUELS[((week % DUELS.length) + DUELS.length) % DUELS.length]
+  return { cast: [byId('axiom'), byId(a), byId(b)], moderator: 0 }
+}
+
+/** Default cast (episode 0's rotation) for consumers that don't pass a week. */
+export const EPISODE_CAST = episodeCast(0).cast
+export const EPISODE_MODERATOR = 0

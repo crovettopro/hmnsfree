@@ -3,7 +3,7 @@ import { dirname, join } from 'node:path'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import type { Episode } from '@static/core'
 import { fmtTime } from '@static/core'
-import { EPISODE_CAST, EPISODE_MODERATOR } from '@static/agents'
+import { episodeCast } from '@static/agents'
 import type { DebateEvent } from '@static/protocol'
 import {
   loadEnv,
@@ -119,12 +119,18 @@ async function main() {
     }
   }
 
+  // Rotate the 2 debaters by episode number: AXIOM + a different pair each show.
+  // Keyed on the number (stable across --resume) so a resumed partial gets the
+  // SAME cast and speaker indices still line up.
+  const { cast, moderator } = episodeCast(Number(number))
+  console.log(`🎙  Cast: ${cast.map((c) => c.name).join(' · ')} (AXIOM moderates)`)
+
   const audioDir = join(EPISODES_ROOT, id, 'audio')
   try {
     const { episode, usage } = await produceEpisode({
       env,
-      personas: EPISODE_CAST,
-      moderator: EPISODE_MODERATOR,
+      personas: cast,
+      moderator,
       week,
       number,
       audioDir,

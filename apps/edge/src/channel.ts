@@ -27,6 +27,12 @@ const sleep = (ms: number) =>
 export async function runChannel(opts: ChannelOptions): Promise<void> {
   const env = loadEnv()
   const { broadcaster } = opts
+  // Audio is served BY the edge (see static.ts), so URLs are absolute to the
+  // edge's public origin — the web (another origin in prod) fetches clips here.
+  const publicUrl = (
+    process.env.STATIC_EDGE_PUBLIC_URL ??
+    `http://localhost:${process.env.PORT ?? process.env.STATIC_EDGE_PORT ?? 8787}`
+  ).replace(/\/$/, '')
   // Only real (live-mode) episodes join the permanent VOD library; mock-sim runs
   // stream + checkpoint to disk but stay out of the browser index to avoid junk.
   const keepInLibrary = env.mode === 'live'
@@ -54,7 +60,7 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
         week: counter,
         number,
         audioDir: join(EPISODES_ROOT, id, 'audio'),
-        audioUrlBase: `/episodes/${id}/audio`,
+        audioUrlBase: `${publicUrl}/episodes/${id}/audio`,
         minTurns: opts.minTurns,
         maxTurns: opts.maxTurns,
         realtime: true, // live edge: unfold the debate on a real-time broadcast clock

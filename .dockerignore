@@ -1,0 +1,11 @@
+node_modules
+**/node_modules
+**/dist
+.git
+.turbo
+out
+apps/web/public/episodes/*/audio
+*.tsbuildinfo
+.DS_Store
+.env
+content

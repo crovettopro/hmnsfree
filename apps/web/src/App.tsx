@@ -47,7 +47,8 @@ export function App() {
   // The library is the studio/edge-produced episodes (loaded at runtime). No
   // hand-authored seeds — only real, voiced episodes ship.
   const [episodes, setEpisodes] = useState<Episode[]>([])
-  const [episodeId, setEpisodeId] = useState('')
+  // A share link (/s/<id>.html → /?ep=<id>) deep-links straight to an episode.
+  const [episodeId, setEpisodeId] = useState(() => new URLSearchParams(window.location.search).get('ep') ?? '')
   const [view, setView] = useState<View>('full')
   const [mode, setMode] = useState<Mode>('replay')
   const [browserOpen, setBrowserOpen] = useState(false)

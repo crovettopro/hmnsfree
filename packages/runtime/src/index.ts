@@ -14,5 +14,7 @@ export { appendLedger, summarizeLedger, readLedgerEntries, projectLedger, PLANS 
 export type { LedgerEntry, LedgerProjection, Plan } from './ledger'
 export { buildGrowthKit, writeGrowthKit, readGrowthKit } from './growth'
 export type { GrowthKit } from './growth'
+export { buildSharePage, buildRss, buildJsonFeed, SITE_URL } from './feed'
+export type { FeedEpisode, ChannelMeta } from './feed'
 export { loadSchedule, saveSchedule, plannedFor, nextScheduled } from './schedule-store'
 export { planUpcoming, type PlanOptions } from './showrunner'

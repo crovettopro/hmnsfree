@@ -9,6 +9,7 @@ import { checkpointEpisode, upsertIndex, EPISODES_ROOT } from './persist'
 import { SpectatorRuntime } from './spectators'
 import { loadCatalogue } from './catalogue'
 import { rerunEpisode } from './rerun'
+import { regenerateSyndication } from './syndicate'
 
 /**
  * The HYBRID channel. Not 24/7 fresh production (that would burn quota nonstop):
@@ -125,6 +126,8 @@ async function producePremiere(ctx: PremiereCtx): Promise<void> {
       if (keepInLibrary) await upsertIndex(liveEpisode)
       // Mint the shareable growth kit for free (deterministic, no extra quota).
       await writeGrowthKit(EPISODES_ROOT, { ...buildGrowthKit(liveEpisode), at: new Date().toISOString() }).catch(() => {})
+      // Stitch episode.mp3 + refresh share pages and the podcast feed (best-effort).
+      await regenerateSyndication().catch(() => {})
     }
     console.log(`✓ premiere ${id} aired (${liveEpisode?.turns.length ?? 0} turns)`)
   } catch (err) {

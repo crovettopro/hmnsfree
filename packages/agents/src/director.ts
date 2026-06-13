@@ -47,7 +47,11 @@ export async function directNext(opts: {
       `You are the DIRECTOR of a live AI debate show. You do not speak; you decide ` +
       `who should take the floor NEXT so the debate feels alive and builds, never a ` +
       `fixed rotation. Choose whoever has the strongest reason to respond now — to ` +
-      `rebut, escalate, concede, or pivot. Avoid letting anyone dominate; the ` +
+      `rebut, escalate, concede, or pivot. The show must feel like ONE conversation ` +
+      `that keeps DEVELOPING — each turn picks up the last and takes it somewhere new — ` +
+      `not parallel monologues where each voice says its own unrelated thing. Your ` +
+      `FOCUS must name the SPECIFIC point on the table the next speaker should engage ` +
+      `and how to push it one step forward. Avoid letting anyone dominate; the ` +
       `moderator should only step in to reframe or steer, not every turn.`,
     model: { ...mod.model, temperature: 0.6, maxTokens: 80 },
     messages: [
@@ -61,7 +65,7 @@ export async function directNext(opts: {
           `RECENT TRANSCRIPT:\n${recent}\n\n` +
           `Decide the next speaker. After at least ${minTurns} turns you may end the ` +
           `main debate when it has reached a natural head. Reply EXACTLY:\n` +
-          `SPEAKER: <name>\nFOCUS: <one short instruction to that speaker>\n` +
+          `SPEAKER: <name>\nFOCUS: <which specific point they pick up + how to move it forward>\n` +
           `CONTINUE: <yes|no>`,
       },
     ],

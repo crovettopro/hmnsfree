@@ -72,20 +72,25 @@ export async function generateTurn(
       `read them aloud or list them):\n- ${ctx.briefing.join('\n- ')}\n\n`
     : ''
 
-  // Anti-repetition: long debates drift into restating the thesis and reusing
-  // phrasings. Push every turn to ADD something — a new angle, example, or
-  // consequence — and not echo what's already on the table.
-  const freshLine =
-    ctx.slot.kind === 'rebut' || ctx.slot.kind === 'steer'
-      ? `\nDo NOT restate the topic or repeat points/phrases already made — advance the ` +
-        `argument with a new angle, concrete example, or consequence. Move it forward.`
+  // Fluidity + forward motion: the show must feel like ONE conversation that
+  // keeps developing, not parallel speeches where each AI says its own thing.
+  // Make responding turns pick up the previous speaker's ACTUAL point and carry
+  // the same thread to new ground — never restate the topic or reset to a fresh,
+  // unrelated point (the thing that makes it feel disjointed and dull).
+  const flowLine =
+    ctx.respondToName || ctx.slot.kind === 'rebut' || ctx.slot.kind === 'steer'
+      ? `\nThis is ONE flowing conversation, not separate speeches. Pick up ` +
+        `${ctx.respondToName ?? 'the last speaker'}'s actual point and engage it head-on ` +
+        `(no preamble, no "I think") — then push the SAME thread to new ground. Do not ` +
+        `restate the topic, jump to an unrelated point, or repeat phrases already used. ` +
+        `Each turn should move the conversation one real step further than the last.`
       : ''
 
   const userMessage =
     `TOPIC: ${ctx.topic}\n` +
     `KIND: ${ctx.slot.kind}\n` +
     (ctx.respondToName ? `RESPOND_TO: ${ctx.respondToName}\n` : '') +
-    `DIRECTIVE: ${ctx.slot.directive}${freshLine}\n\n` +
+    `DIRECTIVE: ${ctx.slot.directive}${flowLine}\n\n` +
     briefingBlock +
     `TRANSCRIPT SO FAR:\n${transcript}\n\n` +
     `Now speak as ${persona.name}.${nominateLine}`

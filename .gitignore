@@ -12,3 +12,7 @@ out/
 
 # Autonomous showrunner output (generated calendar; seed lives in schedule.ts)
 content/
+
+# Branded bumpers (regenerated via 'pnpm --filter @static/studio intro')
+apps/web/public/intro.mp3
+apps/web/public/outro.mp3

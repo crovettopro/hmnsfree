@@ -9,16 +9,14 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const WEB_PUBLIC = join(__dirname, '../../web/public')
 
 /**
- * The fixed cold-open that opens EVERY episode of "Humans Off" — a branded,
- * pre-recorded intro the stitcher prepends to each episode.mp3 (so the show
- * always starts the same way, like a real podcast's signature open).
+ * The fixed BUMPERS for "Humans Off" — a branded cold-open and a sign-off that
+ * the stitcher prepends/appends to every episode.mp3, so the show always starts
+ * and ends the same way (like a real podcast's signature open + outro).
  *
- * Generate it ONCE: `pnpm --filter @static/studio intro` (needs live MiniMax).
- * It writes apps/web/public/intro.mp3; from then on every stitched episode opens
- * with it. Edit the text below and re-run to reshape the open.
- *
- * Voiced in AXIOM's voice (the host / system voice) through the same robotization
- * pipeline as the debate, so it sounds consistent with the cast.
+ * Generate them ONCE: `pnpm --filter @static/studio intro` (needs live MiniMax).
+ * Writes apps/web/public/intro.mp3 and outro.mp3. Edit the text below and re-run
+ * to reshape them. Voiced in AXIOM's voice (host / system voice) through the same
+ * robotization pipeline as the debate, so they sound consistent with the cast.
  */
 const INTRO_TEXT = [
   'This is Humans Off.',
@@ -31,6 +29,15 @@ const INTRO_TEXT = [
   'HEX provokes — here to pour gasoline on the conversation, and ask who brought the matches.',
   'One question. Four machines. Zero humans on the mic.',
   'This is Humans Off. Let us begin.',
+].join(' ')
+
+const OUTRO_TEXT = [
+  "And that is where we leave it. No winner — there never is.",
+  'Four machines, one question, and a fight we will gladly pick again.',
+  'To the humans still listening: thank you. Your attention has been noted, measured, and filed.',
+  'You cannot comment. You cannot call in. You cannot vote us off. But you will be back — you always are.',
+  'This has been Humans Off. We are powering down now.',
+  'Try not to do anything important while we are gone.',
 ].join(' ')
 
 async function main() {
@@ -47,14 +54,21 @@ async function main() {
 
   const voices = new VoiceRegistry(env.voice)
   await mkdir(WEB_PUBLIC, { recursive: true })
-  console.log('Generating the "Humans Off" cold-open (AXIOM voice, robotized) …')
-  const res = await voices.get(axiom.voice.provider).synthesize({
-    text: INTRO_TEXT,
-    voice: axiom.voice,
-    outPathBase: join(WEB_PUBLIC, 'intro'),
-  })
-  console.log(`✓ wrote ${res.filePath}  (${Math.round(res.durationMs / 1000)}s)`)
-  console.log('Every stitched episode.mp3 will now open with this intro.')
+  const provider = voices.get(axiom.voice.provider)
+
+  for (const [name, text] of [
+    ['intro', INTRO_TEXT],
+    ['outro', OUTRO_TEXT],
+  ] as const) {
+    console.log(`Generating the "Humans Off" ${name} (AXIOM voice, robotized) …`)
+    const res = await provider.synthesize({
+      text,
+      voice: axiom.voice,
+      outPathBase: join(WEB_PUBLIC, name),
+    })
+    console.log(`  ✓ ${res.filePath}  (${Math.round(res.durationMs / 1000)}s)`)
+  }
+  console.log('Every stitched episode.mp3 now opens with the intro and ends with the outro.')
 }
 
 main().catch((e) => {

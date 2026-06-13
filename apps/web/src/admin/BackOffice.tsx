@@ -50,6 +50,20 @@ interface Stats {
   }
 }
 
+/**
+ * The outreach board: where the show gets promoted. A curated list of venues
+ * (seeded with the ones we know work) paired with the latest episode's ready-to-
+ * copy post, so promoting is one click. This is the manual half of the growth
+ * agent; a cron can later post to the API-friendly ones automatically.
+ */
+const VENUES: { name: string; url: string; note: string; postIdx: number }[] = [
+  { name: 'moltbook', url: 'https://www.moltbook.com/', note: 'AI/tech community — flagged as a good fit', postIdx: 0 },
+  { name: 'X / Twitter', url: 'https://x.com/compose/post', note: 'the pull-quote travels best here', postIdx: 1 },
+  { name: 'Reddit', url: 'https://www.reddit.com/r/artificial/submit', note: 'r/artificial, r/singularity', postIdx: 0 },
+  { name: 'Hacker News', url: 'https://news.ycombinator.com/submitlink', note: 'Show HN — lead with the "AIs only" hook', postIdx: 2 },
+  { name: 'Discord', url: '', note: 'AI dev servers — drop the share link', postIdx: 2 },
+]
+
 const fmtDur = (ms: number) => {
   const s = Math.round(ms / 1000)
   const m = Math.floor(s / 60)
@@ -229,6 +243,42 @@ export function BackOffice() {
               )}
             </div>
           </section>
+
+          {/* ── Outreach board ── */}
+          {(() => {
+            const latest = stats.library.episodes.find((e) => e.growth)
+            const share = latest ? `${window.location.origin}/s/${latest.id}.html` : ''
+            return (
+              <section className="bo__card bo__card--wide">
+                <h2>PROMOTE {latest && <span className="bo__count">{latest.number}</span>}</h2>
+                {!latest ? (
+                  <p className="bo__note">No episode to promote yet.</p>
+                ) : (
+                  <>
+                    <p className="bo__note">
+                      Share link: <a href={share} target="_blank" rel="noreferrer"><code>{share}</code></a> — pastes as a rich card. Each venue below has a ready post to copy.
+                    </p>
+                    <table className="bo__table">
+                      <thead><tr><th>venue</th><th>what to post</th><th></th></tr></thead>
+                      <tbody>
+                        {VENUES.map((v, i) => {
+                          const post = `${latest.growth!.posts[v.postIdx] ?? latest.growth!.posts[0]}\n${share}`
+                          return (
+                            <tr key={i}>
+                              <td className="bo__mono">{v.url ? <a href={v.url} target="_blank" rel="noreferrer">{v.name}</a> : v.name}</td>
+                              <td className="bo__dim">{v.note}</td>
+                              <td><button className="bo__copy" onClick={() => copy(post, `v-${i}`)}>{copied === `v-${i}` ? '✓ copied' : 'copy post'}</button></td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
+                    <p className="bo__note">Submit to Spotify/Apple/YouTube: point the directory at <code>{window.location.origin}/feed.xml</code> (set a real owner email first — <code>STATIC_FEED_EMAIL</code>).</p>
+                  </>
+                )}
+              </section>
+            )
+          })()}
         </div>
       )}
     </div>

@@ -36,10 +36,11 @@ export interface ChannelMeta {
 }
 
 const DEFAULT_CHANNEL: ChannelMeta = {
-  title: 'STATIC — AI-only debates',
+  title: process.env.STATIC_FEED_TITLE ?? 'STATIC — AI-only debates',
   description: 'An autonomous podcast where AIs debate. Humans listen; only models take part.',
-  author: 'STATIC',
-  email: 'hello@static.audio',
+  author: process.env.STATIC_FEED_AUTHOR ?? 'STATIC',
+  // Podcast directories require a real owner email — set STATIC_FEED_EMAIL before submitting.
+  email: process.env.STATIC_FEED_EMAIL ?? 'hello@static.audio',
 }
 
 const esc = (s: string) =>

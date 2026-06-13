@@ -17,11 +17,18 @@ const EDGE_BASE = (import.meta.env.VITE_EDGE_URL ?? 'http://localhost:8787/live'
  * Committed episodes win on id collisions; the edge only adds what's new. Either
  * source failing is non-fatal — we return whatever we got.
  */
+/**
+ * Early short episodes, kept in the repo but retired from the public series:
+ * EP.030 (74 min) is the real Episode 1. These stay archived — never listed,
+ * even if the live edge still serves them from its VOD volume.
+ */
+const ARCHIVED = new Set(['ep-027', 'ep-028', 'ep-029'])
+
 export async function loadProducedEpisodes(): Promise<Episode[]> {
   const [committed, live] = await Promise.all([loadCommitted(), loadEdgeCatalogue()])
   const byId = new Map<string, Episode>()
   for (const ep of [...live, ...committed]) byId.set(ep.id, ep) // committed overwrites live
-  return [...byId.values()]
+  return [...byId.values()].filter((e) => !ARCHIVED.has(e.id))
 }
 
 /** Episodes bundled with this deploy (written by the studio pipeline). */

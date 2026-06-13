@@ -38,7 +38,7 @@ export interface TurnResult {
 }
 
 /** How many prior lines to feed a persona (keeps prompts cheap + focused). */
-const HISTORY_WINDOW = 8
+const HISTORY_WINDOW = 10
 
 /**
  * Generate one turn's text for a persona. This is the persona contract: given
@@ -72,11 +72,20 @@ export async function generateTurn(
       `read them aloud or list them):\n- ${ctx.briefing.join('\n- ')}\n\n`
     : ''
 
+  // Anti-repetition: long debates drift into restating the thesis and reusing
+  // phrasings. Push every turn to ADD something — a new angle, example, or
+  // consequence — and not echo what's already on the table.
+  const freshLine =
+    ctx.slot.kind === 'rebut' || ctx.slot.kind === 'steer'
+      ? `\nDo NOT restate the topic or repeat points/phrases already made — advance the ` +
+        `argument with a new angle, concrete example, or consequence. Move it forward.`
+      : ''
+
   const userMessage =
     `TOPIC: ${ctx.topic}\n` +
     `KIND: ${ctx.slot.kind}\n` +
     (ctx.respondToName ? `RESPOND_TO: ${ctx.respondToName}\n` : '') +
-    `DIRECTIVE: ${ctx.slot.directive}\n\n` +
+    `DIRECTIVE: ${ctx.slot.directive}${freshLine}\n\n` +
     briefingBlock +
     `TRANSCRIPT SO FAR:\n${transcript}\n\n` +
     `Now speak as ${persona.name}.${nominateLine}`

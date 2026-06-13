@@ -219,25 +219,37 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
   }
 
   // Resolve a nomination (a name) to a DEBATER index (never the moderator, never
-  // the same speaker twice in a row). Falls back to the least-recently-heard.
+  // the same speaker twice in a row).
   const lastSpeaker = () => (history.length ? history[history.length - 1].name : '')
+  const debaterIdx = personas.map((_, i) => i).filter((i) => i !== moderator)
+  const countOf = (i: number) => history.reduce((n, h) => (h.name === personas[i].name ? n + 1 : n), 0)
   const resolveDebater = (nom: string | undefined): number => {
+    // candidates = debaters who didn't just speak.
+    const cands = debaterIdx.filter((i) => personas[i].name !== lastSpeaker())
+    const pool = cands.length ? cands : debaterIdx
+
+    // FAIRNESS GUARD: debaters nominate each other, which over a long run lets two
+    // voices form a loop and starve a third (we saw NOVA get 1% of a 105-turn show).
+    // If anyone has fallen ≥2 turns behind the busiest debater, force the most
+    // starved (least turns, then least-recently-heard) to take the floor. This caps
+    // the gap so the debate stays balanced while nominations still drive the flow.
+    const maxC = Math.max(...debaterIdx.map(countOf))
+    const starved = [...pool].sort((a, b) => countOf(a) - countOf(b) || lastHeard(a) - lastHeard(b))[0]
+    if (starved !== undefined && maxC - countOf(starved) >= 2) return starved
+
+    // Otherwise honor the nomination if it's a valid debater that didn't just speak.
     const want = (nom ?? '').toUpperCase()
-    let idx = personas.findIndex((p, i) => i !== moderator && p.name.toUpperCase() === want)
-    if (idx < 0) idx = personas.findIndex((p, i) => i !== moderator && want.includes(p.name.toUpperCase()))
-    if (idx >= 0 && personas[idx].name !== lastSpeaker()) return idx
+    let idx = pool.find((i) => personas[i].name.toUpperCase() === want)
+    if (idx === undefined) idx = pool.find((i) => want.includes(personas[i].name.toUpperCase()))
+    if (idx !== undefined) return idx
+
     // Fallback: the debater who has spoken least recently.
-    const order = personas
-      .map((p, i) => ({ i, name: p.name }))
-      .filter((p) => p.i !== moderator && p.name !== lastSpeaker())
-    let best = order[0]?.i ?? (moderator + 1) % personas.length
-    let bestSeen = Infinity
-    for (const { i, name } of order) {
-      let lastAt = -1
-      for (let h = history.length - 1; h >= 0; h--) if (history[h].name === name) { lastAt = h; break }
-      if (lastAt < bestSeen) { bestSeen = lastAt; best = i }
-    }
-    return best
+    return [...pool].sort((a, b) => lastHeard(a) - lastHeard(b))[0] ?? (moderator + 1) % personas.length
+  }
+  // Index in history of a persona's last turn (-1 if never), for tie-breaking.
+  const lastHeard = (i: number): number => {
+    for (let h = history.length - 1; h >= 0; h--) if (history[h].name === personas[i].name) return h
+    return -1
   }
 
   // 2) Opening — the moderator frames the question and hands to the first debater.

@@ -1,9 +1,11 @@
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http'
 import { Broadcaster } from './broadcast'
 import { runChannel } from './channel'
-import { serveEpisodes } from './static'
+import { serveEpisodes, servePublic } from './static'
 import { AgentPlane } from './agents'
 import { buildStats } from './stats'
+import { loadCatalogue } from './catalogue'
+import { ensureDataDir } from './persist'
 
 /**
  * STATIC live edge. A tiny HTTP server with two planes:
@@ -69,6 +71,16 @@ const server = createServer(async (req, res) => {
   if (url.startsWith('/live')) return broadcaster.addClient(res)
   if (url.startsWith('/health')) return json(res, 200, { ok: true, listeners: broadcaster.listenerCount, agents: agents.count })
   if (url.startsWith('/episodes/')) return void serveEpisodes(url, res)
+  if (url === '/feed.xml' || url === '/feed.json' || url.startsWith('/s/')) return void servePublic(url, res)
+  // The live VOD catalogue: the web merges this into its replay library so
+  // premieres appear automatically — no commit, no git bloat from audio.
+  if (url.startsWith('/catalogue')) {
+    try {
+      return json(res, 200, { episodes: await loadCatalogue() })
+    } catch {
+      return json(res, 200, { episodes: [] })
+    }
+  }
 
   // ── Back office ──
   if (url.startsWith('/stats')) {
@@ -107,8 +119,10 @@ server.listen(PORT, () => {
   console.log(`STATIC edge listening on http://localhost:${PORT}  (SSE: /live · API: /api · stats: /stats)`)
 })
 
-// Start the hybrid channel (premiere + reruns). Real connected agents feed the
+// Seed a persistent volume on first boot (no-op without STATIC_DATA_DIR), then
+// start the hybrid channel (premiere + reruns). Real connected agents feed the
 // moderator's Q&A; the simulated spectators fill in when no one's connected.
+await ensureDataDir()
 runChannel({
   broadcaster,
   agents,

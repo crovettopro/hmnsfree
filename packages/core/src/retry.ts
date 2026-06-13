@@ -46,6 +46,20 @@ export function isRateLimitError(err: unknown): boolean {
   return /\b429\b|rate.?limit|too many|1002|1039|1429|temporarily/i.test(msg)
 }
 
+/**
+ * Broader transient-error test for long production runs (hundreds of calls):
+ * rate limits PLUS server 5xx, network/socket failures, timeouts/aborts, and
+ * empty/no-content blips. A single non-fatal hiccup on turn 30 of 60 should ride
+ * out on a retry, not truncate the whole episode.
+ */
+export function isTransientError(err: unknown): boolean {
+  if (isRateLimitError(err)) return true
+  const msg = err instanceof Error ? err.message : String(err)
+  return /\b5\d\d\b|server error|bad gateway|service unavailable|gateway timeout|timed?.?out|timeout|abort|network|fetch failed|socket|ECONNRESET|ECONNREFUSED|ETIMEDOUT|ENOTFOUND|EAI_AGAIN|empty content|no audio|no content/i.test(
+    msg,
+  )
+}
+
 function sleep(ms: number): Promise<void> {
   // Access setTimeout via globalThis so this stays lib-agnostic (works whether or
   // not the consuming package includes the DOM/node typings).

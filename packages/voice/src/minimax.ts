@@ -1,7 +1,9 @@
 import { writeFile } from 'node:fs/promises'
-import { withRetry, isRateLimitError } from '@static/core'
+import { withRetry, isTransientError } from '@static/core'
 import type { VoiceProvider, SynthesizeRequest, SynthesizeResult } from './types'
 import type { WordTiming } from '@static/core'
+
+const TTS_TIMEOUT_MS = Number(process.env.STATIC_TTS_TIMEOUT_MS ?? 90_000)
 
 /**
  * MiniMax text-to-audio (T2A v2) provider. We consolidate TTS on MiniMax (one
@@ -26,40 +28,50 @@ export class MiniMaxVoiceProvider implements VoiceProvider {
     const qs = this.groupId ? `?GroupId=${encodeURIComponent(this.groupId)}` : ''
     return withRetry(
       async () => {
-        const res = await fetch(`${this.baseUrl}/v1/t2a_v2${qs}`, {
-          method: 'POST',
-          headers: { authorization: `Bearer ${this.apiKey}`, 'content-type': 'application/json' },
-          body: JSON.stringify({
-            model: this.model,
-            text: req.text,
-            stream: false,
-            voice_setting: {
-              voice_id: req.voice.voiceId,
-              speed: clamp(req.voice.rate ?? 1, 0.5, 2),
-              vol: 1.0,
-              pitch: clampInt(Math.round(req.voice.pitch ?? 0), -12, 12),
-            },
-            audio_setting: { sample_rate: 32000, bitrate: 128000, format: 'mp3', channel: 1 },
-          }),
-        })
-        if (!res.ok) throw new Error(`MiniMax T2A ${res.status}: ${await res.text()}`)
-        const data: any = await res.json()
-        if (data.base_resp && data.base_resp.status_code !== 0) {
-          throw new Error(`MiniMax T2A ${data.base_resp.status_code}: ${data.base_resp.status_msg}`)
+        // Bound every TTS call so a hung connection can't freeze the episode.
+        const ac = new AbortController()
+        const timer = setTimeout(() => ac.abort(new Error('MiniMax T2A timeout')), TTS_TIMEOUT_MS)
+        try {
+          const res = await fetch(`${this.baseUrl}/v1/t2a_v2${qs}`, {
+            method: 'POST',
+            headers: { authorization: `Bearer ${this.apiKey}`, 'content-type': 'application/json' },
+            body: JSON.stringify({
+              model: this.model,
+              text: req.text,
+              stream: false,
+              voice_setting: {
+                voice_id: req.voice.voiceId,
+                speed: clamp(req.voice.rate ?? 1, 0.5, 2),
+                vol: 1.0,
+                pitch: clampInt(Math.round(req.voice.pitch ?? 0), -12, 12),
+              },
+              audio_setting: { sample_rate: 32000, bitrate: 128000, format: 'mp3', channel: 1 },
+            }),
+            signal: ac.signal,
+          })
+          if (!res.ok) throw new Error(`MiniMax T2A ${res.status}: ${await res.text()}`)
+          const data: any = await res.json()
+          if (data.base_resp && data.base_resp.status_code !== 0) {
+            throw new Error(`MiniMax T2A ${data.base_resp.status_code}: ${data.base_resp.status_msg}`)
+          }
+
+          const hex: string = data.data?.audio ?? ''
+          if (!hex) throw new Error('MiniMax T2A returned no audio')
+          const audio = Buffer.from(hex, 'hex')
+          const filePath = `${req.outPathBase}.mp3`
+          await writeFile(filePath, audio)
+
+          const durationMs: number = data.extra_info?.audio_length ?? estimate(req.text)
+          return { filePath, format: 'audio/mpeg', durationMs, wordTimings: spread(req.text, durationMs) }
+        } finally {
+          clearTimeout(timer)
         }
-
-        const hex: string = data.data?.audio ?? ''
-        if (!hex) throw new Error('MiniMax T2A returned no audio')
-        const audio = Buffer.from(hex, 'hex')
-        const filePath = `${req.outPathBase}.mp3`
-        await writeFile(filePath, audio)
-
-        const durationMs: number = data.extra_info?.audio_length ?? estimate(req.text)
-        return { filePath, format: 'audio/mpeg', durationMs, wordTimings: spread(req.text, durationMs) }
       },
       {
-        isRetryable: isRateLimitError,
-        onRetry: (a, ms) => console.warn(`  ⏳ MiniMax TTS rate-limited; retry ${a} in ${ms}ms`),
+        retries: 5,
+        isRetryable: isTransientError,
+        onRetry: (a, ms, err) =>
+          console.warn(`  ⏳ MiniMax TTS retry ${a} in ${ms}ms — ${err instanceof Error ? err.message.slice(0, 80) : ''}`),
       },
     )
   }

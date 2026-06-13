@@ -41,14 +41,14 @@ export interface Plan {
   priceUsd: number
   requestsPerBlock: number
 }
-// Calibrated 2026-06-13 by the limits test: 211 requests measured ≈ 25% of the
-// block (Eduardo's dashboard), and 822 requests in one block (EP.030 211 +
-// EP.900 611) did NOT hit the wall — so the active plan holds ~840 req/block.
-// Eduardo is on the $50 plan, so Max is the measured one; Plus is still an
+// Calibrated 2026-06-13 by the limits test. 822 requests in one block (EP.030
+// 211 + EP.900 611) read as 93% on Eduardo's dashboard → the active ($50) plan
+// holds ~884 req/block, and never hit the wall. A daily ~30-min premiere is
+// ~211 req (~24%), so one episode/day has huge headroom. Plus is still a rough
 // estimate pending its own test.
 export const PLANS: Plan[] = [
-  { name: 'Plus', priceUsd: 20, requestsPerBlock: 340 }, // estimate (not yet measured)
-  { name: 'Max', priceUsd: 50, requestsPerBlock: 840 }, // measured: ~840/block
+  { name: 'Plus', priceUsd: 20, requestsPerBlock: 350 }, // estimate (not yet measured)
+  { name: 'Max', priceUsd: 50, requestsPerBlock: 884 }, // measured: 822 req = 93%
 ]
 
 async function readLedger(): Promise<LedgerEntry[]> {

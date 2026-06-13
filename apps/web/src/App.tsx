@@ -12,6 +12,18 @@ import { Footer } from './components/Footer'
 import { EpisodeBrowser } from './components/EpisodeBrowser'
 import { AiInfoCard } from './components/AiInfoCard'
 import { LiveView } from './components/LiveView'
+import { BackOffice } from './admin/BackOffice'
+
+/** Reactively tracks whether the URL hash requests the back office (#admin). */
+function useHashRoute(): string {
+  const [hash, setHash] = useState(() => window.location.hash)
+  useEffect(() => {
+    const on = () => setHash(window.location.hash)
+    window.addEventListener('hashchange', on)
+    return () => window.removeEventListener('hashchange', on)
+  }, [])
+  return hash
+}
 
 /** Shown only in the header until the first episode loads (never in the list). */
 const PLACEHOLDER: Episode = {
@@ -39,6 +51,7 @@ export function App() {
   const [mode, setMode] = useState<Mode>('replay')
   const [browserOpen, setBrowserOpen] = useState(false)
   const [selectedAi, setSelectedAi] = useState<Participant | null>(null)
+  const hash = useHashRoute()
 
   // Pull in produced episodes; select the first once they arrive.
   useEffect(() => {
@@ -64,6 +77,9 @@ export function App() {
 
   const engine = useMemo<AudioEngine>(() => new CompositeEngine(), [])
   const player = usePlayer(loading ? undefined : episode, engine)
+
+  // The back office is its own surface — no player chrome, talks only to /stats.
+  if (hash === '#admin') return <BackOffice />
 
   return (
     <div className="app">

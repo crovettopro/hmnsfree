@@ -54,6 +54,57 @@ async function readLedger(): Promise<LedgerEntry[]> {
   }
 }
 
+/** Public read of the accumulated ledger entries (for the back office API). */
+export async function readLedgerEntries(): Promise<LedgerEntry[]> {
+  return readLedger()
+}
+
+export interface LedgerProjection {
+  episodes: number
+  avgRequests: number
+  avgMinutes: number
+  avgTtsChars: number
+  requestsPerAudioMin: number
+  totalRequests: number
+  totalMinutes: number
+  plans: { name: string; priceUsd: number; episodesPerBlock: number; minutesPerBlock: number; episodesPerMonth: number }[]
+}
+
+/**
+ * Turn the raw ledger into the headline numbers the back office shows: averages
+ * per episode and, per plan, how many episodes a 5-hour block actually buys.
+ * Same math as the console report, returned as data instead of printed.
+ */
+export function projectLedger(entries: LedgerEntry[]): LedgerProjection | null {
+  const n = entries.length
+  if (!n) return null
+  const sum = (f: (e: LedgerEntry) => number) => entries.reduce((s, e) => s + f(e), 0)
+  const avgRequests = sum((e) => e.requests) / n
+  const avgMinutes = sum((e) => e.audioMs) / n / 60000
+  const avgTtsChars = sum((e) => e.ttsCharacters) / n
+  const totalMinutes = sum((e) => e.audioMs) / 60000
+  const requestsPerAudioMin = sum((e) => e.requests) / Math.max(1, totalMinutes)
+  return {
+    episodes: n,
+    avgRequests,
+    avgMinutes,
+    avgTtsChars,
+    requestsPerAudioMin,
+    totalRequests: sum((e) => e.requests),
+    totalMinutes,
+    plans: PLANS.map((plan) => {
+      const episodesPerBlock = plan.requestsPerBlock / Math.max(1, avgRequests)
+      return {
+        name: plan.name,
+        priceUsd: plan.priceUsd,
+        episodesPerBlock,
+        minutesPerBlock: episodesPerBlock * avgMinutes,
+        episodesPerMonth: episodesPerBlock * 30,
+      }
+    }),
+  }
+}
+
 /**
  * Append one produced episode to the ledger (creates the file on first run).
  * Re-runs of the same id overwrite. When `mergeWithPrior` (a resume completing a

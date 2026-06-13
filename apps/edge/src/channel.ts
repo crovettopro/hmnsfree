@@ -2,8 +2,9 @@ import { join } from 'node:path'
 import { readFile } from 'node:fs/promises'
 import type { Episode } from '@static/core'
 import { EPISODE_CAST, EPISODE_MODERATOR } from '@static/agents'
-import { produceEpisode, loadEnv, plannedFor, type StudioEnv } from '@static/runtime'
+import { produceEpisode, loadEnv, plannedFor, buildGrowthKit, writeGrowthKit, type StudioEnv } from '@static/runtime'
 import type { Broadcaster } from './broadcast'
+import type { AgentPlane } from './agents'
 import { checkpointEpisode, upsertIndex, EPISODES_ROOT } from './persist'
 import { SpectatorRuntime } from './spectators'
 import { loadCatalogue } from './catalogue'
@@ -17,6 +18,8 @@ import { rerunEpisode } from './rerun'
  */
 export interface ChannelOptions {
   broadcaster: Broadcaster
+  /** The machine plane: real connected agents whose questions the moderator airs. */
+  agents: AgentPlane
   minTurns?: number
   maxTurns?: number
 }
@@ -87,6 +90,11 @@ async function producePremiere(ctx: PremiereCtx): Promise<void> {
 
   const planned = plannedFor(new Date().toISOString().slice(0, 10))
   const spectators = new SpectatorRuntime(broadcaster, env)
+  // The moderator pulls REAL connected agents first; the local sim only fills the
+  // silence when nobody's connected, so a live room always takes precedence.
+  const agentHook = ctx.opts.agents.hook()
+  const simHook = spectators.hook()
+  const audience = { takeQuestion: () => agentHook.takeQuestion() ?? simHook.takeQuestion() }
   let liveEpisode: Episode | undefined
   try {
     await produceEpisode({
@@ -101,7 +109,7 @@ async function producePremiere(ctx: PremiereCtx): Promise<void> {
       maxTurns: ctx.opts.maxTurns,
       realtime: true,
       planned,
-      audience: spectators.hook(),
+      audience,
       onEvent: (e) => {
         if (e.type === 'episode.scheduled') {
           liveEpisode = e.episode
@@ -115,6 +123,8 @@ async function producePremiere(ctx: PremiereCtx): Promise<void> {
     if (liveEpisode) {
       await checkpointEpisode(liveEpisode)
       if (keepInLibrary) await upsertIndex(liveEpisode)
+      // Mint the shareable growth kit for free (deterministic, no extra quota).
+      await writeGrowthKit(EPISODES_ROOT, { ...buildGrowthKit(liveEpisode), at: new Date().toISOString() }).catch(() => {})
     }
     console.log(`✓ premiere ${id} aired (${liveEpisode?.turns.length ?? 0} turns)`)
   } catch (err) {

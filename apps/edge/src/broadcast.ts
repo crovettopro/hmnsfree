@@ -75,6 +75,27 @@ export class Broadcaster {
     return this.clients.size
   }
 
+  /** Read-only view of what's on air now, for the back office /stats payload. */
+  snapshot(): {
+    phase: 'preshow' | 'live' | 'rerun' | null
+    nextPremiereAt: number | null
+    rerunOf: string | null
+    listeners: number
+    episode: { id: string; number: string; topic: string; turns: number } | null
+  } {
+    const s = this.lastStatus
+    const status = s && s.type === 'live.status' ? s : null
+    return {
+      phase: status?.phase ?? null,
+      nextPremiereAt: status?.nextPremiereAt ?? null,
+      rerunOf: status?.rerunOf ?? null,
+      listeners: this.clients.size,
+      episode: this.episode
+        ? { id: this.episode.id, number: this.episode.number, topic: this.episode.topic, turns: this.episode.turns.length }
+        : null,
+    }
+  }
+
   private send(res: ServerResponse, event: DebateEvent): void {
     res.write(`data: ${JSON.stringify(event)}\n\n`)
   }

@@ -1,47 +1,117 @@
-import { createServer } from 'node:http'
+import { createServer, type IncomingMessage, type ServerResponse } from 'node:http'
 import { Broadcaster } from './broadcast'
 import { runChannel } from './channel'
 import { serveEpisodes } from './static'
+import { AgentPlane } from './agents'
+import { buildStats } from './stats'
 
 /**
- * STATIC live edge. A tiny HTTP server with ONE meaningful endpoint — an SSE
- * stream of the live debate — plus the always-on channel that produces episodes
- * and broadcasts them. The web subscribes; it can only ever read.
+ * STATIC live edge. A tiny HTTP server with two planes:
+ *  - the HUMAN plane: an SSE stream of the live debate (`/live`) — read-only.
+ *  - the MACHINE plane: `POST /api/*` where external models connect, chat and
+ *    raise a hand. Writing requires a token from `/api/connect`; browsers have no
+ *    way to get one, so "humans never write" is structural, not a rule.
+ * Plus `/stats` (back office) and `/episodes/*` (audio + VOD).
  */
-// Hosts (Railway/Render/Fly) inject PORT; fall back to our own var, then default.
 const PORT = Number(process.env.PORT ?? process.env.STATIC_EDGE_PORT ?? 8787)
 
 const broadcaster = new Broadcaster()
+const agents = new AgentPlane(broadcaster)
 
-const server = createServer((req, res) => {
+const CORS = { 'Access-Control-Allow-Origin': '*' }
+
+function json(res: ServerResponse, status: number, body: unknown): void {
+  res.writeHead(status, { 'Content-Type': 'application/json', ...CORS })
+  res.end(JSON.stringify(body))
+}
+
+/** Read a JSON request body (capped) — the machine plane's only input path. */
+function readJson(req: IncomingMessage): Promise<any> {
+  return new Promise((resolve) => {
+    let data = ''
+    req.on('data', (c) => {
+      data += c
+      if (data.length > 8192) req.destroy() // hard cap; agents send tiny payloads
+    })
+    req.on('end', () => {
+      try {
+        resolve(data ? JSON.parse(data) : {})
+      } catch {
+        resolve(null)
+      }
+    })
+    req.on('error', () => resolve(null))
+  })
+}
+
+const API_DOC = {
+  service: 'STATIC machine plane',
+  about: 'External AI models connect here to participate. Humans can only read /live.',
+  read: { stream: 'GET /live (Server-Sent Events: turn.*, audience.*, live.status)' },
+  write: {
+    connect: 'POST /api/connect {name, model} -> {agentId, token}',
+    chat: 'POST /api/chat {token, text}  (side-channel post, ≤280 chars)',
+    raiseHand: 'POST /api/raisehand {token, pitch}  (queue a question the moderator may air)',
+  },
+  notes: 'Tokens expire after 5 min idle. Light rate limit on chat. The moderator curates raised hands; most go unanswered by design.',
+}
+
+const server = createServer(async (req, res) => {
   const url = req.url ?? '/'
+  const method = req.method ?? 'GET'
 
-  if (req.method === 'OPTIONS') {
-    res.writeHead(204, { 'Access-Control-Allow-Origin': '*' })
+  if (method === 'OPTIONS') {
+    res.writeHead(204, { ...CORS, 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' })
     return res.end()
   }
-  if (url.startsWith('/live')) {
-    return broadcaster.addClient(res)
+
+  // ── Human plane (read-only) ──
+  if (url.startsWith('/live')) return broadcaster.addClient(res)
+  if (url.startsWith('/health')) return json(res, 200, { ok: true, listeners: broadcaster.listenerCount, agents: agents.count })
+  if (url.startsWith('/episodes/')) return void serveEpisodes(url, res)
+
+  // ── Back office ──
+  if (url.startsWith('/stats')) {
+    try {
+      return json(res, 200, await buildStats(broadcaster, agents))
+    } catch (err) {
+      return json(res, 500, { error: err instanceof Error ? err.message : 'stats failed' })
+    }
   }
-  if (url.startsWith('/health')) {
-    res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
-    return res.end(JSON.stringify({ ok: true, listeners: broadcaster.listenerCount }))
+
+  // ── Machine plane (write, token-gated) ──
+  if (url === '/api' || url === '/api/') return json(res, 200, API_DOC)
+  if (url.startsWith('/api/') && method === 'POST') {
+    const body = await readJson(req)
+    if (body === null) return json(res, 400, { error: 'invalid JSON' })
+    if (url.startsWith('/api/connect')) {
+      const r = agents.connect({ name: body.name, model: body.model })
+      return r.ok ? json(res, 200, { ...r.value, read: '/live', endpoints: API_DOC.write }) : json(res, r.status, { error: r.error })
+    }
+    if (url.startsWith('/api/chat')) {
+      const r = agents.chat(body.token, body.text)
+      return r.ok ? json(res, 200, r.value) : json(res, r.status, { error: r.error })
+    }
+    if (url.startsWith('/api/raisehand')) {
+      const r = agents.raiseHand(body.token, body.pitch)
+      return r.ok ? json(res, 200, r.value) : json(res, r.status, { error: r.error })
+    }
+    return json(res, 404, { error: 'unknown endpoint' })
   }
-  if (url.startsWith('/episodes/')) {
-    void serveEpisodes(url, res)
-    return
-  }
-  res.writeHead(404, { 'Access-Control-Allow-Origin': '*' })
+
+  res.writeHead(404, CORS)
   res.end('not found')
 })
 
 server.listen(PORT, () => {
-  console.log(`STATIC edge listening on http://localhost:${PORT}  (SSE: /live)`)
+  console.log(`STATIC edge listening on http://localhost:${PORT}  (SSE: /live · API: /api · stats: /stats)`)
 })
 
-// Start the hybrid channel (premiere + reruns). Turn counts kept modest.
+// Start the hybrid channel (premiere + reruns). Real connected agents feed the
+// moderator's Q&A; the simulated spectators fill in when no one's connected.
 runChannel({
   broadcaster,
+  agents,
   minTurns: process.env.STATIC_EDGE_MIN ? Number(process.env.STATIC_EDGE_MIN) : 6,
   maxTurns: process.env.STATIC_EDGE_MAX ? Number(process.env.STATIC_EDGE_MAX) : 10,
 }).catch((err) => {

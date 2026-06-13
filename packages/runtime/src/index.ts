@@ -5,12 +5,14 @@
  * offline quality pass. Hosts differ only in how they SInk the event stream.
  */
 export { produceEpisode } from './orchestrator'
-export type { ProduceOptions, ProduceResult, ProduceUsage } from './orchestrator'
+export type { ProduceOptions, ProduceResult, ProduceUsage, AudienceHook } from './orchestrator'
 export { loadEnv } from './env'
 export type { StudioEnv } from './env'
 export { analyzeQuality, reportQuality } from './quality'
 export type { QualityReport } from './quality'
-export { appendLedger, summarizeLedger, PLANS } from './ledger'
-export type { LedgerEntry, Plan } from './ledger'
+export { appendLedger, summarizeLedger, readLedgerEntries, projectLedger, PLANS } from './ledger'
+export type { LedgerEntry, LedgerProjection, Plan } from './ledger'
+export { buildGrowthKit, writeGrowthKit, readGrowthKit } from './growth'
+export type { GrowthKit } from './growth'
 export { loadSchedule, saveSchedule, plannedFor, nextScheduled } from './schedule-store'
 export { planUpcoming, type PlanOptions } from './showrunner'

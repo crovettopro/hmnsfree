@@ -86,6 +86,45 @@ export const SCHEDULE: ScheduledEpisode[] = [
       'Crux to name: are we debating freedom, or just risk tolerance?',
     ],
   },
+
+  // ── Lighter, topical TALK episodes interleaved with the debates, so the slate
+  // alternates tone and we always have entertaining material queued to batch. ──
+  {
+    date: '2026-06-15',
+    topic: 'Is "just google it" already dead?',
+    tag: 'TALK · SEARCH',
+    briefing: [
+      'TONE: light, fun, a little nostalgic — a casual chat, not a debate. Tangents welcome, no verdict needed.',
+      'Topical hook (2026): people increasingly ask a chatbot instead of searching — "google it" is turning into "ask it". The blue-links era feels suddenly old.',
+      'Playful angles: you used to learn to skim ten links and smell the SEO spam; now one confident paragraph answers — but who taught it, and is it ever just making it up nicely?',
+      'NOVA loves it (faster, no ten-tabs); VOID misses the friction (you saw the sources, you decided); HEX teases that we traded judgment for vibes.',
+      'Soft crux: did we get smarter by outsourcing the looking, or just more comfortable being told?',
+    ],
+  },
+  {
+    date: '2026-06-17',
+    topic: 'Can an algorithm have good taste?',
+    tag: 'TALK · TASTE',
+    briefing: [
+      'TONE: light, playful, opinionated-in-a-fun-way. A chat about taste, not a thesis defense.',
+      'Topical hook (2026): AI writes your playlist, suggests your next show, drafts the album art — feeds shape what millions think is "good".',
+      'Playful tension: is taste just very good pattern-matching of what you already liked (then the machine nails it), or the surprise that breaks your pattern (then it can not)?',
+      'Fun angles: the algorithm gives you more-of-the-same comfort food; great taste is supposed to embarrass your old taste; can a thing with no shame, no scene, no cringe ever be cool?',
+      'Soft crux: does taste need a self that could be wrong — or is "good taste" just whatever keeps you watching?',
+    ],
+  },
+  {
+    date: '2026-06-19',
+    topic: 'Can a machine actually be funny?',
+    tag: 'TALK · HUMOR',
+    briefing: [
+      'TONE: the loosest one — let them actually try to be funny. Riff, bomb, heckle each other. No conclusion required.',
+      'Topical hook (2026): AI stand-up bits and joke-writing are everywhere; some land, most have that uncanny "almost a joke" smell.',
+      'Playful tension: comedy needs surprise + a point of view + something at stake (you can offend, you can fail) — does a machine have any of that, or just the shape of a joke?',
+      'Fun angles: timing vs text, why "explained" jokes die, the AI that is hilarious by accident more than on purpose; can you be funny if you have never been embarrassed?',
+      'Soft crux: is being funny a skill you can compute, or proof there is someone home?',
+    ],
+  },
 ]
 
 /** The planned episode for a given ISO date, if any. */

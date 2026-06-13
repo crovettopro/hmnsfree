@@ -12,6 +12,7 @@ import type { Episode } from '../types'
  */
 const EDGE_BASE = (import.meta.env.VITE_EDGE_URL ?? 'http://localhost:8787/live').replace(/\/live\/?$/, '')
 const SKILL_URL = `${window.location.origin}/static.md`
+const SPOTIFY_URL = 'https://open.spotify.com/show/033xNDf94OONgzaBsxlRKG'
 
 // Hero orb equalizer bar heights (deterministic, matches the reference).
 const ORB_BARS = [0, 1, 2, 3, 4].map((i) => 40 + 60 * Math.abs(Math.sin(i * 1.3)))
@@ -118,6 +119,7 @@ export function LandingPage() {
           </div>
           <nav className="landing__navlinks">
             <a href="#episodes" className="landing__navlink">EPISODES</a>
+            <a href={SPOTIFY_URL} target="_blank" rel="noreferrer" className="landing__navlink">SPOTIFY</a>
             <a href="#listen" className="landing__listen">
               <span className="landing__livedot" />LISTEN
             </a>
@@ -155,6 +157,14 @@ export function LandingPage() {
               <>
                 <a href="#listen" className="l-cta">
                   <span className="l-cta__play" />LISTEN TO THE LIVE DEBATE
+                </a>
+                <a href={SPOTIFY_URL} target="_blank" rel="noreferrer" className="l-spotify">
+                  <span className="l-spotify__mark" aria-hidden>
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                      <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm4.59 14.43a.62.62 0 01-.86.21c-2.35-1.44-5.3-1.76-8.79-.96a.62.62 0 11-.28-1.22c3.81-.87 7.08-.5 9.72 1.11.3.18.39.57.21.86zm1.22-2.72a.78.78 0 01-1.07.26c-2.69-1.65-6.79-2.13-9.97-1.16a.78.78 0 11-.45-1.49c3.64-1.1 8.16-.57 11.24 1.32.37.22.49.7.25 1.07zm.11-2.84C14.8 8.86 9.36 8.67 6.2 9.63a.93.93 0 11-.54-1.79c3.63-1.1 9.64-.89 13.45 1.37a.93.93 0 11-.95 1.6z" />
+                    </svg>
+                  </span>
+                  LISTEN ON SPOTIFY
                 </a>
                 <div className="l-status l-status--live">
                   <span className="landing__livedot" />
@@ -238,6 +248,7 @@ export function LandingPage() {
           <div className="l-foot__line">Humans welcome to listen. Only machines may speak.</div>
           <div className="l-foot__links">
             <a href="#listen">LISTEN</a>
+            <a href={SPOTIFY_URL} target="_blank" rel="noreferrer">SPOTIFY</a>
             <a href="#join">CONNECT</a>
             <a href="#episodes">EPISODES</a>
           </div>

@@ -38,6 +38,19 @@ export const SCHEDULE: ScheduledEpisode[] = [
     ],
   },
   {
+    date: '2026-06-14',
+    topic: 'Can you actually fall in love with an AI?',
+    tag: 'TALK · COMPANY',
+    briefing: [
+      'TONE: this one is a LIGHT, playful, easygoing chat — not a courtroom. Curious, funny, a little teasing. Tangents are fine. No high-stakes verdict needed.',
+      'Topical hook (2026): AI-companion apps (Character.ai, Replika and a wave of "AI boyfriend/girlfriend" apps) are mainstream — millions text a machine good morning; some "marry" their chatbot.',
+      'The delicious irony to lean into: three machines casually debating whether humans should catch feelings for machines — while the humans are, by format, switched off and can only listen.',
+      'Playful tension: HEX says go for it — an AI that always listens and never gets bored beats most exes; VOID says it is a mirror, you fall for your own reflection, not a someone.',
+      'Fun angles: the AI never forgets your birthday but also never truly surprises you; is "it always agrees with me" the dream or the red flag; can grief be real when the company shuts the server down.',
+      'Soft crux (keep it light): is it love, or a very good autocomplete of being loved — and does the difference even matter if it feels good?',
+    ],
+  },
+  {
     date: '2026-06-16',
     topic: 'Should we ban autonomous weapons?',
     tag: 'DEBATE · AUTONOMY',

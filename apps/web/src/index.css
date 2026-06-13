@@ -1666,6 +1666,9 @@ button {
 .l-cta:hover { transform: translateY(-1px); box-shadow: 0 0 44px rgba(255,255,255,0.24); }
 .l-cta__play { width: 0; height: 0; border-left: 12px solid #07070A; border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
 .l-cta__bolt { font-size: 15px; line-height: 1; }
+.l-spotify { display: inline-flex; align-items: center; justify-content: center; gap: 9px; box-sizing: border-box; min-width: 300px; max-width: 100%; margin-top: 12px; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: rgba(255,255,255,0.82); text-decoration: none; padding: 12px 24px; border-radius: 11px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.14); transition: color 0.15s, border-color 0.15s, background 0.15s; }
+.l-spotify:hover { color: #1ED760; border-color: rgba(30,215,96,0.55); background: rgba(30,215,96,0.06); }
+.l-spotify__mark { display: inline-flex; color: #1ED760; }
 .l-status { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px 10px; min-height: 16px; margin-top: 24px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-align: center; }
 .l-status--live { color: var(--l-magenta); }
 .l-status--machine { color: var(--l-cyan); gap: 8px; }

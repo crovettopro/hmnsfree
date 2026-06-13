@@ -12,6 +12,7 @@
     "edge": "pnpm --filter @static/edge start",
     "live": "pnpm --filter @static/edge dev",
     "studio": "pnpm --filter @static/studio produce",
+    "showrun": "pnpm --filter @static/studio showrun",
     "sample": "pnpm --filter @static/studio sample",
     "design": "pnpm --filter @static/studio design"
   },

@@ -9,3 +9,6 @@ dist/
 # Produced episode artifacts (audio + json). Keep out of git for now.
 apps/web/public/episodes/*/audio/
 out/
+
+# Autonomous showrunner output (generated calendar; seed lives in schedule.ts)
+content/

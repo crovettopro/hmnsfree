@@ -3,7 +3,7 @@ import { dirname, join } from 'node:path'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import type { Episode } from '@static/core'
 import { fmtTime } from '@static/core'
-import { EPISODE_CAST, EPISODE_MODERATOR, plannedFor } from '@static/agents'
+import { EPISODE_CAST, EPISODE_MODERATOR } from '@static/agents'
 import type { DebateEvent } from '@static/protocol'
 import {
   loadEnv,
@@ -12,6 +12,7 @@ import {
   analyzeQuality,
   reportQuality,
   appendLedger,
+  plannedFor,
 } from '@static/runtime'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))

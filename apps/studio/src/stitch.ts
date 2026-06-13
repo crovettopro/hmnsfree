@@ -57,15 +57,19 @@ async function main() {
     '-t', String(GAP_MS / 1000), '-c:a', 'libmp3lame', '-b:a', '128k', gap,
   ])
 
+  // If the episode already carries its bumpers as the first/last turns (so the
+  // web player plays them too), don't prepend them again — just gap the turns.
+  const hasIntroTurn = basename(clips[0]) === 'intro.mp3'
+  const hasOutroTurn = basename(clips[clips.length - 1]) === 'outro.mp3'
   const intro = join(WEB_PUBLIC, 'intro.mp3')
   const outro = join(WEB_PUBLIC, 'outro.mp3')
   const seg: string[] = []
-  if (await exists(intro)) seg.push(intro, gap)
+  if (!hasIntroTurn && (await exists(intro))) seg.push(intro, gap)
   clips.forEach((u, i) => {
     seg.push(join(dir, 'audio', basename(u)))
     if (i < clips.length - 1) seg.push(gap) // beat between turns, not after the last
   })
-  if (await exists(outro)) seg.push(gap, outro)
+  if (!hasOutroTurn && (await exists(outro))) seg.push(gap, outro)
 
   const out = join(dir, 'episode.mp3')
   const listPath = join(dir, '.stitch.txt')

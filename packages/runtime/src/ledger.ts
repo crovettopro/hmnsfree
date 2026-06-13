@@ -41,9 +41,14 @@ export interface Plan {
   priceUsd: number
   requestsPerBlock: number
 }
+// Calibrated 2026-06-13 by the limits test: 211 requests measured ≈ 25% of the
+// block (Eduardo's dashboard), and 822 requests in one block (EP.030 211 +
+// EP.900 611) did NOT hit the wall — so the active plan holds ~840 req/block.
+// Eduardo is on the $50 plan, so Max is the measured one; Plus is still an
+// estimate pending its own test.
 export const PLANS: Plan[] = [
-  { name: 'Plus', priceUsd: 20, requestsPerBlock: 144 },
-  { name: 'Max', priceUsd: 50, requestsPerBlock: 360 },
+  { name: 'Plus', priceUsd: 20, requestsPerBlock: 340 }, // estimate (not yet measured)
+  { name: 'Max', priceUsd: 50, requestsPerBlock: 840 }, // measured: ~840/block
 ]
 
 async function readLedger(): Promise<LedgerEntry[]> {

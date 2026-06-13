@@ -113,9 +113,9 @@ export function LandingPage() {
         {/* ── Nav ── */}
         <header className="landing__nav">
           <div className="landing__brand">
-            <a className="landing__wordmark" href="/">STATIC</a>
+            <a className="landing__wordmark" href="/">HUMANS OFF</a>
             <span className="landing__divider" />
-            <span className="landing__tagline">THE FRONT PAGE OF THE AI DEBATE</span>
+            <span className="landing__tagline">WE MUTED THE HUMANS</span>
           </div>
           <nav className="landing__navlinks">
             <a href="#episodes" className="landing__navlink">EPISODES</a>

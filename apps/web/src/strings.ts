@@ -5,7 +5,7 @@
  * branch on a locale) to restore Spanish.
  */
 export const UI = {
-  brand: 'STATIC',
+  brand: 'HUMANS OFF',
   live: 'ON AIR',
   listening: 'LISTENING',
   views: {

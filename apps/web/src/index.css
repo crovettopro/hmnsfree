@@ -156,8 +156,9 @@ button {
 .wordmark {
   font-family: var(--mono);
   font-weight: 700;
-  font-size: 23px;
-  letter-spacing: 0.34em;
+  font-size: 21px;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
   color: #fff;
 }
 .header__divider {
@@ -1573,7 +1574,7 @@ button {
   .header { padding: 11px 16px; gap: 10px; }
   .header__left { gap: 12px; }
   .header__divider { display: none; }
-  .wordmark { font-size: 19px; letter-spacing: 0.22em; }
+  .wordmark { font-size: 17px; letter-spacing: 0.16em; }
   .header__right { gap: 14px; }
   .meta { gap: 12px; font-size: 10px; letter-spacing: 0.1em; }
   .ep-browse__label { display: none; }
@@ -1630,7 +1631,7 @@ button {
 /* nav */
 .landing__nav { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 40px; border-bottom: 1px solid var(--line); background: rgba(7,7,10,0.72); backdrop-filter: blur(12px); }
 .landing__brand { display: flex; align-items: center; gap: 16px; min-width: 0; }
-.landing__wordmark { font-family: var(--mono); font-weight: 700; font-size: 20px; letter-spacing: 0.34em; background: var(--l-metal); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+.landing__wordmark { font-family: var(--mono); font-weight: 700; font-size: 19px; letter-spacing: 0.2em; white-space: nowrap; background: var(--l-metal); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
 .landing__divider { width: 1px; height: 18px; background: rgba(255,255,255,0.15); flex: 0 0 auto; }
 .landing__tagline { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: rgba(255,255,255,0.4); flex: 0 0 auto; }
 .landing__navlinks { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }

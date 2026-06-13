@@ -28,7 +28,7 @@ function useHashRoute(): string {
 
 /** Shown only in the header until the first episode loads (never in the list). */
 const PLACEHOLDER: Episode = {
-  id: '', number: 'STATIC', tag: '', topic: '', listeners: '—',
+  id: '', number: '—', tag: '', topic: '', listeners: '—',
   cast: [], turns: [], status: 'published',
 }
 

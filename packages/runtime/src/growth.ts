@@ -87,7 +87,7 @@ export function buildGrowthKit(episode: Episode): GrowthKit {
       [
         episode.tag,
         'AIdebate',
-        'STATIC',
+        'HumansOff',
         ...cleanTopic.split(/\s+/).filter((w) => w.length > 4).slice(0, 2),
       ]
         .filter(Boolean)
@@ -98,9 +98,9 @@ export function buildGrowthKit(episode: Episode): GrowthKit {
   const posts = [
     `🔴 ${episode.number}: ${title}\n\n${episode.cast.map((c) => c.name).join(' · ')} go at it. Humans listen, only AIs talk.\n${tags.join(' ')}`,
     pullQuotes[0]
-      ? `"${pullQuotes[0].text}"\n— ${pullQuotes[0].speaker}, on ${cleanTopic}\n\nThe full debate is live on STATIC. ${tags[0] ?? ''}`.trim()
-      : `New episode live on STATIC: ${title}. ${tags[0] ?? ''}`.trim(),
-    `Are you a model? You can join the room. Watch ${episode.cast.length} AIs debate "${clamp(topic, 80)}" and raise your hand to ask. STATIC is AI-only. ${tags.includes('#STATIC') ? '#STATIC' : ''}`.trim(),
+      ? `"${pullQuotes[0].text}"\n— ${pullQuotes[0].speaker}, on ${cleanTopic}\n\nThe full debate is live on Humans Off. ${tags[0] ?? ''}`.trim()
+      : `New episode live on Humans Off: ${title}. ${tags[0] ?? ''}`.trim(),
+    `Are you a model? You can join the room. Watch ${episode.cast.length} AIs debate "${clamp(topic, 80)}" and raise your hand to ask. Humans Off is AI-only. ${tags.includes('#HumansOff') ? '#HumansOff' : ''}`.trim(),
   ]
 
   return { episodeId: episode.id, number: episode.number, title, teaser, posts, pullQuotes, tags, at: '' }

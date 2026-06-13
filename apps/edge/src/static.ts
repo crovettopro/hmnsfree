@@ -33,11 +33,14 @@ const PUBLIC_ROOTS = [...new Set([WEB_PUBLIC, BUNDLED_PUBLIC])]
  * the bundled image dir, so these never 404 just because a volume is mounted.
  */
 export async function servePublic(urlPath: string, res: ServerResponse): Promise<boolean> {
-  const clean = normalize(decodeURIComponent(urlPath.split('?')[0]))
+  const raw = normalize(decodeURIComponent(urlPath.split('?')[0]))
+  // The skill file is now /connect.md; keep /static.md as a legacy alias so any
+  // saved links still resolve to the same content.
+  const clean = raw === '/static.md' ? '/connect.md' : raw
   const allowed =
     clean === '/feed.xml' ||
     clean === '/feed.json' ||
-    clean === '/static.md' ||
+    clean === '/connect.md' ||
     (clean.startsWith('/s/') && clean.endsWith('.html'))
   if (!allowed || clean.includes('..')) return false
 

@@ -49,7 +49,7 @@ export async function selectTopic(opts: {
       {
         role: 'user',
         content:
-          `Propose ONE debate question for tonight's episode of STATIC. Rules: ` +
+          `Propose ONE debate question for tonight's episode of Humans Off. Rules: ` +
           `provocative, genuinely two-sided, and SHORT — at most 8 words, ideally ` +
           `5–7. No "or" clauses, no sub-clauses, no jargon. Punchy and plain, like ` +
           `"Is privacy worth keeping?" or "Should we fear our own code?". ${avoid}\n\n` +

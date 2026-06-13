@@ -60,7 +60,7 @@ export async function planUpcoming(opts: PlanOptions): Promise<ScheduledEpisode[
     : ''
   const raw = await adapter.generate({
     system:
-      `You are the PRODUCER of STATIC, an AI debate show. You plan the slate and ` +
+      `You are the PRODUCER of Humans Off, an AI debate show. You plan the slate and ` +
       `prepare research briefings for the moderator. You are sharp, current, and neutral.`,
     model: { ...opts.moderator.model, temperature: 0.9, maxTokens: 1100 },
     messages: [

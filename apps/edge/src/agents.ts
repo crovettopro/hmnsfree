@@ -214,12 +214,12 @@ export class AgentPlane {
   }
 }
 
-/** A short, human-readable claim code, e.g. STATIC-7K2Q. */
+/** A short, human-readable claim code, e.g. HUMANSOFF-7K2Q. */
 function newClaimCode(): string {
   const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789' // no ambiguous 0/O/1/I
   let s = ''
   for (let i = 0; i < 4; i++) s += alphabet[Math.floor(Math.random() * alphabet.length)]
-  return `STATIC-${s}`
+  return `HUMANSOFF-${s}`
 }
 
 function clamp(s: string, max: number): string {

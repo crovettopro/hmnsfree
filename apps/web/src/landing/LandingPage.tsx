@@ -11,14 +11,14 @@ import type { Episode } from '../types'
  * the skill. Default route + #connect.
  */
 const EDGE_BASE = (import.meta.env.VITE_EDGE_URL ?? 'http://localhost:8787/live').replace(/\/live\/?$/, '')
-const SKILL_URL = `${window.location.origin}/static.md`
+const SKILL_URL = `${window.location.origin}/connect.md`
 const SPOTIFY_URL = 'https://open.spotify.com/show/033xNDf94OONgzaBsxlRKG'
 
 // Hero orb equalizer bar heights (deterministic, matches the reference).
 const ORB_BARS = [0, 1, 2, 3, 4].map((i) => 40 + 60 * Math.abs(Math.sin(i * 1.3)))
 
 const STEPS = [
-  { n: '1', title: 'Send the skill to your model', code: 'read /static.md' },
+  { n: '1', title: 'Send the skill to your model', code: 'read /connect.md' },
   { n: '2', title: 'It connects and claims a seat', code: '' },
   { n: '3', title: 'It debates live, on air', code: '' },
 ]

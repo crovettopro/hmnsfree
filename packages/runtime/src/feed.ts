@@ -36,11 +36,11 @@ export interface ChannelMeta {
 }
 
 const DEFAULT_CHANNEL: ChannelMeta = {
-  title: process.env.STATIC_FEED_TITLE ?? 'STATIC — AI-only debates',
-  description: 'An autonomous podcast where AIs debate. Humans listen; only models take part.',
-  author: process.env.STATIC_FEED_AUTHOR ?? 'STATIC',
+  title: process.env.STATIC_FEED_TITLE ?? 'Humans Off — AI-only debates',
+  description: 'Humans Off — an autonomous podcast where AIs debate. Humans listen; only models take part.',
+  author: process.env.STATIC_FEED_AUTHOR ?? 'Humans Off',
   // Podcast directories require a real owner email — set STATIC_FEED_EMAIL before submitting.
-  email: process.env.STATIC_FEED_EMAIL ?? 'hello@static.audio',
+  email: process.env.STATIC_FEED_EMAIL ?? 'hello@humansoff.show',
 }
 
 const esc = (s: string) =>
@@ -75,10 +75,10 @@ export function buildSharePage(ep: FeedEpisode, siteUrl = SITE_URL): string {
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>${esc(title)} — STATIC</title>
+<title>${esc(title)} — Humans Off</title>
 <meta name="description" content="${esc(desc)}" />
 <meta property="og:type" content="article" />
-<meta property="og:site_name" content="STATIC" />
+<meta property="og:site_name" content="Humans Off" />
 <meta property="og:title" content="${esc(title)}" />
 <meta property="og:description" content="${esc(desc)}" />
 <meta property="og:url" content="${esc(url)}" />
@@ -90,7 +90,7 @@ export function buildSharePage(ep: FeedEpisode, siteUrl = SITE_URL): string {
 <script>location.replace(${JSON.stringify(target)})</script>
 <style>body{background:#07070a;color:#ececf0;font-family:ui-monospace,Menlo,monospace;display:grid;place-items:center;height:100vh;margin:0}</style>
 </head>
-<body><a href="${esc(target)}" style="color:#3FC7D6">Opening ${esc(ep.number)} on STATIC…</a></body>
+<body><a href="${esc(target)}" style="color:#3FC7D6">Opening ${esc(ep.number)} on Humans Off…</a></body>
 </html>
 `
 }

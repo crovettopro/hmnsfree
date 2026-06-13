@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { Episode, Participant } from './types'
-import { SEED_EPISODES } from './data/episodes'
 import { loadProducedEpisodes } from './data/loadProduced'
 import { usePlayer } from './playback/usePlayer'
 import type { AudioEngine } from './playback/audio/AudioEngine'
@@ -13,6 +12,12 @@ import { Footer } from './components/Footer'
 import { EpisodeBrowser } from './components/EpisodeBrowser'
 import { AiInfoCard } from './components/AiInfoCard'
 import { LiveView } from './components/LiveView'
+
+/** Shown only in the header until the first episode loads (never in the list). */
+const PLACEHOLDER: Episode = {
+  id: '', number: 'STATIC', tag: '', topic: '', listeners: '—',
+  cast: [], turns: [], status: 'published',
+}
 import { DEMO_AUDIENCE } from './data/audience'
 
 /**
@@ -26,14 +31,16 @@ import { DEMO_AUDIENCE } from './data/audience'
  * changes.
  */
 export function App() {
-  const [episodes, setEpisodes] = useState<Episode[]>(SEED_EPISODES)
-  const [episodeId, setEpisodeId] = useState(SEED_EPISODES[0].id)
+  // The library is the studio/edge-produced episodes (loaded at runtime). No
+  // hand-authored seeds — only real, voiced episodes ship.
+  const [episodes, setEpisodes] = useState<Episode[]>([])
+  const [episodeId, setEpisodeId] = useState('')
   const [view, setView] = useState<View>('full')
   const [mode, setMode] = useState<Mode>('replay')
   const [browserOpen, setBrowserOpen] = useState(false)
   const [selectedAi, setSelectedAi] = useState<Participant | null>(null)
 
-  // Pull in any studio-produced episodes (on-demand replay path).
+  // Pull in produced episodes; select the first once they arrive.
   useEffect(() => {
     let alive = true
     loadProducedEpisodes().then((produced) => {
@@ -42,19 +49,21 @@ export function App() {
         const seen = new Set(prev.map((e) => e.id))
         return [...prev, ...produced.filter((e) => !seen.has(e.id))]
       })
+      setEpisodeId((cur) => cur || produced[0].id)
     })
     return () => {
       alive = false
     }
   }, [])
 
+  const loading = episodes.length === 0
   const episode = useMemo(
-    () => episodes.find((e) => e.id === episodeId) ?? episodes[0],
+    () => episodes.find((e) => e.id === episodeId) ?? episodes[0] ?? PLACEHOLDER,
     [episodes, episodeId],
   )
 
   const engine = useMemo<AudioEngine>(() => new CompositeEngine(), [])
-  const player = usePlayer(episode, engine)
+  const player = usePlayer(loading ? undefined : episode, engine)
 
   return (
     <div className="app">
@@ -81,6 +90,13 @@ export function App() {
 
       {mode === 'live' ? (
         <LiveView view={view} onSelectAi={setSelectedAi} />
+      ) : loading ? (
+        <main className="main main--live-empty">
+          <div className="live-empty">
+            <span className="live-empty__dot" />
+            Loading episodes…
+          </div>
+        </main>
       ) : (
         <main className="main">
           {/* The AIs (stage) show in every mode. */}
@@ -113,7 +129,7 @@ export function App() {
         <AiInfoCard participant={selectedAi} episode={episode} onClose={() => setSelectedAi(null)} />
       )}
 
-      {mode === 'replay' && (
+      {mode === 'replay' && !loading && (
       <Footer
         episode={episode}
         elapsed={player.elapsed}

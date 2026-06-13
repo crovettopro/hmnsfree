@@ -46,7 +46,23 @@ export interface PlayerControls {
  * derives from it. In production this clock is what you replace with the real
  * audio element's currentTime — the AudioEngine is already decoupled.
  */
-export function usePlayer(episode: Episode, engine: AudioEngine): PlayerView & PlayerControls {
+/** A safe placeholder while the library is still loading (no episode selected). */
+const EMPTY_EPISODE: Episode = {
+  id: '',
+  number: '',
+  tag: '',
+  topic: '',
+  listeners: '',
+  cast: [],
+  turns: [],
+  status: 'published',
+}
+
+export function usePlayer(
+  episodeOrUndefined: Episode | undefined,
+  engine: AudioEngine,
+): PlayerView & PlayerControls {
+  const episode = episodeOrUndefined ?? EMPTY_EPISODE
   const [state, setState] = useState<PlayerState>({ playing: false, elapsedMs: 0, rate: 1 })
   const raf = useRef<number | null>(null)
   const lastTs = useRef<number | null>(null)

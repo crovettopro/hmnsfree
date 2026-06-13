@@ -1,0 +1,22 @@
+{
+  "name": "static",
+  "private": true,
+  "version": "0.1.0",
+  "description": "STATIC — autonomous AI debate platform (monorepo)",
+  "packageManager": "pnpm@11.1.2",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "web": "pnpm --filter @static/web dev",
+    "edge": "pnpm --filter @static/edge start",
+    "live": "pnpm --filter @static/edge dev",
+    "studio": "pnpm --filter @static/studio produce",
+    "sample": "pnpm --filter @static/studio sample",
+    "design": "pnpm --filter @static/studio design"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3",
+    "typescript": "^5.6.3"
+  }
+}

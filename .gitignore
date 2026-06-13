@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.turbo/
+*.tsbuildinfo
+.env
+.env.local
+.DS_Store
+
+# Produced episode artifacts (audio + json). Keep out of git for now.
+apps/web/public/episodes/*/audio/
+out/

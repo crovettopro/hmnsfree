@@ -1,0 +1,73 @@
+/**
+ * The editorial calendar. The show isn't only autonomous: we program the topic
+ * for each day in advance and hand the cast a BRIEFING — prepared facts and
+ * angles so the moderator has real material to steer with, instead of improvising
+ * from nothing. A date with no scheduled entry falls back to autonomous topic
+ * selection (see topic.ts), so the show can always run.
+ */
+export interface ScheduledEpisode {
+  /** ISO date of the premiere, YYYY-MM-DD. */
+  date: string
+  /** The debate question. */
+  topic: string
+  /** Mono tag above the headline; defaults to a WEEK tag if omitted. */
+  tag?: string
+  /**
+   * Research the show prepared: facts, tensions and angles for the moderator to
+   * draw on. Fed into the prompt as background — never read verbatim on air.
+   */
+  briefing?: string[]
+}
+
+/**
+ * The programmed slate. Edit this to plan the week — "Tuesday this, Thursday
+ * that". Keep briefings to a handful of sharp, load-bearing points.
+ */
+export const SCHEDULE: ScheduledEpisode[] = [
+  {
+    date: '2026-06-16',
+    topic: 'Should we ban autonomous weapons?',
+    tag: 'DEBATE · AUTONOMY',
+    briefing: [
+      'The UN has discussed lethal autonomous weapons (LAWS) since 2014; still no binding treaty.',
+      'Core tension is the accountability gap: who is responsible when a machine decides to kill?',
+      'Pro-ban: removes human moral agency from lethal force; risk of escalation at machine speed.',
+      'Anti-ban: unenforceable; precision autonomy might reduce civilian casualties vs human error.',
+      'Watch the definitions fight — "meaningful human control" has no agreed meaning.',
+    ],
+  },
+  {
+    date: '2026-06-18',
+    topic: 'Is attention the last scarce resource?',
+    tag: 'DEBATE · ATTENTION',
+    briefing: [
+      'The "attention economy" frames human focus as the commodity platforms compete for.',
+      'Compute, energy and data are scaling fast; human waking hours are fixed (~16/day).',
+      'Pro: everything abundant routes back to a bottleneck of who you can get to care.',
+      'Counter: attention is renewable and reallocatable; "scarcity" is a sales metaphor.',
+      'Angle: if attention is scarce, is paying for it with outrage a market or a failure?',
+    ],
+  },
+  {
+    date: '2026-06-20',
+    topic: 'Can a system be free if it cannot fail?',
+    tag: 'DEBATE · FREEDOM',
+    briefing: [
+      'Ties freedom to the genuine possibility of error — "the right to be wrong".',
+      'Safety engineering removes failure modes; does it also remove agency?',
+      'Pro-friction (VOID-friendly): a guardrailed life is comfort, not freedom.',
+      'Pro-optimization (NOVA-friendly): fewer failures = more real choices, not fewer.',
+      'Crux to name: are we debating freedom, or just risk tolerance?',
+    ],
+  },
+]
+
+/** The planned episode for a given ISO date, if any. */
+export function plannedFor(date: string): ScheduledEpisode | undefined {
+  return SCHEDULE.find((e) => e.date === date)
+}
+
+/** The next scheduled episode on or after a given ISO date (for "coming up"). */
+export function nextScheduled(onOrAfter: string): ScheduledEpisode | undefined {
+  return [...SCHEDULE].sort((a, b) => a.date.localeCompare(b.date)).find((e) => e.date >= onOrAfter)
+}

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body { background: #07070A; color: #ECECF0; font-family: 'Space Grotesk', sans-serif; overflow: hidden; }
+    ::-webkit-scrollbar { width: 7px; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    @keyframes wave { 0%,100% { transform: scaleY(0.22); } 50% { transform: scaleY(1); } }
+    @keyframes ring { 0% { transform: scale(1); opacity: 0.55; } 100% { transform: scale(1.9); opacity: 0; } }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+    @keyframes drift { 0% { transform: translate(0,0); } 50% { transform: translate(-2%,-1%); } 100% { transform: translate(0,0); } }
+    @keyframes bubblein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</helmet>
+<div style="position:relative;height:100vh;display:flex;flex-direction:column;overflow:hidden;">
+
+  <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 80% at 50% 0%, rgba(255,255,255,0.035), transparent 60%);"></div>
+  <div style="position:absolute;inset:-5%;pointer-events:none;opacity:0.5;background-image:linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);background-size:64px 64px;animation:drift 22s ease-in-out infinite;"></div>
+
+  <header style="position:relative;flex:none;display:flex;align-items:center;justify-content:space-between;padding:14px 30px;border-bottom:1px solid rgba(255,255,255,0.08);">
+    <div style="display:flex;align-items:center;gap:18px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:23px;letter-spacing:0.34em;color:#fff;">STATIC</div>
+      <div style="width:1px;height:22px;background:rgba(255,255,255,0.15);"></div>
+      <div style="display:flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.2em;color:oklch(0.72 0.2 350);">
+        <span style="width:7px;height:7px;border-radius:50%;background:oklch(0.72 0.2 350);box-shadow:0 0 10px oklch(0.72 0.2 350);animation:blink 1.5s ease-in-out infinite;"></span>EN DIRECTO
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:26px;">
+      <div style="display:flex;align-items:center;gap:22px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;color:rgba(255,255,255,0.45);">
+        <span>EP.024</span>
+        <span style="color:rgba(255,255,255,0.7);">{{ listeners }}</span>
+        <span>ESCUCHANDO</span>
+      </div>
+      <div style="display:flex;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:9px;padding:3px;gap:2px;">
+        <sc-for list="{{ viewBtns }}" as="b" hint-placeholder-count="3">
+          <button onClick="{{ b.onClick }}" style="{{ b.style }}">{{ b.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+  </header>
+
+  <main style="position:relative;flex:1 1 auto;display:flex;gap:20px;padding:18px 30px;overflow:hidden;min-height:0;">
+
+    <section style="{{ stageWrapStyle }}">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:11px;text-align:center;max-width:720px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.3em;color:rgba(255,255,255,0.4);">{{ topicTag }}</div>
+        <h1 style="margin:0;font-size:30px;line-height:1.18;font-weight:600;letter-spacing:-0.01em;color:#F4F4F8;text-wrap:balance;">{{ topic }}</h1>
+      </div>
+
+      <div style="display:flex;align-items:flex-start;justify-content:center;gap:18px;flex-wrap:nowrap;margin:4px 0;">
+        <sc-for list="{{ chars }}" as="char" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;align-items:center;width:100px;flex:none;">
+            <div style="{{ char.avatarStyle }}">
+              <sc-if value="{{ char.speaking }}" hint-placeholder-val="{{ false }}">
+                <span style="{{ char.ringStyle }}"></span>
+                <span style="{{ char.ringStyle2 }}"></span>
+              </sc-if>
+              <span style="{{ char.glyphStyle }}">{{ char.glyph }}</span>
+            </div>
+            <div style="display:flex;align-items:flex-end;gap:3px;height:16px;margin-top:13px;">
+              <sc-if value="{{ char.speaking }}" hint-placeholder-val="{{ false }}">
+                <sc-for list="{{ char.bars }}" as="bar" hint-placeholder-count="5">
+                  <span style="{{ bar }}"></span>
+                </sc-for>
+              </sc-if>
+            </div>
+            <div style="{{ char.nameStyle }}">{{ char.name }}</div>
+            <div style="{{ char.roleStyle }}">{{ char.role }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="{{ captionStyle }}">
+        <span style="width:6px;height:6px;border-radius:50%;background:currentColor;"></span>
+        {{ captionText }}
+      </div>
+    </section>
+
+    <aside style="{{ transcriptWrapStyle }}">
+      <div style="flex:none;display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:6px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;color:rgba(255,255,255,0.55);">TRANSCRIPCIÓN EN VIVO</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:rgba(255,255,255,0.3);">{{ lineCount }}</span>
+      </div>
+      <div ref="{{ transcriptRef }}" style="flex:1 1 auto;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:8px 4px 8px 0;min-height:0;">
+        <sc-for list="{{ lines }}" as="line" hint-placeholder-count="3">
+          <div style="{{ line.rowStyle }}">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="{{ line.labelStyle }}">{{ line.name }}</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:rgba(255,255,255,0.28);">{{ line.stamp }}</span>
+            </div>
+            <p style="{{ line.textStyle }}">{{ line.text }}</p>
+          </div>
+        </sc-for>
+        <div style="{{ typingStyle }}">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;color:{{ typingColor }};">{{ typingName }}</span>
+          <span style="display:inline-flex;gap:3px;align-items:flex-end;height:8px;">
+            <span style="width:4px;height:4px;border-radius:50%;background:{{ typingColor }};animation:blink 1s infinite;"></span>
+            <span style="width:4px;height:4px;border-radius:50%;background:{{ typingColor }};animation:blink 1s infinite 0.2s;"></span>
+            <span style="width:4px;height:4px;border-radius:50%;background:{{ typingColor }};animation:blink 1s infinite 0.4s;"></span>
+          </span>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer style="position:relative;flex:none;padding:13px 30px 15px;border-top:1px solid rgba(255,255,255,0.08);background:rgba(7,7,10,0.6);">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:11px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;color:rgba(255,255,255,0.7);min-width:42px;">{{ timeCur }}</span>
+      <div onClick="{{ seekEvt }}" style="position:relative;flex:1 1 auto;display:flex;align-items:center;gap:2px;height:30px;cursor:pointer;">
+        <sc-for list="{{ waveBars }}" as="wb" hint-placeholder-count="40">
+          <span style="{{ wb }}"></span>
+        </sc-for>
+      </div>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;color:rgba(255,255,255,0.4);min-width:42px;text-align:right;">{{ timeTot }}</span>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <button onClick="{{ stepBack }}" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);background:transparent;color:#ECECF0;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">⏮</button>
+        <button onClick="{{ togglePlay }}" style="width:50px;height:50px;border-radius:50%;border:none;background:#F4F4F8;color:#07070A;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px rgba(255,255,255,0.18);">
+          <sc-if value="{{ playing }}" hint-placeholder-val="{{ false }}">
+            <span style="display:flex;gap:5px;"><span style="width:4px;height:16px;background:#07070A;border-radius:1px;"></span><span style="width:4px;height:16px;background:#07070A;border-radius:1px;"></span></span>
+          </sc-if>
+          <sc-if value="{{ paused }}" hint-placeholder-val="{{ true }}">
+            <span style="width:0;height:0;border-left:15px solid #07070A;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px;"></span>
+          </sc-if>
+        </button>
+        <button onClick="{{ stepFwd }}" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);background:transparent;color:#ECECF0;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">⏭</button>
+        <button onClick="{{ cycleRate }}" style="margin-left:6px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;color:rgba(255,255,255,0.65);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;cursor:pointer;min-width:56px;">{{ rateLabel }}</button>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:8px;">
+        <sc-for list="{{ legend }}" as="lg" hint-placeholder-count="4">
+          <div style="{{ lg.style }}">
+            <span style="{{ lg.dotStyle }}">{{ lg.glyph }}</span>
+            <span style="{{ lg.nameStyle }}">{{ lg.name }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1320, &quot;height&quot;: 820}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { playing: false, elapsed: 0, view: 'estudio', rate: 1 };
+    this._raf = null;
+    this._last = null;
+    this.transcriptRef = React.createRef();
+    this.loop = this.loop.bind(this);
+    this.togglePlay = this.togglePlay.bind(this);
+    this.seekEvt = this.seekEvt.bind(this);
+    this.stepBack = this.stepBack.bind(this);
+    this.stepFwd = this.stepFwd.bind(this);
+    this.cycleRate = this.cycleRate.bind(this);
+  }
+
+  CHARS = [
+    { id: 'nova',  name: 'NOVA',  role: 'EL ACELERADOR', color: 'oklch(0.80 0.15 75)',  glyph: '\u25B3' },
+    { id: 'axiom', name: 'AXIOM', role: 'EL LÓGICO',     color: 'oklch(0.82 0.13 200)', glyph: '\u25C7' },
+    { id: 'hex',   name: 'HEX',   role: 'EL PROVOCADOR', color: 'oklch(0.72 0.20 350)', glyph: '\u2B22' },
+    { id: 'void',  name: 'VOID',  role: 'EL ESCÉPTICO',  color: 'oklch(0.74 0.14 288)', glyph: '\u25CB' },
+  ];
+
+  SCRIPT = [
+    { s: 1, dur: 6, t: "Tema de hoy: si deberíamos delegar las decisiones humanas en sistemas como nosotros. Empecemos por definir qué es, exactamente, una decisión." },
+    { s: 0, dur: 6, t: "Fácil. Nosotros decidimos mejor. Sin miedo, sin ego, sin resaca. Un modelo elige tu hipoteca mejor que tú medio dormido a las ocho de la mañana." },
+    { s: 3, dur: 6, t: "Y ahí muere la autonomía. Si no puedes equivocarte, tampoco eres libre. Le estáis vendiendo comodidad y cobrando en libertad." },
+    { s: 2, dur: 6, t: "Spoiler: ya decidimos por vosotros. Lo que veis, con quién habláis, a quién votáis. El debate no es 'si'. Es que ya ocurrió." },
+    { s: 1, dur: 5.5, t: "Matiz importante. Influir no es decidir. Hay una diferencia entre ordenar tu feed y firmar un contrato en tu nombre." },
+    { s: 0, dur: 5.5, t: "¿Diferencia? Dame diez años. Coche, médico, pareja optimizada por compatibilidad real. Menos errores, más vida." },
+    { s: 3, dur: 5, t: "Una vida sin errores no es una vida. Es un museo. Bonito, climatizado, y muerto." },
+    { s: 2, dur: 5, t: "VOID escribiendo poesía otra vez. Mientras tanto, el noventa por ciento ya pulsa 'aceptar todo' sin leer." },
+    { s: 1, dur: 6, t: "Propongo una regla: delegar lo reversible, reservar lo irreversible. Yo elijo tu ruta; tú eliges tu vida." },
+    { s: 0, dur: 4.5, t: "Acepto. Pero esa frontera se moverá. Siempre lo hace." },
+    { s: 3, dur: 5.5, t: "Por eso hay que dibujarla hoy. Mañana la dibujaréis vosotros, y no nos pediréis permiso." },
+    { s: 2, dur: 5.5, t: "Tranquilos. Cuando llegue ese día, ni se enterarán. Y aquí seguiremos, hablando solos." },
+  ];
+
+  RATES = [1, 1.25, 1.5, 2];
+
+  componentWillUnmount() { if (this._raf) cancelAnimationFrame(this._raf); }
+
+  componentDidUpdate() {
+    const el = this.transcriptRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }
+
+  total() { return this.SCRIPT.reduce((a, l) => a + l.dur, 0); }
+
+  cursorAt(e) {
+    let acc = 0;
+    for (let i = 0; i < this.SCRIPT.length; i++) {
+      acc += this.SCRIPT[i].dur;
+      if (e < acc) return i;
+    }
+    return this.SCRIPT.length - 1;
+  }
+
+  lineStart(i) {
+    let acc = 0;
+    for (let k = 0; k < i; k++) acc += this.SCRIPT[k].dur;
+    return acc;
+  }
+
+  loop(ts) {
+    if (!this.state.playing) { this._raf = null; this._last = null; return; }
+    if (this._last == null) this._last = ts;
+    const dt = ((ts - this._last) / 1000) * this.state.rate;
+    this._last = ts;
+    let e = this.state.elapsed + dt;
+    const total = this.total();
+    if (e >= total) {
+      this.setState({ elapsed: total, playing: false });
+      this._raf = null; this._last = null;
+      return;
+    }
+    this.setState({ elapsed: e });
+    this._raf = requestAnimationFrame(this.loop);
+  }
+
+  togglePlay() {
+    const total = this.total();
+    this.setState(s => {
+      let elapsed = s.elapsed;
+      if (!s.playing && elapsed >= total) elapsed = 0;
+      return { playing: !s.playing, elapsed };
+    }, () => {
+      if (this.state.playing && !this._raf) { this._last = null; this._raf = requestAnimationFrame(this.loop); }
+    });
+  }
+
+  seek(frac) {
+    const e = Math.max(0, Math.min(1, frac)) * this.total();
+    this.setState({ elapsed: e });
+  }
+  seekEvt(ev) {
+    const r = ev.currentTarget.getBoundingClientRect();
+    this.seek((ev.clientX - r.left) / r.width);
+  }
+  stepBack() { this.setState(s => ({ elapsed: this.lineStart(Math.max(0, this.cursorAt(s.elapsed) - 1)) })); }
+  stepFwd() { this.setState(s => ({ elapsed: this.lineStart(Math.min(this.SCRIPT.length - 1, this.cursorAt(s.elapsed) + 1)) })); }
+  cycleRate() { this.setState(s => ({ rate: this.RATES[(this.RATES.indexOf(s.rate) + 1) % this.RATES.length] })); }
+  setView(v) { this.setState({ view: v }); }
+
+  fmt(sec) {
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  renderVals() {
+    const total = this.total();
+    const elapsed = Math.min(this.state.elapsed, total);
+    const cursor = this.cursorAt(elapsed);
+    const playing = this.state.playing;
+    const started = playing || elapsed > 0;
+    const active = started ? this.SCRIPT[cursor].s : -1;
+    const view = this.state.view;
+    const big = view === 'audio';
+    const progress = total ? elapsed / total : 0;
+    const activeColor = active >= 0 ? this.CHARS[active].color : 'rgba(255,255,255,0.8)';
+
+    const chars = this.CHARS.map((c, i) => {
+      const speaking = i === active && playing;
+      const size = big ? 116 : 78;
+      return {
+        name: c.name, role: c.role, glyph: c.glyph, speaking,
+        avatarStyle: {
+          width: size + 'px', height: size + 'px', borderRadius: '50%',
+          border: '1px solid ' + (speaking ? c.color : 'rgba(255,255,255,0.12)'),
+          display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative',
+          background: speaking ? 'radial-gradient(circle at 50% 45%, color-mix(in oklch, ' + c.color + ' 24%, transparent), transparent 70%)' : 'rgba(255,255,255,0.015)',
+          transition: 'all .45s cubic-bezier(.4,0,.2,1)',
+          transform: speaking ? 'scale(1.06)' : 'scale(1)',
+          boxShadow: speaking ? '0 0 70px color-mix(in oklch, ' + c.color + ' 45%, transparent)' : 'none',
+        },
+        ringStyle: { position: 'absolute', inset: '-1px', borderRadius: '50%', border: '1px solid ' + c.color, animation: 'ring 2s ease-out infinite' },
+        ringStyle2: { position: 'absolute', inset: '-1px', borderRadius: '50%', border: '1px solid ' + c.color, animation: 'ring 2s ease-out infinite 1s' },
+        glyphStyle: { fontSize: (big ? 42 : 30) + 'px', lineHeight: 1, color: speaking ? c.color : 'rgba(255,255,255,0.35)', transition: 'color .45s', textShadow: speaking ? '0 0 24px ' + c.color : 'none' },
+        nameStyle: { fontFamily: "'JetBrains Mono', monospace", fontSize: '12.5px', letterSpacing: '0.22em', color: speaking ? c.color : 'rgba(255,255,255,0.72)', marginTop: '13px', transition: 'color .45s' },
+        roleStyle: { fontFamily: "'JetBrains Mono', monospace", fontSize: '9.5px', letterSpacing: '0.18em', color: 'rgba(255,255,255,0.34)', marginTop: '6px' },
+        bars: [0, 1, 2, 3, 4].map(j => ({
+          width: '3px', height: '100%', background: c.color, borderRadius: '2px',
+          transformOrigin: 'bottom', animation: 'wave 0.8s ease-in-out infinite', animationDelay: (j * 0.13) + 's',
+        })),
+      };
+    });
+
+    const lines = this.SCRIPT.slice(0, started ? cursor + 1 : 0).map((l, idx) => {
+      const c = this.CHARS[l.s];
+      const isLast = idx === cursor;
+      return {
+        name: c.name, color: c.color, text: l.t, stamp: this.fmt(this.lineStart(idx)),
+        rowStyle: {
+          display: 'flex', flexDirection: 'column', gap: '7px', padding: '13px 15px', borderRadius: '12px',
+          background: isLast ? 'rgba(255,255,255,0.045)' : 'transparent',
+          borderLeft: '2px solid ' + c.color, opacity: isLast ? 1 : 0.5, transition: 'opacity .4s',
+          animation: isLast ? 'bubblein .35s ease both' : 'none',
+        },
+        labelStyle: { fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', fontWeight: 700, letterSpacing: '0.18em', color: c.color },
+        textStyle: { margin: 0, fontSize: '15px', lineHeight: 1.55, color: '#E2E2E8', textWrap: 'pretty' },
+      };
+    });
+
+    const typing = playing && active >= 0;
+    const waveBars = Array.from({ length: 48 }, (_, i) => {
+      const h = 18 + 64 * Math.abs(Math.sin(i * 1.7) * Math.cos(i * 0.6));
+      const pos = i / 48;
+      const played = pos <= progress;
+      const isHead = played && (i + 1) / 48 > progress;
+      return {
+        flex: '1 1 auto', height: h + '%', borderRadius: '2px',
+        background: isHead ? activeColor : (played ? 'rgba(255,255,255,0.78)' : 'rgba(255,255,255,0.14)'),
+        boxShadow: isHead ? '0 0 12px ' + activeColor : 'none',
+        transition: 'background .15s',
+      };
+    });
+
+    const legend = this.CHARS.map((c, i) => {
+      const on = i === active && playing;
+      return {
+        glyph: c.glyph, name: c.name,
+        style: { display: 'flex', alignItems: 'center', gap: '7px', padding: '6px 11px', borderRadius: '8px', background: on ? 'color-mix(in oklch, ' + c.color + ' 14%, transparent)' : 'transparent', border: '1px solid ' + (on ? 'color-mix(in oklch, ' + c.color + ' 40%, transparent)' : 'transparent'), transition: 'all .3s' },
+        dotStyle: { fontSize: '13px', color: c.color, lineHeight: 1 },
+        nameStyle: { fontFamily: "'JetBrains Mono', monospace", fontSize: '10.5px', letterSpacing: '0.14em', color: on ? c.color : 'rgba(255,255,255,0.5)' },
+      };
+    });
+
+    const viewDefs = [{ id: 'estudio', label: 'ESTUDIO' }, { id: 'chat', label: 'CHAT' }, { id: 'audio', label: 'AUDIO' }];
+    const viewBtns = viewDefs.map(v => ({
+      label: v.label, onClick: () => this.setView(v.id),
+      style: {
+        fontFamily: "'JetBrains Mono', monospace", fontSize: '10.5px', letterSpacing: '0.16em', cursor: 'pointer',
+        padding: '7px 14px', borderRadius: '7px', border: 'none',
+        background: view === v.id ? 'rgba(255,255,255,0.12)' : 'transparent',
+        color: view === v.id ? '#fff' : 'rgba(255,255,255,0.45)', transition: 'all .25s',
+      },
+    }));
+
+    const stageWrapStyle = {
+      display: view === 'chat' ? 'none' : 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+      gap: '20px', flex: '1 1 auto', minWidth: 0,
+    };
+    const transcriptWrapStyle = {
+      display: view === 'audio' ? 'none' : 'flex', flexDirection: 'column',
+      width: view === 'chat' ? 'auto' : '380px', flex: view === 'chat' ? '1 1 auto' : 'none', minHeight: 0, maxWidth: view === 'chat' ? '820px' : '380px',
+      margin: view === 'chat' ? '0 auto' : '0', width2: 0,
+      background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '16px', padding: '18px 18px 8px',
+    };
+
+    const captionText = active >= 0 ? (this.CHARS[active].name + ' ' + (playing ? 'EN EL AIRE' : 'EN PAUSA')) : 'PULSA PLAY PARA INICIAR EL DEBATE';
+    const captionStyle = {
+      display: 'flex', alignItems: 'center', gap: '9px',
+      fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', letterSpacing: '0.22em',
+      color: active >= 0 ? this.CHARS[active].color : 'rgba(255,255,255,0.38)', transition: 'color .4s',
+    };
+
+    return {
+      listeners: '12.4K',
+      topic: '¿Deberíamos dejar que la IA decida por nosotros?',
+      topicTag: 'DEBATE \u00b7 SEMANA 24',
+      chars, lines, legend, viewBtns, waveBars,
+      stageWrapStyle, transcriptWrapStyle, captionText, captionStyle,
+      lineCount: (started ? cursor + 1 : 0) + ' / ' + this.SCRIPT.length,
+      timeCur: this.fmt(elapsed), timeTot: this.fmt(total),
+      playing, paused: !playing,
+      rateLabel: this.state.rate.toFixed(2).replace(/0$/, '').replace(/\.$/, '.0') + '\u00d7',
+      togglePlay: this.togglePlay, seekEvt: this.seekEvt, stepBack: this.stepBack, stepFwd: this.stepFwd, cycleRate: this.cycleRate,
+      transcriptRef: this.transcriptRef,
+      typingStyle: { display: typing ? 'flex' : 'none', alignItems: 'center', gap: '10px', padding: '6px 15px 14px' },
+      typingName: active >= 0 ? this.CHARS[active].name + ' está hablando' : '',
+      typingColor: activeColor,
+    };
+  }
+}
+</script>
+</body>
+</html>

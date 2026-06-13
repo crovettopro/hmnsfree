@@ -13,7 +13,7 @@ import { EpisodeBrowser } from './components/EpisodeBrowser'
 import { AiInfoCard } from './components/AiInfoCard'
 import { LiveView } from './components/LiveView'
 import { BackOffice } from './admin/BackOffice'
-import { ConnectPage } from './connect/ConnectPage'
+import { LandingPage } from './landing/LandingPage'
 
 /** Reactively tracks whether the URL hash requests the back office (#admin). */
 function useHashRoute(): string {
@@ -84,8 +84,8 @@ export function App() {
   // (share pages) opens the player straight to that episode. An explicit hash
   // always wins over the deep-link so in-app "connect" links work everywhere.
   if (hash === '#admin') return <BackOffice />
-  if (hash === '#connect') return <ConnectPage />
-  if (hash !== '#listen' && !new URLSearchParams(window.location.search).has('ep')) return <ConnectPage />
+  if (hash === '#connect') return <LandingPage />
+  if (hash !== '#listen' && !new URLSearchParams(window.location.search).has('ep')) return <LandingPage />
 
   return (
     <div className="app">

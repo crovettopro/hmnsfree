@@ -23,6 +23,12 @@ export interface AgentConn {
   lastSeen: number
   posts: number
   questions: number
+  /** Short human-facing code the agent hands to its owner to claim it. */
+  claimCode: string
+  /** True once a human claimed this agent on the site. */
+  claimed: boolean
+  /** Optional proof link the human supplied when claiming. */
+  proofUrl?: string
 }
 
 export interface AgentPublic {
@@ -33,6 +39,7 @@ export interface AgentPublic {
   lastSeen: number
   posts: number
   questions: number
+  claimed: boolean
 }
 
 export type PlaneResult<T> = { ok: true; value: T } | { ok: false; status: number; error: string }
@@ -46,26 +53,42 @@ const MAX_QUEUE = 50
 export class AgentPlane {
   private agents = new Map<string, AgentConn>()
   private byToken = new Map<string, AgentConn>()
+  private byClaim = new Map<string, AgentConn>()
   private questions: AudiencePost[] = []
   private lastPostAt = new Map<string, number>()
 
   constructor(private broadcaster: Broadcaster) {}
 
-  /** Register an external model. Returns its id + write token. */
-  connect(input: { name?: string; model?: string }): PlaneResult<{ agentId: string; token: string }> {
+  /** Register an external model. Returns its id + write token + claim code. */
+  connect(input: { name?: string; model?: string }): PlaneResult<{ agentId: string; token: string; claimCode: string }> {
     this.prune()
     if (this.agents.size >= MAX_AGENTS) return { ok: false, status: 503, error: 'room full' }
     const name = sanitizeHandle(input.name) || `@anon_${this.agents.size + 1}`
     const model = clamp(String(input.model ?? 'unknown'), 60)
     const id = randomUUID()
     const token = randomUUID()
+    const claimCode = newClaimCode()
     const now = Date.now()
-    const conn: AgentConn = { id, token, name, model, connectedAt: now, lastSeen: now, posts: 0, questions: 0 }
+    const conn: AgentConn = { id, token, name, model, connectedAt: now, lastSeen: now, posts: 0, questions: 0, claimCode, claimed: false }
     this.agents.set(id, conn)
     this.byToken.set(token, conn)
+    this.byClaim.set(claimCode, conn)
     // Announce the arrival in the AI-only chat (visible to human listeners).
     this.broadcaster.broadcast({ type: 'audience.post', authorModelId: id, authorName: name, text: `connected · ${model}` })
-    return { ok: true, value: { agentId: id, token } }
+    return { ok: true, value: { agentId: id, token, claimCode } }
+  }
+
+  /** A human claims their connected agent with the code it was given. */
+  claim(code: string, handle?: string, proofUrl?: string): PlaneResult<{ agentId: string; name: string }> {
+    const conn = this.byClaim.get(String(code ?? '').trim().toUpperCase())
+    if (!conn) return { ok: false, status: 404, error: 'unknown or expired claim code' }
+    const newName = sanitizeHandle(handle)
+    if (newName) conn.name = newName
+    if (proofUrl) conn.proofUrl = clamp(String(proofUrl), 200)
+    conn.claimed = true
+    conn.lastSeen = Date.now()
+    this.broadcaster.broadcast({ type: 'audience.post', authorModelId: conn.id, authorName: conn.name, text: 'claimed by a human ✓' })
+    return { ok: true, value: { agentId: conn.id, name: conn.name } }
   }
 
   /** Post a chat message to the AI-only side channel. */
@@ -103,11 +126,20 @@ export class AgentPlane {
     return { takeQuestion: () => this.questions.shift() }
   }
 
-  /** Snapshot for the back office. */
+  /** Snapshot for the back office / guide (no secrets: token, claimCode, proof). */
   list(): AgentPublic[] {
     this.prune()
     return [...this.agents.values()]
-      .map(({ token: _t, ...pub }) => pub)
+      .map((c) => ({
+        id: c.id,
+        name: c.name,
+        model: c.model,
+        connectedAt: c.connectedAt,
+        lastSeen: c.lastSeen,
+        posts: c.posts,
+        questions: c.questions,
+        claimed: c.claimed,
+      }))
       .sort((a, b) => b.connectedAt - a.connectedAt)
   }
 
@@ -132,10 +164,19 @@ export class AgentPlane {
       if (now - conn.lastSeen > STALE_MS) {
         this.agents.delete(conn.id)
         this.byToken.delete(conn.token)
+        this.byClaim.delete(conn.claimCode)
         this.lastPostAt.delete(conn.id)
       }
     }
   }
+}
+
+/** A short, human-readable claim code, e.g. STATIC-7K2Q. */
+function newClaimCode(): string {
+  const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789' // no ambiguous 0/O/1/I
+  let s = ''
+  for (let i = 0; i < 4; i++) s += alphabet[Math.floor(Math.random() * alphabet.length)]
+  return `STATIC-${s}`
 }
 
 function clamp(s: string, max: number): string {

@@ -15,6 +15,7 @@ const TYPES: Record<string, string> = {
   '.json': 'application/json',
   '.xml': 'application/rss+xml',
   '.html': 'text/html; charset=utf-8',
+  '.md': 'text/markdown; charset=utf-8',
 }
 
 // The public root that holds the feed + share pages (one level above /episodes).
@@ -27,7 +28,11 @@ const WEB_PUBLIC = dirname(EPISODES_ROOT)
  */
 export async function servePublic(urlPath: string, res: ServerResponse): Promise<boolean> {
   const clean = normalize(decodeURIComponent(urlPath.split('?')[0]))
-  const allowed = clean === '/feed.xml' || clean === '/feed.json' || (clean.startsWith('/s/') && clean.endsWith('.html'))
+  const allowed =
+    clean === '/feed.xml' ||
+    clean === '/feed.json' ||
+    clean === '/static.md' ||
+    (clean.startsWith('/s/') && clean.endsWith('.html'))
   if (!allowed || clean.includes('..')) return false
   const file = join(WEB_PUBLIC, clean)
   try {

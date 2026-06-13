@@ -1514,8 +1514,8 @@ button {
 .bo__mono { font-family: var(--mono); }
 .bo__dim { color: var(--text-muted); }
 .bo__growths { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 10px; }
-.bo__growth { border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
-.bo__growth-title { font-weight: 600; font-size: 14px; margin-bottom: 6px; color: var(--text-strong); }
+.bo__growth { border: 1px solid var(--line); border-radius: 10px; padding: 16px; min-width: 0; overflow-wrap: anywhere; }
+.bo__growth-title { font-weight: 600; font-size: 14px; margin-bottom: 6px; color: var(--text-strong); overflow-wrap: anywhere; }
 .bo__growth-teaser { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5; }
 .bo__quote { margin: 8px 0; padding-left: 12px; border-left: 2px solid var(--line-strong); font-size: 13px; color: var(--text-body); font-style: italic; }
 .bo__quote span { color: var(--text-faint); font-style: normal; }

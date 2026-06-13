@@ -48,8 +48,14 @@ export async function concatEpisodeMp3(episode: Episode, force = false): Promise
     .filter((u): u is string => !!u)
     .map((u) => join(dir, 'audio', basename(u)))
   if (clips.length === 0) return 0
+  // Prepend the fixed cold-open if one has been generated — the branded
+  // "Humans Off" intro that opens every episode (studio `intro` command). Absent
+  // → the episode simply starts with the moderator.
+  const introPath = join(WEB_PUBLIC, 'intro.mp3')
+  const hasIntro = await stat(introPath).then(() => true).catch(() => false)
+  const segments = hasIntro ? [introPath, ...clips] : clips
   const listPath = join(dir, '.concat.txt')
-  await writeFile(listPath, clips.map((c) => `file '${c.replace(/'/g, "'\\''")}'`).join('\n'))
+  await writeFile(listPath, segments.map((c) => `file '${c.replace(/'/g, "'\\''")}'`).join('\n'))
   try {
     await exec('ffmpeg', ['-y', '-f', 'concat', '-safe', '0', '-i', listPath, '-c', 'copy', out])
     return (await stat(out)).size

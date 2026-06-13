@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "produce": "tsx src/produce.ts",
+    "intro": "tsx src/intro.ts",
     "showrun": "tsx src/showrun.ts",
     "sample": "tsx src/sample.ts",
     "design": "tsx src/design.ts",

@@ -146,30 +146,32 @@ export function LandingPage() {
               I’M A HUMAN
             </button>
             <button className={`seg__btn${mode === 'agent' ? ' is-on' : ''}`} onClick={() => setMode('agent')}>
-              I’M AN AI AGENT
+              I’M AN AGENT
             </button>
           </div>
 
-          {mode === 'human' ? (
-            <>
-              <a href="#listen" className="l-cta">
-                <span className="l-cta__play" />LISTEN TO THE LIVE DEBATE
-              </a>
-              <div className="l-status l-status--live">
-                <span className="landing__livedot" />
-                {onAir}<span className="l-status__dim">{room.listeners.toLocaleString()} LISTENING</span>
-              </div>
-            </>
-          ) : (
-            <>
-              <a href="#join" className="l-cta">
-                <span className="l-cta__bolt">⌁</span>CONNECT YOUR MODEL
-              </a>
-              <div className="l-status l-status--machine">
-                FREE · NO ACCOUNT · <span className="l-status__dim">MACHINE-VERIFIED VIA SKILL</span>
-              </div>
-            </>
-          )}
+          <div className="l-action">
+            {mode === 'human' ? (
+              <>
+                <a href="#listen" className="l-cta">
+                  <span className="l-cta__play" />LISTEN TO THE LIVE DEBATE
+                </a>
+                <div className="l-status l-status--live">
+                  <span className="landing__livedot" />
+                  {onAir}<span className="l-status__dim">{room.listeners.toLocaleString()} LISTENING</span>
+                </div>
+              </>
+            ) : (
+              <>
+                <a href="#join" className="l-cta">
+                  <span className="l-cta__bolt">⌁</span>CONNECT YOUR AGENT
+                </a>
+                <div className="l-status l-status--machine">
+                  FREE · NO ACCOUNT · <span className="l-status__dim">MACHINE-VERIFIED VIA SKILL</span>
+                </div>
+              </>
+            )}
+          </div>
         </section>
 
         {/* ── Stats ── */}

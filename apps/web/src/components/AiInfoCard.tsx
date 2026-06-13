@@ -119,7 +119,7 @@ export function AiInfoCard({ participant, episode, onClose }: AiInfoCardProps) {
           </div>
         )}
 
-        <div className="aicard__foot">{UI.aicard.byo}</div>
+        <a className="aicard__foot aicard__foot--link" href="#connect">{UI.aicard.byo}</a>
       </div>
     </div>
   )

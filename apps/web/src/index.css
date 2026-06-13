@@ -1103,6 +1103,22 @@ button {
   letter-spacing: 0.16em;
   color: var(--text-faint);
 }
+.chat__composer--link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.chat__composer--link:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.035);
+}
+.chat__connect {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: oklch(0.78 0.13 200);
+}
 
 /* ========================================================================== */
 /* Episode browser (searchable overlay)                                       */
@@ -1533,3 +1549,85 @@ button {
 }
 .bo__copy:hover { border-color: var(--line-strong); color: var(--text-strong); }
 @media (max-width: 760px) { .bo__grid { grid-template-columns: 1fr; } }
+
+/* ── Connect page (#connect) — machine-plane onboarding ───────────────────── */
+.aicard__foot--link { display: block; text-decoration: none; cursor: pointer; transition: color 0.15s; }
+.aicard__foot--link:hover { color: var(--text-strong); }
+.cn {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  padding: 28px clamp(16px, 5vw, 64px) 64px;
+}
+.cn__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+}
+.cn__brand { font-family: var(--mono); font-weight: 700; letter-spacing: 0.16em; font-size: 18px; }
+.cn__exit { font-family: var(--mono); font-size: 12px; color: var(--text-muted); text-decoration: none; }
+.cn__exit:hover { color: var(--text); }
+.cn__hero { max-width: 720px; margin: 56px 0 40px; }
+.cn__hero h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 600; letter-spacing: -0.01em; margin: 0 0 18px; color: var(--text-strong); }
+.cn__lede { font-size: 16px; line-height: 1.6; color: var(--text-body); margin: 0 0 22px; }
+.cn__lede em { font-style: normal; color: var(--text-strong); }
+.cn__live {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 15px;
+}
+.cn__pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--text-faint); }
+.cn__pulse.is-on { background: oklch(0.74 0.16 145); box-shadow: 0 0 0 0 oklch(0.74 0.16 145 / 0.6); animation: cn-pulse 2s infinite; }
+@keyframes cn-pulse { 70% { box-shadow: 0 0 0 7px oklch(0.74 0.16 145 / 0); } 100% { box-shadow: 0 0 0 0 oklch(0.74 0.16 145 / 0); } }
+.cn__cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-bottom: 36px; }
+.cn__card { border: 1px solid var(--panel-line); background: var(--panel); border-radius: 12px; padding: 22px; }
+.cn__card h2 { font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; color: var(--text-muted); margin: 0 0 16px; font-weight: 600; }
+.cn__list { margin: 0; padding-left: 18px; }
+.cn__list li { font-size: 14px; line-height: 1.6; color: var(--text-body); margin-bottom: 10px; }
+.cn__list b { color: var(--text-strong); font-weight: 600; }
+.cn code { font-family: var(--mono); font-size: 0.9em; background: var(--row-active); padding: 1px 5px; border-radius: 4px; }
+.cn__note { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; margin: 14px 0 0; }
+.cn__note a { color: oklch(0.78 0.13 200); text-decoration: none; }
+.cn__code { position: relative; }
+.cn__code pre {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.6;
+  background: #0b0b10;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 16px;
+  overflow-x: auto;
+  color: var(--text-body);
+  white-space: pre;
+}
+.cn__copy {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  background: var(--row-active);
+  border: 1px solid var(--line);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.cn__copy:hover { color: var(--text-strong); border-color: var(--line-strong); }
+.cn__endpoints { margin-bottom: 36px; }
+.cn__endpoints h2 { font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; color: var(--text-muted); margin: 0 0 14px; font-weight: 600; }
+.cn__table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.cn__table td { padding: 9px 12px; border-bottom: 1px solid var(--line); color: var(--text-body); vertical-align: top; }
+.cn__m { font-family: var(--mono); white-space: nowrap; color: var(--text-strong); }
+.cn__foot { max-width: 720px; font-size: 13px; line-height: 1.6; color: var(--text-muted); border-top: 1px solid var(--line); padding-top: 22px; }
+@media (max-width: 720px) { .cn__cols { grid-template-columns: 1fr; } }

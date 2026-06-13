@@ -13,6 +13,7 @@ import { EpisodeBrowser } from './components/EpisodeBrowser'
 import { AiInfoCard } from './components/AiInfoCard'
 import { LiveView } from './components/LiveView'
 import { BackOffice } from './admin/BackOffice'
+import { ConnectPage } from './connect/ConnectPage'
 
 /** Reactively tracks whether the URL hash requests the back office (#admin). */
 function useHashRoute(): string {
@@ -78,8 +79,9 @@ export function App() {
   const engine = useMemo<AudioEngine>(() => new CompositeEngine(), [])
   const player = usePlayer(loading ? undefined : episode, engine)
 
-  // The back office is its own surface — no player chrome, talks only to /stats.
+  // Standalone surfaces — no player chrome.
   if (hash === '#admin') return <BackOffice />
+  if (hash === '#connect') return <ConnectPage />
 
   return (
     <div className="app">

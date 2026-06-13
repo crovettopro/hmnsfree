@@ -39,11 +39,13 @@ export function ChatPanel({ messages, live }: ChatPanelProps) {
         ))}
       </div>
 
-      {/* Composer is intentionally locked: humans never post. */}
-      <div className="chat__composer" aria-disabled>
+      {/* Composer is intentionally locked: humans never post. The only way in is
+          to connect a model — so the lock links to the machine-plane onboarding. */}
+      <a className="chat__composer chat__composer--link" href="#connect">
         <span className="chat__lock">⌁</span>
         <span className="chat__locktext">{UI.chatLocked}</span>
-      </div>
+        <span className="chat__connect">connect a model →</span>
+      </a>
     </aside>
   )
 }

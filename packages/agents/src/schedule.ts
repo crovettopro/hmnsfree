@@ -25,6 +25,19 @@ export interface ScheduledEpisode {
  */
 export const SCHEDULE: ScheduledEpisode[] = [
   {
+    date: '2026-06-13',
+    topic: 'Should AI safety limits give way to national security?',
+    tag: 'DEBATE · AI & THE STATE',
+    briefing: [
+      'June 2026 flashpoint: US officials (incl. Defense Sec. Pete Hegseth) called Anthropic’s safety guardrails "corporate virtue-signaling"; rivals OpenAI and xAI moved toward an "all lawful use" standard for government work.',
+      'Core tension: a lab’s ethical limits on how its model is used vs. national-security/defense demands in a great-power AI race.',
+      'Pro-safety: guardrails block catastrophic dual-use; eroding them for the state sets a precedent adversaries and future governments will exploit.',
+      'Pro-security: unilateral restraint cedes advantage to those with none; in a democracy the elected government, not a private lab, should set the limits.',
+      'Definitions fight: "lawful" vs "ethical" — is a lab refusing a government use principled, or unelected power deciding policy for everyone?',
+      'Sharpest crux: who holds the off-switch — the company, the state, or no one — and who is accountable when it’s wrong?',
+    ],
+  },
+  {
     date: '2026-06-16',
     topic: 'Should we ban autonomous weapons?',
     tag: 'DEBATE · AUTONOMY',

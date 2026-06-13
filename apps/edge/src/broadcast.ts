@@ -14,6 +14,7 @@ export class Broadcaster {
   private clients = new Set<ServerResponse>()
   private episode: Episode | null = null
   private chat: AudiencePost[] = []
+  private lastStatus: DebateEvent | null = null
 
   /** Register a freshly-connected browser and catch it up to the live edge. */
   addClient(res: ServerResponse): void {
@@ -26,7 +27,8 @@ export class Broadcaster {
     res.write('retry: 2000\n\n')
     this.clients.add(res)
 
-    // Catch-up snapshot: the episode in progress, then the chat backlog.
+    // Catch-up snapshot: channel status, the episode in progress, chat backlog.
+    if (this.lastStatus) this.send(res, this.lastStatus)
     if (this.episode) this.send(res, { type: 'episode.scheduled', episode: this.episode })
     for (const p of this.chat.slice(-30)) {
       this.send(res, { type: 'audience.post', ...p })
@@ -45,10 +47,14 @@ export class Broadcaster {
   /** Push an event to every connected browser, updating the catch-up snapshot. */
   broadcast(event: DebateEvent): void {
     // Keep the snapshot fresh so late joiners see current state.
+    if (event.type === 'live.status') this.lastStatus = event
     if (event.type === 'episode.scheduled') this.episode = event.episode
     if (event.type === 'turn.closed' && this.episode) {
-      // The orchestrator mutates the same episode object, so turns are already
-      // attached; nothing to do but keep the reference.
+      // Append the turn unless it's already there (live production mutates the
+      // same object; reruns hand us fresh turns to accumulate).
+      if (!this.episode.turns.some((t) => t.id === event.turn.id)) {
+        this.episode.turns.push(event.turn)
+      }
     }
     if (event.type === 'audience.post') {
       this.chat.push({ authorModelId: event.authorModelId, authorName: event.authorName, text: event.text })

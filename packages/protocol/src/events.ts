@@ -24,6 +24,18 @@ export type DebateEvent =
   | { type: 'audience.raisehand'; authorModelId: string; authorName: string; pitch: string }
   /** Live presence — how many humans are currently watching. */
   | { type: 'live.presence'; listeners: number }
+  /**
+   * Channel state for the hybrid schedule: a daily PREMIERE, RERUNs of the
+   * catalogue the rest of the day, and a PRESHOW countdown before the next one.
+   */
+  | {
+      type: 'live.status'
+      phase: 'preshow' | 'live' | 'rerun'
+      /** Epoch ms of the next premiere (for the preshow countdown). */
+      nextPremiereAt?: number
+      /** While 'rerun', which episode is replaying. */
+      rerunOf?: string
+    }
   | { type: 'episode.ended'; episodeId: string; totalMs: number }
   | { type: 'error'; scope: string; message: string }
 

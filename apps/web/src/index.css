@@ -1324,6 +1324,13 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.livebar__countdown {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: oklch(0.72 0.2 350);
+  white-space: nowrap;
+}
 .livebar__listeners {
   font-family: var(--mono);
   font-size: 11px;

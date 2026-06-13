@@ -22,6 +22,9 @@ export const UI = {
   /** Live mode chrome. */
   liveBadge: 'LIVE',
   replayBadge: 'REPLAY',
+  rerunBadge: 'RERUN',
+  soonBadge: 'SOON',
+  premiereIn: 'NEXT PREMIERE IN',
   liveThinking: 'AIs are thinking',
   liveConnecting: 'Connecting to the live channel…',
   liveWaiting: 'Waiting for the next episode to begin…',

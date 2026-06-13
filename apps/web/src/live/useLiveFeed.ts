@@ -24,6 +24,12 @@ export interface LiveFeed {
   ended: boolean
   /** Ms into the episode — drives the transcript word-by-word reveal. */
   elapsed: number
+  /** Channel phase from the hybrid schedule. */
+  phase: 'preshow' | 'live' | 'rerun' | null
+  /** Epoch ms of the next premiere (preshow/rerun countdown). */
+  nextPremiereAt: number | null
+  /** While 'rerun', which episode is replaying (e.g. "EP.027"). */
+  rerunOf: string | null
 }
 
 export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
@@ -35,6 +41,9 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
   const [thinking, setThinking] = useState(false)
   const [ended, setEnded] = useState(false)
   const [elapsed, setElapsed] = useState(0)
+  const [phase, setPhase] = useState<'preshow' | 'live' | 'rerun' | null>(null)
+  const [nextPremiereAt, setNextPremiereAt] = useState<number | null>(null)
+  const [rerunOf, setRerunOf] = useState<string | null>(null)
 
   // The active turn's wall-clock start, for the word-reveal clock.
   const turnStartRef = useRef<number | null>(null)
@@ -97,6 +106,11 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
         case 'live.presence':
           setListeners(ev.listeners)
           break
+        case 'live.status':
+          setPhase(ev.phase)
+          setNextPremiereAt(ev.nextPremiereAt ?? null)
+          setRerunOf(ev.rerunOf ?? null)
+          break
         case 'episode.ended':
           setEnded(true)
           setThinking(false)
@@ -137,5 +151,8 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
   const activeSpeaker =
     episode && cursor >= 0 && episode.turns[cursor] ? episode.turns[cursor].speaker : -1
 
-  return { connected, episode, chat, listeners, cursor, activeSpeaker, thinking, ended, elapsed }
+  return {
+    connected, episode, chat, listeners, cursor, activeSpeaker, thinking, ended, elapsed,
+    phase, nextPremiereAt, rerunOf,
+  }
 }

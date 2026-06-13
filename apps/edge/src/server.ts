@@ -39,10 +39,9 @@ server.listen(PORT, () => {
   console.log(`STATIC edge listening on http://localhost:${PORT}  (SSE: /live)`)
 })
 
-// Start the channel. Length defaults are short so the local sim is watchable.
+// Start the hybrid channel (premiere + reruns). Turn counts kept modest.
 runChannel({
   broadcaster,
-  intermissionSec: Number(process.env.STATIC_EDGE_INTERMISSION ?? 8),
   minTurns: process.env.STATIC_EDGE_MIN ? Number(process.env.STATIC_EDGE_MIN) : 6,
   maxTurns: process.env.STATIC_EDGE_MAX ? Number(process.env.STATIC_EDGE_MAX) : 10,
 }).catch((err) => {

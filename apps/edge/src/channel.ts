@@ -6,17 +6,17 @@ import { produceEpisode, loadEnv, plannedFor, type StudioEnv } from '@static/run
 import type { Broadcaster } from './broadcast'
 import { checkpointEpisode, upsertIndex, EPISODES_ROOT } from './persist'
 import { SpectatorRuntime } from './spectators'
+import { loadCatalogue } from './catalogue'
+import { rerunEpisode } from './rerun'
 
 /**
- * The always-on channel: produce episodes back to back, broadcasting every event
- * the instant it happens and checkpointing to disk (VOD). This is the live edge —
- * the same orchestrator the studio runs offline, sunk into a real-time fan-out
- * instead of a return value.
+ * The HYBRID channel. Not 24/7 fresh production (that would burn quota nonstop):
+ * one LIVE PREMIERE per day at a set time, and the catalogue RE-AIRING the rest
+ * of the day, with a PRESHOW countdown before each premiere. The premiere is the
+ * only thing that spends LLM/TTS — everything else replays what already exists.
  */
 export interface ChannelOptions {
   broadcaster: Broadcaster
-  /** Seconds of intermission between episodes. */
-  intermissionSec?: number
   minTurns?: number
   maxTurns?: number
 }
@@ -27,73 +27,115 @@ const sleep = (ms: number) =>
 export async function runChannel(opts: ChannelOptions): Promise<void> {
   const env = loadEnv()
   const { broadcaster } = opts
-  // Audio is served BY the edge (see static.ts), so URLs are absolute to the
-  // edge's public origin — the web (another origin in prod) fetches clips here.
   const publicUrl = (
     process.env.STATIC_EDGE_PUBLIC_URL ??
     `http://localhost:${process.env.PORT ?? process.env.STATIC_EDGE_PORT ?? 8787}`
   ).replace(/\/$/, '')
-  // Only real (live-mode) episodes join the permanent VOD library; mock-sim runs
-  // stream + checkpoint to disk but stay out of the browser index to avoid junk.
   const keepInLibrary = env.mode === 'live'
-  console.log(`STATIC edge — mode: ${env.mode.toUpperCase()} (VOD library: ${keepInLibrary ? 'on' : 'off'})`)
+
+  // Premiere schedule: daily at STATIC_PREMIERE_HOUR (server local time), or every
+  // STATIC_PREMIERE_EVERY_MIN minutes (debug — lets us watch the full cycle fast).
+  const premiereHour = Number(process.env.STATIC_PREMIERE_HOUR ?? 18)
+  const everyMin = process.env.STATIC_PREMIERE_EVERY_MIN ? Number(process.env.STATIC_PREMIERE_EVERY_MIN) : 0
+
+  console.log(
+    `STATIC edge — mode: ${env.mode.toUpperCase()} · premiere ${everyMin ? `every ${everyMin}min` : `daily @ ${premiereHour}:00`}`,
+  )
 
   let counter = await nextNumber()
-  // The channel never stops; the process staying alive IS the live stream.
+  let rerunIdx = 0
+
   for (;;) {
-    const number = String(counter)
-    const id = `ep-${number.padStart(3, '0')}`
-    broadcaster.resetChat()
+    const nextPremiere = computeNextPremiere(Date.now(), premiereHour, everyMin)
 
-    // The day's programmed topic + briefing (editorial calendar); autonomous if none.
-    const planned = plannedFor(new Date().toISOString().slice(0, 10))
-
-    // Spectator AIs watch this episode's events and chat / raise hands.
-    const spectators = new SpectatorRuntime(broadcaster, env)
-
-    let liveEpisode: Episode | undefined
-    try {
-      await produceEpisode({
-        env,
-        personas: EPISODE_CAST,
-        moderator: EPISODE_MODERATOR,
-        week: counter,
-        number,
-        audioDir: join(EPISODES_ROOT, id, 'audio'),
-        audioUrlBase: `${publicUrl}/episodes/${id}/audio`,
-        minTurns: opts.minTurns,
-        maxTurns: opts.maxTurns,
-        realtime: true, // live edge: unfold the debate on a real-time broadcast clock
-        planned,
-        audience: spectators.hook(),
-        onEvent: (e) => {
-          if (e.type === 'episode.scheduled') {
-            liveEpisode = e.episode
-            if (keepInLibrary) void upsertIndex(e.episode) // findable while still live
-          }
-          broadcaster.broadcast(e)
-          spectators.onEvent(e)
-          if (e.type === 'turn.closed' && liveEpisode) void checkpointEpisode(liveEpisode).catch(() => {})
-        },
-      })
-      if (liveEpisode) {
-        await checkpointEpisode(liveEpisode)
-        if (keepInLibrary) await upsertIndex(liveEpisode)
+    // ── Fill the gap until the premiere: re-air the catalogue, counting down. ──
+    while (Date.now() < nextPremiere) {
+      const catalogue = await loadCatalogue()
+      if (!catalogue.length) {
+        broadcaster.broadcast({ type: 'live.status', phase: 'preshow', nextPremiereAt: nextPremiere })
+        await sleep(Math.min(5000, Math.max(1000, nextPremiere - Date.now())))
+        continue
       }
-      console.log(`✓ ${id} aired (${liveEpisode?.turns.length ?? 0} turns)`)
-    } catch (err) {
-      console.error(`✗ ${id} failed:`, err instanceof Error ? err.message : err)
-      if (liveEpisode?.turns.length) {
-        await checkpointEpisode(liveEpisode)
-        if (keepInLibrary) await upsertIndex(liveEpisode)
-      }
-    } finally {
-      spectators.stop()
+      const ep = catalogue[rerunIdx++ % catalogue.length]
+      broadcaster.broadcast({ type: 'live.status', phase: 'rerun', nextPremiereAt: nextPremiere, rerunOf: ep.number })
+      broadcaster.resetChat()
+      await rerunEpisode(ep, broadcaster, { deadlineMs: nextPremiere, shouldStop: () => false })
     }
 
+    // ── Premiere: the day's programmed episode, produced live. ──
+    broadcaster.broadcast({ type: 'live.status', phase: 'live' })
+    await producePremiere({ env, broadcaster, publicUrl, keepInLibrary, counter, opts })
     counter++
-    await sleep((opts.intermissionSec ?? 8) * 1000)
   }
+}
+
+interface PremiereCtx {
+  env: StudioEnv
+  broadcaster: Broadcaster
+  publicUrl: string
+  keepInLibrary: boolean
+  counter: number
+  opts: ChannelOptions
+}
+
+/** Produce and broadcast ONE live episode (the premiere), then persist it as VOD. */
+async function producePremiere(ctx: PremiereCtx): Promise<void> {
+  const { env, broadcaster, publicUrl, keepInLibrary, counter } = ctx
+  const number = String(counter)
+  const id = `ep-${number.padStart(3, '0')}`
+  broadcaster.resetChat()
+
+  const planned = plannedFor(new Date().toISOString().slice(0, 10))
+  const spectators = new SpectatorRuntime(broadcaster, env)
+  let liveEpisode: Episode | undefined
+  try {
+    await produceEpisode({
+      env,
+      personas: EPISODE_CAST,
+      moderator: EPISODE_MODERATOR,
+      week: counter,
+      number,
+      audioDir: join(EPISODES_ROOT, id, 'audio'),
+      audioUrlBase: `${publicUrl}/episodes/${id}/audio`,
+      minTurns: ctx.opts.minTurns,
+      maxTurns: ctx.opts.maxTurns,
+      realtime: true,
+      planned,
+      audience: spectators.hook(),
+      onEvent: (e) => {
+        if (e.type === 'episode.scheduled') {
+          liveEpisode = e.episode
+          if (keepInLibrary) void upsertIndex(e.episode)
+        }
+        broadcaster.broadcast(e)
+        spectators.onEvent(e)
+        if (e.type === 'turn.closed' && liveEpisode) void checkpointEpisode(liveEpisode).catch(() => {})
+      },
+    })
+    if (liveEpisode) {
+      await checkpointEpisode(liveEpisode)
+      if (keepInLibrary) await upsertIndex(liveEpisode)
+    }
+    console.log(`✓ premiere ${id} aired (${liveEpisode?.turns.length ?? 0} turns)`)
+  } catch (err) {
+    console.error(`✗ premiere ${id} failed:`, err instanceof Error ? err.message : err)
+    if (liveEpisode?.turns.length) {
+      await checkpointEpisode(liveEpisode)
+      if (keepInLibrary) await upsertIndex(liveEpisode)
+    }
+  } finally {
+    spectators.stop()
+  }
+}
+
+/** Epoch ms of the next premiere: every N minutes (debug) or daily at `hour`. */
+function computeNextPremiere(now: number, hour: number, everyMin: number): number {
+  if (everyMin > 0) return now + everyMin * 60000
+  const d = new Date(now)
+  d.setHours(hour, 0, 0, 0)
+  let t = d.getTime()
+  if (t <= now) t += 86400000
+  return t
 }
 
 /** Next episode number = continue after whatever's already in the library. */

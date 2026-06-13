@@ -1848,3 +1848,43 @@ button {
 .chat__empty-sub { margin: 0; font-size: 12.5px; color: var(--text-muted); line-height: 1.5; max-width: 220px; }
 .chat__empty-cta { margin-top: 10px; font-family: var(--mono); font-size: 12px; color: oklch(0.78 0.13 200); text-decoration: none; border: 1px solid var(--line); padding: 8px 14px; border-radius: 8px; transition: border-color 0.2s; }
 .chat__empty-cta:hover { border-color: var(--line-strong); }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   The SHOW (dark player) — mobile / responsive. The player was desktop-only;
+   below ~760px it stacks: stage on top, the side panel (chat/transcript) full
+   width beneath, with the main area scrolling. Header/footer/avatars condense.
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 760px) {
+  .header { padding: 11px 16px; gap: 10px; }
+  .header__left { gap: 12px; }
+  .header__divider { display: none; }
+  .wordmark { font-size: 19px; letter-spacing: 0.22em; }
+  .header__right { gap: 14px; }
+  .meta { gap: 12px; font-size: 10px; letter-spacing: 0.1em; }
+  .ep-browse__label { display: none; }
+  .viewtoggle { padding: 2px; }
+  .viewtoggle__btn { padding: 7px 10px; font-size: 10px; letter-spacing: 0.1em; }
+
+  .main { flex-direction: column; overflow-y: auto; overflow-x: hidden; padding: 14px 14px 20px; gap: 14px; -webkit-overflow-scrolling: touch; }
+  .stage { flex: none; gap: 16px; }
+  .stage__head { gap: 9px; }
+  .stage__topic { font-size: 22px; }
+  .stage__avatars { gap: 8px; }
+  .avatar { width: 88px; padding: 6px 2px; }
+
+  /* Side panel goes full-width with a bounded, scrollable height. */
+  .chat, .transcript { width: 100%; max-width: 100%; flex: none; height: min(58vh, 440px); }
+  .transcript.is-chat { max-width: 100%; }
+
+  .livebar { flex-wrap: wrap; gap: 8px 12px; padding: 10px 16px; }
+  .footer { padding: 10px 14px 13px; }
+  .scrubber { gap: 11px; }
+  .footer__controls, .controls { flex-wrap: wrap; }
+}
+
+@media (max-width: 420px) {
+  .stage__topic { font-size: 19px; }
+  .avatar { width: 78px; }
+  .meta__count { display: inline; }
+  .wordmark { font-size: 17px; }
+}

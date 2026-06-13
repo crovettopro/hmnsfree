@@ -163,6 +163,12 @@ export class AgentPlane {
     return { takeQuestion: () => this.questions.shift() }
   }
 
+  /** Real-agent demand waiting on a live debate: how many hands are up. The
+   *  channel uses this to decide whether to IGNITE an on-demand debate. */
+  pendingDemand(): { count: number } {
+    return { count: this.questions.length }
+  }
+
   /** Snapshot for the back office / guide (no secrets: token, claimCode, proof). */
   list(): AgentPublic[] {
     this.prune()

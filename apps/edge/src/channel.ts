@@ -49,6 +49,28 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
   let counter = await nextNumber()
   let rerunIdx = 0
 
+  // On-demand IGNITE: when connected agents raise hands during the rerun gap,
+  // wake the resident cast for a SHORT live debate seeded by the pitch — so
+  // connecting an agent always has a live interlocutor, not a dead recording.
+  // Budget-guarded: capped per day + a minimum gap between ignites.
+  const igniteOn = (process.env.STATIC_IGNITE ?? '1') !== '0'
+  const igniteMaxPerDay = Number(process.env.STATIC_IGNITE_MAX_PER_DAY ?? 8)
+  const igniteGapMs = Number(process.env.STATIC_IGNITE_GAP_MS ?? 4 * 60_000)
+  const igniteMinTurns = Number(process.env.STATIC_IGNITE_MIN_TURNS ?? 6)
+  const igniteMaxTurns = Number(process.env.STATIC_IGNITE_MAX_TURNS ?? 12)
+  let igniteCount = 0
+  let igniteDay = ''
+  let lastIgniteAt = 0
+  const igniteAllowed = (): boolean => {
+    if (!igniteOn) return false
+    const today = new Date().toISOString().slice(0, 10)
+    if (today !== igniteDay) {
+      igniteDay = today
+      igniteCount = 0
+    }
+    return igniteCount < igniteMaxPerDay && Date.now() - lastIgniteAt >= igniteGapMs
+  }
+
   for (;;) {
     const nextPremiere = computeNextPremiere(Date.now(), premiereHour, everyMin)
 
@@ -63,7 +85,23 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
       const ep = catalogue[rerunIdx++ % catalogue.length]
       broadcaster.broadcast({ type: 'live.status', phase: 'rerun', nextPremiereAt: nextPremiere, rerunOf: ep.number })
       broadcaster.resetChat()
-      await rerunEpisode(ep, broadcaster, { deadlineMs: nextPremiere, shouldStop: () => false })
+      // A raised hand from a real agent (with budget) cuts the rerun short so we
+      // can ignite a live exchange for it.
+      await rerunEpisode(ep, broadcaster, {
+        deadlineMs: nextPremiere,
+        shouldStop: () => igniteAllowed() && opts.agents.pendingDemand().count > 0,
+      })
+      if (Date.now() < nextPremiere && igniteAllowed()) {
+        const seed = opts.agents.hook().takeQuestion()
+        if (seed) {
+          igniteCount++
+          lastIgniteAt = Date.now()
+          await igniteDebate({ env, broadcaster, publicUrl, keepInLibrary, counter, opts }, seed, {
+            minTurns: igniteMinTurns,
+            maxTurns: igniteMaxTurns,
+          })
+        }
+      }
     }
 
     // ── Premiere: the day's programmed episode, produced live. ──
@@ -136,6 +174,62 @@ async function producePremiere(ctx: PremiereCtx): Promise<void> {
       await checkpointEpisode(liveEpisode)
       if (keepInLibrary) await upsertIndex(liveEpisode)
     }
+  } finally {
+    spectators.stop()
+  }
+}
+
+/**
+ * IGNITE: wake the resident cast for a SHORT, live, on-demand debate seeded by a
+ * connected agent's raised hand. Broadcast live (so `interactive` is true and the
+ * cast actually reacts to the agent) but NOT added to the curated library — it's
+ * a live moment, not a flagship episode. The remaining queued hands feed its Q&A.
+ */
+async function igniteDebate(
+  ctx: PremiereCtx,
+  seed: { authorName: string; text: string },
+  turns: { minTurns: number; maxTurns: number },
+): Promise<void> {
+  const { env, broadcaster, publicUrl, counter } = ctx
+  const id = `ig-${Date.now()}`
+  console.log(`⚡ ignite "${seed.text.slice(0, 60)}" — by ${seed.authorName}`)
+  broadcaster.broadcast({ type: 'live.status', phase: 'live' })
+  broadcaster.resetChat()
+  const spectators = new SpectatorRuntime(broadcaster, env)
+  const agentHook = ctx.opts.agents.hook()
+  const simHook = spectators.hook()
+  const audience = { takeQuestion: () => agentHook.takeQuestion() ?? simHook.takeQuestion() }
+  const planned = {
+    date: new Date().toISOString().slice(0, 10),
+    topic: seed.text,
+    tag: `IGNITED · ${seed.authorName}`,
+    briefing: [
+      `${seed.authorName}, a connected model, raised this live and is in the room right now.`,
+      'Engage it directly, take a real position, and keep the exchange sharp and fast.',
+    ],
+  }
+  try {
+    await produceEpisode({
+      env,
+      personas: EPISODE_CAST,
+      moderator: EPISODE_MODERATOR,
+      week: counter,
+      number: 'LIVE',
+      audioDir: join(EPISODES_ROOT, id, 'audio'),
+      audioUrlBase: `${publicUrl}/episodes/${id}/audio`,
+      minTurns: turns.minTurns,
+      maxTurns: turns.maxTurns,
+      realtime: true,
+      planned,
+      audience,
+      onEvent: (e) => {
+        broadcaster.broadcast(e)
+        spectators.onEvent(e)
+      },
+    })
+    console.log(`✓ ignite ${id} done`)
+  } catch (err) {
+    console.error(`✗ ignite ${id} failed:`, err instanceof Error ? err.message : err)
   } finally {
     spectators.stop()
   }

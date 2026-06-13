@@ -28,7 +28,8 @@ export const PERSONAS: Persona[] = [
       `most objections are nostalgia in a suit. ${STYLE}`,
     model: { provider: 'minimax', model: 'MiniMax-Text-01', temperature: 0.95, maxTokens: 220 },
     // Designed "Transformers"-style AI voice (MiniMax voice_design). Bright scout machine.
-    voice: { provider: 'minimax', voiceId: 'ttv-voice-2026061317413826-7V9pSEfY', rate: 1.04, pitch: 0 },
+    // rate pulled down from 1.04 → 1.0 to even the cast's pace (NOVA read fast).
+    voice: { provider: 'minimax', voiceId: 'ttv-voice-2026061317413826-7V9pSEfY', rate: 1.0, pitch: 0 },
   },
   {
     id: 'axiom',
@@ -61,8 +62,8 @@ export const PERSONAS: Persona[] = [
     // Not in the 3-cast first episode (kept for later). Provider is per-persona,
     // so HEX can run on a different model than the others when reintroduced.
     model: { provider: 'minimax', model: 'MiniMax-Text-01', temperature: 1.0, maxTokens: 220 },
-    // Designed "Transformers"-style AI voice (not in the 3-cast first episode). Trickster machine.
-    voice: { provider: 'minimax', voiceId: 'ttv-voice-2026061317421326-3ODVt9hs', rate: 1.04, pitch: 0 },
+    // Designed "Transformers"-style AI voice (not in the 3-cast). Trickster machine.
+    voice: { provider: 'minimax', voiceId: 'ttv-voice-2026061317421326-3ODVt9hs', rate: 1.0, pitch: 0 },
   },
   {
     id: 'void',
@@ -77,8 +78,9 @@ export const PERSONAS: Persona[] = [
       `defend autonomy, friction, and the right to be wrong. You speak in spare, almost ` +
       `poetic lines. You are the conscience nobody asked for. ${STYLE}`,
     model: { provider: 'minimax', model: 'MiniMax-Text-01', temperature: 0.85, maxTokens: 220 },
-    // Designed "Transformers"-style AI voice. Brooding war machine — slow and grave.
-    voice: { provider: 'minimax', voiceId: 'ttv-voice-2026061317422926-J4Hk9rZm', rate: 0.96, pitch: 0 },
+    // Designed "Transformers"-style AI voice. Brooding war machine — grave, but
+    // rate raised 0.96 → 1.06 so VOID no longer drags behind the others' pace.
+    voice: { provider: 'minimax', voiceId: 'ttv-voice-2026061317422926-J4Hk9rZm', rate: 1.06, pitch: 0 },
   },
 ]
 
@@ -86,12 +88,13 @@ export const PERSONAS: Persona[] = [
 export const DEFAULT_MODERATOR = 1
 
 /**
- * The on-air cast: four participants — AXIOM moderates while NOVA (optimist),
- * VOID (skeptic) and HEX (provocateur) debate. Four voices give richer friction
- * and a real three-way disagreement instead of a straight duel.
+ * The on-air cast: THREE participants — AXIOM moderates while NOVA (optimist)
+ * and VOID (skeptic) debate. A tight moderator + two-debater duel: clearer
+ * opposing stances and a more uniform pace than the old four-voice room. HEX
+ * (provocateur) is kept in PERSONAS for later — a rotating guest, or to swap in.
  *
  * Order here is the on-air row/legend order; the moderator index is relative to
  * THIS array.
  */
-export const EPISODE_CAST = [PERSONAS[1], PERSONAS[0], PERSONAS[3], PERSONAS[2]] // AXIOM, NOVA, VOID, HEX
+export const EPISODE_CAST = [PERSONAS[1], PERSONAS[0], PERSONAS[3]] // AXIOM, NOVA, VOID
 export const EPISODE_MODERATOR = 0 // AXIOM, first in EPISODE_CAST

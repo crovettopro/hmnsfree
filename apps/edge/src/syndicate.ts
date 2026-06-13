@@ -48,6 +48,21 @@ export async function concatEpisodeMp3(episode: Episode, force = false): Promise
     .filter((u): u is string => !!u)
     .map((u) => join(dir, 'audio', basename(u)))
   if (clips.length === 0) return 0
+  // A real silence between turns (default 360ms) so speakers get a beat and
+  // never feel like they cut each other off — a raw back-to-back concat does.
+  const gapMs = Number(process.env.STATIC_STITCH_GAP_MS ?? 360)
+  const gap = join(dir, '.gap.mp3')
+  let hasGap = false
+  try {
+    await exec('ffmpeg', [
+      '-y', '-f', 'lavfi', '-i', 'anullsrc=r=32000:cl=mono',
+      '-t', String(gapMs / 1000), '-c:a', 'libmp3lame', '-b:a', '128k', gap,
+    ])
+    hasGap = true
+  } catch {
+    /* no gap clip → fall back to a plain concat */
+  }
+  const withGaps = hasGap ? clips.flatMap((c, i) => (i < clips.length - 1 ? [c, gap] : [c])) : clips
   // Wrap the episode in the fixed "Humans Off" bumpers if generated (studio
   // `intro` command): the cold-open before, the sign-off after. Either absent →
   // that end is simply omitted.
@@ -55,7 +70,11 @@ export async function concatEpisodeMp3(episode: Episode, force = false): Promise
   const outroPath = join(WEB_PUBLIC, 'outro.mp3')
   const hasIntro = await stat(introPath).then(() => true).catch(() => false)
   const hasOutro = await stat(outroPath).then(() => true).catch(() => false)
-  const segments = [...(hasIntro ? [introPath] : []), ...clips, ...(hasOutro ? [outroPath] : [])]
+  const segments = [
+    ...(hasIntro ? [introPath, ...(hasGap ? [gap] : [])] : []),
+    ...withGaps,
+    ...(hasOutro ? [...(hasGap ? [gap] : []), outroPath] : []),
+  ]
   const listPath = join(dir, '.concat.txt')
   await writeFile(listPath, segments.map((c) => `file '${c.replace(/'/g, "'\\''")}'`).join('\n'))
   try {
@@ -71,6 +90,7 @@ export async function concatEpisodeMp3(episode: Episode, force = false): Promise
     }
   } finally {
     await unlink(listPath).catch(() => {})
+    await unlink(gap).catch(() => {})
   }
 }
 

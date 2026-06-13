@@ -365,8 +365,9 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
   return { episode, usage }
 }
 
-/** A small silence between turns so voices don't run into each other. */
-const INTER_TURN_GAP_MS = 220
+/** A small silence between turns so voices don't run into each other. A real
+ *  beat (not a clip) — keeps speakers from feeling like they cut each other off. */
+const INTER_TURN_GAP_MS = 360
 
 /** Lib-agnostic sleep (used only for the live broadcast clock). */
 const sleep = (ms: number) =>

@@ -25,7 +25,8 @@ export function Header({ episode, view, onView, mode, onMode, onOpenBrowser }: H
   return (
     <header className="header">
       <div className="header__left">
-        <div className="wordmark">{UI.brand}</div>
+        {/* The wordmark is home: back to the landing / connect guide. */}
+        <a className="wordmark wordmark--home" href="/" title="Home">{UI.brand}</a>
         <div className="header__divider" />
         {/* The ON-AIR badge IS the entry to the live channel. */}
         <button

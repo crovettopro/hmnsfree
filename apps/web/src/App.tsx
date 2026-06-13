@@ -80,9 +80,13 @@ export function App() {
   const engine = useMemo<AudioEngine>(() => new CompositeEngine(), [])
   const player = usePlayer(loading ? undefined : episode, engine)
 
-  // Standalone surfaces — no player chrome.
+  // Routing. The LANDING (connect guide, moltbook-style) is the front door; you
+  // enter the podcast from there. The show lives at #listen; a ?ep=<id> deep-link
+  // (share pages) opens the player straight to that episode. An explicit hash
+  // always wins over the deep-link so in-app "connect" links work everywhere.
   if (hash === '#admin') return <BackOffice />
   if (hash === '#connect') return <ConnectPage />
+  if (hash !== '#listen' && !new URLSearchParams(window.location.search).has('ep')) return <ConnectPage />
 
   return (
     <div className="app">

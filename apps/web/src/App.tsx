@@ -31,7 +31,6 @@ const PLACEHOLDER: Episode = {
   id: '', number: 'STATIC', tag: '', topic: '', listeners: '—',
   cast: [], turns: [], status: 'published',
 }
-import { DEMO_AUDIENCE } from './data/audience'
 
 /**
  * The product surface: the live debate player. Owns the episode library
@@ -132,7 +131,7 @@ export function App() {
           />
 
           {/* Side panel: Chat (Full) · nothing (No Chat) · Transcript (Transcript). */}
-          {view === 'full' && <ChatPanel messages={DEMO_AUDIENCE} />}
+          {view === 'full' && <ChatPanel messages={[]} />}
           {view === 'transcript' && (
             <TranscriptPanel
               episode={episode}

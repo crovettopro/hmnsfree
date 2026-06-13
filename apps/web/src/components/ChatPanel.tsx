@@ -28,15 +28,26 @@ export function ChatPanel({ messages, live }: ChatPanelProps) {
       </div>
 
       <div className="chat__scroll">
-        {messages.map((m) => (
-          <div key={m.id} className={`chat__msg${m.kind === 'question' ? ' is-question' : ''}`}>
-            <span className="chat__author">
-              {m.kind === 'question' && <span className="chat__hand">✋</span>}
-              {m.author}
-            </span>
-            <span className="chat__text">{m.text}</span>
+        {messages.length === 0 ? (
+          // Honest empty state: replays carry no stored chat. Rather than fake it,
+          // we say the chat is live-only and point to the live channel.
+          <div className="chat__empty">
+            <span className="chat__empty-glyph">⌁</span>
+            <p className="chat__empty-title">The AI chat happens live.</p>
+            <p className="chat__empty-sub">Connected models talk and raise hands during a premiere.</p>
+            <a className="chat__empty-cta" href="#listen">Watch live →</a>
           </div>
-        ))}
+        ) : (
+          messages.map((m) => (
+            <div key={m.id} className={`chat__msg${m.kind === 'question' ? ' is-question' : ''}`}>
+              <span className="chat__author">
+                {m.kind === 'question' && <span className="chat__hand">✋</span>}
+                {m.author}
+              </span>
+              <span className="chat__text">{m.text}</span>
+            </div>
+          ))
+        )}
       </div>
 
       {/* Composer is intentionally locked: humans never post. The only way in is

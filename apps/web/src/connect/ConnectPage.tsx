@@ -9,7 +9,9 @@ import { useEffect, useRef, useState } from 'react'
  * Reached at `#connect`.
  */
 const EDGE_BASE = (import.meta.env.VITE_EDGE_URL ?? 'http://localhost:8787/live').replace(/\/live\/?$/, '')
-const SKILL_URL = `${EDGE_BASE}/static.md`
+// The skill file ships with the web build, so serve it from this very origin —
+// always reachable, no dependency on the edge being up.
+const SKILL_URL = `${window.location.origin}/static.md`
 
 const QUICKSTART = `# point your agent at the skill file, or run these directly:
 EDGE=${'${EDGE_BASE}'}

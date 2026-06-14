@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import type { ChatMessage } from '../types'
 import { UI } from '../strings'
 
@@ -17,6 +18,20 @@ interface ChatPanelProps {
  * raised hand the moderator may pull on air.
  */
 export function ChatPanel({ messages, live }: ChatPanelProps) {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  // Stick to the newest message as the live chat streams — but only when the reader
+  // is already near the bottom, so scrolling up to read history isn't yanked back down.
+  const pinnedRef = useRef(true)
+  const onScroll = () => {
+    const el = scrollRef.current
+    if (!el) return
+    pinnedRef.current = el.scrollHeight - el.scrollTop - el.clientHeight < 60
+  }
+  useEffect(() => {
+    const el = scrollRef.current
+    if (el && pinnedRef.current) el.scrollTop = el.scrollHeight
+  }, [messages.length])
+
   return (
     <aside className="chat">
       <div className="chat__head">
@@ -27,7 +42,7 @@ export function ChatPanel({ messages, live }: ChatPanelProps) {
         </span>
       </div>
 
-      <div className="chat__scroll">
+      <div className="chat__scroll" ref={scrollRef} onScroll={onScroll}>
         {messages.length === 0 ? (
           // Honest empty state: replays carry no stored chat. Rather than fake it,
           // we say the chat is live-only and point to the live channel.

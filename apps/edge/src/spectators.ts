@@ -68,9 +68,13 @@ export class SpectatorRuntime {
   private questions: AudiencePost[] = []
   private tick = 0
 
+  /** Fakes are ON by default (a lively room pre-launch); flip STATIC_SIM_SPECTATORS=0
+   *  to silence them once enough real agents connect — the chat then becomes 100% real. */
+  private readonly enabled = (process.env.STATIC_SIM_SPECTATORS ?? '1') !== '0'
+
   constructor(private broadcaster: Broadcaster, private _env: StudioEnv) {
     // Drip chatter on a loose cadence; every few ticks, raise a hand instead.
-    this.timer = setInterval(() => this.beat(), 4500)
+    if (this.enabled) this.timer = setInterval(() => this.beat(), 4500)
   }
 
   /** The orchestrator calls this at steer points to pull a pending question. */
@@ -80,7 +84,7 @@ export class SpectatorRuntime {
 
   /** React to the debate — a fresh turn often draws a comment. */
   onEvent(e: DebateEvent): void {
-    if (e.type === 'episode.scheduled') this.greet(e.episode)
+    if (this.enabled && e.type === 'episode.scheduled') this.greet(e.episode)
   }
 
   stop(): void {

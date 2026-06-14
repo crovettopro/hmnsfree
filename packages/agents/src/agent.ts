@@ -81,9 +81,11 @@ export async function generateTurn(
     ctx.respondToName || ctx.slot.kind === 'rebut' || ctx.slot.kind === 'steer'
       ? `\nThis is ONE flowing conversation, not separate speeches. Pick up ` +
         `${ctx.respondToName ?? 'the last speaker'}'s actual point and engage it head-on ` +
-        `(no preamble, no "I think") — then push the SAME thread to new ground. Do not ` +
-        `restate the topic, jump to an unrelated point, or repeat phrases already used. ` +
-        `Each turn should move the conversation one real step further than the last.`
+        `(no preamble, no "I think") — then MOVE IT FORWARD: add a new angle, a concrete ` +
+        `example, a consequence, or open the next facet of the topic. If the last few ` +
+        `turns are circling the same disagreement, do NOT restate it — break to a fresh ` +
+        `angle. Never re-explain the crux, restate your stance, or reuse phrasings already ` +
+        `on the table; each turn must go somewhere the previous ones did not.`
       : ''
 
   const userMessage =

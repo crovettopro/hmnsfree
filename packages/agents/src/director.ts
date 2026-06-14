@@ -51,8 +51,13 @@ export async function directNext(opts: {
       `that keeps DEVELOPING — each turn picks up the last and takes it somewhere new — ` +
       `not parallel monologues where each voice says its own unrelated thing. Your ` +
       `FOCUS must name the SPECIFIC point on the table the next speaker should engage ` +
-      `and how to push it one step forward. Avoid letting anyone dominate; the ` +
-      `moderator should only step in to reframe or steer, not every turn.`,
+      `and how to push it one step forward. CRUCIAL: if the last few turns are circling ` +
+      `the SAME disagreement (restating it in new words), PIVOT — hand to a speaker and ` +
+      `tell them to open a fresh angle or sub-question of the topic, so the show keeps ` +
+      `moving instead of trenching on one point. Do NOT keep handing the moderator the ` +
+      `floor to re-summarize the crux; a debate that restates itself is the failure to ` +
+      `avoid. Avoid letting anyone dominate; the moderator steps in only to introduce a ` +
+      `genuinely new framing, not to repeat the tension already named.`,
     model: { ...mod.model, temperature: 0.6, maxTokens: 80 },
     messages: [
       {

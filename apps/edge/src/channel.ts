@@ -161,6 +161,9 @@ async function producePremiere(ctx: PremiereCtx): Promise<void> {
       audioUrlBase: `${publicUrl}/episodes/${id}/audio`,
       minTurns: ctx.opts.minTurns,
       maxTurns: ctx.opts.maxTurns,
+      // Premieres run to a ~1h time budget (STATIC_LIVE_TARGET_MIN), winding down to
+      // closings as the hour ends — not a fixed turn count. (Ignite stays short.)
+      targetMs: Number(process.env.STATIC_LIVE_TARGET_MIN ?? 60) * 60_000,
       realtime: true,
       planned,
       audience,

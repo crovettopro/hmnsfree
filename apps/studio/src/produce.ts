@@ -138,6 +138,9 @@ async function main() {
       recentTopics: existing.slice(-5).map((e) => e.topic),
       minTurns: arg('min') ? Number(arg('min')) : undefined,
       maxTurns: arg('max') ? Number(arg('max')) : undefined,
+      // --target <minutes>: run to a time budget (winding down to closings) instead
+      // of a turn count — keeps episodes near a target length (e.g. --target 60).
+      targetMs: arg('target') ? Number(arg('target')) * 60_000 : undefined,
       resumeFrom,
       planned,
       onEvent: (e) => {

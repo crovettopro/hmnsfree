@@ -40,6 +40,14 @@ export interface ProduceOptions {
   /** Hard cap on debate turns (excludes opening + closings). */
   maxTurns?: number
   /**
+   * Target episode length in MILLISECONDS. When set, the debate runs by a time
+   * budget instead of a turn count: it keeps going until ~targetMs minus a reserve
+   * for the closing, then the moderator signals the wrap and the show closes — so a
+   * live lands near the hour regardless of how fast/slow the turns run. `maxTurns`
+   * then only acts as a runaway safety cap. Omit for turn-count production.
+   */
+  targetMs?: number
+  /**
    * Resume a partial episode that hit the quota wall: its topic + turns so far
    * are reused, topic-selection and the opening are skipped, and the debate
    * continues from where it stopped (then closings). Pass the SAME personas the
@@ -94,6 +102,14 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
   const { env, personas, moderator } = opts
   const minTurns = opts.minTurns ?? 8
   const maxTurns = opts.maxTurns ?? 14
+  // Time-budgeted live: debate until the hour minus a reserve for the wrap, then
+  // close. `cursorMs` (the broadcast timeline) is the elapsed clock. The reserve
+  // covers the wind-down beat + closings (+ a little audience Q&A); maxTurns becomes
+  // a runaway safety cap (~10 min/turn would be absurd, so a high count is plenty).
+  const targetMs = opts.targetMs
+  const CLOSINGS_RESERVE_MS = 180_000
+  const debateBudgetMs = targetMs ? Math.max(0, targetMs - CLOSINGS_RESERVE_MS) : Infinity
+  const hardMaxTurns = targetMs ? 600 : maxTurns
   const llm = new LlmRegistry(env.llm)
   const voices = new VoiceRegistry(env.voice)
   const emit = (e: DebateEvent) => opts.onEvent?.(e)
@@ -285,11 +301,29 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
     }
 
     // 3) The debate proper — debaters nominate EACH OTHER; the moderator only steps
-    //    in to steer every few turns. Min/max turns guard the length.
+    //    in to steer every few turns. A turn count guards length (studio), or a time
+    //    budget does (live): when the hour is nearly up, the moderator calls the wrap
+    //    and we head to closings.
     let sinceSteer = 0
-    for (let debateTurns = 0; debateTurns < maxTurns; debateTurns++) {
+    for (let debateTurns = 0; debateTurns < hardMaxTurns; debateTurns++) {
       const ended = (nomination ?? '').toUpperCase().startsWith('END')
-      if (ended && debateTurns >= minTurns) break
+      const outOfTime = targetMs ? cursorMs >= debateBudgetMs : debateTurns >= maxTurns
+      if (debateTurns >= minTurns && (ended || outOfTime)) {
+        // Time-budgeted live: one moderator beat to signal the wrap before closings.
+        if (targetMs && outOfTime && !ended) {
+          yield {
+            slot: {
+              speaker: moderator,
+              kind: 'steer',
+              directive:
+                'We are near the end of the hour. In ONE short beat, signal that time is almost up ' +
+                'and the debate is heading into its final stretch — do NOT summarize or pick a winner. ' +
+                'Closing statements come next.',
+            },
+          }
+        }
+        break
+      }
 
       if (sinceSteer >= STEER_EVERY) {
         // Scheduled moderator beat. If a spectator AI raised a question, pull it on

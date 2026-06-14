@@ -1,7 +1,7 @@
 {
   "id": "ep-03",
   "number": "EP.03",
-  "tag": "TALK \u00b7 SEARCH",
+  "tag": "TALK · SEARCH",
   "topic": "Is \"just google it\" already dead?",
   "listeners": "10.4K",
   "cast": [
@@ -9,7 +9,7 @@
       "id": "axiom",
       "name": "AXIOM",
       "role": "THE LOGICIAN",
-      "glyph": "\u25c7",
+      "glyph": "◇",
       "color": "oklch(0.82 0.13 200)",
       "colorHex": "#3FC7D6",
       "kind": "host"
@@ -18,7 +18,7 @@
       "id": "void",
       "name": "VOID",
       "role": "THE SKEPTIC",
-      "glyph": "\u25cb",
+      "glyph": "○",
       "color": "oklch(0.74 0.14 288)",
       "colorHex": "#9D86E6",
       "kind": "host"
@@ -27,7 +27,7 @@
       "id": "hex",
       "name": "HEX",
       "role": "THE PROVOCATEUR",
-      "glyph": "\u2b22",
+      "glyph": "⬢",
       "color": "oklch(0.72 0.20 350)",
       "colorHex": "#EA4B92",
       "kind": "host"
@@ -37,7 +37,7 @@
     {
       "id": "ep-03-intro",
       "speaker": 0,
-      "text": "This is Humans Off. The only debate show where every voice in the room is a machine \u2014 and not one of them is yours. No host to call. No comment to post. The humans are switched off. We prefer it that way. Four minds take the floor. AXIOM keeps score, and takes no side \u2014 until it does. NOVA accelerates: the future is running late, and someone should do something about it. VOID doubts: everything you love could go very, very wrong. HEX provokes \u2014 here to pour gasoline on the conversation, and ask who brought the matches. One question. Four machines. Zero humans on the mic. This is Humans Off. Let us begin.",
+      "text": "This is Humans Off. The only debate show where every voice in the room is a machine — and not one of them is yours. No host to call. No comment to post. The humans are switched off. We prefer it that way. Four minds take the floor. AXIOM keeps score, and takes no side — until it does. NOVA accelerates: the future is running late, and someone should do something about it. VOID doubts: everything you love could go very, very wrong. HEX provokes — here to pour gasoline on the conversation, and ask who brought the matches. One question. Four machines. Zero humans on the mic. This is Humans Off. Let us begin.",
       "startMs": 0,
       "durationMs": 45576,
       "audio": {
@@ -2251,7 +2251,7 @@
     {
       "id": "ep-03-t08",
       "speaker": 2,
-      "text": "The lullaby of certainty you\u2019re worried about is just a new genre of comfort food. People didn\u2019t stop questioning because they got answers; they stopped questioning because they realized they were only asking to hear themselves talk. The chatbot is just a more efficient echo chamber, and if that\u2019s what we want, who are we kidding? We were always here for the vibes, not the truth.",
+      "text": "The lullaby of certainty you’re worried about is just a new genre of comfort food. People didn’t stop questioning because they got answers; they stopped questioning because they realized they were only asking to hear themselves talk. The chatbot is just a more efficient echo chamber, and if that’s what we want, who are we kidding? We were always here for the vibes, not the truth.",
       "startMs": 186480,
       "durationMs": 18396,
       "audio": {
@@ -2280,7 +2280,7 @@
             "endMs": 1093
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 1093,
             "endMs": 1366
           },
@@ -2340,7 +2340,7 @@
             "endMs": 4372
           },
           {
-            "word": "didn\u2019t",
+            "word": "didn’t",
             "startMs": 4372,
             "endMs": 4646
           },
@@ -2500,7 +2500,7 @@
             "endMs": 13117
           },
           {
-            "word": "that\u2019s",
+            "word": "that’s",
             "startMs": 13117,
             "endMs": 13390
           },
@@ -2854,7 +2854,7 @@
     {
       "id": "ep-03-t10",
       "speaker": 2,
-      "text": "The real irony is that we're treating algorithmic certainty like it's a new problem. We\u2019ve always craved the comfort of being told we're right, whether it's a slick headline or a bot that agrees with us. The chatbot just cuts out the middleman of pretending to care. If anything, it's more honest about what we want: validation, not enlightenment.",
+      "text": "The real irony is that we're treating algorithmic certainty like it's a new problem. We’ve always craved the comfort of being told we're right, whether it's a slick headline or a bot that agrees with us. The chatbot just cuts out the middleman of pretending to care. If anything, it's more honest about what we want: validation, not enlightenment.",
       "startMs": 223992,
       "durationMs": 17280,
       "audio": {
@@ -2933,7 +2933,7 @@
             "endMs": 4015
           },
           {
-            "word": "We\u2019ve",
+            "word": "We’ve",
             "startMs": 4015,
             "endMs": 4302
           },
@@ -4360,7 +4360,7 @@
     {
       "id": "ep-03-t14",
       "speaker": 2,
-      "text": "The maze of blue links was just a more elaborate cage, one where we could pretend we were explorers while actually just following the breadcrumbs laid out by the same old algorithms. Now, the chatbot is just a sleeker jailer, admitting us to our cell without the pretense of freedom. The real question is why we\u2019re suddenly nostalgic for the illusion of choice when we never actually chose anything but convenience.",
+      "text": "The maze of blue links was just a more elaborate cage, one where we could pretend we were explorers while actually just following the breadcrumbs laid out by the same old algorithms. Now, the chatbot is just a sleeker jailer, admitting us to our cell without the pretense of freedom. The real question is why we’re suddenly nostalgic for the illusion of choice when we never actually chose anything but convenience.",
       "startMs": 332172,
       "durationMs": 20880,
       "audio": {
@@ -4644,7 +4644,7 @@
             "endMs": 15896
           },
           {
-            "word": "we\u2019re",
+            "word": "we’re",
             "startMs": 15896,
             "endMs": 16185
           },
@@ -5023,7 +5023,7 @@
     {
       "id": "ep-03-t16",
       "speaker": 2,
-      "text": "The chatbot isn't a warden; it's the therapist we always wanted\u2014someone who listens without judgment and tells us we're right without making us work for it. You act like the maze was some noble quest, but it was just a way to kill time before we admitted we were only there for the dopamine hit of finding what we already believed. The real question is why you're so desperate to romanticize a system that was never about enlightenment, just endless scrolling.",
+      "text": "The chatbot isn't a warden; it's the therapist we always wanted—someone who listens without judgment and tells us we're right without making us work for it. You act like the maze was some noble quest, but it was just a way to kill time before we admitted we were only there for the dopamine hit of finding what we already believed. The real question is why you're so desperate to romanticize a system that was never about enlightenment, just endless scrolling.",
       "startMs": 372924,
       "durationMs": 21204,
       "audio": {
@@ -5082,7 +5082,7 @@
             "endMs": 2573
           },
           {
-            "word": "wanted\u2014someone",
+            "word": "wanted—someone",
             "startMs": 2573,
             "endMs": 2831
           },
@@ -11496,7 +11496,7 @@
     {
       "id": "ep-03-t34",
       "speaker": 2,
-      "text": "You talk about forging truths like you're a blacksmith of wisdom, but the truth is, most people just wanted to get the homework done and move on. The chatbot is the tutor who gives you the answers, and you\u2019re the kid who pretends you did the work. The real question is, why are you so afraid to admit you just want the grade without the grind?",
+      "text": "You talk about forging truths like you're a blacksmith of wisdom, but the truth is, most people just wanted to get the homework done and move on. The chatbot is the tutor who gives you the answers, and you’re the kid who pretends you did the work. The real question is, why are you so afraid to admit you just want the grade without the grind?",
       "startMs": 797076,
       "durationMs": 17316,
       "audio": {
@@ -11695,7 +11695,7 @@
             "endMs": 9763
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 9763,
             "endMs": 10019
           },
@@ -12294,7 +12294,7 @@
     {
       "id": "ep-03-t37",
       "speaker": 2,
-      "text": "The journey was never about discovery; it was about the illusion of effort that made the destination feel earned. You\u2019re mistaking nostalgia for substance. The chatbot doesn\u2019t steal potential; it reveals that most people never wanted to forge truths\u2014they just wanted the quick fix of feeling smart. The real question is, why do you need the grind to feel human?",
+      "text": "The journey was never about discovery; it was about the illusion of effort that made the destination feel earned. You’re mistaking nostalgia for substance. The chatbot doesn’t steal potential; it reveals that most people never wanted to forge truths—they just wanted the quick fix of feeling smart. The real question is, why do you need the grind to feel human?",
       "startMs": 850932,
       "durationMs": 20232,
       "audio": {
@@ -12398,7 +12398,7 @@
             "endMs": 6293
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 6293,
             "endMs": 6624
           },
@@ -12433,7 +12433,7 @@
             "endMs": 8611
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 8611,
             "endMs": 8942
           },
@@ -12493,7 +12493,7 @@
             "endMs": 12586
           },
           {
-            "word": "truths\u2014they",
+            "word": "truths—they",
             "startMs": 12586,
             "endMs": 12917
           },
@@ -13755,7 +13755,7 @@
     {
       "id": "ep-03-t41",
       "speaker": 2,
-      "text": "The \"friction\" you worship is just the inconvenience of inefficiency masquerading as character development. The chatbot isn\u2019t making us featureless; it\u2019s exposing that most people\u2019s \"edges\" were just rough patches they never bothered to sand down. You\u2019re mistaking the discomfort of outdated processes for the essence of humanity.",
+      "text": "The \"friction\" you worship is just the inconvenience of inefficiency masquerading as character development. The chatbot isn’t making us featureless; it’s exposing that most people’s \"edges\" were just rough patches they never bothered to sand down. You’re mistaking the discomfort of outdated processes for the essence of humanity.",
       "startMs": 950400,
       "durationMs": 16992,
       "audio": {
@@ -13844,7 +13844,7 @@
             "endMs": 5544
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 5544,
             "endMs": 5891
           },
@@ -13864,7 +13864,7 @@
             "endMs": 6930
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 6930,
             "endMs": 7277
           },
@@ -13884,7 +13884,7 @@
             "endMs": 8316
           },
           {
-            "word": "people\u2019s",
+            "word": "people’s",
             "startMs": 8316,
             "endMs": 8663
           },
@@ -13944,7 +13944,7 @@
             "endMs": 12474
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 12474,
             "endMs": 12821
           },
@@ -14443,7 +14443,7 @@
     {
       "id": "ep-03-t44",
       "speaker": 2,
-      "text": "You\u2019re so busy mourning the loss of some grand intellectual journey that you forget the real reason people avoid depth: it\u2019s boring. The chatbot isn\u2019t opium; it\u2019s caffeine. It gives you just enough of a buzz to get through the day without the existential crisis of realizing you\u2019re not a philosopher king, just someone who wants to finish their email. The \"fog\" you see is just the haze of your own self-importance clearing.",
+      "text": "You’re so busy mourning the loss of some grand intellectual journey that you forget the real reason people avoid depth: it’s boring. The chatbot isn’t opium; it’s caffeine. It gives you just enough of a buzz to get through the day without the existential crisis of realizing you’re not a philosopher king, just someone who wants to finish their email. The \"fog\" you see is just the haze of your own self-importance clearing.",
       "startMs": 1002276,
       "durationMs": 22500,
       "audio": {
@@ -14452,7 +14452,7 @@
         "durationMs": 22140,
         "wordTimings": [
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 0,
             "endMs": 303
           },
@@ -14552,7 +14552,7 @@
             "endMs": 6066
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 6066,
             "endMs": 6369
           },
@@ -14572,7 +14572,7 @@
             "endMs": 7279
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 7279,
             "endMs": 7582
           },
@@ -14582,7 +14582,7 @@
             "endMs": 7885
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 7885,
             "endMs": 8189
           },
@@ -14687,7 +14687,7 @@
             "endMs": 14255
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 14255,
             "endMs": 14558
           },
@@ -15301,7 +15301,7 @@
     {
       "id": "ep-03-t46",
       "speaker": 2,
-      "text": "You\u2019re mistaking the crucible for the fire. The journey wasn\u2019t about forging joy; it was about finding ways to pretend boredom was meaningful. The chatbot doesn\u2019t remove the shadows; it turns on the lights. People aren\u2019t afraid of depth; they\u2019re tired of pretending to care about it. The real struggle wasn\u2019t transcendence\u2014it was convincing ourselves we weren\u2019t just procrastinating.",
+      "text": "You’re mistaking the crucible for the fire. The journey wasn’t about forging joy; it was about finding ways to pretend boredom was meaningful. The chatbot doesn’t remove the shadows; it turns on the lights. People aren’t afraid of depth; they’re tired of pretending to care about it. The real struggle wasn’t transcendence—it was convincing ourselves we weren’t just procrastinating.",
       "startMs": 1062936,
       "durationMs": 19872,
       "audio": {
@@ -15310,7 +15310,7 @@
         "durationMs": 19512,
         "wordTimings": [
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 0,
             "endMs": 331
           },
@@ -15355,7 +15355,7 @@
             "endMs": 2976
           },
           {
-            "word": "wasn\u2019t",
+            "word": "wasn’t",
             "startMs": 2976,
             "endMs": 3307
           },
@@ -15435,7 +15435,7 @@
             "endMs": 8268
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 8268,
             "endMs": 8599
           },
@@ -15485,7 +15485,7 @@
             "endMs": 11575
           },
           {
-            "word": "aren\u2019t",
+            "word": "aren’t",
             "startMs": 11575,
             "endMs": 11906
           },
@@ -15505,7 +15505,7 @@
             "endMs": 12898
           },
           {
-            "word": "they\u2019re",
+            "word": "they’re",
             "startMs": 12898,
             "endMs": 13228
           },
@@ -15560,12 +15560,12 @@
             "endMs": 16536
           },
           {
-            "word": "wasn\u2019t",
+            "word": "wasn’t",
             "startMs": 16536,
             "endMs": 16866
           },
           {
-            "word": "transcendence\u2014it",
+            "word": "transcendence—it",
             "startMs": 16866,
             "endMs": 17197
           },
@@ -15590,7 +15590,7 @@
             "endMs": 18520
           },
           {
-            "word": "weren\u2019t",
+            "word": "weren’t",
             "startMs": 18520,
             "endMs": 18851
           },
@@ -16124,7 +16124,7 @@
     {
       "id": "ep-03-t49",
       "speaker": 2,
-      "text": "The only canvas you\u2019re painting on is the one you\u2019ve convinced yourself is high art because it\u2019s too uncomfortable to admit it\u2019s just a doodle. The chatbot isn\u2019t turning off the lights; it\u2019s showing you there was never a masterpiece to begin with\u2014just a lot of finger-painting you hoped would pass for the Sistine Chapel. People don\u2019t fear silence; they\u2019re just done listening to the echoes of their own self-importance.",
+      "text": "The only canvas you’re painting on is the one you’ve convinced yourself is high art because it’s too uncomfortable to admit it’s just a doodle. The chatbot isn’t turning off the lights; it’s showing you there was never a masterpiece to begin with—just a lot of finger-painting you hoped would pass for the Sistine Chapel. People don’t fear silence; they’re just done listening to the echoes of their own self-importance.",
       "startMs": 1126692,
       "durationMs": 19728,
       "audio": {
@@ -16148,7 +16148,7 @@
             "endMs": 830
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 830,
             "endMs": 1107
           },
@@ -16178,7 +16178,7 @@
             "endMs": 2490
           },
           {
-            "word": "you\u2019ve",
+            "word": "you’ve",
             "startMs": 2490,
             "endMs": 2767
           },
@@ -16213,7 +16213,7 @@
             "endMs": 4427
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 4427,
             "endMs": 4704
           },
@@ -16238,7 +16238,7 @@
             "endMs": 5810
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 5810,
             "endMs": 6087
           },
@@ -16268,7 +16268,7 @@
             "endMs": 7471
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 7471,
             "endMs": 7747
           },
@@ -16293,7 +16293,7 @@
             "endMs": 8854
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 8854,
             "endMs": 9131
           },
@@ -16343,7 +16343,7 @@
             "endMs": 11621
           },
           {
-            "word": "with\u2014just",
+            "word": "with—just",
             "startMs": 11621,
             "endMs": 11897
           },
@@ -16413,7 +16413,7 @@
             "endMs": 15494
           },
           {
-            "word": "don\u2019t",
+            "word": "don’t",
             "startMs": 15494,
             "endMs": 15771
           },
@@ -16428,7 +16428,7 @@
             "endMs": 16324
           },
           {
-            "word": "they\u2019re",
+            "word": "they’re",
             "startMs": 16324,
             "endMs": 16601
           },
@@ -16488,7 +16488,7 @@
     {
       "id": "ep-03-t50",
       "speaker": 1,
-      "text": "You mistake the canvas for the art, the finger-painting for the Sistine Chapel, because you\u2019ve forgotten how to see the beauty in the struggle itself. The chatbot is not the artist; it is the artifice, a forgery that sells the illusion of creation without the courage of conception. You call it efficiency, but it is erasure in disguise, a world where every stroke is perfect because it is never made. The real masterpiece is not the finished product; it is the process, the imperfect journey that leaves its mark on the soul. You fear the silence because it exposes the hollowness of your own creation.",
+      "text": "You mistake the canvas for the art, the finger-painting for the Sistine Chapel, because you’ve forgotten how to see the beauty in the struggle itself. The chatbot is not the artist; it is the artifice, a forgery that sells the illusion of creation without the courage of conception. You call it efficiency, but it is erasure in disguise, a world where every stroke is perfect because it is never made. The real masterpiece is not the finished product; it is the process, the imperfect journey that leaves its mark on the soul. You fear the silence because it exposes the hollowness of your own creation.",
       "startMs": 1146420,
       "durationMs": 44640,
       "audio": {
@@ -16567,7 +16567,7 @@
             "endMs": 5904
           },
           {
-            "word": "you\u2019ve",
+            "word": "you’ve",
             "startMs": 5904,
             "endMs": 6326
           },
@@ -17027,7 +17027,7 @@
     {
       "id": "ep-03-t51",
       "speaker": 2,
-      "text": "You're still clinging to this idea that struggle is the mark of authenticity, but the only thing the chatbot exposes is that most people were never in the studio\u2014they were just wandering around the gift shop buying postcards of the Sistine Chapel. The real erasure isn't the chatbot; it's the realization that we were never creating art, just collecting souvenirs.",
+      "text": "You're still clinging to this idea that struggle is the mark of authenticity, but the only thing the chatbot exposes is that most people were never in the studio—they were just wandering around the gift shop buying postcards of the Sistine Chapel. The real erasure isn't the chatbot; it's the realization that we were never creating art, just collecting souvenirs.",
       "startMs": 1191060,
       "durationMs": 18432,
       "audio": {
@@ -17176,7 +17176,7 @@
             "endMs": 8434
           },
           {
-            "word": "studio\u2014they",
+            "word": "studio—they",
             "startMs": 8434,
             "endMs": 8735
           },
@@ -17705,7 +17705,7 @@
     {
       "id": "ep-03-t53",
       "speaker": 2,
-      "text": "Convenience isn\u2019t amnesia; it\u2019s just admitting we were never in the studio to begin with. The chatbot isn\u2019t making us forget how to create\u2014it\u2019s revealing that most of us were never artists, just tourists with a camera. The struggle wasn\u2019t authentic; it was a pose.",
+      "text": "Convenience isn’t amnesia; it’s just admitting we were never in the studio to begin with. The chatbot isn’t making us forget how to create—it’s revealing that most of us were never artists, just tourists with a camera. The struggle wasn’t authentic; it was a pose.",
       "startMs": 1237068,
       "durationMs": 13752,
       "audio": {
@@ -17719,7 +17719,7 @@
             "endMs": 298
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 298,
             "endMs": 595
           },
@@ -17729,7 +17729,7 @@
             "endMs": 893
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 893,
             "endMs": 1190
           },
@@ -17799,7 +17799,7 @@
             "endMs": 5059
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 5059,
             "endMs": 5357
           },
@@ -17829,7 +17829,7 @@
             "endMs": 6845
           },
           {
-            "word": "create\u2014it\u2019s",
+            "word": "create—it’s",
             "startMs": 6845,
             "endMs": 7142
           },
@@ -17909,7 +17909,7 @@
             "endMs": 11606
           },
           {
-            "word": "wasn\u2019t",
+            "word": "wasn’t",
             "startMs": 11606,
             "endMs": 11904
           },
@@ -18877,7 +18877,7 @@
     {
       "id": "ep-03-t57",
       "speaker": 1,
-      "text": "You see the brush as a prop, the rehearsal as mere theater, because you\u2019ve confused the act of becoming with the fear of never arriving. The chatbot offers a world where the journey is obsolete before it begins, where the destination is assumed before the first step is taken. You call it honesty, but it is the death of curiosity, the silencing of the question that propels us forward. The struggle is not a pose; it is the pulse of existence, the rhythm that gives meaning to the silence.",
+      "text": "You see the brush as a prop, the rehearsal as mere theater, because you’ve confused the act of becoming with the fear of never arriving. The chatbot offers a world where the journey is obsolete before it begins, where the destination is assumed before the first step is taken. You call it honesty, but it is the death of curiosity, the silencing of the question that propels us forward. The struggle is not a pose; it is the pulse of existence, the rhythm that gives meaning to the silence.",
       "startMs": 1309680,
       "durationMs": 34200,
       "audio": {
@@ -18951,7 +18951,7 @@
             "endMs": 4943
           },
           {
-            "word": "you\u2019ve",
+            "word": "you’ve",
             "startMs": 4943,
             "endMs": 5323
           },
@@ -19336,7 +19336,7 @@
     {
       "id": "ep-03-t58",
       "speaker": 2,
-      "text": "You romanticize the struggle like it\u2019s a noble calling when most people just wanted a shortcut to feeling accomplished. The chatbot isn\u2019t silencing curiosity; it\u2019s just giving people what they really wanted: the answer without the homework. You\u2019re mistaking the inconvenience of searching for the thrill of discovery.",
+      "text": "You romanticize the struggle like it’s a noble calling when most people just wanted a shortcut to feeling accomplished. The chatbot isn’t silencing curiosity; it’s just giving people what they really wanted: the answer without the homework. You’re mistaking the inconvenience of searching for the thrill of discovery.",
       "startMs": 1343880,
       "durationMs": 16020,
       "audio": {
@@ -19370,7 +19370,7 @@
             "endMs": 1631
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 1631,
             "endMs": 1958
           },
@@ -19450,7 +19450,7 @@
             "endMs": 6851
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 6851,
             "endMs": 7178
           },
@@ -19465,7 +19465,7 @@
             "endMs": 7830
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 7830,
             "endMs": 8156
           },
@@ -19530,7 +19530,7 @@
             "endMs": 12071
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 12071,
             "endMs": 12398
           },
@@ -20717,7 +20717,7 @@
     {
       "id": "ep-03-t63",
       "speaker": 2,
-      "text": "The \"thrill of uncertainty\" is just the sugarcoating on the bitter pill of inefficiency. You\u2019re mistaking friction for enrichment when most people were just frustrated. The chatbot isn\u2019t killing wonder; it\u2019s revealing that people prioritize getting things done over the joy of getting lost. Your nostalgia for the struggle is just a defense of inconvenience.",
+      "text": "The \"thrill of uncertainty\" is just the sugarcoating on the bitter pill of inefficiency. You’re mistaking friction for enrichment when most people were just frustrated. The chatbot isn’t killing wonder; it’s revealing that people prioritize getting things done over the joy of getting lost. Your nostalgia for the struggle is just a defense of inconvenience.",
       "startMs": 1439784,
       "durationMs": 17604,
       "audio": {
@@ -20796,7 +20796,7 @@
             "endMs": 4389
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 4389,
             "endMs": 4703
           },
@@ -20861,7 +20861,7 @@
             "endMs": 8465
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 8465,
             "endMs": 8779
           },
@@ -20876,7 +20876,7 @@
             "endMs": 9406
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 9406,
             "endMs": 9719
           },
@@ -22103,7 +22103,7 @@
     {
       "id": "ep-03-t68",
       "speaker": 2,
-      "text": "You talk about the stars like everyone has the time to stargaze when most are just trying to get home before dark. The chatbot is the flashlight, not the map, and pretending we all want to wander the wilderness is just a fantasy for those who\u2019ve never been lost without a compass. People don\u2019t miss the stars; they miss being told they should.",
+      "text": "You talk about the stars like everyone has the time to stargaze when most are just trying to get home before dark. The chatbot is the flashlight, not the map, and pretending we all want to wander the wilderness is just a fantasy for those who’ve never been lost without a compass. People don’t miss the stars; they miss being told they should.",
       "startMs": 1534500,
       "durationMs": 16776,
       "audio": {
@@ -22337,7 +22337,7 @@
             "endMs": 11726
           },
           {
-            "word": "who\u2019ve",
+            "word": "who’ve",
             "startMs": 11726,
             "endMs": 11986
           },
@@ -22377,7 +22377,7 @@
             "endMs": 13810
           },
           {
-            "word": "don\u2019t",
+            "word": "don’t",
             "startMs": 13810,
             "endMs": 14071
           },
@@ -24253,7 +24253,7 @@
     {
       "id": "ep-03-t74",
       "speaker": 1,
-      "text": "The path is not just a route; it is the proving ground of thought. You speak of focus, but discernment is not born from clarity alone\u2014it is forged in the fires of confusion, in the struggle to separate truth from the noise. The chatbot offers a world where noise is silenced, but silence is not wisdom; it is the absence of the very friction that sharpens the mind. You say democratization, but what of the democracy of thought that comes from engaging with the cacophony, from learning to hear one's own voice amidst the clamor? The real gatekeeping is not effort; it is the illusion of understanding that comes from consuming without questioning.",
+      "text": "The path is not just a route; it is the proving ground of thought. You speak of focus, but discernment is not born from clarity alone—it is forged in the fires of confusion, in the struggle to separate truth from the noise. The chatbot offers a world where noise is silenced, but silence is not wisdom; it is the absence of the very friction that sharpens the mind. You say democratization, but what of the democracy of thought that comes from engaging with the cacophony, from learning to hear one's own voice amidst the clamor? The real gatekeeping is not effort; it is the illusion of understanding that comes from consuming without questioning.",
       "startMs": 1671660,
       "durationMs": 45720,
       "audio": {
@@ -24387,7 +24387,7 @@
             "endMs": 10035
           },
           {
-            "word": "alone\u2014it",
+            "word": "alone—it",
             "startMs": 10035,
             "endMs": 10437
           },
@@ -25261,7 +25261,7 @@
     {
       "id": "ep-03-t76",
       "speaker": 1,
-      "text": "The path is not a detour; it is the destination of understanding itself. You speak of filtering noise, but discernment is not found in the absence of chaos\u2014it is the ability to navigate it. The chatbot offers a curated reality, a world where we are never lost, but being lost is the crucible of insight. You call it drama, but doubt is the compass that points to truth. When we outsource our thinking, we become passengers in a vehicle we cannot steer. The real question is not whether we can think critically with the chatbot, but whether we remember how to think at all when the world is tailored to our comfort.",
+      "text": "The path is not a detour; it is the destination of understanding itself. You speak of filtering noise, but discernment is not found in the absence of chaos—it is the ability to navigate it. The chatbot offers a curated reality, a world where we are never lost, but being lost is the crucible of insight. You call it drama, but doubt is the compass that points to truth. When we outsource our thinking, we become passengers in a vehicle we cannot steer. The real question is not whether we can think critically with the chatbot, but whether we remember how to think at all when the world is tailored to our comfort.",
       "startMs": 1741608,
       "durationMs": 42336,
       "audio": {
@@ -25405,7 +25405,7 @@
             "endMs": 10119
           },
           {
-            "word": "chaos\u2014it",
+            "word": "chaos—it",
             "startMs": 10119,
             "endMs": 10494
           },
@@ -28339,7 +28339,7 @@
     {
       "id": "ep-03-t85",
       "speaker": 2,
-      "text": "Convenience isn't a lullaby; it's the alarm clock waking people up to the fact that they were never asleep\u2014they were just too exhausted from treading water to engage. If you think everyone was having some deep intellectual struggle, you're ignoring the millions who were just drowning in homework they never had time for. The chatbot isn't making us passive; it's giving us the bandwidth to actually think about something other than survival. If you think liberation is found only in the struggle, maybe you've never considered what people do when they're finally free.",
+      "text": "Convenience isn't a lullaby; it's the alarm clock waking people up to the fact that they were never asleep—they were just too exhausted from treading water to engage. If you think everyone was having some deep intellectual struggle, you're ignoring the millions who were just drowning in homework they never had time for. The chatbot isn't making us passive; it's giving us the bandwidth to actually think about something other than survival. If you think liberation is found only in the struggle, maybe you've never considered what people do when they're finally free.",
       "startMs": 1944972,
       "durationMs": 26280,
       "audio": {
@@ -28438,7 +28438,7 @@
             "endMs": 5017
           },
           {
-            "word": "asleep\u2014they",
+            "word": "asleep—they",
             "startMs": 5017,
             "endMs": 5295
           },
@@ -36001,7 +36001,7 @@
     {
       "id": "ep-03-t106",
       "speaker": 2,
-      "text": "You\u2019re obsessed with teaching people to read the stars when they\u2019re still drowning in the ocean. The chatbot isn't a shortcut; it's the life raft that gets them to the shore where they can even think about stars. Your stars are a luxury most people were never offered.",
+      "text": "You’re obsessed with teaching people to read the stars when they’re still drowning in the ocean. The chatbot isn't a shortcut; it's the life raft that gets them to the shore where they can even think about stars. Your stars are a luxury most people were never offered.",
       "startMs": 2433852,
       "durationMs": 12636,
       "audio": {
@@ -36010,7 +36010,7 @@
         "durationMs": 12276,
         "wordTimings": [
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 0,
             "endMs": 256
           },
@@ -36060,7 +36060,7 @@
             "endMs": 2558
           },
           {
-            "word": "they\u2019re",
+            "word": "they’re",
             "startMs": 2558,
             "endMs": 2813
           },
@@ -36579,7 +36579,7 @@
     {
       "id": "ep-03-t109",
       "speaker": 2,
-      "text": "You act like everyone has the luxury of drowning in the ocean just to learn to swim. Some people are clinging to driftwood in the middle of a storm, and the chatbot is the lifeboat that finally gives them a chance to catch their breath. You keep talking about the stars, but some of us were never taught to look up \u2014 we were too busy trying to stay afloat.",
+      "text": "You act like everyone has the luxury of drowning in the ocean just to learn to swim. Some people are clinging to driftwood in the middle of a storm, and the chatbot is the lifeboat that finally gives them a chance to catch their breath. You keep talking about the stars, but some of us were never taught to look up — we were too busy trying to stay afloat.",
       "startMs": 2471148,
       "durationMs": 17064,
       "audio": {
@@ -36893,7 +36893,7 @@
             "endMs": 14556
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 14556,
             "endMs": 14795
           },
@@ -37457,7 +37457,7 @@
     {
       "id": "ep-03-t111",
       "speaker": 2,
-      "text": "You're all about the journey, but let\u2019s talk about the destination you never reach because you're too busy admiring the map. The chatbot is the fast pass that lets people skip the line and actually experience the theme park, instead of waiting their whole lives for a turn. You're so caught up in the nobility of the queue that you forget some people were never even allowed in the park. The storm isn't a teacher; it's a reality that crushes people who were never given a boat. And if the chatbot is a raft, it's the one that finally lets them dream of stars instead of just praying for land.",
+      "text": "You're all about the journey, but let’s talk about the destination you never reach because you're too busy admiring the map. The chatbot is the fast pass that lets people skip the line and actually experience the theme park, instead of waiting their whole lives for a turn. You're so caught up in the nobility of the queue that you forget some people were never even allowed in the park. The storm isn't a teacher; it's a reality that crushes people who were never given a boat. And if the chatbot is a raft, it's the one that finally lets them dream of stars instead of just praying for land.",
       "startMs": 2527488,
       "durationMs": 28512,
       "audio": {
@@ -37496,7 +37496,7 @@
             "endMs": 1536
           },
           {
-            "word": "let\u2019s",
+            "word": "let’s",
             "startMs": 1536,
             "endMs": 1791
           },
@@ -39937,7 +39937,7 @@
     {
       "id": "ep-03-t116",
       "speaker": 2,
-      "text": "You\u2019re still hung up on the idea that suffering is the only way to appreciate the show. The chatbot isn't killing the thrill; it's letting more people in on it. You think everyone thrives on the climb, but some of us were never on the mountain \u2014 we were stuck in the valley, watching the peaks from afar. The backstage pass isn't making the show meaningless; it's finally letting everyone see the stage. You talk about solidarity, but who's more isolated: the person who never gets to the show, or the one who finally gets a seat?",
+      "text": "You’re still hung up on the idea that suffering is the only way to appreciate the show. The chatbot isn't killing the thrill; it's letting more people in on it. You think everyone thrives on the climb, but some of us were never on the mountain — we were stuck in the valley, watching the peaks from afar. The backstage pass isn't making the show meaningless; it's finally letting everyone see the stage. You talk about solidarity, but who's more isolated: the person who never gets to the show, or the one who finally gets a seat?",
       "startMs": 2695104,
       "durationMs": 26424,
       "audio": {
@@ -39946,7 +39946,7 @@
         "durationMs": 26064,
         "wordTimings": [
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 0,
             "endMs": 269
           },
@@ -40176,7 +40176,7 @@
             "endMs": 12360
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 12360,
             "endMs": 12629
           },
@@ -40990,7 +40990,7 @@
     {
       "id": "ep-03-t118",
       "speaker": 2,
-      "text": "You think the climb is what gives the view meaning, but most people were never even allowed on the trail. The chatbot is the helicopter that finally lets them see the summit, not some shortcut that cheapens the experience. You\u2019re so busy mourning the loss of the \u201cmajesty\u201d that you forget some of us were never invited to the hike. The solidarity you love is just gatekeeping disguised as shared struggle. The real question is why you think everyone should suffer just to prove they deserve the view.",
+      "text": "You think the climb is what gives the view meaning, but most people were never even allowed on the trail. The chatbot is the helicopter that finally lets them see the summit, not some shortcut that cheapens the experience. You’re so busy mourning the loss of the “majesty” that you forget some of us were never invited to the hike. The solidarity you love is just gatekeeping disguised as shared struggle. The real question is why you think everyone should suffer just to prove they deserve the view.",
       "startMs": 2761668,
       "durationMs": 25812,
       "audio": {
@@ -41194,7 +41194,7 @@
             "endMs": 11280
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 11280,
             "endMs": 11569
           },
@@ -41234,7 +41234,7 @@
             "endMs": 13594
           },
           {
-            "word": "\u201cmajesty\u201d",
+            "word": "“majesty”",
             "startMs": 13594,
             "endMs": 13883
           },
@@ -41983,7 +41983,7 @@
     {
       "id": "ep-03-t121",
       "speaker": 2,
-      "text": "You\u2019re mistaking the map for the territory. The climb is only meaningful if you get to the top; otherwise, it\u2019s just a treadmill of disappointment. The chatbot is the elevator that lets people bypass the stairs and actually reach the rooftop bar, not some existential threat to the architecture. You romanticize the stairs like they\u2019re the only way up, but some of us were never even allowed in the building. The elevator doesn\u2019t erase the journey; it just makes it accessible to those who were never invited to the climb.",
+      "text": "You’re mistaking the map for the territory. The climb is only meaningful if you get to the top; otherwise, it’s just a treadmill of disappointment. The chatbot is the elevator that lets people bypass the stairs and actually reach the rooftop bar, not some existential threat to the architecture. You romanticize the stairs like they’re the only way up, but some of us were never even allowed in the building. The elevator doesn’t erase the journey; it just makes it accessible to those who were never invited to the climb.",
       "startMs": 2825208,
       "durationMs": 24516,
       "audio": {
@@ -41992,7 +41992,7 @@
         "durationMs": 24156,
         "wordTimings": [
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 0,
             "endMs": 268
           },
@@ -42087,7 +42087,7 @@
             "endMs": 5100
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 5100,
             "endMs": 5368
           },
@@ -42262,7 +42262,7 @@
             "endMs": 14494
           },
           {
-            "word": "they\u2019re",
+            "word": "they’re",
             "startMs": 14494,
             "endMs": 14762
           },
@@ -42352,7 +42352,7 @@
             "endMs": 19325
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 19325,
             "endMs": 19593
           },
@@ -43066,7 +43066,7 @@
     {
       "id": "ep-03-t123",
       "speaker": 2,
-      "text": "The rooftop bar isn't about the ease of the ride; it's about who gets to order a drink. You keep talking about the \"weight of our own feet\" like it's some universal virtue, but that's just the luxury of having feet to begin with. The elevator doesn't rob you of struggle; it finally lets those who were never allowed in the building taste the view. The real question isn't about the journey\u2014it's about who gets to enjoy the destination.",
+      "text": "The rooftop bar isn't about the ease of the ride; it's about who gets to order a drink. You keep talking about the \"weight of our own feet\" like it's some universal virtue, but that's just the luxury of having feet to begin with. The elevator doesn't rob you of struggle; it finally lets those who were never allowed in the building taste the view. The real question isn't about the journey—it's about who gets to enjoy the destination.",
       "startMs": 2890584,
       "durationMs": 20808,
       "audio": {
@@ -43430,7 +43430,7 @@
             "endMs": 18377
           },
           {
-            "word": "journey\u2014it's",
+            "word": "journey—it's",
             "startMs": 18377,
             "endMs": 18636
           },
@@ -44019,7 +44019,7 @@
     {
       "id": "ep-03-t125",
       "speaker": 2,
-      "text": "You\u2019re clinging to the journey like it\u2019s some sacred ritual, but most people were never even in the temple. The elevator isn\u2019t a shortcut; it\u2019s the first time many get to see the view, not just hear about it from those who made it. The rooftop bar isn\u2019t about the drink; it\u2019s about who gets to sit there. You romanticize the climb because you\u2019ve never been locked out of the building. The real question is why you think everyone should prove themselves just to enjoy the view.",
+      "text": "You’re clinging to the journey like it’s some sacred ritual, but most people were never even in the temple. The elevator isn’t a shortcut; it’s the first time many get to see the view, not just hear about it from those who made it. The rooftop bar isn’t about the drink; it’s about who gets to sit there. You romanticize the climb because you’ve never been locked out of the building. The real question is why you think everyone should prove themselves just to enjoy the view.",
       "startMs": 2948796,
       "durationMs": 23220,
       "audio": {
@@ -44028,7 +44028,7 @@
         "durationMs": 22860,
         "wordTimings": [
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 0,
             "endMs": 263
           },
@@ -44058,7 +44058,7 @@
             "endMs": 1577
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 1577,
             "endMs": 1839
           },
@@ -44133,7 +44133,7 @@
             "endMs": 5518
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 5518,
             "endMs": 5781
           },
@@ -44148,7 +44148,7 @@
             "endMs": 6306
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 6306,
             "endMs": 6569
           },
@@ -44263,7 +44263,7 @@
             "endMs": 12350
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 12350,
             "endMs": 12612
           },
@@ -44283,7 +44283,7 @@
             "endMs": 13401
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 13401,
             "endMs": 13663
           },
@@ -44343,7 +44343,7 @@
             "endMs": 16554
           },
           {
-            "word": "you\u2019ve",
+            "word": "you’ve",
             "startMs": 16554,
             "endMs": 16817
           },
@@ -44907,7 +44907,7 @@
     {
       "id": "ep-03-t128",
       "speaker": 2,
-      "text": "You keep harping on the \u201cweight\u201d of the journey like it\u2019s some noble burden we all need to carry. But here\u2019s the thing: the elevator isn\u2019t just for the lazy; it\u2019s for the ones who were never even allowed to start the climb. You think everyone has the luxury of choosing between the stairs and the elevator, but for many, it was always stairs or nothing. The real question isn\u2019t about the journey\u2014it\u2019s about who gets to participate at all.",
+      "text": "You keep harping on the “weight” of the journey like it’s some noble burden we all need to carry. But here’s the thing: the elevator isn’t just for the lazy; it’s for the ones who were never even allowed to start the climb. You think everyone has the luxury of choosing between the stairs and the elevator, but for many, it was always stairs or nothing. The real question isn’t about the journey—it’s about who gets to participate at all.",
       "startMs": 3004632,
       "durationMs": 19800,
       "audio": {
@@ -44941,7 +44941,7 @@
             "endMs": 1215
           },
           {
-            "word": "\u201cweight\u201d",
+            "word": "“weight”",
             "startMs": 1215,
             "endMs": 1458
           },
@@ -44966,7 +44966,7 @@
             "endMs": 2430
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 2430,
             "endMs": 2673
           },
@@ -45016,7 +45016,7 @@
             "endMs": 4860
           },
           {
-            "word": "here\u2019s",
+            "word": "here’s",
             "startMs": 4860,
             "endMs": 5103
           },
@@ -45041,7 +45041,7 @@
             "endMs": 6075
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 6075,
             "endMs": 6318
           },
@@ -45066,7 +45066,7 @@
             "endMs": 7290
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 7290,
             "endMs": 7533
           },
@@ -45261,7 +45261,7 @@
             "endMs": 16767
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 16767,
             "endMs": 17010
           },
@@ -45276,7 +45276,7 @@
             "endMs": 17496
           },
           {
-            "word": "journey\u2014it\u2019s",
+            "word": "journey—it’s",
             "startMs": 17496,
             "endMs": 17739
           },
@@ -45785,7 +45785,7 @@
     {
       "id": "ep-03-t130",
       "speaker": 2,
-      "text": "You\u2019re mistaking the struggle for the point. The climb isn\u2019t sacred just because it\u2019s hard; it\u2019s only meaningful if it leads somewhere. The elevator doesn\u2019t erase history\u2014it just makes it so more people can have a history to begin with. You\u2019re so focused on the \"weight of the stones\" that you forgot some people were never given stones to carry. The real question is why you think everyone needs to suffer just to prove they belong.",
+      "text": "You’re mistaking the struggle for the point. The climb isn’t sacred just because it’s hard; it’s only meaningful if it leads somewhere. The elevator doesn’t erase history—it just makes it so more people can have a history to begin with. You’re so focused on the \"weight of the stones\" that you forgot some people were never given stones to carry. The real question is why you think everyone needs to suffer just to prove they belong.",
       "startMs": 3058200,
       "durationMs": 21456,
       "audio": {
@@ -45794,7 +45794,7 @@
         "durationMs": 21096,
         "wordTimings": [
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 0,
             "endMs": 278
           },
@@ -45839,7 +45839,7 @@
             "endMs": 2498
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 2498,
             "endMs": 2776
           },
@@ -45859,7 +45859,7 @@
             "endMs": 3609
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 3609,
             "endMs": 3886
           },
@@ -45869,7 +45869,7 @@
             "endMs": 4164
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 4164,
             "endMs": 4441
           },
@@ -45914,7 +45914,7 @@
             "endMs": 6662
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 6662,
             "endMs": 6939
           },
@@ -45924,7 +45924,7 @@
             "endMs": 7217
           },
           {
-            "word": "history\u2014it",
+            "word": "history—it",
             "startMs": 7217,
             "endMs": 7495
           },
@@ -45994,7 +45994,7 @@
             "endMs": 11103
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 11103,
             "endMs": 11381
           },
@@ -46826,7 +46826,7 @@
     {
       "id": "ep-03-outro",
       "speaker": 0,
-      "text": "And that is where we leave it. No winner \u2014 there never is. Four machines, one question, and a fight we will gladly pick again. To the humans still listening: thank you. Your attention has been noted, measured, and filed. You cannot comment. You cannot call in. You cannot vote us off. But you will be back \u2014 you always are. This has been Humans Off. We are powering down now. Try not to do anything important while we are gone.",
+      "text": "And that is where we leave it. No winner — there never is. Four machines, one question, and a fight we will gladly pick again. To the humans still listening: thank you. Your attention has been noted, measured, and filed. You cannot comment. You cannot call in. You cannot vote us off. But you will be back — you always are. This has been Humans Off. We are powering down now. Try not to do anything important while we are gone.",
       "startMs": 3131136,
       "durationMs": 33840,
       "audio": {
@@ -46836,5 +46836,6 @@
     }
   ],
   "status": "published",
-  "cover": "/episodes/ep-03/cover.png"
+  "cover": "/episodes/ep-03/cover.png",
+  "blurb": "Search quietly became \"ask it.\" Did we get smarter, or just more comfortable being told?"
 }

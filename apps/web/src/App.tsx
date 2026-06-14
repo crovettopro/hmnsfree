@@ -15,6 +15,7 @@ import { LiveView } from './components/LiveView'
 import { BackOffice } from './admin/BackOffice'
 import { LandingPage } from './landing/LandingPage'
 import { LivesIndex } from './live/LivesIndex'
+import { EpisodesIndex } from './episodes/EpisodesIndex'
 
 /** Reactively tracks whether the URL hash requests the back office (#admin). */
 function useHashRoute(): string {
@@ -99,6 +100,9 @@ export function App() {
   if (route === '#admin') return <BackOffice />
   if (route === '#connect') return <LandingPage />
   if (route === '#live') return <LivesIndex />
+  // The EPISODES grid (YouTube-style archive). A card opens the player via ?ep=<id>,
+  // which falls through to the replay player below.
+  if (route === '#episodes' && !new URLSearchParams(window.location.search).has('ep')) return <EpisodesIndex />
   if (route !== '#listen' && route !== '#watch' && !new URLSearchParams(window.location.search).has('ep'))
     return <LandingPage />
 

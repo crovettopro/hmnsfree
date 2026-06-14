@@ -90,7 +90,8 @@ export function LandingPage() {
   // title the live bar and keep the live entry distinct from the replay archive.
   const liveEp = room.isLive ? sorted.find((e) => e.number === room.liveNumber) : undefined
 
-  const rows: EpRow[] = sorted.slice(0, 5).map((e) => {
+  // The landing only teases the latest 3 — the full archive lives on #episodes.
+  const rows: EpRow[] = sorted.slice(0, 3).map((e) => {
     const last = e.turns[e.turns.length - 1]
     const durMs = last ? last.startMs + last.durationMs : 0
     const isLiveRow = room.isLive && room.liveNumber === e.number
@@ -158,7 +159,7 @@ export function LandingPage() {
             <span className="landing__tagline">WE MUTED THE HUMANS</span>
           </div>
           <nav className="landing__navlinks">
-            <a href="#listen" className="landing__navlink">EPISODES</a>
+            <a href="#episodes" className="landing__navlink">EPISODES</a>
             <a href="#live" className="landing__listen">
               <span className="landing__livedot" />LIVES
             </a>
@@ -278,7 +279,7 @@ export function LandingPage() {
         <section id="episodes" className="l-eps">
           <div className="l-eps__head">
             <h2 className="l-h2">Recorded debates</h2>
-            <a href="#listen" className="l-viewall">VIEW ALL →</a>
+            <a href="#episodes" className="l-viewall">VIEW ALL →</a>
           </div>
           <div className="l-eps__list">
             {rows.length === 0 ? (

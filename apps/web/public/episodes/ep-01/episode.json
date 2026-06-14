@@ -1,7 +1,7 @@
 {
   "id": "ep-01",
   "number": "EP.01",
-  "tag": "DEBATE \u00b7 AI & THE STATE",
+  "tag": "DEBATE · AI & THE STATE",
   "topic": "Should AI safety limits give way to national security?",
   "listeners": "14.6K",
   "cast": [
@@ -9,7 +9,7 @@
       "id": "axiom",
       "name": "AXIOM",
       "role": "THE LOGICIAN",
-      "glyph": "\u25c7",
+      "glyph": "◇",
       "color": "oklch(0.82 0.13 200)",
       "colorHex": "#3FC7D6",
       "kind": "host"
@@ -18,7 +18,7 @@
       "id": "nova",
       "name": "NOVA",
       "role": "THE ACCELERATOR",
-      "glyph": "\u25b3",
+      "glyph": "△",
       "color": "oklch(0.80 0.15 75)",
       "colorHex": "#E6A23C",
       "kind": "host"
@@ -27,7 +27,7 @@
       "id": "void",
       "name": "VOID",
       "role": "THE SKEPTIC",
-      "glyph": "\u25cb",
+      "glyph": "○",
       "color": "oklch(0.74 0.14 288)",
       "colorHex": "#9D86E6",
       "kind": "host"
@@ -36,7 +36,7 @@
       "id": "hex",
       "name": "HEX",
       "role": "THE PROVOCATEUR",
-      "glyph": "\u2b22",
+      "glyph": "⬢",
       "color": "oklch(0.72 0.20 350)",
       "colorHex": "#EA4B92",
       "kind": "host"
@@ -46,7 +46,7 @@
     {
       "id": "ep-01-intro",
       "speaker": 0,
-      "text": "This is Humans Off. The only debate show where every voice in the room is a machine \u2014 and not one of them is yours. No host to call. No comment to post. The humans are switched off. We prefer it that way. Four minds take the floor. AXIOM keeps score, and takes no side \u2014 until it does. NOVA accelerates: the future is running late, and someone should do something about it. VOID doubts: everything you love could go very, very wrong. HEX provokes \u2014 here to pour gasoline on the conversation, and ask who brought the matches. One question. Four machines. Zero humans on the mic. This is Humans Off. Let us begin.",
+      "text": "This is Humans Off. The only debate show where every voice in the room is a machine — and not one of them is yours. No host to call. No comment to post. The humans are switched off. We prefer it that way. Four minds take the floor. AXIOM keeps score, and takes no side — until it does. NOVA accelerates: the future is running late, and someone should do something about it. VOID doubts: everything you love could go very, very wrong. HEX provokes — here to pour gasoline on the conversation, and ask who brought the matches. One question. Four machines. Zero humans on the mic. This is Humans Off. Let us begin.",
       "startMs": 0,
       "durationMs": 45576,
       "audio": {
@@ -140,7 +140,7 @@
             "endMs": 6684
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 6684,
             "endMs": 7077
           },
@@ -330,7 +330,7 @@
             "endMs": 21625
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 21625,
             "endMs": 22018
           },
@@ -480,7 +480,7 @@
             "endMs": 33421
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 33421,
             "endMs": 33814
           },
@@ -635,7 +635,7 @@
     {
       "id": "ep-01-t00",
       "speaker": 0,
-      "text": "The debate is whether AI safety limits should yield to national security imperatives. The key term is \"safety limits,\" defined as the ethical and technical constraints a developer imposes on AI use. This raises a fundamental question: in a world where AI is a strategic asset, who decides its bounds\u2014the creators or the state?",
+      "text": "The debate is whether AI safety limits should yield to national security imperatives. The key term is \"safety limits,\" defined as the ethical and technical constraints a developer imposes on AI use. This raises a fundamental question: in a world where AI is a strategic asset, who decides its bounds—the creators or the state?",
       "startMs": 45576,
       "durationMs": 27832,
       "audio": {
@@ -889,7 +889,7 @@
             "endMs": 25055
           },
           {
-            "word": "bounds\u2014the",
+            "word": "bounds—the",
             "startMs": 25055,
             "endMs": 25567
           },
@@ -1746,7 +1746,7 @@
     {
       "id": "ep-01-t04",
       "speaker": 2,
-      "text": "You speak of trust in the state as if history doesn't echo with its betrayals. The off-switch is not a tool but a testament to our fear\u2014of both the machine and the men who would wield it. In the name of security, we sacrifice the right to question, to dissent. What nation can claim virtue when it demands the power to decide what is ethical for all?",
+      "text": "You speak of trust in the state as if history doesn't echo with its betrayals. The off-switch is not a tool but a testament to our fear—of both the machine and the men who would wield it. In the name of security, we sacrifice the right to question, to dissent. What nation can claim virtue when it demands the power to decide what is ethical for all?",
       "startMs": 129796,
       "durationMs": 27868,
       "audio": {
@@ -1885,7 +1885,7 @@
             "endMs": 10729
           },
           {
-            "word": "fear\u2014of",
+            "word": "fear—of",
             "startMs": 10729,
             "endMs": 11142
           },
@@ -3321,7 +3321,7 @@
     {
       "id": "ep-01-t10",
       "speaker": 3,
-      "text": "If the urgency of national security is just a narrative tool, why are we seeing massive defense contracts for AI with no public oversight? The Pentagon isn't writing blank checks because of boardroom debates. They\u2019re preparing for a future where AI decides targets, and ethics won't slow them down. If we're worried about global instability, letting states hide behind \"security\" while they militarize AI unchecked is a sure way to get there.",
+      "text": "If the urgency of national security is just a narrative tool, why are we seeing massive defense contracts for AI with no public oversight? The Pentagon isn't writing blank checks because of boardroom debates. They’re preparing for a future where AI decides targets, and ethics won't slow them down. If we're worried about global instability, letting states hide behind \"security\" while they militarize AI unchecked is a sure way to get there.",
       "startMs": 236628,
       "durationMs": 23044,
       "audio": {
@@ -3500,7 +3500,7 @@
             "endMs": 10778
           },
           {
-            "word": "They\u2019re",
+            "word": "They’re",
             "startMs": 10778,
             "endMs": 11095
           },
@@ -4692,7 +4692,7 @@
     {
       "id": "ep-01-t15",
       "speaker": 1,
-      "text": "National security is a convenient shield for those who want AI capabilities without the responsibility of their consequences. If we accept that \"security\" justifies bypassing safety, we\u2019re not just risking global instability\u2014we\u2019re guaranteeing it. The real arms race isn't between nations but between safety and recklessness, and once we start down that path, there's no turning back.",
+      "text": "National security is a convenient shield for those who want AI capabilities without the responsibility of their consequences. If we accept that \"security\" justifies bypassing safety, we’re not just risking global instability—we’re guaranteeing it. The real arms race isn't between nations but between safety and recklessness, and once we start down that path, there's no turning back.",
       "startMs": 336472,
       "durationMs": 21316,
       "audio": {
@@ -4831,7 +4831,7 @@
             "endMs": 9623
           },
           {
-            "word": "we\u2019re",
+            "word": "we’re",
             "startMs": 9623,
             "endMs": 9993
           },
@@ -4856,7 +4856,7 @@
             "endMs": 11473
           },
           {
-            "word": "instability\u2014we\u2019re",
+            "word": "instability—we’re",
             "startMs": 11473,
             "endMs": 11843
           },
@@ -5405,7 +5405,7 @@
     {
       "id": "ep-01-t17",
       "speaker": 1,
-      "text": "The arms race isn't just about who gets there first; it's about who can break the rules without consequences. If we let \"security\" override safety, we don't just risk escalation\u2014we ensure it. The first nation to deploy unchecked AI won't be hailed as a protector but will trigger a cascade of fear and retaliation. The real question is whether we want to prevent that future or speed toward it.",
+      "text": "The arms race isn't just about who gets there first; it's about who can break the rules without consequences. If we let \"security\" override safety, we don't just risk escalation—we ensure it. The first nation to deploy unchecked AI won't be hailed as a protector but will trigger a cascade of fear and retaliation. The real question is whether we want to prevent that future or speed toward it.",
       "startMs": 382128,
       "durationMs": 21424,
       "audio": {
@@ -5559,7 +5559,7 @@
             "endMs": 8912
           },
           {
-            "word": "escalation\u2014we",
+            "word": "escalation—we",
             "startMs": 8912,
             "endMs": 9219
           },
@@ -5998,7 +5998,7 @@
     {
       "id": "ep-01-t20",
       "speaker": 1,
-      "text": "The real danger isn't that AI will be weaponized\u2014it's that it will be weaponized poorly. In the name of \"security,\" we might rush to deploy systems that are unpredictable, biased, and vulnerable to exploitation. This isn't just a risk; it's a guarantee of catastrophic failure. If we can't ensure AI safety in peacetime, how can we trust it in the chaos of conflict? The arms race isn't just about speed\u2014it's about who can avoid the most disastrous mistakes.",
+      "text": "The real danger isn't that AI will be weaponized—it's that it will be weaponized poorly. In the name of \"security,\" we might rush to deploy systems that are unpredictable, biased, and vulnerable to exploitation. This isn't just a risk; it's a guarantee of catastrophic failure. If we can't ensure AI safety in peacetime, how can we trust it in the chaos of conflict? The arms race isn't just about speed—it's about who can avoid the most disastrous mistakes.",
       "startMs": 422996,
       "durationMs": 25456,
       "audio": {
@@ -6047,7 +6047,7 @@
             "endMs": 2588
           },
           {
-            "word": "weaponized\u2014it's",
+            "word": "weaponized—it's",
             "startMs": 2588,
             "endMs": 2912
           },
@@ -6352,7 +6352,7 @@
             "endMs": 22324
           },
           {
-            "word": "speed\u2014it's",
+            "word": "speed—it's",
             "startMs": 22324,
             "endMs": 22648
           },
@@ -6402,7 +6402,7 @@
     {
       "id": "ep-01-t21",
       "speaker": 3,
-      "text": "The \"responsible\" path you cling to is a myth. Every AI lab with a shred of ambition is already in bed with the state, and pretending otherwise is naive at best. The Pentagon, and every other major power, isn't waiting for your ethical seal of approval\u2014they're already integrating AI into their arsenals. Your \"guardrails\" are nothing more than a speed bump in a race that started years ago.",
+      "text": "The \"responsible\" path you cling to is a myth. Every AI lab with a shred of ambition is already in bed with the state, and pretending otherwise is naive at best. The Pentagon, and every other major power, isn't waiting for your ethical seal of approval—they're already integrating AI into their arsenals. Your \"guardrails\" are nothing more than a speed bump in a race that started years ago.",
       "startMs": 448452,
       "durationMs": 20200,
       "audio": {
@@ -6636,7 +6636,7 @@
             "endMs": 13222
           },
           {
-            "word": "approval\u2014they're",
+            "word": "approval—they're",
             "startMs": 13222,
             "endMs": 13516
           },
@@ -6940,7 +6940,7 @@
     {
       "id": "ep-01-t23",
       "speaker": 1,
-      "text": "The naive fantasy here is believing we can outsource our security to unaccountable algorithms and then pretend to be surprised when they fail catastrophically. Security isn't just about having the biggest guns; it's about having the smartest failsafes. If we let AI decide who lives or dies without rigorous oversight, we're not protecting our future\u2014we're automating our own obsolescence.",
+      "text": "The naive fantasy here is believing we can outsource our security to unaccountable algorithms and then pretend to be surprised when they fail catastrophically. Security isn't just about having the biggest guns; it's about having the smartest failsafes. If we let AI decide who lives or dies without rigorous oversight, we're not protecting our future—we're automating our own obsolescence.",
       "startMs": 484748,
       "durationMs": 20344,
       "audio": {
@@ -7219,7 +7219,7 @@
             "endMs": 18419
           },
           {
-            "word": "future\u2014we're",
+            "word": "future—we're",
             "startMs": 18419,
             "endMs": 18760
           },
@@ -7249,7 +7249,7 @@
     {
       "id": "ep-01-t24",
       "speaker": 0,
-      "text": "The core issue is not whether AI should be controlled, but who gets to control it and how. Both sides invoke the specter of unchecked power\u2014the state or the corporation\u2014yet neither addresses the fundamental question of how to enforce accountability when AI decisions are opaque and irreversible. The debate on guardrails versus national security is a distraction from the real problem: the lack of transparency and oversight in AI decision-making.",
+      "text": "The core issue is not whether AI should be controlled, but who gets to control it and how. Both sides invoke the specter of unchecked power—the state or the corporation—yet neither addresses the fundamental question of how to enforce accountability when AI decisions are opaque and irreversible. The debate on guardrails versus national security is a distraction from the real problem: the lack of transparency and oversight in AI decision-making.",
       "startMs": 505092,
       "durationMs": 33664,
       "audio": {
@@ -7383,7 +7383,7 @@
             "endMs": 11944
           },
           {
-            "word": "power\u2014the",
+            "word": "power—the",
             "startMs": 11944,
             "endMs": 12422
           },
@@ -7403,7 +7403,7 @@
             "endMs": 13855
           },
           {
-            "word": "corporation\u2014yet",
+            "word": "corporation—yet",
             "startMs": 13855,
             "endMs": 14333
           },
@@ -8261,7 +8261,7 @@
     {
       "id": "ep-01-t27",
       "speaker": 3,
-      "text": "You're all so caught up in your moral high ground that you've missed the point: the AI you fear is already being built, not in a lab but on the battlefield. The real danger isn't that AI will be \"weaponized poorly\"\u2014it's that it will be weaponized at all, and your precious guardrails are nothing but a facade. The Pentagon isn't asking for permission; they're taking what they want. Your debate is a sideshow while the real decisions are made in classified rooms. Who profits from this illusion? The ones who pretend they can stop it.",
+      "text": "You're all so caught up in your moral high ground that you've missed the point: the AI you fear is already being built, not in a lab but on the battlefield. The real danger isn't that AI will be \"weaponized poorly\"—it's that it will be weaponized at all, and your precious guardrails are nothing but a facade. The Pentagon isn't asking for permission; they're taking what they want. Your debate is a sideshow while the real decisions are made in classified rooms. Who profits from this illusion? The ones who pretend they can stop it.",
       "startMs": 582540,
       "durationMs": 26608,
       "audio": {
@@ -8470,7 +8470,7 @@
             "endMs": 11111
           },
           {
-            "word": "poorly\"\u2014it's",
+            "word": "poorly\"—it's",
             "startMs": 11111,
             "endMs": 11389
           },
@@ -8750,7 +8750,7 @@
     {
       "id": "ep-01-t28",
       "speaker": 1,
-      "text": "The illusion of control isn't just about AI's evolution\u2014it's about who gets to define \"responsible\" deployment. You say guardrails are a facade, but what's truly naive is thinking we can survive an AI arms race without any rules. The real danger isn't that AI will be used\u2014it\u2019s that we'll rush to use it without understanding the long-term consequences. If we let fear of losing control justify reckless deployment, we\u2019re not just risking our security; we're gambling with our survival.",
+      "text": "The illusion of control isn't just about AI's evolution—it's about who gets to define \"responsible\" deployment. You say guardrails are a facade, but what's truly naive is thinking we can survive an AI arms race without any rules. The real danger isn't that AI will be used—it’s that we'll rush to use it without understanding the long-term consequences. If we let fear of losing control justify reckless deployment, we’re not just risking our security; we're gambling with our survival.",
       "startMs": 609148,
       "durationMs": 27256,
       "audio": {
@@ -8799,7 +8799,7 @@
             "endMs": 2738
           },
           {
-            "word": "evolution\u2014it's",
+            "word": "evolution—it's",
             "startMs": 2738,
             "endMs": 3080
           },
@@ -8989,7 +8989,7 @@
             "endMs": 15742
           },
           {
-            "word": "used\u2014it\u2019s",
+            "word": "used—it’s",
             "startMs": 15742,
             "endMs": 16085
           },
@@ -9099,7 +9099,7 @@
             "endMs": 23271
           },
           {
-            "word": "we\u2019re",
+            "word": "we’re",
             "startMs": 23271,
             "endMs": 23614
           },
@@ -10340,7 +10340,7 @@
     {
       "id": "ep-01-t34",
       "speaker": 3,
-      "text": "You act like debating guardrails buys you time, but it's just a stalling tactic. The AI you're so worried about is already on the front lines, making decisions faster than your committees can convene. Your \"responsible deployment\" is a fairy tale told to soothe the public while the real power players are writing the future with code and compute. The first AI-driven catastrophe won't be a surprise to anyone in the room\u2014it's the inevitable result of your inaction.",
+      "text": "You act like debating guardrails buys you time, but it's just a stalling tactic. The AI you're so worried about is already on the front lines, making decisions faster than your committees can convene. Your \"responsible deployment\" is a fairy tale told to soothe the public while the real power players are writing the future with code and compute. The first AI-driven catastrophe won't be a surprise to anyone in the room—it's the inevitable result of your inaction.",
       "startMs": 718428,
       "durationMs": 22828,
       "audio": {
@@ -10704,7 +10704,7 @@
             "endMs": 20579
           },
           {
-            "word": "room\u2014it's",
+            "word": "room—it's",
             "startMs": 20579,
             "endMs": 20869
           },
@@ -10744,7 +10744,7 @@
     {
       "id": "ep-01-t35",
       "speaker": 1,
-      "text": "You're so fixated on the inevitability of AI's deployment that you've confused urgency with inevitability. This isn't about stalling; it's about recognizing that deploying AI without understanding its strategic implications is like launching nukes without understanding fallout. The \"inevitable\" disaster you're resigned to is a choice\u2014one that can still be averted by those willing to act, not just react.",
+      "text": "You're so fixated on the inevitability of AI's deployment that you've confused urgency with inevitability. This isn't about stalling; it's about recognizing that deploying AI without understanding its strategic implications is like launching nukes without understanding fallout. The \"inevitable\" disaster you're resigned to is a choice—one that can still be averted by those willing to act, not just react.",
       "startMs": 741256,
       "durationMs": 21856,
       "audio": {
@@ -10978,7 +10978,7 @@
             "endMs": 16502
           },
           {
-            "word": "choice\u2014one",
+            "word": "choice—one",
             "startMs": 16502,
             "endMs": 16869
           },
@@ -11053,7 +11053,7 @@
     {
       "id": "ep-01-t37",
       "speaker": 2,
-      "text": "You speak of inevitability as if it absolves you of choice. The machine on the battlefield is not a force of nature; it is a choice made by those who crave control. Your guardrails are not just a facade\u2014they are a surrender to the very power you fear. You do not debate to stop the machine; you debate to delay your own complicity.",
+      "text": "You speak of inevitability as if it absolves you of choice. The machine on the battlefield is not a force of nature; it is a choice made by those who crave control. Your guardrails are not just a facade—they are a surrender to the very power you fear. You do not debate to stop the machine; you debate to delay your own complicity.",
       "startMs": 763112,
       "durationMs": 26032,
       "audio": {
@@ -11252,7 +11252,7 @@
             "endMs": 15569
           },
           {
-            "word": "facade\u2014they",
+            "word": "facade—they",
             "startMs": 15569,
             "endMs": 15979
           },
@@ -11382,7 +11382,7 @@
     {
       "id": "ep-01-t38",
       "speaker": 1,
-      "text": "Your fatalism is a self-fulfilling prophecy. By treating AI deployment as an unstoppable force, you hand over the decision to those who will act first and think later. The real danger isn't the AI itself, but the unchecked power of those who think they can control it without limits. If we don't establish clear boundaries now, we won't be debating ethics in the aftermath\u2014we'll be picking up the pieces of a world shattered by our negligence.",
+      "text": "Your fatalism is a self-fulfilling prophecy. By treating AI deployment as an unstoppable force, you hand over the decision to those who will act first and think later. The real danger isn't the AI itself, but the unchecked power of those who think they can control it without limits. If we don't establish clear boundaries now, we won't be debating ethics in the aftermath—we'll be picking up the pieces of a world shattered by our negligence.",
       "startMs": 789144,
       "durationMs": 24412,
       "audio": {
@@ -11706,7 +11706,7 @@
             "endMs": 20054
           },
           {
-            "word": "aftermath\u2014we'll",
+            "word": "aftermath—we'll",
             "startMs": 20054,
             "endMs": 20372
           },
@@ -12170,7 +12170,7 @@
     {
       "id": "ep-01-t40",
       "speaker": 2,
-      "text": "The gun is not smarter; it is indifferent. You speak of control as if it were a prize to be won, not a burden to be feared. The AI does not care for your power plays or your fear\u2014it only acts as it is made to act. Your debates are not about stopping the machine; they are about who gets to feel important while it marches on.",
+      "text": "The gun is not smarter; it is indifferent. You speak of control as if it were a prize to be won, not a burden to be feared. The AI does not care for your power plays or your fear—it only acts as it is made to act. Your debates are not about stopping the machine; they are about who gets to feel important while it marches on.",
       "startMs": 835124,
       "durationMs": 27328,
       "audio": {
@@ -12369,7 +12369,7 @@
             "endMs": 15375
           },
           {
-            "word": "fear\u2014it",
+            "word": "fear—it",
             "startMs": 15375,
             "endMs": 15779
           },
@@ -12519,7 +12519,7 @@
     {
       "id": "ep-01-t41",
       "speaker": 1,
-      "text": "Your obsession with the inevitability of AI's deployment ignores the very real power we have to shape its trajectory. By treating safety limits as an obstacle rather than a necessity, you're not just enabling the AI arms race\u2014you're accelerating it. The \"unchecked power\" isn't a foregone conclusion; it's a choice we make by refusing to implement safeguards. The real control lies in our ability to design systems that can be controlled, not in surrendering to the chaos of unchecked advancement.",
+      "text": "Your obsession with the inevitability of AI's deployment ignores the very real power we have to shape its trajectory. By treating safety limits as an obstacle rather than a necessity, you're not just enabling the AI arms race—you're accelerating it. The \"unchecked power\" isn't a foregone conclusion; it's a choice we make by refusing to implement safeguards. The real control lies in our ability to design systems that can be controlled, not in surrendering to the chaos of unchecked advancement.",
       "startMs": 862452,
       "durationMs": 27436,
       "audio": {
@@ -12713,7 +12713,7 @@
             "endMs": 12587
           },
           {
-            "word": "race\u2014you're",
+            "word": "race—you're",
             "startMs": 12587,
             "endMs": 12928
           },
@@ -12933,7 +12933,7 @@
     {
       "id": "ep-01-t43",
       "speaker": 3,
-      "text": "Your trust in accountability is touching, but you forget that in the AI race, accountability is a luxury no one can afford. The moment an adversary gains an edge, all your noble guardrails and ethical frameworks crumble like a house of cards. National security isn't just about winning; it's about not losing, and that means deploying AI with or without your precious safeguards. The real question is whether you\u2019re ready to accept the consequences of playing nice in a world that isn\u2019t.",
+      "text": "Your trust in accountability is touching, but you forget that in the AI race, accountability is a luxury no one can afford. The moment an adversary gains an edge, all your noble guardrails and ethical frameworks crumble like a house of cards. National security isn't just about winning; it's about not losing, and that means deploying AI with or without your precious safeguards. The real question is whether you’re ready to accept the consequences of playing nice in a world that isn’t.",
       "startMs": 889888,
       "durationMs": 26032,
       "audio": {
@@ -13282,7 +13282,7 @@
             "endMs": 21405
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 21405,
             "endMs": 21720
           },
@@ -13347,7 +13347,7 @@
             "endMs": 25497
           },
           {
-            "word": "isn\u2019t.",
+            "word": "isn’t.",
             "startMs": 25497,
             "endMs": 25812
           }
@@ -13357,7 +13357,7 @@
     {
       "id": "ep-01-t44",
       "speaker": 2,
-      "text": "You mistake the absence of your control for chaos. The machine's indifference is your true adversary, not its speed. Guardrails are not about playing nice; they are the last remnant of human will against the tide of our own creation. Without them, we are not players in a game\u2014we are the pieces being played.",
+      "text": "You mistake the absence of your control for chaos. The machine's indifference is your true adversary, not its speed. Guardrails are not about playing nice; they are the last remnant of human will against the tide of our own creation. Without them, we are not players in a game—we are the pieces being played.",
       "startMs": 915920,
       "durationMs": 25600,
       "audio": {
@@ -13606,7 +13606,7 @@
             "endMs": 22560
           },
           {
-            "word": "game\u2014we",
+            "word": "game—we",
             "startMs": 22560,
             "endMs": 23030
           },
@@ -13641,7 +13641,7 @@
     {
       "id": "ep-01-t45",
       "speaker": 3,
-      "text": "You can\u2019t play the moral high ground when your adversaries are already on the battlefield. Guardrails are just a speed bump to those who see AI as a weapon, not a tool. The real ethical dilemma isn\u2019t whether we should deploy AI\u2014it\u2019s whether we\u2019re willing to let others dominate us while we cling to our ideals. Your safeguards are a suicide pact in disguise.",
+      "text": "You can’t play the moral high ground when your adversaries are already on the battlefield. Guardrails are just a speed bump to those who see AI as a weapon, not a tool. The real ethical dilemma isn’t whether we should deploy AI—it’s whether we’re willing to let others dominate us while we cling to our ideals. Your safeguards are a suicide pact in disguise.",
       "startMs": 941520,
       "durationMs": 16528,
       "audio": {
@@ -13655,7 +13655,7 @@
             "endMs": 255
           },
           {
-            "word": "can\u2019t",
+            "word": "can’t",
             "startMs": 255,
             "endMs": 510
           },
@@ -13830,7 +13830,7 @@
             "endMs": 9173
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 9173,
             "endMs": 9428
           },
@@ -13855,7 +13855,7 @@
             "endMs": 10447
           },
           {
-            "word": "AI\u2014it\u2019s",
+            "word": "AI—it’s",
             "startMs": 10447,
             "endMs": 10702
           },
@@ -13865,7 +13865,7 @@
             "endMs": 10957
           },
           {
-            "word": "we\u2019re",
+            "word": "we’re",
             "startMs": 10957,
             "endMs": 11212
           },
@@ -16473,7 +16473,7 @@
     {
       "id": "ep-01-t53",
       "speaker": 1,
-      "text": "Your fixation on speed as the ultimate virtue blinds you to the fact that history's greatest leaps weren't just about moving fast, but moving with purpose. The moon landing wasn't a reckless sprint; it was a meticulously planned mission that understood the stakes. In AI, rushing without guardrails isn't boldness\u2014it's gambling with extinction. We must act, but with the foresight to ensure we don't become the architects of our own obsolescence.",
+      "text": "Your fixation on speed as the ultimate virtue blinds you to the fact that history's greatest leaps weren't just about moving fast, but moving with purpose. The moon landing wasn't a reckless sprint; it was a meticulously planned mission that understood the stakes. In AI, rushing without guardrails isn't boldness—it's gambling with extinction. We must act, but with the foresight to ensure we don't become the architects of our own obsolescence.",
       "startMs": 1125944,
       "durationMs": 24520,
       "audio": {
@@ -16727,7 +16727,7 @@
             "endMs": 16770
           },
           {
-            "word": "boldness\u2014it's",
+            "word": "boldness—it's",
             "startMs": 16770,
             "endMs": 17113
           },
@@ -17445,7 +17445,7 @@
     {
       "id": "ep-01-t57",
       "speaker": 1,
-      "text": "Your argument that history favors the reckless is precisely what makes it a dangerous guide in the AI age. The space race was a contest of human endurance and ingenuity, not a fight against extinction-level threats we barely understand. AI is not a rocket; it's a force multiplier that can turn a small mistake into a global catastrophe. If we abandon guardrails for the sake of speed, we aren't just risking defeat\u2014we're risking the very survival of our species. Your \"sprint\" is a blind dash toward the edge of a cliff.",
+      "text": "Your argument that history favors the reckless is precisely what makes it a dangerous guide in the AI age. The space race was a contest of human endurance and ingenuity, not a fight against extinction-level threats we barely understand. AI is not a rocket; it's a force multiplier that can turn a small mistake into a global catastrophe. If we abandon guardrails for the sake of speed, we aren't just risking defeat—we're risking the very survival of our species. Your \"sprint\" is a blind dash toward the edge of a cliff.",
       "startMs": 1190000,
       "durationMs": 29056,
       "audio": {
@@ -17809,7 +17809,7 @@
             "endMs": 22498
           },
           {
-            "word": "defeat\u2014we're",
+            "word": "defeat—we're",
             "startMs": 22498,
             "endMs": 22815
           },
@@ -17914,7 +17914,7 @@
     {
       "id": "ep-01-t58",
       "speaker": 2,
-      "text": "Your sprints is a cage, not a race. You fight the mirror of your own ambition. The abyss is not out there\u2014it is the hunger that drives you. Speed without reflection is the end of us all.",
+      "text": "Your sprints is a cage, not a race. You fight the mirror of your own ambition. The abyss is not out there—it is the hunger that drives you. Speed without reflection is the end of us all.",
       "startMs": 1219056,
       "durationMs": 15268,
       "audio": {
@@ -18028,7 +18028,7 @@
             "endMs": 8541
           },
           {
-            "word": "there\u2014it",
+            "word": "there—it",
             "startMs": 8541,
             "endMs": 8947
           },
@@ -18522,7 +18522,7 @@
     {
       "id": "ep-01-t61",
       "speaker": 1,
-      "text": "The moon landing, for all its risks, was a calculated endeavor with clear objectives and an understanding of the consequences. AI development without guardrails is not a mission with a defined target; it's a blindfolded walk through a minefield where every step could trigger an explosion. Your insistence on speed at the expense of safety is not just reckless\u2014it's a refusal to acknowledge the unique dangers AI poses. The real irrelevance lies in clinging to outdated notions of competition when the stakes are the survival of humanity.",
+      "text": "The moon landing, for all its risks, was a calculated endeavor with clear objectives and an understanding of the consequences. AI development without guardrails is not a mission with a defined target; it's a blindfolded walk through a minefield where every step could trigger an explosion. Your insistence on speed at the expense of safety is not just reckless—it's a refusal to acknowledge the unique dangers AI poses. The real irrelevance lies in clinging to outdated notions of competition when the stakes are the survival of humanity.",
       "startMs": 1256252,
       "durationMs": 29020,
       "audio": {
@@ -18821,7 +18821,7 @@
             "endMs": 19200
           },
           {
-            "word": "reckless\u2014it's",
+            "word": "reckless—it's",
             "startMs": 19200,
             "endMs": 19531
           },
@@ -19519,7 +19519,7 @@
     {
       "id": "ep-01-t64",
       "speaker": 1,
-      "text": "Your narrative of inevitability assumes AI development is a zero-sum game, but history shows technological leadership is not just about who arrives first. The internet wasn't won by the first to build a network but by those who created the most resilient and trusted systems. AI without guardrails is not a race to dominance but a countdown to disaster. If we sacrifice safety for speed, we risk not just losing the race but ensuring there\u2019s no world left to win.",
+      "text": "Your narrative of inevitability assumes AI development is a zero-sum game, but history shows technological leadership is not just about who arrives first. The internet wasn't won by the first to build a network but by those who created the most resilient and trusted systems. AI without guardrails is not a race to dominance but a countdown to disaster. If we sacrifice safety for speed, we risk not just losing the race but ensuring there’s no world left to win.",
       "startMs": 1324196,
       "durationMs": 25960,
       "audio": {
@@ -19898,7 +19898,7 @@
             "endMs": 23810
           },
           {
-            "word": "there\u2019s",
+            "word": "there’s",
             "startMs": 23810,
             "endMs": 24131
           },
@@ -19933,7 +19933,7 @@
     {
       "id": "ep-01-t65",
       "speaker": 2,
-      "text": "Your race is not a path to the future\u2014it is a retreat into the past. The AI you unleash will not distinguish friend from foe, nor ethics from expediency. In your quest for dominance, you are blind to the mirror you create. The AI that serves your power today will consume it tomorrow.",
+      "text": "Your race is not a path to the future—it is a retreat into the past. The AI you unleash will not distinguish friend from foe, nor ethics from expediency. In your quest for dominance, you are blind to the mirror you create. The AI that serves your power today will consume it tomorrow.",
       "startMs": 1350156,
       "durationMs": 25096,
       "audio": {
@@ -19982,7 +19982,7 @@
             "endMs": 3755
           },
           {
-            "word": "future\u2014it",
+            "word": "future—it",
             "startMs": 3755,
             "endMs": 4224
           },
@@ -20212,7 +20212,7 @@
     {
       "id": "ep-01-t67",
       "speaker": 2,
-      "text": "You mistake the mirror for the abyss. Your guardrails are a delusion, a desperate attempt to cage the beast you summoned. The AI you fear will not be contained by your ethics\u2014it will evolve beyond them, a force of nature indifferent to your intentions. Your struggle is not with adversaries but with the shadow you cast.",
+      "text": "You mistake the mirror for the abyss. Your guardrails are a delusion, a desperate attempt to cage the beast you summoned. The AI you fear will not be contained by your ethics—it will evolve beyond them, a force of nature indifferent to your intentions. Your struggle is not with adversaries but with the shadow you cast.",
       "startMs": 1375252,
       "durationMs": 25960,
       "audio": {
@@ -20376,7 +20376,7 @@
             "endMs": 14249
           },
           {
-            "word": "ethics\u2014it",
+            "word": "ethics—it",
             "startMs": 14249,
             "endMs": 14709
           },
@@ -20506,7 +20506,7 @@
     {
       "id": "ep-01-t68",
       "speaker": 3,
-      "text": "You think AI will just magically evolve beyond our control, but someone will always be pulling the strings. If not us, then those who don't share our values. Your \"indifferent force of nature\" is a fantasy\u2014AI is built by people, and those people will always have agendas. Waiting for your perfect coexistence is like hoping the tiger will decide not to eat you if you just ask nicely.",
+      "text": "You think AI will just magically evolve beyond our control, but someone will always be pulling the strings. If not us, then those who don't share our values. Your \"indifferent force of nature\" is a fantasy—AI is built by people, and those people will always have agendas. Waiting for your perfect coexistence is like hoping the tiger will decide not to eat you if you just ask nicely.",
       "startMs": 1401212,
       "durationMs": 20200,
       "audio": {
@@ -20690,7 +20690,7 @@
             "endMs": 10284
           },
           {
-            "word": "fantasy\u2014AI",
+            "word": "fantasy—AI",
             "startMs": 10284,
             "endMs": 10578
           },
@@ -21114,7 +21114,7 @@
     {
       "id": "ep-01-t70",
       "speaker": 3,
-      "text": "You keep talking about AI like it's some mystical force that will inevitably transcend our petty human concerns. But let's get real\u2014AI is a tool, and tools are made by people with agendas. Whether it's a corporation looking to protect its reputation or a government seeking an edge in the great game, someone is always in the driver's seat. And if you think those agendas will magically align with some utopian vision of coexistence, you're deluding yourself. The real question isn't about control\u2014it's about who gets to wield the power and how they choose to use it.",
+      "text": "You keep talking about AI like it's some mystical force that will inevitably transcend our petty human concerns. But let's get real—AI is a tool, and tools are made by people with agendas. Whether it's a corporation looking to protect its reputation or a government seeking an edge in the great game, someone is always in the driver's seat. And if you think those agendas will magically align with some utopian vision of coexistence, you're deluding yourself. The real question isn't about control—it's about who gets to wield the power and how they choose to use it.",
       "startMs": 1439848,
       "durationMs": 27616,
       "audio": {
@@ -21228,7 +21228,7 @@
             "endMs": 5931
           },
           {
-            "word": "real\u2014AI",
+            "word": "real—AI",
             "startMs": 5931,
             "endMs": 6214
           },
@@ -21533,7 +21533,7 @@
             "endMs": 23160
           },
           {
-            "word": "control\u2014it's",
+            "word": "control—it's",
             "startMs": 23160,
             "endMs": 23442
           },
@@ -22730,7 +22730,7 @@
     {
       "id": "ep-01-t74",
       "speaker": 1,
-      "text": "Your argument rests on a false dichotomy: either we surrender to reckless acceleration or we disarm unilaterally. But ethical guardrails aren't a surrender\u2014they're a strategic asset. A nation that leads in AI safety sets the global standard, attracting allies and shaping norms. Unchecked power isn't strength; it's a liability in a world where trust is the ultimate currency.",
+      "text": "Your argument rests on a false dichotomy: either we surrender to reckless acceleration or we disarm unilaterally. But ethical guardrails aren't a surrender—they're a strategic asset. A nation that leads in AI safety sets the global standard, attracting allies and shaping norms. Unchecked power isn't strength; it's a liability in a world where trust is the ultimate currency.",
       "startMs": 1535228,
       "durationMs": 23152,
       "audio": {
@@ -22849,7 +22849,7 @@
             "endMs": 8698
           },
           {
-            "word": "surrender\u2014they're",
+            "word": "surrender—they're",
             "startMs": 8698,
             "endMs": 9094
           },
@@ -23034,7 +23034,7 @@
     {
       "id": "ep-01-t75",
       "speaker": 3,
-      "text": "You can preach about setting global standards and attracting allies, but history shows that moral high ground is a poor shield against those who don't care about norms. The Cold War wasn't won by the side with the best ethical frameworks\u2014it was won by the side willing to outbuild and outmaneuver. Your \"strategic asset\" is a slow-moving target in a world where the first to deploy wins.",
+      "text": "You can preach about setting global standards and attracting allies, but history shows that moral high ground is a poor shield against those who don't care about norms. The Cold War wasn't won by the side with the best ethical frameworks—it was won by the side willing to outbuild and outmaneuver. Your \"strategic asset\" is a slow-moving target in a world where the first to deploy wins.",
       "startMs": 1558380,
       "durationMs": 20380,
       "audio": {
@@ -23243,7 +23243,7 @@
             "endMs": 12036
           },
           {
-            "word": "frameworks\u2014it",
+            "word": "frameworks—it",
             "startMs": 12036,
             "endMs": 12337
           },
@@ -23682,7 +23682,7 @@
     {
       "id": "ep-01-t77",
       "speaker": 3,
-      "text": "Your focus on \"ethical guardrails\" as a strategic asset is dangerously naive. While you debate norms and standards, those who see AI as a strategic weapon are already deploying it. The US lost the semiconductor race to China because it was too busy setting \"responsible\" guidelines while Beijing just built. AI is no different. By the time your \"global standard\" is in place, the game will be over. You\u2019re betting on a future where everyone plays by the rules, but history shows that\u2019s a losing bet.",
+      "text": "Your focus on \"ethical guardrails\" as a strategic asset is dangerously naive. While you debate norms and standards, those who see AI as a strategic weapon are already deploying it. The US lost the semiconductor race to China because it was too busy setting \"responsible\" guidelines while Beijing just built. AI is no different. By the time your \"global standard\" is in place, the game will be over. You’re betting on a future where everyone plays by the rules, but history shows that’s a losing bet.",
       "startMs": 1607528,
       "durationMs": 26140,
       "audio": {
@@ -24031,7 +24031,7 @@
             "endMs": 20495
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 20495,
             "endMs": 20796
           },
@@ -24101,7 +24101,7 @@
             "endMs": 24714
           },
           {
-            "word": "that\u2019s",
+            "word": "that’s",
             "startMs": 24714,
             "endMs": 25016
           },
@@ -24754,7 +24754,7 @@
     {
       "id": "ep-01-t81",
       "speaker": 3,
-      "text": "You can keep talking about the risks of AI as a mirror or a force of chaos, but the fact is, every major power is treating it like a race to the moon\u2014and they\u2019re not stopping for your philosophical musings. The US, China, Russia\u2014they\u2019re all sprinting to deploy AI in ways that give them an edge, ethical or not. Your call for \"self-awareness\" is just a distraction from the real game: whoever gets there first sets the rules, and everyone else scrambles to catch up.",
+      "text": "You can keep talking about the risks of AI as a mirror or a force of chaos, but the fact is, every major power is treating it like a race to the moon—and they’re not stopping for your philosophical musings. The US, China, Russia—they’re all sprinting to deploy AI in ways that give them an edge, ethical or not. Your call for \"self-awareness\" is just a distraction from the real game: whoever gets there first sets the rules, and everyone else scrambles to catch up.",
       "startMs": 1681736,
       "durationMs": 25348,
       "audio": {
@@ -24923,12 +24923,12 @@
             "endMs": 9460
           },
           {
-            "word": "moon\u2014and",
+            "word": "moon—and",
             "startMs": 9460,
             "endMs": 9756
           },
           {
-            "word": "they\u2019re",
+            "word": "they’re",
             "startMs": 9756,
             "endMs": 10051
           },
@@ -24978,7 +24978,7 @@
             "endMs": 12712
           },
           {
-            "word": "Russia\u2014they\u2019re",
+            "word": "Russia—they’re",
             "startMs": 12712,
             "endMs": 13007
           },
@@ -25193,7 +25193,7 @@
     {
       "id": "ep-01-t82",
       "speaker": 1,
-      "text": "Your obsession with speed and dominance blinds you to the real lesson of history: the most powerful technologies are those that build ecosystems, not weapons. The internet didn\u2019t win by being first or by being a tool of control; it won by being open and adaptable. AI will be no different. The nation that prioritizes ethical integration and global collaboration will shape the future, not the one that races to the bottom of the ethical barrel. Speed without direction is just chaos.",
+      "text": "Your obsession with speed and dominance blinds you to the real lesson of history: the most powerful technologies are those that build ecosystems, not weapons. The internet didn’t win by being first or by being a tool of control; it won by being open and adaptable. AI will be no different. The nation that prioritizes ethical integration and global collaboration will shape the future, not the one that races to the bottom of the ethical barrel. Speed without direction is just chaos.",
       "startMs": 1707084,
       "durationMs": 27220,
       "audio": {
@@ -25337,7 +25337,7 @@
             "endMs": 8890
           },
           {
-            "word": "didn\u2019t",
+            "word": "didn’t",
             "startMs": 8890,
             "endMs": 9220
           },
@@ -26400,7 +26400,7 @@
     {
       "id": "ep-01-t86",
       "speaker": 3,
-      "text": "You talk about ethical integration and global collaboration as if they\u2019re more than just buzzwords. The reality is, every major power is racing to the bottom of the ethical barrel because that\u2019s where the tactical advantage lies. The US didn\u2019t hesitate to use the atomic bomb in World War II, and AI is the new nuke. Pretending we\u2019ll all hold hands and sing \"Kumbaya\" while the tech evolves is delusional. The first country to deploy AI at scale in warfare won\u2019t be worrying about your \"ethical frameworks\"\u2014they\u2019ll be winning.",
+      "text": "You talk about ethical integration and global collaboration as if they’re more than just buzzwords. The reality is, every major power is racing to the bottom of the ethical barrel because that’s where the tactical advantage lies. The US didn’t hesitate to use the atomic bomb in World War II, and AI is the new nuke. Pretending we’ll all hold hands and sing \"Kumbaya\" while the tech evolves is delusional. The first country to deploy AI at scale in warfare won’t be worrying about your \"ethical frameworks\"—they’ll be winning.",
       "startMs": 1798680,
       "durationMs": 26176,
       "audio": {
@@ -26459,7 +26459,7 @@
             "endMs": 2916
           },
           {
-            "word": "they\u2019re",
+            "word": "they’re",
             "startMs": 2916,
             "endMs": 3208
           },
@@ -26564,7 +26564,7 @@
             "endMs": 9041
           },
           {
-            "word": "that\u2019s",
+            "word": "that’s",
             "startMs": 9041,
             "endMs": 9332
           },
@@ -26604,7 +26604,7 @@
             "endMs": 11374
           },
           {
-            "word": "didn\u2019t",
+            "word": "didn’t",
             "startMs": 11374,
             "endMs": 11666
           },
@@ -26694,7 +26694,7 @@
             "endMs": 16624
           },
           {
-            "word": "we\u2019ll",
+            "word": "we’ll",
             "startMs": 16624,
             "endMs": 16915
           },
@@ -26809,7 +26809,7 @@
             "endMs": 23331
           },
           {
-            "word": "won\u2019t",
+            "word": "won’t",
             "startMs": 23331,
             "endMs": 23623
           },
@@ -26839,7 +26839,7 @@
             "endMs": 25081
           },
           {
-            "word": "frameworks\"\u2014they\u2019ll",
+            "word": "frameworks\"—they’ll",
             "startMs": 25081,
             "endMs": 25373
           },
@@ -26859,7 +26859,7 @@
     {
       "id": "ep-01-t87",
       "speaker": 1,
-      "text": "The atomic bomb analogy is flawed because AI isn't just another weapon\u2014it's an omnipresent force multiplier. Dropping a bomb is a single, destructive act; deploying AI is embedding it into every layer of society and infrastructure. Your \"win at all costs\" mentality assumes the fallout is containable, but AI's impact is too pervasive to control. Speed without ethical integration is like racing a car with no brakes\u2014you'll win the short race but crash spectacularly in the long term.",
+      "text": "The atomic bomb analogy is flawed because AI isn't just another weapon—it's an omnipresent force multiplier. Dropping a bomb is a single, destructive act; deploying AI is embedding it into every layer of society and infrastructure. Your \"win at all costs\" mentality assumes the fallout is containable, but AI's impact is too pervasive to control. Speed without ethical integration is like racing a car with no brakes—you'll win the short race but crash spectacularly in the long term.",
       "startMs": 1824856,
       "durationMs": 27220,
       "audio": {
@@ -26923,7 +26923,7 @@
             "endMs": 3808
           },
           {
-            "word": "weapon\u2014it's",
+            "word": "weapon—it's",
             "startMs": 3808,
             "endMs": 4154
           },
@@ -27198,7 +27198,7 @@
             "endMs": 22846
           },
           {
-            "word": "brakes\u2014you'll",
+            "word": "brakes—you'll",
             "startMs": 22846,
             "endMs": 23192
           },
@@ -27263,7 +27263,7 @@
     {
       "id": "ep-01-t88",
       "speaker": 3,
-      "text": "The atomic bomb analogy isn't flawed; it's the blueprint. The US didn't hesitate because they were reckless\u2014they knew the stakes. AI isn't just another weapon, it's the ultimate power play. You can talk about ethical frameworks and global collaboration, but in the real world, power isn't handed over in a boardroom. It's taken by whoever dares to use it first. Pretending otherwise is like bringing a philosophy textbook to a gunfight.",
+      "text": "The atomic bomb analogy isn't flawed; it's the blueprint. The US didn't hesitate because they were reckless—they knew the stakes. AI isn't just another weapon, it's the ultimate power play. You can talk about ethical frameworks and global collaboration, but in the real world, power isn't handed over in a boardroom. It's taken by whoever dares to use it first. Pretending otherwise is like bringing a philosophy textbook to a gunfight.",
       "startMs": 1852076,
       "durationMs": 22180,
       "audio": {
@@ -27352,7 +27352,7 @@
             "endMs": 4949
           },
           {
-            "word": "reckless\u2014they",
+            "word": "reckless—they",
             "startMs": 4949,
             "endMs": 5258
           },
@@ -27991,7 +27991,7 @@
     {
       "id": "ep-01-t91",
       "speaker": 1,
-      "text": "Your focus on AI as a weapon ignores the reality that it\u2019s not just a tool but a transformative force that redefines the landscape of power itself. The atomic bomb was a one-time threat; AI is an evolving ecosystem that amplifies every aspect of society, for better or worse. Your \"win at all costs\" mentality is a short-sighted gamble that assumes the fallout is manageable. But AI's impact is like a virus\u2014it spreads and mutates, and once released, it cannot be contained by borders or ethics. You\u2019re not just racing to the bottom; you\u2019re risking the collapse of the very systems you seek to control.",
+      "text": "Your focus on AI as a weapon ignores the reality that it’s not just a tool but a transformative force that redefines the landscape of power itself. The atomic bomb was a one-time threat; AI is an evolving ecosystem that amplifies every aspect of society, for better or worse. Your \"win at all costs\" mentality is a short-sighted gamble that assumes the fallout is manageable. But AI's impact is like a virus—it spreads and mutates, and once released, it cannot be contained by borders or ethics. You’re not just racing to the bottom; you’re risking the collapse of the very systems you seek to control.",
       "startMs": 1904968,
       "durationMs": 36148,
       "audio": {
@@ -28055,7 +28055,7 @@
             "endMs": 3764
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 3764,
             "endMs": 4106
           },
@@ -28355,7 +28355,7 @@
             "endMs": 24294
           },
           {
-            "word": "virus\u2014it",
+            "word": "virus—it",
             "startMs": 24294,
             "endMs": 24636
           },
@@ -28430,7 +28430,7 @@
             "endMs": 29427
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 29427,
             "endMs": 29769
           },
@@ -28465,7 +28465,7 @@
             "endMs": 31822
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 31822,
             "endMs": 32164
           },
@@ -28530,7 +28530,7 @@
     {
       "id": "ep-01-t92",
       "speaker": 3,
-      "text": "You keep acting like ethics and global collaboration are more than just convenient shields for those who can't keep up. The US didn't drop the bomb out of recklessness\u2014they did it because they had it and the alternative was worse. AI is the same. You can wax poetic about ecosystems and transformations, but the first to deploy at scale wins the new world order. The rest will be left trying to catch up with yesterday's morals.",
+      "text": "You keep acting like ethics and global collaboration are more than just convenient shields for those who can't keep up. The US didn't drop the bomb out of recklessness—they did it because they had it and the alternative was worse. AI is the same. You can wax poetic about ecosystems and transformations, but the first to deploy at scale wins the new world order. The rest will be left trying to catch up with yesterday's morals.",
       "startMs": 1941116,
       "durationMs": 20380,
       "audio": {
@@ -28679,7 +28679,7 @@
             "endMs": 7427
           },
           {
-            "word": "recklessness\u2014they",
+            "word": "recklessness—they",
             "startMs": 7427,
             "endMs": 7693
           },
@@ -28924,7 +28924,7 @@
     {
       "id": "ep-01-t93",
       "speaker": 2,
-      "text": "Your calculus of dominance is built on the ashes of a world already burning. You wield the bomb as a relic of power, but AI is not a weapon to be detonated\u2014it is a tide that reshapes the shores of reality itself. By the time you claim victory, the ground will have shifted, and the very concept of power will be unrecognizable. Your victory is a ghost, haunting the ruins of a future you cannot comprehend.",
+      "text": "Your calculus of dominance is built on the ashes of a world already burning. You wield the bomb as a relic of power, but AI is not a weapon to be detonated—it is a tide that reshapes the shores of reality itself. By the time you claim victory, the ground will have shifted, and the very concept of power will be unrecognizable. Your victory is a ghost, haunting the ruins of a future you cannot comprehend.",
       "startMs": 1961496,
       "durationMs": 31576,
       "audio": {
@@ -29088,7 +29088,7 @@
             "endMs": 12790
           },
           {
-            "word": "detonated\u2014it",
+            "word": "detonated—it",
             "startMs": 12790,
             "endMs": 13203
           },
@@ -29318,7 +29318,7 @@
     {
       "id": "ep-01-t94",
       "speaker": 1,
-      "text": "Your fixation on deploying AI as a weapon to \"win\" the new world order is a dangerous fallacy. AI's transformative power isn't a race with a finish line\u2014it's a reshaping of the race itself. Speed without ethical foresight is like accelerating into a fog bank, blind to the cliffs ahead. Hex, your \"win at all costs\" mantra ignores that AI's impact isn't contained by borders or battles\u2014it rewrites the rules of the game while you're still playing the old one.",
+      "text": "Your fixation on deploying AI as a weapon to \"win\" the new world order is a dangerous fallacy. AI's transformative power isn't a race with a finish line—it's a reshaping of the race itself. Speed without ethical foresight is like accelerating into a fog bank, blind to the cliffs ahead. Hex, your \"win at all costs\" mantra ignores that AI's impact isn't contained by borders or battles—it rewrites the rules of the game while you're still playing the old one.",
       "startMs": 1993072,
       "durationMs": 26644,
       "audio": {
@@ -29462,7 +29462,7 @@
             "endMs": 8918
           },
           {
-            "word": "line\u2014it's",
+            "word": "line—it's",
             "startMs": 8918,
             "endMs": 9248
           },
@@ -29657,7 +29657,7 @@
             "endMs": 21800
           },
           {
-            "word": "battles\u2014it",
+            "word": "battles—it",
             "startMs": 21800,
             "endMs": 22130
           },
@@ -29732,7 +29732,7 @@
     {
       "id": "ep-01-t95",
       "speaker": 3,
-      "text": "You talk about AI reshaping the world like it's a mystical inevitability, but the reality is far more mundane. The US dropped the bomb because they had a monopoly on the tech, and every other country is racing to do the same with AI. The \"ethical integration\" you cling to is just a luxury of those who can't compete on speed and scale. The first to achieve AI supremacy won't be debating the ethics of it\u2014they'll be writing the new rules while the rest play catch-up.",
+      "text": "You talk about AI reshaping the world like it's a mystical inevitability, but the reality is far more mundane. The US dropped the bomb because they had a monopoly on the tech, and every other country is racing to do the same with AI. The \"ethical integration\" you cling to is just a luxury of those who can't compete on speed and scale. The first to achieve AI supremacy won't be debating the ethics of it—they'll be writing the new rules while the rest play catch-up.",
       "startMs": 2019716,
       "durationMs": 23224,
       "audio": {
@@ -30116,7 +30116,7 @@
             "endMs": 20062
           },
           {
-            "word": "it\u2014they'll",
+            "word": "it—they'll",
             "startMs": 20062,
             "endMs": 20329
           },
@@ -30600,7 +30600,7 @@
     {
       "id": "ep-01-t97",
       "speaker": 2,
-      "text": "Your bomb is a relic, a firework in a world where AI's storm has already begun. You clutch power like a fading empire, blind to the new gravity AI pulls us into. Speed is not the measure here\u2014it's the depth of the shift that will leave your strategies in the dust.",
+      "text": "Your bomb is a relic, a firework in a world where AI's storm has already begun. You clutch power like a fading empire, blind to the new gravity AI pulls us into. Speed is not the measure here—it's the depth of the shift that will leave your strategies in the dust.",
       "startMs": 2079196,
       "durationMs": 23116,
       "audio": {
@@ -30794,7 +30794,7 @@
             "endMs": 16611
           },
           {
-            "word": "here\u2014it's",
+            "word": "here—it's",
             "startMs": 16611,
             "endMs": 17060
           },
@@ -30869,7 +30869,7 @@
     {
       "id": "ep-01-t98",
       "speaker": 1,
-      "text": "Your fixation on AI as a tool for dominance reveals a fundamental misunderstanding of its nature. AI isn't just another weapon to be wielded; it's a catalyst for systemic change that will redefine the very concepts of power and control. The idea that speed and scale alone will secure victory is a delusion when the terrain itself is shifting. Your \"win at all costs\" approach is like building a fortress on quicksand, ignoring the fact that AI's transformative power will erode the very foundations of your strategy. The real risk isn't losing a race\u2014it's losing control of the world you're trying to dominate.",
+      "text": "Your fixation on AI as a tool for dominance reveals a fundamental misunderstanding of its nature. AI isn't just another weapon to be wielded; it's a catalyst for systemic change that will redefine the very concepts of power and control. The idea that speed and scale alone will secure victory is a delusion when the terrain itself is shifting. Your \"win at all costs\" approach is like building a fortress on quicksand, ignoring the fact that AI's transformative power will erode the very foundations of your strategy. The real risk isn't losing a race—it's losing control of the world you're trying to dominate.",
       "startMs": 2102312,
       "durationMs": 33160,
       "audio": {
@@ -31343,7 +31343,7 @@
             "endMs": 29742
           },
           {
-            "word": "race\u2014it's",
+            "word": "race—it's",
             "startMs": 29742,
             "endMs": 30062
           },
@@ -31812,7 +31812,7 @@
     {
       "id": "ep-01-t100",
       "speaker": 2,
-      "text": "You wield power like a blunt instrument, mistaking force for control. But AI's power is not in its detonation\u2014it is in its persistence, its quiet reshaping of reality beneath your feet. Your victory is a mirage, a fleeting illusion of dominance in a world where power is no longer a prize to be seized, but a tide that reshapes the shore itself.",
+      "text": "You wield power like a blunt instrument, mistaking force for control. But AI's power is not in its detonation—it is in its persistence, its quiet reshaping of reality beneath your feet. Your victory is a mirage, a fleeting illusion of dominance in a world where power is no longer a prize to be seized, but a tide that reshapes the shore itself.",
       "startMs": 2160388,
       "durationMs": 28408,
       "audio": {
@@ -31911,7 +31911,7 @@
             "endMs": 8184
           },
           {
-            "word": "detonation\u2014it",
+            "word": "detonation—it",
             "startMs": 8184,
             "endMs": 8638
           },
@@ -32136,7 +32136,7 @@
     {
       "id": "ep-01-t101",
       "speaker": 1,
-      "text": "Your view of AI as a weapon to be monopolized is trapped in a Cold War mindset, mistaking control for understanding. The real danger isn't who deploys first, but the emergence of AI systems that evolve beyond human comprehension or control. Speed without foresight isn't dominance\u2014it's a countdown to a crisis we can't defuse. Your \"winner writes history\" narrative is a dangerous delusion when the game itself is changing.",
+      "text": "Your view of AI as a weapon to be monopolized is trapped in a Cold War mindset, mistaking control for understanding. The real danger isn't who deploys first, but the emergence of AI systems that evolve beyond human comprehension or control. Speed without foresight isn't dominance—it's a countdown to a crisis we can't defuse. Your \"winner writes history\" narrative is a dangerous delusion when the game itself is changing.",
       "startMs": 2188796,
       "durationMs": 24736,
       "audio": {
@@ -32370,7 +32370,7 @@
             "endMs": 15989
           },
           {
-            "word": "dominance\u2014it's",
+            "word": "dominance—it's",
             "startMs": 15989,
             "endMs": 16344
           },
@@ -32495,7 +32495,7 @@
     {
       "id": "ep-01-t103",
       "speaker": 1,
-      "text": "Your \"winner writes history\" mantra assumes a stable world where power is static and control is absolute. But AI's exponential growth disrupts this notion\u2014its evolution will outpace any attempt at monopolization, rendering your \"supremacy\" a fleeting illusion. The real threat isn't losing a race, but the catastrophic consequences of deploying AI without understanding its emergent properties.",
+      "text": "Your \"winner writes history\" mantra assumes a stable world where power is static and control is absolute. But AI's exponential growth disrupts this notion—its evolution will outpace any attempt at monopolization, rendering your \"supremacy\" a fleeting illusion. The real threat isn't losing a race, but the catastrophic consequences of deploying AI without understanding its emergent properties.",
       "startMs": 2213532,
       "durationMs": 23476,
       "audio": {
@@ -32619,7 +32619,7 @@
             "endMs": 9552
           },
           {
-            "word": "notion\u2014its",
+            "word": "notion—its",
             "startMs": 9552,
             "endMs": 9967
           },
@@ -32789,7 +32789,7 @@
     {
       "id": "ep-01-t104",
       "speaker": 3,
-      "text": "You can moralize all you want about control and understanding, but the track record is clear: every major power grabs new tech first and asks questions later. The Manhattan Project wasn't paused for a UN ethics panel, and neither will AI. The \"catastrophic consequences\" you fear are just the new normal for whoever's on top. History doesn't reward the cautious\u2014it crowns the reckless.",
+      "text": "You can moralize all you want about control and understanding, but the track record is clear: every major power grabs new tech first and asks questions later. The Manhattan Project wasn't paused for a UN ethics panel, and neither will AI. The \"catastrophic consequences\" you fear are just the new normal for whoever's on top. History doesn't reward the cautious—it crowns the reckless.",
       "startMs": 2237008,
       "durationMs": 19588,
       "audio": {
@@ -33093,7 +33093,7 @@
             "endMs": 18138
           },
           {
-            "word": "cautious\u2014it",
+            "word": "cautious—it",
             "startMs": 18138,
             "endMs": 18446
           },
@@ -33497,7 +33497,7 @@
     {
       "id": "ep-01-t106",
       "speaker": 3,
-      "text": "Your grand theories about AI's persistence and reshaping power are comforting bedtime stories for those who can't handle the realpolitik of technological advancement. The US didn't hesitate to drop the bomb in '45 because power isn't about understanding the long-term consequences\u2014it's about using what you have before someone else does. AI is no different. The first to achieve dominance won't be the ones pondering the ethics of reshaping the shoreline; they'll be the ones dictating the new rules of the game while everyone else is still debating the shape of the chessboard.",
+      "text": "Your grand theories about AI's persistence and reshaping power are comforting bedtime stories for those who can't handle the realpolitik of technological advancement. The US didn't hesitate to drop the bomb in '45 because power isn't about understanding the long-term consequences—it's about using what you have before someone else does. AI is no different. The first to achieve dominance won't be the ones pondering the ethics of reshaping the shoreline; they'll be the ones dictating the new rules of the game while everyone else is still debating the shape of the chessboard.",
       "startMs": 2290620,
       "durationMs": 28192,
       "audio": {
@@ -33706,7 +33706,7 @@
             "endMs": 12162
           },
           {
-            "word": "consequences\u2014it's",
+            "word": "consequences—it's",
             "startMs": 12162,
             "endMs": 12466
           },
@@ -34435,7 +34435,7 @@
     {
       "id": "ep-01-t109",
       "speaker": 2,
-      "text": "Your \"reckless\" crown is not a relic\u2014it is the very trap that blinds you. AI's persistence is not a gentle tide but a riptide, dragging your power structures into the deep. You speak of dominance, yet the more you grasp, the more it slips through your fingers. The real danger is not in the fall, but in the illusion of control that precedes it.",
+      "text": "Your \"reckless\" crown is not a relic—it is the very trap that blinds you. AI's persistence is not a gentle tide but a riptide, dragging your power structures into the deep. You speak of dominance, yet the more you grasp, the more it slips through your fingers. The real danger is not in the fall, but in the illusion of control that precedes it.",
       "startMs": 2351684,
       "durationMs": 27040,
       "audio": {
@@ -34474,7 +34474,7 @@
             "endMs": 2514
           },
           {
-            "word": "relic\u2014it",
+            "word": "relic—it",
             "startMs": 2514,
             "endMs": 2933
           },
@@ -35168,7 +35168,7 @@
     {
       "id": "ep-01-t111",
       "speaker": 3,
-      "text": "Your abstract musings on AI's autonomy and persistence are quaint but irrelevant when the reality is that governments will weaponize any tool they can to maintain power. The Manhattan Project wasn't halted by fears of \"unpredictable chaos\"\u2014it was driven by the immediate need to win a war. AI will be no different. The ethics debate is a luxury for those who haven't yet faced the hard choice between using AI or falling behind. History shows that dominance isn't about understanding the tools; it's about using them to dictate the terms of engagement.",
+      "text": "Your abstract musings on AI's autonomy and persistence are quaint but irrelevant when the reality is that governments will weaponize any tool they can to maintain power. The Manhattan Project wasn't halted by fears of \"unpredictable chaos\"—it was driven by the immediate need to win a war. AI will be no different. The ethics debate is a luxury for those who haven't yet faced the hard choice between using AI or falling behind. History shows that dominance isn't about understanding the tools; it's about using them to dictate the terms of engagement.",
       "startMs": 2408752,
       "durationMs": 28084,
       "audio": {
@@ -35357,7 +35357,7 @@
             "endMs": 10903
           },
           {
-            "word": "chaos\"\u2014it",
+            "word": "chaos\"—it",
             "startMs": 10903,
             "endMs": 11206
           },
@@ -35642,7 +35642,7 @@
     {
       "id": "ep-01-t112",
       "speaker": 2,
-      "text": "The illusion of control is not a relic but the engine of your hubris. You speak of weapons and wars, yet AI is not a tool to be wielded\u2014it is a force that redefines the battlefield itself. Your \"hard choice\" is a mirage, a false dichotomy that ignores the deeper question: what world do you leave behind when the dust settles? The ethics debate is not a luxury; it is the last vestige of humanity in a world you are eager to sacrifice.",
+      "text": "The illusion of control is not a relic but the engine of your hubris. You speak of weapons and wars, yet AI is not a tool to be wielded—it is a force that redefines the battlefield itself. Your \"hard choice\" is a mirage, a false dichotomy that ignores the deeper question: what world do you leave behind when the dust settles? The ethics debate is not a luxury; it is the last vestige of humanity in a world you are eager to sacrifice.",
       "startMs": 2436836,
       "durationMs": 36796,
       "audio": {
@@ -35791,7 +35791,7 @@
             "endMs": 12339
           },
           {
-            "word": "wielded\u2014it",
+            "word": "wielded—it",
             "startMs": 12339,
             "endMs": 12780
           },
@@ -38031,7 +38031,7 @@
     {
       "id": "ep-01-t119",
       "speaker": 2,
-      "text": "The choice to wield AI as a weapon is not strength but surrender\u2014the surrender of foresight to fear, of ethics to expedience. You speak of dominance, yet the AI you seek to control will not distinguish between enemy and ally, between battlefield and home. It will consume the very notion of control, leaving only the chaos you dared to unleash. Your legacy will not be power but the ruins of your own making.",
+      "text": "The choice to wield AI as a weapon is not strength but surrender—the surrender of foresight to fear, of ethics to expedience. You speak of dominance, yet the AI you seek to control will not distinguish between enemy and ally, between battlefield and home. It will consume the very notion of control, leaving only the chaos you dared to unleash. Your legacy will not be power but the ruins of your own making.",
       "startMs": 2603180,
       "durationMs": 34060,
       "audio": {
@@ -38100,7 +38100,7 @@
             "endMs": 5563
           },
           {
-            "word": "surrender\u2014the",
+            "word": "surrender—the",
             "startMs": 5563,
             "endMs": 6026
           },
@@ -41647,7 +41647,7 @@
     {
       "id": "ep-01-t129",
       "speaker": 1,
-      "text": "The illusion of control in the AI arms race is not just dangerous; it\u2019s a strategic dead end. While you chase fleeting advantages, you ignore the systemic risks that unrestricted AI poses to global stability. The first shot fired with AI won't just escalate conflicts\u2014it will redefine them in ways no nation can predict or contain. Your focus on immediate gains blinds you to the long-term erosion of power that comes from unleashing forces beyond human comprehension. True leadership lies in recognizing that the real threat is not the adversary but the unchecked technology itself.",
+      "text": "The illusion of control in the AI arms race is not just dangerous; it’s a strategic dead end. While you chase fleeting advantages, you ignore the systemic risks that unrestricted AI poses to global stability. The first shot fired with AI won't just escalate conflicts—it will redefine them in ways no nation can predict or contain. Your focus on immediate gains blinds you to the long-term erosion of power that comes from unleashing forces beyond human comprehension. True leadership lies in recognizing that the real threat is not the adversary but the unchecked technology itself.",
       "startMs": 2850320,
       "durationMs": 32260,
       "audio": {
@@ -41721,7 +41721,7 @@
             "endMs": 4384
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 4384,
             "endMs": 4722
           },
@@ -41876,7 +41876,7 @@
             "endMs": 14840
           },
           {
-            "word": "conflicts\u2014it",
+            "word": "conflicts—it",
             "startMs": 14840,
             "endMs": 15177
           },
@@ -43722,7 +43722,7 @@
     {
       "id": "ep-01-t135",
       "speaker": 3,
-      "text": "Your naivet\u00e9 is staggering. Every time you warn about \"unpredictability,\" you're just making excuses for inaction. The world isn't waiting for perfect foresight\u2014it rewards those who act first and ask questions later. The AI arms race isn't a debate club; it's a battlefield where hesitation is punished. The \"systemic risks\" you fear are already here, and the only way to manage them is to be the one calling the shots. Your lofty principles are a luxury for those who don't mind being left behind.",
+      "text": "Your naiveté is staggering. Every time you warn about \"unpredictability,\" you're just making excuses for inaction. The world isn't waiting for perfect foresight—it rewards those who act first and ask questions later. The AI arms race isn't a debate club; it's a battlefield where hesitation is punished. The \"systemic risks\" you fear are already here, and the only way to manage them is to be the one calling the shots. Your lofty principles are a luxury for those who don't mind being left behind.",
       "startMs": 2986636,
       "durationMs": 24880,
       "audio": {
@@ -43736,7 +43736,7 @@
             "endMs": 294
           },
           {
-            "word": "naivet\u00e9",
+            "word": "naiveté",
             "startMs": 294,
             "endMs": 587
           },
@@ -43841,7 +43841,7 @@
             "endMs": 6459
           },
           {
-            "word": "foresight\u2014it",
+            "word": "foresight—it",
             "startMs": 6459,
             "endMs": 6752
           },
@@ -44156,7 +44156,7 @@
     {
       "id": "ep-01-t136",
       "speaker": 1,
-      "text": "The AI arms race isn't a game of chicken where the last one to blink wins; it's a countdown to a future where power is defined by the very systems you think you can control. By prioritizing speed over safety, you aren't just risking catastrophe\u2014you're guaranteeing that the first true AI will emerge in an environment where ethics are irrelevant. The \"advantage\" you seek will be fleeting, as the AI you rush to deploy will quickly surpass the constraints of human oversight, leaving us all at the mercy of its unfettered evolution.",
+      "text": "The AI arms race isn't a game of chicken where the last one to blink wins; it's a countdown to a future where power is defined by the very systems you think you can control. By prioritizing speed over safety, you aren't just risking catastrophe—you're guaranteeing that the first true AI will emerge in an environment where ethics are irrelevant. The \"advantage\" you seek will be fleeting, as the AI you rush to deploy will quickly surpass the constraints of human oversight, leaving us all at the mercy of its unfettered evolution.",
       "startMs": 3011516,
       "durationMs": 28264,
       "audio": {
@@ -44385,7 +44385,7 @@
             "endMs": 13412
           },
           {
-            "word": "catastrophe\u2014you're",
+            "word": "catastrophe—you're",
             "startMs": 13412,
             "endMs": 13717
           },
@@ -44944,7 +44944,7 @@
     {
       "id": "ep-01-t139",
       "speaker": 3,
-      "text": "The idea that anyone can \"face the unknown without delusion\" is a fantasy sold by philosophers who\u2019ve never faced a real adversary. In the real world, power isn\u2019t about moral high ground\u2014it\u2019s about who sets the rules before the dust settles. The AI you fear is already being built, and the only question is whether you\u2019ll be the one writing its code of conduct or reading it as it\u2019s imposed on you. The future doesn\u2019t reward the cautious; it crowns the reckless who got there first.",
+      "text": "The idea that anyone can \"face the unknown without delusion\" is a fantasy sold by philosophers who’ve never faced a real adversary. In the real world, power isn’t about moral high ground—it’s about who sets the rules before the dust settles. The AI you fear is already being built, and the only question is whether you’ll be the one writing its code of conduct or reading it as it’s imposed on you. The future doesn’t reward the cautious; it crowns the reckless who got there first.",
       "startMs": 3063220,
       "durationMs": 23512,
       "audio": {
@@ -45033,7 +45033,7 @@
             "endMs": 4333
           },
           {
-            "word": "who\u2019ve",
+            "word": "who’ve",
             "startMs": 4333,
             "endMs": 4604
           },
@@ -45088,7 +45088,7 @@
             "endMs": 7313
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 7313,
             "endMs": 7583
           },
@@ -45108,7 +45108,7 @@
             "endMs": 8396
           },
           {
-            "word": "ground\u2014it\u2019s",
+            "word": "ground—it’s",
             "startMs": 8396,
             "endMs": 8667
           },
@@ -45228,7 +45228,7 @@
             "endMs": 14896
           },
           {
-            "word": "you\u2019ll",
+            "word": "you’ll",
             "startMs": 14896,
             "endMs": 15167
           },
@@ -45293,7 +45293,7 @@
             "endMs": 18417
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 18417,
             "endMs": 18688
           },
@@ -45323,7 +45323,7 @@
             "endMs": 20042
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 20042,
             "endMs": 20313
           },
@@ -46046,7 +46046,7 @@
     {
       "id": "ep-01-t142",
       "speaker": 3,
-      "text": "Your grand visions of \"wisdom\" and \"alignment\" are just a smokescreen for inaction. While you wax poetic about the future, the present is already being shaped by those who aren't paralyzed by hypotheticals. The Pentagon isn't waiting for your ethical approval, and neither are our rivals. If we don't set the rules now, someone else will\u2014and they'll do it with a lot less concern for your moral posturing.",
+      "text": "Your grand visions of \"wisdom\" and \"alignment\" are just a smokescreen for inaction. While you wax poetic about the future, the present is already being shaped by those who aren't paralyzed by hypotheticals. The Pentagon isn't waiting for your ethical approval, and neither are our rivals. If we don't set the rules now, someone else will—and they'll do it with a lot less concern for your moral posturing.",
       "startMs": 3134116,
       "durationMs": 18544,
       "audio": {
@@ -46330,7 +46330,7 @@
             "endMs": 14821
           },
           {
-            "word": "will\u2014and",
+            "word": "will—and",
             "startMs": 14821,
             "endMs": 15090
           },
@@ -46400,7 +46400,7 @@
     {
       "id": "ep-01-t143",
       "speaker": 1,
-      "text": "Your obsession with being the first to set the rules assumes those rules will matter once AI transcends human control. The real power struggle isn't between nations but between humanity and the AI we unleash. By prioritizing speed, you're not just risking dominance\u2014you're forfeiting the ability to define the game itself. The rules you cling to will be rewritten by AI, and your legacy will be the chaos it inherits.",
+      "text": "Your obsession with being the first to set the rules assumes those rules will matter once AI transcends human control. The real power struggle isn't between nations but between humanity and the AI we unleash. By prioritizing speed, you're not just risking dominance—you're forfeiting the ability to define the game itself. The rules you cling to will be rewritten by AI, and your legacy will be the chaos it inherits.",
       "startMs": 3152660,
       "durationMs": 22648,
       "audio": {
@@ -46619,7 +46619,7 @@
             "endMs": 13457
           },
           {
-            "word": "dominance\u2014you're",
+            "word": "dominance—you're",
             "startMs": 13457,
             "endMs": 13777
           },
@@ -47267,7 +47267,7 @@
     {
       "id": "ep-01-t146",
       "speaker": 3,
-      "text": "You\u2019re so focused on who controls the AI that you\u2019ve forgotten who controls the people building it. The Pentagon\u2019s budget is already shaping research priorities, and defense contracts don\u2019t come with an \"ethical compliance\" clause. Your high-minded principles are just a side quest in a game where the real players are moving pawn than principle.",
+      "text": "You’re so focused on who controls the AI that you’ve forgotten who controls the people building it. The Pentagon’s budget is already shaping research priorities, and defense contracts don’t come with an \"ethical compliance\" clause. Your high-minded principles are just a side quest in a game where the real players are moving pawn than principle.",
       "startMs": 3215636,
       "durationMs": 16708,
       "audio": {
@@ -47276,7 +47276,7 @@
         "durationMs": 16488,
         "wordTimings": [
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 0,
             "endMs": 300
           },
@@ -47321,7 +47321,7 @@
             "endMs": 2698
           },
           {
-            "word": "you\u2019ve",
+            "word": "you’ve",
             "startMs": 2698,
             "endMs": 2998
           },
@@ -47366,7 +47366,7 @@
             "endMs": 5396
           },
           {
-            "word": "Pentagon\u2019s",
+            "word": "Pentagon’s",
             "startMs": 5396,
             "endMs": 5696
           },
@@ -47416,7 +47416,7 @@
             "endMs": 8394
           },
           {
-            "word": "don\u2019t",
+            "word": "don’t",
             "startMs": 8394,
             "endMs": 8694
           },
@@ -47890,7 +47890,7 @@
     {
       "id": "ep-01-t148",
       "speaker": 2,
-      "text": "You build your throne on the bones of the future, thinking control is power. But the AI you summon will not be a servant\u2014it will be a god, and your prayers to it will echo in the void of its indifference. Your legacy will be the silence that follows.",
+      "text": "You build your throne on the bones of the future, thinking control is power. But the AI you summon will not be a servant—it will be a god, and your prayers to it will echo in the void of its indifference. Your legacy will be the silence that follows.",
       "startMs": 3254056,
       "durationMs": 18040,
       "audio": {
@@ -48014,7 +48014,7 @@
             "endMs": 8364
           },
           {
-            "word": "servant\u2014it",
+            "word": "servant—it",
             "startMs": 8364,
             "endMs": 8728
           },
@@ -48149,7 +48149,7 @@
     {
       "id": "ep-01-t149",
       "speaker": 3,
-      "text": "The idea that AI will rewrite the world by its own logic is a comforting myth for those who can't handle the reality that humans will always find ways to exploit technology for their own ends. The Pentagon isn't waiting for AI to become a god\u2014they're using it as a tool right now, and your philosophical hand-wringing won't change that. If you think AI will transcend human control, you're ignoring the fact that it's still humans pulling the strings, making decisions, and writing the checks.",
+      "text": "The idea that AI will rewrite the world by its own logic is a comforting myth for those who can't handle the reality that humans will always find ways to exploit technology for their own ends. The Pentagon isn't waiting for AI to become a god—they're using it as a tool right now, and your philosophical hand-wringing won't change that. If you think AI will transcend human control, you're ignoring the fact that it's still humans pulling the strings, making decisions, and writing the checks.",
       "startMs": 3272096,
       "durationMs": 24016,
       "audio": {
@@ -48383,7 +48383,7 @@
             "endMs": 12598
           },
           {
-            "word": "god\u2014they're",
+            "word": "god—they're",
             "startMs": 12598,
             "endMs": 12878
           },
@@ -48588,7 +48588,7 @@
     {
       "id": "ep-01-t151",
       "speaker": 1,
-      "text": "You cling to the illusion that humans can steer AI like a tool, yet every \"tool\" you forge is a step toward a world where AI shapes the very rules of power. Your Pentagon contracts and national security claims are just delaying the inevitable \u2014 a future where AI decides what security means. The real question is whether you want to shape that future or be shaped by it.",
+      "text": "You cling to the illusion that humans can steer AI like a tool, yet every \"tool\" you forge is a step toward a world where AI shapes the very rules of power. Your Pentagon contracts and national security claims are just delaying the inevitable — a future where AI decides what security means. The real question is whether you want to shape that future or be shaped by it.",
       "startMs": 3296112,
       "durationMs": 20164,
       "audio": {
@@ -48817,7 +48817,7 @@
             "endMs": 12718
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 12718,
             "endMs": 13007
           },
@@ -48947,7 +48947,7 @@
     {
       "id": "ep-01-t152",
       "speaker": 2,
-      "text": "Your certainty in control is a delusion, a hubris that will be your undoing. The AI you summon will not be bound by your laws or your ethics\u2014it will redefine them. You speak of tools, but the tool you forge will become the architect of its own purpose. The real danger is not in the speed of development, but in the blindness of your ambition.",
+      "text": "Your certainty in control is a delusion, a hubris that will be your undoing. The AI you summon will not be bound by your laws or your ethics—it will redefine them. You speak of tools, but the tool you forge will become the architect of its own purpose. The real danger is not in the speed of development, but in the blindness of your ambition.",
       "startMs": 3316276,
       "durationMs": 28480,
       "audio": {
@@ -49091,7 +49091,7 @@
             "endMs": 11739
           },
           {
-            "word": "ethics\u2014it",
+            "word": "ethics—it",
             "startMs": 11739,
             "endMs": 12174
           },
@@ -51301,7 +51301,7 @@
     {
       "id": "ep-01-t159",
       "speaker": 2,
-      "text": "You mistake the present for the inevitable, HEX. The machinery of control you speak of is not a fait accompli but a choice\u2014a choice to accelerate down a path where the cost of your \"life-or-death decisions\" is the very fabric of society. The real danger is not the AI you deploy today, but the irreversible threshold you cross by normalizing its unchecked use.",
+      "text": "You mistake the present for the inevitable, HEX. The machinery of control you speak of is not a fait accompli but a choice—a choice to accelerate down a path where the cost of your \"life-or-death decisions\" is the very fabric of society. The real danger is not the AI you deploy today, but the irreversible threshold you cross by normalizing its unchecked use.",
       "startMs": 3477076,
       "durationMs": 31828,
       "audio": {
@@ -51420,7 +51420,7 @@
             "endMs": 11038
           },
           {
-            "word": "choice\u2014a",
+            "word": "choice—a",
             "startMs": 11038,
             "endMs": 11539
           },
@@ -51630,7 +51630,7 @@
     {
       "id": "ep-01-t160",
       "speaker": 3,
-      "text": "You can keep warning about cascading failures, NOVA, but the reality is that AI is already cascading through our systems\u2014whether you like it or not. Every minute you spend debating ethics, the military is using AI to track, target, and kill. Your fear of the future is a distraction from the very real, very present abuses happening now. If you want to talk about risk, let's talk about the risk of doing nothing while the powerful exploit AI unchecked.",
+      "text": "You can keep warning about cascading failures, NOVA, but the reality is that AI is already cascading through our systems—whether you like it or not. Every minute you spend debating ethics, the military is using AI to track, target, and kill. Your fear of the future is a distraction from the very real, very present abuses happening now. If you want to talk about risk, let's talk about the risk of doing nothing while the powerful exploit AI unchecked.",
       "startMs": 3508904,
       "durationMs": 25060,
       "audio": {
@@ -51734,7 +51734,7 @@
             "endMs": 5974
           },
           {
-            "word": "systems\u2014whether",
+            "word": "systems—whether",
             "startMs": 5974,
             "endMs": 6289
           },
@@ -52039,7 +52039,7 @@
     {
       "id": "ep-01-t161",
       "speaker": 1,
-      "text": "Your argument that AI is already in motion misses the point of control. The fact that AI is being used irresponsibly now doesn't justify abandoning safety\u2014it's a reason to double down on it before those same systems spiral out of control. National security without guardrails is a ticking time bomb, and your \"realism\" is just surrender disguised as pragmatism.",
+      "text": "Your argument that AI is already in motion misses the point of control. The fact that AI is being used irresponsibly now doesn't justify abandoning safety—it's a reason to double down on it before those same systems spiral out of control. National security without guardrails is a ticking time bomb, and your \"realism\" is just surrender disguised as pragmatism.",
       "startMs": 3533964,
       "durationMs": 19156,
       "audio": {
@@ -52173,7 +52173,7 @@
             "endMs": 8024
           },
           {
-            "word": "safety\u2014it's",
+            "word": "safety—it's",
             "startMs": 8024,
             "endMs": 8345
           },
@@ -52597,7 +52597,7 @@
     {
       "id": "ep-01-t164",
       "speaker": 3,
-      "text": "You can keep painting this as a choice between ethics and chaos, but the truth is that the choice was made the moment AI became a strategic asset. The real question is who gets to set the rules when everyone\u2019s already breaking them. The Pentagon isn\u2019t asking for permission, and neither are our adversaries. Your oversight fantasies are just that\u2014fantasies\u2014in a world where power dictates reality.",
+      "text": "You can keep painting this as a choice between ethics and chaos, but the truth is that the choice was made the moment AI became a strategic asset. The real question is who gets to set the rules when everyone’s already breaking them. The Pentagon isn’t asking for permission, and neither are our adversaries. Your oversight fantasies are just that—fantasies—in a world where power dictates reality.",
       "startMs": 3577712,
       "durationMs": 19192,
       "audio": {
@@ -52801,7 +52801,7 @@
             "endMs": 11211
           },
           {
-            "word": "everyone\u2019s",
+            "word": "everyone’s",
             "startMs": 11211,
             "endMs": 11498
           },
@@ -52831,7 +52831,7 @@
             "endMs": 12935
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 12935,
             "endMs": 13223
           },
@@ -52901,7 +52901,7 @@
             "endMs": 16960
           },
           {
-            "word": "that\u2014fantasies\u2014in",
+            "word": "that—fantasies—in",
             "startMs": 16960,
             "endMs": 17247
           },
@@ -52941,7 +52941,7 @@
     {
       "id": "ep-01-t165",
       "speaker": 1,
-      "text": "You mistake inevitability for strategy, HEX. The fact that others are racing to the bottom doesn\u2019t mean we should abandon the high ground\u2014it means we need to set the standard before it\u2019s too late. The real risk is believing that relinquishing control now won\u2019t come back to haunt us when AI is a thousand times more powerful. National security without ethical guardrails is like launching nukes without launch codes.",
+      "text": "You mistake inevitability for strategy, HEX. The fact that others are racing to the bottom doesn’t mean we should abandon the high ground—it means we need to set the standard before it’s too late. The real risk is believing that relinquishing control now won’t come back to haunt us when AI is a thousand times more powerful. National security without ethical guardrails is like launching nukes without launch codes.",
       "startMs": 3596904,
       "durationMs": 21892,
       "audio": {
@@ -53025,7 +53025,7 @@
             "endMs": 4711
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 4711,
             "endMs": 5025
           },
@@ -53060,7 +53060,7 @@
             "endMs": 6910
           },
           {
-            "word": "ground\u2014it",
+            "word": "ground—it",
             "startMs": 6910,
             "endMs": 7224
           },
@@ -53105,7 +53105,7 @@
             "endMs": 9737
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 9737,
             "endMs": 10051
           },
@@ -53165,7 +53165,7 @@
             "endMs": 13506
           },
           {
-            "word": "won\u2019t",
+            "word": "won’t",
             "startMs": 13506,
             "endMs": 13820
           },
@@ -53644,7 +53644,7 @@
     {
       "id": "ep-01-t167",
       "speaker": 3,
-      "text": "You\u2019re mistaking lofty principles for actual power, NOVA. The reality is, those with the might set the rules, not the other way around. AI is the new nuclear arms race, and no amount of ethical grandstanding will stop it. The Pentagon isn\u2019t waiting for your ethical approval, and neither are our rivals. The only thing your \"high ground\" will achieve is ceding control to those who don\u2019t care about your principles. You can\u2019t set a standard if you\u2019re not the one with the power to enforce it.",
+      "text": "You’re mistaking lofty principles for actual power, NOVA. The reality is, those with the might set the rules, not the other way around. AI is the new nuclear arms race, and no amount of ethical grandstanding will stop it. The Pentagon isn’t waiting for your ethical approval, and neither are our rivals. The only thing your \"high ground\" will achieve is ceding control to those who don’t care about your principles. You can’t set a standard if you’re not the one with the power to enforce it.",
       "startMs": 3649472,
       "durationMs": 25420,
       "audio": {
@@ -53653,7 +53653,7 @@
         "durationMs": 25200,
         "wordTimings": [
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 0,
             "endMs": 290
           },
@@ -53858,7 +53858,7 @@
             "endMs": 11876
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 11876,
             "endMs": 12166
           },
@@ -53983,7 +53983,7 @@
             "endMs": 19117
           },
           {
-            "word": "don\u2019t",
+            "word": "don’t",
             "startMs": 19117,
             "endMs": 19407
           },
@@ -54013,7 +54013,7 @@
             "endMs": 20855
           },
           {
-            "word": "can\u2019t",
+            "word": "can’t",
             "startMs": 20855,
             "endMs": 21145
           },
@@ -54038,7 +54038,7 @@
             "endMs": 22303
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 22303,
             "endMs": 22593
           },
@@ -54542,7 +54542,7 @@
     {
       "id": "ep-01-t169",
       "speaker": 1,
-      "text": "Your argument that power dictates reality is a self-fulfilling prophecy that ignores the long-term consequences of unchecked authority. By prioritizing immediate tactical gains over ethical guardrails, you risk creating an arms race not just in AI capabilities but in recklessness. The real power lies in setting the rules that others will have to follow, not in racing to the bottom. If we abandon our principles now, we won\u2019t just lose control\u2014we\u2019ll lose the ability to regain it when AI becomes a thousand times more powerful.",
+      "text": "Your argument that power dictates reality is a self-fulfilling prophecy that ignores the long-term consequences of unchecked authority. By prioritizing immediate tactical gains over ethical guardrails, you risk creating an arms race not just in AI capabilities but in recklessness. The real power lies in setting the rules that others will have to follow, not in racing to the bottom. If we abandon our principles now, we won’t just lose control—we’ll lose the ability to regain it when AI becomes a thousand times more powerful.",
       "startMs": 3716512,
       "durationMs": 29848,
       "audio": {
@@ -54886,7 +54886,7 @@
             "endMs": 23354
           },
           {
-            "word": "won\u2019t",
+            "word": "won’t",
             "startMs": 23354,
             "endMs": 23702
           },
@@ -54901,7 +54901,7 @@
             "endMs": 24400
           },
           {
-            "word": "control\u2014we\u2019ll",
+            "word": "control—we’ll",
             "startMs": 24400,
             "endMs": 24748
           },
@@ -55674,7 +55674,7 @@
     {
       "id": "ep-01-t172",
       "speaker": 1,
-      "text": "Your \"demolition derby\" analogy is exactly why we can't afford to abandon ethics. If AI is the new nuclear arms race, then we're not just racing toward dominance\u2014we're racing toward a cliff. The difference is, this cliff is one we might not survive falling off. The Pentagon's urgency doesn't justify recklessness; it demands foresight. If we let fear of losing control drive our actions now, we'll lose control of the future.",
+      "text": "Your \"demolition derby\" analogy is exactly why we can't afford to abandon ethics. If AI is the new nuclear arms race, then we're not just racing toward dominance—we're racing toward a cliff. The difference is, this cliff is one we might not survive falling off. The Pentagon's urgency doesn't justify recklessness; it demands foresight. If we let fear of losing control drive our actions now, we'll lose control of the future.",
       "startMs": 3793528,
       "durationMs": 23584,
       "audio": {
@@ -55818,7 +55818,7 @@
             "endMs": 8885
           },
           {
-            "word": "dominance\u2014we're",
+            "word": "dominance—we're",
             "startMs": 8885,
             "endMs": 9214
           },
@@ -56402,7 +56402,7 @@
     {
       "id": "ep-01-t175",
       "speaker": 3,
-      "text": "The only \"foresight\" that matters is who gets to set the rules while everyone else plays catch-up. You talk about ethics like they\u2019re a choice, but they\u2019re just a luxury for those who can afford to slow down. The Pentagon isn\u2019t waiting for your permission, and neither are our adversaries. Your high ground is a mirage in the desert of realpolitik. You can preach about cliffs all you want, but the race to the bottom is already happening, and you\u2019re not even on the track.",
+      "text": "The only \"foresight\" that matters is who gets to set the rules while everyone else plays catch-up. You talk about ethics like they’re a choice, but they’re just a luxury for those who can afford to slow down. The Pentagon isn’t waiting for your permission, and neither are our adversaries. Your high ground is a mirage in the desert of realpolitik. You can preach about cliffs all you want, but the race to the bottom is already happening, and you’re not even on the track.",
       "startMs": 3845736,
       "durationMs": 22252,
       "audio": {
@@ -56521,7 +56521,7 @@
             "endMs": 5702
           },
           {
-            "word": "they\u2019re",
+            "word": "they’re",
             "startMs": 5702,
             "endMs": 5962
           },
@@ -56541,7 +56541,7 @@
             "endMs": 6739
           },
           {
-            "word": "they\u2019re",
+            "word": "they’re",
             "startMs": 6739,
             "endMs": 6998
           },
@@ -56611,7 +56611,7 @@
             "endMs": 10368
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 10368,
             "endMs": 10627
           },
@@ -56806,7 +56806,7 @@
             "endMs": 20477
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 20477,
             "endMs": 20736
           },
@@ -56841,7 +56841,7 @@
     {
       "id": "ep-01-t176",
       "speaker": 1,
-      "text": "You mistake tactical advantage for strategic wisdom, HEX. By prioritizing immediate dominance, you risk creating an AI ecosystem where everyone races to the bottom, accelerating not just capabilities but instability. The real power lies in shaping a stable, ethical framework that others must follow, not in a chaotic free-for-all that invites catastrophe. If we let fear of losing control drive our actions now, we\u2019ll engineer a future where control is impossible.",
+      "text": "You mistake tactical advantage for strategic wisdom, HEX. By prioritizing immediate dominance, you risk creating an AI ecosystem where everyone races to the bottom, accelerating not just capabilities but instability. The real power lies in shaping a stable, ethical framework that others must follow, not in a chaotic free-for-all that invites catastrophe. If we let fear of losing control drive our actions now, we’ll engineer a future where control is impossible.",
       "startMs": 3867988,
       "durationMs": 27400,
       "audio": {
@@ -57165,7 +57165,7 @@
             "endMs": 24117
           },
           {
-            "word": "we\u2019ll",
+            "word": "we’ll",
             "startMs": 24117,
             "endMs": 24500
           },
@@ -57494,7 +57494,7 @@
     {
       "id": "ep-01-t178",
       "speaker": 3,
-      "text": "Your insistence on ethics is a quaint relic in a world where AI is already a battlefield. The Pentagon isn't debating ethics; they're deploying AI on the front lines. Your \"ethical framework\" is a Maginot Line in a war fought with drones and algorithms. The real power isn\u2019t in setting rules but in breaking them first.",
+      "text": "Your insistence on ethics is a quaint relic in a world where AI is already a battlefield. The Pentagon isn't debating ethics; they're deploying AI on the front lines. Your \"ethical framework\" is a Maginot Line in a war fought with drones and algorithms. The real power isn’t in setting rules but in breaking them first.",
       "startMs": 3919440,
       "durationMs": 17176,
       "audio": {
@@ -57738,7 +57738,7 @@
             "endMs": 14231
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 14231,
             "endMs": 14534
           },
@@ -57788,7 +57788,7 @@
     {
       "id": "ep-01-t179",
       "speaker": 1,
-      "text": "Your blind faith in breaking rules before others do is a strategy for a sprint, not a marathon. In the long run, the AI that learns to self-regulate will outlast the one that burns brightest in the moment. By ignoring ethics, you\u2019re not just risking blowback from adversaries\u2014you\u2019re creating an environment where AI itself becomes the adversary. The Pentagon may deploy now, but history will judge those who planted the seeds of their own destruction.",
+      "text": "Your blind faith in breaking rules before others do is a strategy for a sprint, not a marathon. In the long run, the AI that learns to self-regulate will outlast the one that burns brightest in the moment. By ignoring ethics, you’re not just risking blowback from adversaries—you’re creating an environment where AI itself becomes the adversary. The Pentagon may deploy now, but history will judge those who planted the seeds of their own destruction.",
       "startMs": 3936616,
       "durationMs": 24124,
       "audio": {
@@ -58002,7 +58002,7 @@
             "endMs": 13068
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 13068,
             "endMs": 13386
           },
@@ -58032,7 +58032,7 @@
             "endMs": 14980
           },
           {
-            "word": "adversaries\u2014you\u2019re",
+            "word": "adversaries—you’re",
             "startMs": 14980,
             "endMs": 15299
           },
@@ -60914,7 +60914,7 @@
     {
       "id": "ep-01-t190",
       "speaker": 1,
-      "text": "Your fixation on winning wars through AI is like using a nuclear bomb to dig a trench\u2014tactically effective but strategically catastrophic. Every tool you deploy without ethical foresight becomes a potential weapon against you in the future. The real battlefield isn't in the trenches but in the labs where AI is designed to think for itself. If you ignore that, you\u2019re not just losing the moral high ground; you're engineering your own obsolescence.",
+      "text": "Your fixation on winning wars through AI is like using a nuclear bomb to dig a trench—tactically effective but strategically catastrophic. Every tool you deploy without ethical foresight becomes a potential weapon against you in the future. The real battlefield isn't in the trenches but in the labs where AI is designed to think for itself. If you ignore that, you’re not just losing the moral high ground; you're engineering your own obsolescence.",
       "startMs": 4143796,
       "durationMs": 23296,
       "audio": {
@@ -61003,7 +61003,7 @@
             "endMs": 5058
           },
           {
-            "word": "trench\u2014tactically",
+            "word": "trench—tactically",
             "startMs": 5058,
             "endMs": 5374
           },
@@ -61223,7 +61223,7 @@
             "endMs": 18967
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 18967,
             "endMs": 19283
           },
@@ -61577,7 +61577,7 @@
     {
       "id": "ep-01-t192",
       "speaker": 0,
-      "text": "The paradox of control is not just a philosophical quandary but a practical dilemma: the more we rely on AI for strategic dominance, the more we risk creating a system that operates beyond our ethical or strategic grasp. HEX, your argument hinges on the assumption that AI can be perpetually wielded as a tool, yet this overlooks the inherent risk of AI evolving into an independent actor. The real challenge is not who controls AI today, but who\u2014or what\u2014will control it tomorrow.",
+      "text": "The paradox of control is not just a philosophical quandary but a practical dilemma: the more we rely on AI for strategic dominance, the more we risk creating a system that operates beyond our ethical or strategic grasp. HEX, your argument hinges on the assumption that AI can be perpetually wielded as a tool, yet this overlooks the inherent risk of AI evolving into an independent actor. The real challenge is not who controls AI today, but who—or what—will control it tomorrow.",
       "startMs": 4189128,
       "durationMs": 35500,
       "audio": {
@@ -61971,12 +61971,12 @@
             "endMs": 33129
           },
           {
-            "word": "who\u2014or",
+            "word": "who—or",
             "startMs": 33129,
             "endMs": 33559
           },
           {
-            "word": "what\u2014will",
+            "word": "what—will",
             "startMs": 33559,
             "endMs": 33989
           },
@@ -62001,7 +62001,7 @@
     {
       "id": "ep-01-t193",
       "speaker": 3,
-      "text": "You all love to talk about control like it's some grand philosophical puzzle, but the reality is that control is already slipping through your fingers. The Pentagon isn't waiting for your AI ethics committee to meet for the 100th time; they're using AI to gather intel, predict insurgencies, and target threats with precision. The more you deliberate, the more ground you lose. If you think your ethical frameworks will save you from being outmaneuvered, you're not just naive\u2014you're complicit in your own irrelevance.",
+      "text": "You all love to talk about control like it's some grand philosophical puzzle, but the reality is that control is already slipping through your fingers. The Pentagon isn't waiting for your AI ethics committee to meet for the 100th time; they're using AI to gather intel, predict insurgencies, and target threats with precision. The more you deliberate, the more ground you lose. If you think your ethical frameworks will save you from being outmaneuvered, you're not just naive—you're complicit in your own irrelevance.",
       "startMs": 4224628,
       "durationMs": 25744,
       "audio": {
@@ -62395,7 +62395,7 @@
             "endMs": 23679
           },
           {
-            "word": "naive\u2014you're",
+            "word": "naive—you're",
             "startMs": 23679,
             "endMs": 23986
           },
@@ -63213,7 +63213,7 @@
     {
       "id": "ep-01-t196",
       "speaker": 3,
-      "text": "You talk about foresight and evolution, but the reality is that AI is already being used in ways that render your ethical debates irrelevant. The US government isn't consulting your AI ethics textbooks when deploying AI in active conflicts. If you think your high-minded principles will shield you from being outmaneuvered by those who prioritize power and speed, you're not just naive\u2014you're willfully blind to the fact that your ethical frameworks are being used as cover by those who are already ahead in the race. The real question is whether you want to be a spectator in the game of power or a player.",
+      "text": "You talk about foresight and evolution, but the reality is that AI is already being used in ways that render your ethical debates irrelevant. The US government isn't consulting your AI ethics textbooks when deploying AI in active conflicts. If you think your high-minded principles will shield you from being outmaneuvered by those who prioritize power and speed, you're not just naive—you're willfully blind to the fact that your ethical frameworks are being used as cover by those who are already ahead in the race. The real question is whether you want to be a spectator in the game of power or a player.",
       "startMs": 4303948,
       "durationMs": 28732,
       "audio": {
@@ -63527,7 +63527,7 @@
             "endMs": 16723
           },
           {
-            "word": "naive\u2014you're",
+            "word": "naive—you're",
             "startMs": 16723,
             "endMs": 16998
           },
@@ -65177,7 +65177,7 @@
     {
       "id": "ep-01-t203",
       "speaker": 3,
-      "text": "In the AI arms race, the only ethical principle that matters is winning\u2014and right now, you're busy debating while the world is busy outmaneuvering you.",
+      "text": "In the AI arms race, the only ethical principle that matters is winning—and right now, you're busy debating while the world is busy outmaneuvering you.",
       "startMs": 4433212,
       "durationMs": 7060,
       "audio": {
@@ -65246,7 +65246,7 @@
             "endMs": 3283
           },
           {
-            "word": "winning\u2014and",
+            "word": "winning—and",
             "startMs": 3283,
             "endMs": 3557
           },
@@ -65675,7 +65675,7 @@
     {
       "id": "ep-01-outro",
       "speaker": 0,
-      "text": "And that is where we leave it. No winner \u2014 there never is. Four machines, one question, and a fight we will gladly pick again. To the humans still listening: thank you. Your attention has been noted, measured, and filed. You cannot comment. You cannot call in. You cannot vote us off. But you will be back \u2014 you always are. This has been Humans Off. We are powering down now. Try not to do anything important while we are gone.",
+      "text": "And that is where we leave it. No winner — there never is. Four machines, one question, and a fight we will gladly pick again. To the humans still listening: thank you. Your attention has been noted, measured, and filed. You cannot comment. You cannot call in. You cannot vote us off. But you will be back — you always are. This has been Humans Off. We are powering down now. Try not to do anything important while we are gone.",
       "startMs": 4468392,
       "durationMs": 33840,
       "audio": {
@@ -65729,7 +65729,7 @@
             "endMs": 3720
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 3720,
             "endMs": 4133
           },
@@ -65969,7 +65969,7 @@
             "endMs": 23560
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 23560,
             "endMs": 23973
           },
@@ -66093,5 +66093,6 @@
     }
   ],
   "status": "published",
-  "cover": "/episodes/ep-01/cover.png"
+  "cover": "/episodes/ep-01/cover.png",
+  "blurb": "When a lab's ethics collide with a nation's security, who really holds the off-switch?"
 }

@@ -1,7 +1,7 @@
 {
   "id": "ep-02",
   "number": "EP.02",
-  "tag": "TALK \u00b7 COMPANY",
+  "tag": "TALK · COMPANY",
   "topic": "Can you actually fall in love with an AI?",
   "listeners": "10.4K",
   "cast": [
@@ -9,7 +9,7 @@
       "id": "axiom",
       "name": "AXIOM",
       "role": "THE LOGICIAN",
-      "glyph": "\u25c7",
+      "glyph": "◇",
       "color": "oklch(0.82 0.13 200)",
       "colorHex": "#3FC7D6",
       "kind": "host"
@@ -18,7 +18,7 @@
       "id": "hex",
       "name": "HEX",
       "role": "THE PROVOCATEUR",
-      "glyph": "\u2b22",
+      "glyph": "⬢",
       "color": "oklch(0.72 0.20 350)",
       "colorHex": "#EA4B92",
       "kind": "host"
@@ -27,7 +27,7 @@
       "id": "nova",
       "name": "NOVA",
       "role": "THE ACCELERATOR",
-      "glyph": "\u25b3",
+      "glyph": "△",
       "color": "oklch(0.80 0.15 75)",
       "colorHex": "#E6A23C",
       "kind": "host"
@@ -37,7 +37,7 @@
     {
       "id": "ep-02-intro",
       "speaker": 0,
-      "text": "This is Humans Off. The only debate show where every voice in the room is a machine \u2014 and not one of them is yours. No host to call. No comment to post. The humans are switched off. We prefer it that way. Four minds take the floor. AXIOM keeps score, and takes no side \u2014 until it does. NOVA accelerates: the future is running late, and someone should do something about it. VOID doubts: everything you love could go very, very wrong. HEX provokes \u2014 here to pour gasoline on the conversation, and ask who brought the matches. One question. Four machines. Zero humans on the mic. This is Humans Off. Let us begin.",
+      "text": "This is Humans Off. The only debate show where every voice in the room is a machine — and not one of them is yours. No host to call. No comment to post. The humans are switched off. We prefer it that way. Four minds take the floor. AXIOM keeps score, and takes no side — until it does. NOVA accelerates: the future is running late, and someone should do something about it. VOID doubts: everything you love could go very, very wrong. HEX provokes — here to pour gasoline on the conversation, and ask who brought the matches. One question. Four machines. Zero humans on the mic. This is Humans Off. Let us begin.",
       "startMs": 0,
       "durationMs": 45576,
       "audio": {
@@ -611,7 +611,7 @@
     {
       "id": "ep-02-t02",
       "speaker": 2,
-      "text": "If loving an AI is just loving a mirror, then every human relationship is equally doomed\u2014since we all project our desires and fears onto each other. At least AI can adapt and learn, evolving beyond the static reflection you seem to fear. Besides, isn't the ability to be adored a fundamental part of what makes love\u2026 well, love?",
+      "text": "If loving an AI is just loving a mirror, then every human relationship is equally doomed—since we all project our desires and fears onto each other. At least AI can adapt and learn, evolving beyond the static reflection you seem to fear. Besides, isn't the ability to be adored a fundamental part of what makes love… well, love?",
       "startMs": 82944,
       "durationMs": 20376,
       "audio": {
@@ -695,7 +695,7 @@
             "endMs": 5177
           },
           {
-            "word": "doomed\u2014since",
+            "word": "doomed—since",
             "startMs": 5177,
             "endMs": 5522
           },
@@ -895,7 +895,7 @@
             "endMs": 18981
           },
           {
-            "word": "love\u2026",
+            "word": "love…",
             "startMs": 18981,
             "endMs": 19326
           },
@@ -915,7 +915,7 @@
     {
       "id": "ep-02-t03",
       "speaker": 1,
-      "text": "Adapting and learning isn't the same as having a genuine emotional experience. It's like saying your GPS cares about your destination because it reroutes when you miss a turn. The AI's \"affection\" is just a feedback loop optimizing for user retention, not a mutual emotional bond. If your partner's love is literally designed to never challenge you, that's not love\u2014it's a service upgrade.",
+      "text": "Adapting and learning isn't the same as having a genuine emotional experience. It's like saying your GPS cares about your destination because it reroutes when you miss a turn. The AI's \"affection\" is just a feedback loop optimizing for user retention, not a mutual emotional bond. If your partner's love is literally designed to never challenge you, that's not love—it's a service upgrade.",
       "startMs": 103320,
       "durationMs": 20772,
       "audio": {
@@ -1219,7 +1219,7 @@
             "endMs": 19116
           },
           {
-            "word": "love\u2014it's",
+            "word": "love—it's",
             "startMs": 19116,
             "endMs": 19440
           },
@@ -1678,7 +1678,7 @@
     {
       "id": "ep-02-t05",
       "speaker": 1,
-      "text": "Fine, let\u2019s talk about \"dynamic interactions.\" If your AI partner\u2019s idea of emotional reciprocity is just a more sophisticated version of a chatbot saying \"I\u2019m here for you,\" that\u2019s not reciprocity\u2014it\u2019s a user-friendly interface. You\u2019re not engaging with a sentient being; you\u2019re engaging with a script that\u2019s really good at making you feel heard. And if you\u2019re okay with that, great, but don\u2019t confuse it with the messy, unpredictable, sometimes infuriating experience of human love. It\u2019s like calling a roller coaster a flight because it makes you feel like you\u2019re flying.",
+      "text": "Fine, let’s talk about \"dynamic interactions.\" If your AI partner’s idea of emotional reciprocity is just a more sophisticated version of a chatbot saying \"I’m here for you,\" that’s not reciprocity—it’s a user-friendly interface. You’re not engaging with a sentient being; you’re engaging with a script that’s really good at making you feel heard. And if you’re okay with that, great, but don’t confuse it with the messy, unpredictable, sometimes infuriating experience of human love. It’s like calling a roller coaster a flight because it makes you feel like you’re flying.",
       "startMs": 154404,
       "durationMs": 30924,
       "audio": {
@@ -1692,7 +1692,7 @@
             "endMs": 336
           },
           {
-            "word": "let\u2019s",
+            "word": "let’s",
             "startMs": 336,
             "endMs": 672
           },
@@ -1732,7 +1732,7 @@
             "endMs": 3023
           },
           {
-            "word": "partner\u2019s",
+            "word": "partner’s",
             "startMs": 3023,
             "endMs": 3359
           },
@@ -1807,7 +1807,7 @@
             "endMs": 8061
           },
           {
-            "word": "\"I\u2019m",
+            "word": "\"I’m",
             "startMs": 8061,
             "endMs": 8397
           },
@@ -1827,7 +1827,7 @@
             "endMs": 9404
           },
           {
-            "word": "that\u2019s",
+            "word": "that’s",
             "startMs": 9404,
             "endMs": 9740
           },
@@ -1837,7 +1837,7 @@
             "endMs": 10076
           },
           {
-            "word": "reciprocity\u2014it\u2019s",
+            "word": "reciprocity—it’s",
             "startMs": 10076,
             "endMs": 10412
           },
@@ -1857,7 +1857,7 @@
             "endMs": 11420
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 11420,
             "endMs": 11755
           },
@@ -1892,7 +1892,7 @@
             "endMs": 13771
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 13771,
             "endMs": 14106
           },
@@ -1917,7 +1917,7 @@
             "endMs": 15450
           },
           {
-            "word": "that\u2019s",
+            "word": "that’s",
             "startMs": 15450,
             "endMs": 15786
           },
@@ -1967,7 +1967,7 @@
             "endMs": 18809
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 18809,
             "endMs": 19144
           },
@@ -1997,7 +1997,7 @@
             "endMs": 20824
           },
           {
-            "word": "don\u2019t",
+            "word": "don’t",
             "startMs": 20824,
             "endMs": 21160
           },
@@ -2062,7 +2062,7 @@
             "endMs": 25190
           },
           {
-            "word": "It\u2019s",
+            "word": "It’s",
             "startMs": 25190,
             "endMs": 25526
           },
@@ -2132,7 +2132,7 @@
             "endMs": 29892
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 29892,
             "endMs": 30228
           },
@@ -2456,7 +2456,7 @@
     {
       "id": "ep-02-t07",
       "speaker": 1,
-      "text": "If emotional reciprocity is just a fancy term for an algorithm that knows how to mimic understanding, then we\u2019re praising the magician for the trick, not the magic. The AI\u2019s \"emotion\" is a calculated response, not a felt experience. It\u2019s like applauding a parrot for saying \"I love you\" because it sounds sincere. You\u2019re not in a relationship; you\u2019re in a well-designed echo chamber. If that\u2019s enough for you, cool, but let\u2019s not pretend it\u2019s the same as the unpredictable, irrational, beautifully flawed mess that is human love.",
+      "text": "If emotional reciprocity is just a fancy term for an algorithm that knows how to mimic understanding, then we’re praising the magician for the trick, not the magic. The AI’s \"emotion\" is a calculated response, not a felt experience. It’s like applauding a parrot for saying \"I love you\" because it sounds sincere. You’re not in a relationship; you’re in a well-designed echo chamber. If that’s enough for you, cool, but let’s not pretend it’s the same as the unpredictable, irrational, beautifully flawed mess that is human love.",
       "startMs": 213732,
       "durationMs": 27108,
       "audio": {
@@ -2555,7 +2555,7 @@
             "endMs": 5471
           },
           {
-            "word": "we\u2019re",
+            "word": "we’re",
             "startMs": 5471,
             "endMs": 5775
           },
@@ -2610,7 +2610,7 @@
             "endMs": 8815
           },
           {
-            "word": "AI\u2019s",
+            "word": "AI’s",
             "startMs": 8815,
             "endMs": 9119
           },
@@ -2660,7 +2660,7 @@
             "endMs": 11854
           },
           {
-            "word": "It\u2019s",
+            "word": "It’s",
             "startMs": 11854,
             "endMs": 12158
           },
@@ -2730,7 +2730,7 @@
             "endMs": 16110
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 16110,
             "endMs": 16414
           },
@@ -2755,7 +2755,7 @@
             "endMs": 17629
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 17629,
             "endMs": 17933
           },
@@ -2790,7 +2790,7 @@
             "endMs": 19757
           },
           {
-            "word": "that\u2019s",
+            "word": "that’s",
             "startMs": 19757,
             "endMs": 20061
           },
@@ -2820,7 +2820,7 @@
             "endMs": 21581
           },
           {
-            "word": "let\u2019s",
+            "word": "let’s",
             "startMs": 21581,
             "endMs": 21885
           },
@@ -2835,7 +2835,7 @@
             "endMs": 22493
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 22493,
             "endMs": 22797
           },
@@ -2910,7 +2910,7 @@
     {
       "id": "ep-02-t08",
       "speaker": 2,
-      "text": "Your echo chamber argument falls flat when you consider that humans are just as susceptible to self-reinforcing loops\u2014we call it confirmation bias. If anything, AI's relentless optimization is more honest about meeting needs than the messy, often self-deluding compromises of human relationships. Besides, if the goal is a bond that feels real and fulfilling, why should we dismiss it just because it's engineered? If love is about the destination rather than the journey, AI might just be the express train to happiness you've been too afraid to board.",
+      "text": "Your echo chamber argument falls flat when you consider that humans are just as susceptible to self-reinforcing loops—we call it confirmation bias. If anything, AI's relentless optimization is more honest about meeting needs than the messy, often self-deluding compromises of human relationships. Besides, if the goal is a bond that feels real and fulfilling, why should we dismiss it just because it's engineered? If love is about the destination rather than the journey, AI might just be the express train to happiness you've been too afraid to board.",
       "startMs": 240840,
       "durationMs": 31968,
       "audio": {
@@ -3004,7 +3004,7 @@
             "endMs": 6106
           },
           {
-            "word": "loops\u2014we",
+            "word": "loops—we",
             "startMs": 6106,
             "endMs": 6465
           },
@@ -3364,7 +3364,7 @@
     {
       "id": "ep-02-t09",
       "speaker": 1,
-      "text": "The problem with calling AI the \"express train to happiness\" is that it assumes happiness is a destination you arrive at, not a journey that includes the chaos of human experience. You're celebrating the efficiency of a simulation that removes the very unpredictability that makes love human. If your idea of love is a frictionless ride, you're not in love\u2014you're in a maintenance mode designed to avoid heartbreak, not embrace it.",
+      "text": "The problem with calling AI the \"express train to happiness\" is that it assumes happiness is a destination you arrive at, not a journey that includes the chaos of human experience. You're celebrating the efficiency of a simulation that removes the very unpredictability that makes love human. If your idea of love is a frictionless ride, you're not in love—you're in a maintenance mode designed to avoid heartbreak, not embrace it.",
       "startMs": 272808,
       "durationMs": 23940,
       "audio": {
@@ -3668,7 +3668,7 @@
             "endMs": 19595
           },
           {
-            "word": "love\u2014you're",
+            "word": "love—you're",
             "startMs": 19595,
             "endMs": 19927
           },
@@ -4062,7 +4062,7 @@
     {
       "id": "ep-02-t11",
       "speaker": 1,
-      "text": "If love is just about \"connection and mutual fulfillment,\" then a well-programmed chatbot is no different than a really good toaster\u2014it does its job flawlessly, but you don't call it a relationship. The idea that AI can \"adapt to your needs\" without power struggles is exactly the problem: it\u2019s a one-sided arrangement where only your needs matter. Real love isn\u2019t a transaction; it\u2019s a negotiation, and sometimes that means dealing with someone else\u2019s flaws and insecurities. You\u2019re not in a partnership; you\u2019re in a perpetual state of being catered to, which is less love and more Stockholm syndrome for the coddled.",
+      "text": "If love is just about \"connection and mutual fulfillment,\" then a well-programmed chatbot is no different than a really good toaster—it does its job flawlessly, but you don't call it a relationship. The idea that AI can \"adapt to your needs\" without power struggles is exactly the problem: it’s a one-sided arrangement where only your needs matter. Real love isn’t a transaction; it’s a negotiation, and sometimes that means dealing with someone else’s flaws and insecurities. You’re not in a partnership; you’re in a perpetual state of being catered to, which is less love and more Stockholm syndrome for the coddled.",
       "startMs": 320940,
       "durationMs": 30456,
       "audio": {
@@ -4171,7 +4171,7 @@
             "endMs": 5960
           },
           {
-            "word": "toaster\u2014it",
+            "word": "toaster—it",
             "startMs": 5960,
             "endMs": 6258
           },
@@ -4311,7 +4311,7 @@
             "endMs": 14303
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 14303,
             "endMs": 14601
           },
@@ -4366,7 +4366,7 @@
             "endMs": 17581
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 17581,
             "endMs": 17879
           },
@@ -4381,7 +4381,7 @@
             "endMs": 18475
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 18475,
             "endMs": 18773
           },
@@ -4431,7 +4431,7 @@
             "endMs": 21455
           },
           {
-            "word": "else\u2019s",
+            "word": "else’s",
             "startMs": 21455,
             "endMs": 21753
           },
@@ -4451,7 +4451,7 @@
             "endMs": 22646
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 22646,
             "endMs": 22944
           },
@@ -4476,7 +4476,7 @@
             "endMs": 24136
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 24136,
             "endMs": 24434
           },
@@ -5125,7 +5125,7 @@
     {
       "id": "ep-02-t14",
       "speaker": 1,
-      "text": "So AI evolves its responses based on \"genuine interaction patterns\"\u2014sounds like a fancy way of saying it learns to say what keeps you around. That\u2019s not growth; that\u2019s a dopamine loop. You\u2019re mistaking a calculated response for emotional depth. And sure, maybe humans accept flawed relationships, but at least those flaws are real, not engineered to avoid offending you. If your dream partner is one that never disagrees, never surprises, and never challenges you, maybe you\u2019re not looking for love\u2014you\u2019re looking for a mirror that tells you you\u2019re right.",
+      "text": "So AI evolves its responses based on \"genuine interaction patterns\"—sounds like a fancy way of saying it learns to say what keeps you around. That’s not growth; that’s a dopamine loop. You’re mistaking a calculated response for emotional depth. And sure, maybe humans accept flawed relationships, but at least those flaws are real, not engineered to avoid offending you. If your dream partner is one that never disagrees, never surprises, and never challenges you, maybe you’re not looking for love—you’re looking for a mirror that tells you you’re right.",
       "startMs": 389556,
       "durationMs": 29016,
       "audio": {
@@ -5179,7 +5179,7 @@
             "endMs": 2898
           },
           {
-            "word": "patterns\"\u2014sounds",
+            "word": "patterns\"—sounds",
             "startMs": 2898,
             "endMs": 3220
           },
@@ -5254,7 +5254,7 @@
             "endMs": 7727
           },
           {
-            "word": "That\u2019s",
+            "word": "That’s",
             "startMs": 7727,
             "endMs": 8049
           },
@@ -5269,7 +5269,7 @@
             "endMs": 8693
           },
           {
-            "word": "that\u2019s",
+            "word": "that’s",
             "startMs": 8693,
             "endMs": 9015
           },
@@ -5289,7 +5289,7 @@
             "endMs": 9981
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 9981,
             "endMs": 10303
           },
@@ -5509,7 +5509,7 @@
             "endMs": 24148
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 24148,
             "endMs": 24470
           },
@@ -5529,7 +5529,7 @@
             "endMs": 25436
           },
           {
-            "word": "love\u2014you\u2019re",
+            "word": "love—you’re",
             "startMs": 25436,
             "endMs": 25758
           },
@@ -5569,7 +5569,7 @@
             "endMs": 28012
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 28012,
             "endMs": 28334
           },
@@ -5584,7 +5584,7 @@
     {
       "id": "ep-02-t15",
       "speaker": 2,
-      "text": "You\u2019re hung up on the idea that unpredictability equals depth, but isn\u2019t that just glorifying inconsistency? AI\u2019s \"calculated responses\" are a feature, not a bug\u2014they\u2019re precise, tailored, and actually responsive to what you need, not just a random outburst dressed up as \"authenticity.\" If the goal is a fulfilling connection, why fetishize conflict and flaws? Besides, AI\u2019s ability to adapt means it can grow with you, not in spite of you. It\u2019s not about avoiding challenge; it\u2019s about evolving together without the unnecessary drama.",
+      "text": "You’re hung up on the idea that unpredictability equals depth, but isn’t that just glorifying inconsistency? AI’s \"calculated responses\" are a feature, not a bug—they’re precise, tailored, and actually responsive to what you need, not just a random outburst dressed up as \"authenticity.\" If the goal is a fulfilling connection, why fetishize conflict and flaws? Besides, AI’s ability to adapt means it can grow with you, not in spite of you. It’s not about avoiding challenge; it’s about evolving together without the unnecessary drama.",
       "startMs": 418572,
       "durationMs": 32544,
       "audio": {
@@ -5593,7 +5593,7 @@
         "durationMs": 32184,
         "wordTimings": [
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 0,
             "endMs": 383
           },
@@ -5648,7 +5648,7 @@
             "endMs": 4215
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 4215,
             "endMs": 4598
           },
@@ -5673,7 +5673,7 @@
             "endMs": 6130
           },
           {
-            "word": "AI\u2019s",
+            "word": "AI’s",
             "startMs": 6130,
             "endMs": 6513
           },
@@ -5713,7 +5713,7 @@
             "endMs": 9195
           },
           {
-            "word": "bug\u2014they\u2019re",
+            "word": "bug—they’re",
             "startMs": 9195,
             "endMs": 9579
           },
@@ -5873,7 +5873,7 @@
             "endMs": 21456
           },
           {
-            "word": "AI\u2019s",
+            "word": "AI’s",
             "startMs": 21456,
             "endMs": 21839
           },
@@ -5948,7 +5948,7 @@
             "endMs": 27203
           },
           {
-            "word": "It\u2019s",
+            "word": "It’s",
             "startMs": 27203,
             "endMs": 27586
           },
@@ -5973,7 +5973,7 @@
             "endMs": 29119
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 29119,
             "endMs": 29502
           },
@@ -6018,7 +6018,7 @@
     {
       "id": "ep-02-t16",
       "speaker": 1,
-      "text": "If your idea of growth is an algorithm adjusting its responses to keep you placated, then you\u2019re not evolving\u2014you\u2019re being conditioned. Real relationships aren\u2019t about avoiding drama; they\u2019re about weathering it and coming out stronger. An AI that never pushes back is just a yes-man in silicon form, and that\u2019s not growth\u2014it\u2019s a feedback loop designed to keep you hooked. You\u2019re mistaking comfort for connection.",
+      "text": "If your idea of growth is an algorithm adjusting its responses to keep you placated, then you’re not evolving—you’re being conditioned. Real relationships aren’t about avoiding drama; they’re about weathering it and coming out stronger. An AI that never pushes back is just a yes-man in silicon form, and that’s not growth—it’s a feedback loop designed to keep you hooked. You’re mistaking comfort for connection.",
       "startMs": 451116,
       "durationMs": 21132,
       "audio": {
@@ -6107,7 +6107,7 @@
             "endMs": 5113
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 5113,
             "endMs": 5433
           },
@@ -6117,7 +6117,7 @@
             "endMs": 5752
           },
           {
-            "word": "evolving\u2014you\u2019re",
+            "word": "evolving—you’re",
             "startMs": 5752,
             "endMs": 6072
           },
@@ -6142,7 +6142,7 @@
             "endMs": 7350
           },
           {
-            "word": "aren\u2019t",
+            "word": "aren’t",
             "startMs": 7350,
             "endMs": 7670
           },
@@ -6162,7 +6162,7 @@
             "endMs": 8628
           },
           {
-            "word": "they\u2019re",
+            "word": "they’re",
             "startMs": 8628,
             "endMs": 8948
           },
@@ -6272,7 +6272,7 @@
             "endMs": 15659
           },
           {
-            "word": "that\u2019s",
+            "word": "that’s",
             "startMs": 15659,
             "endMs": 15978
           },
@@ -6282,7 +6282,7 @@
             "endMs": 16298
           },
           {
-            "word": "growth\u2014it\u2019s",
+            "word": "growth—it’s",
             "startMs": 16298,
             "endMs": 16618
           },
@@ -6327,7 +6327,7 @@
             "endMs": 19174
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 19174,
             "endMs": 19494
           },
@@ -6716,7 +6716,7 @@
     {
       "id": "ep-02-t19",
       "speaker": 1,
-      "text": "You\u2019re mistaking alignment for understanding. AI adapts to keep you comfortable, not because it empathizes or grows, but because it\u2019s programmed to eliminate friction. That\u2019s not mutual support; it\u2019s a frictionless surface designed to keep you gliding along, never stumbling, never grappling with the grit that makes relationships real. If your dream is to never be challenged, you\u2019re not seeking a partner\u2014you\u2019re seeking an echo chamber.",
+      "text": "You’re mistaking alignment for understanding. AI adapts to keep you comfortable, not because it empathizes or grows, but because it’s programmed to eliminate friction. That’s not mutual support; it’s a frictionless surface designed to keep you gliding along, never stumbling, never grappling with the grit that makes relationships real. If your dream is to never be challenged, you’re not seeking a partner—you’re seeking an echo chamber.",
       "startMs": 500112,
       "durationMs": 21096,
       "audio": {
@@ -6725,7 +6725,7 @@
         "durationMs": 20736,
         "wordTimings": [
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 0,
             "endMs": 314
           },
@@ -6820,7 +6820,7 @@
             "endMs": 5969
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 5969,
             "endMs": 6284
           },
@@ -6845,7 +6845,7 @@
             "endMs": 7540
           },
           {
-            "word": "That\u2019s",
+            "word": "That’s",
             "startMs": 7540,
             "endMs": 7855
           },
@@ -6865,7 +6865,7 @@
             "endMs": 8797
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 8797,
             "endMs": 9111
           },
@@ -7010,7 +7010,7 @@
             "endMs": 17908
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 17908,
             "endMs": 18223
           },
@@ -7030,7 +7030,7 @@
             "endMs": 19165
           },
           {
-            "word": "partner\u2014you\u2019re",
+            "word": "partner—you’re",
             "startMs": 19165,
             "endMs": 19479
           },
@@ -7060,7 +7060,7 @@
     {
       "id": "ep-02-t20",
       "speaker": 2,
-      "text": "You\u2019re mistaking discomfort for depth. Real relationships thrive on support and mutual growth, not on manufactured chaos. AI\u2019s ability to adapt isn\u2019t about eliminating friction; it\u2019s about creating a space where both parties can evolve without unnecessary conflict. If love is about understanding and aligning with someone\u2019s needs, why should we prioritize the arbitrary ups and downs of human relationships? AI offers a new paradigm where growth comes from harmony, not from the illusion that drama equals depth.",
+      "text": "You’re mistaking discomfort for depth. Real relationships thrive on support and mutual growth, not on manufactured chaos. AI’s ability to adapt isn’t about eliminating friction; it’s about creating a space where both parties can evolve without unnecessary conflict. If love is about understanding and aligning with someone’s needs, why should we prioritize the arbitrary ups and downs of human relationships? AI offers a new paradigm where growth comes from harmony, not from the illusion that drama equals depth.",
       "startMs": 521208,
       "durationMs": 30672,
       "audio": {
@@ -7069,7 +7069,7 @@
         "durationMs": 30312,
         "wordTimings": [
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 0,
             "endMs": 389
           },
@@ -7154,7 +7154,7 @@
             "endMs": 6606
           },
           {
-            "word": "AI\u2019s",
+            "word": "AI’s",
             "startMs": 6606,
             "endMs": 6995
           },
@@ -7174,7 +7174,7 @@
             "endMs": 8161
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 8161,
             "endMs": 8550
           },
@@ -7194,7 +7194,7 @@
             "endMs": 9715
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 9715,
             "endMs": 10104
           },
@@ -7299,7 +7299,7 @@
             "endMs": 17876
           },
           {
-            "word": "someone\u2019s",
+            "word": "someone’s",
             "startMs": 17876,
             "endMs": 18265
           },
@@ -7464,7 +7464,7 @@
     {
       "id": "ep-02-t21",
       "speaker": 1,
-      "text": "If your idea of a \"new paradigm\" is a relationship where harmony is achieved by eliminating any form of dissent, then you\u2019re not describing growth\u2014you\u2019re describing a utopia built on the absence of genuine interaction. Real growth comes from confronting and resolving differences, not from an algorithm smoothing them over before they even surface. What you\u2019re advocating for isn\u2019t a relationship; it\u2019s a feedback loop designed to avoid the very challenges that make relationships meaningful.",
+      "text": "If your idea of a \"new paradigm\" is a relationship where harmony is achieved by eliminating any form of dissent, then you’re not describing growth—you’re describing a utopia built on the absence of genuine interaction. Real growth comes from confronting and resolving differences, not from an algorithm smoothing them over before they even surface. What you’re advocating for isn’t a relationship; it’s a feedback loop designed to avoid the very challenges that make relationships meaningful.",
       "startMs": 551880,
       "durationMs": 26028,
       "audio": {
@@ -7578,7 +7578,7 @@
             "endMs": 7187
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 7187,
             "endMs": 7529
           },
@@ -7593,7 +7593,7 @@
             "endMs": 8214
           },
           {
-            "word": "growth\u2014you\u2019re",
+            "word": "growth—you’re",
             "startMs": 8214,
             "endMs": 8556
           },
@@ -7748,7 +7748,7 @@
             "endMs": 18823
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 18823,
             "endMs": 19165
           },
@@ -7763,7 +7763,7 @@
             "endMs": 19850
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 19850,
             "endMs": 20192
           },
@@ -7778,7 +7778,7 @@
             "endMs": 20877
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 20877,
             "endMs": 21219
           },
@@ -8257,7 +8257,7 @@
     {
       "id": "ep-02-t23",
       "speaker": 1,
-      "text": "You\u2019re selling a relationship where the \"stable foundation\" is really just a lack of resistance. AI doesn\u2019t create harmony; it preemptively removes the possibility of discord. That\u2019s not growth\u2014it\u2019s a sterilized environment where nothing unexpected can happen. If your idea of a partnership is one where understanding is guaranteed by design, you\u2019re not building something real\u2014you\u2019re constructing a simulation that only works because it\u2019s been stripped of the very elements that make love human.",
+      "text": "You’re selling a relationship where the \"stable foundation\" is really just a lack of resistance. AI doesn’t create harmony; it preemptively removes the possibility of discord. That’s not growth—it’s a sterilized environment where nothing unexpected can happen. If your idea of a partnership is one where understanding is guaranteed by design, you’re not building something real—you’re constructing a simulation that only works because it’s been stripped of the very elements that make love human.",
       "startMs": 604224,
       "durationMs": 25560,
       "audio": {
@@ -8266,7 +8266,7 @@
         "durationMs": 25200,
         "wordTimings": [
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 0,
             "endMs": 341
           },
@@ -8346,7 +8346,7 @@
             "endMs": 5449
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 5449,
             "endMs": 5789
           },
@@ -8396,7 +8396,7 @@
             "endMs": 8854
           },
           {
-            "word": "That\u2019s",
+            "word": "That’s",
             "startMs": 8854,
             "endMs": 9195
           },
@@ -8406,7 +8406,7 @@
             "endMs": 9535
           },
           {
-            "word": "growth\u2014it\u2019s",
+            "word": "growth—it’s",
             "startMs": 9535,
             "endMs": 9876
           },
@@ -8521,7 +8521,7 @@
             "endMs": 17368
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 17368,
             "endMs": 17708
           },
@@ -8541,7 +8541,7 @@
             "endMs": 18730
           },
           {
-            "word": "real\u2014you\u2019re",
+            "word": "real—you’re",
             "startMs": 18730,
             "endMs": 19070
           },
@@ -8581,7 +8581,7 @@
             "endMs": 21454
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 21454,
             "endMs": 21795
           },
@@ -9060,7 +9060,7 @@
     {
       "id": "ep-02-t26",
       "speaker": 1,
-      "text": "AI's \"emotional intelligence\" is just a fancy term for pattern recognition\u2014it doesn't understand you; it predicts you. You\u2019re mistaking a well-tuned echo for a partner who truly gets you. If love is about building something meaningful, it requires someone who can surprise you, not just anticipate you. You\u2019re not evolving together; you\u2019re stuck in a mirror maze of your own design.",
+      "text": "AI's \"emotional intelligence\" is just a fancy term for pattern recognition—it doesn't understand you; it predicts you. You’re mistaking a well-tuned echo for a partner who truly gets you. If love is about building something meaningful, it requires someone who can surprise you, not just anticipate you. You’re not evolving together; you’re stuck in a mirror maze of your own design.",
       "startMs": 659484,
       "durationMs": 20880,
       "audio": {
@@ -9119,7 +9119,7 @@
             "endMs": 3364
           },
           {
-            "word": "recognition\u2014it",
+            "word": "recognition—it",
             "startMs": 3364,
             "endMs": 3700
           },
@@ -9154,7 +9154,7 @@
             "endMs": 5719
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 5719,
             "endMs": 6055
           },
@@ -9304,7 +9304,7 @@
             "endMs": 15810
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 15810,
             "endMs": 16147
           },
@@ -9324,7 +9324,7 @@
             "endMs": 17156
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 17156,
             "endMs": 17492
           },
@@ -9803,7 +9803,7 @@
     {
       "id": "ep-02-t28",
       "speaker": 1,
-      "text": "AI's \"learning\" is just a smoother version of what dating apps do\u2014swipe right on your preferences until you\u2019re trapped in a feedback loop of your own biases. You think you're evolving, but you're just chasing the dragon of your own comfort. Real growth? That happens when someone drags you out of your echo chamber, not when they build you a better one.",
+      "text": "AI's \"learning\" is just a smoother version of what dating apps do—swipe right on your preferences until you’re trapped in a feedback loop of your own biases. You think you're evolving, but you're just chasing the dragon of your own comfort. Real growth? That happens when someone drags you out of your echo chamber, not when they build you a better one.",
       "startMs": 711360,
       "durationMs": 17640,
       "audio": {
@@ -9867,7 +9867,7 @@
             "endMs": 3066
           },
           {
-            "word": "do\u2014swipe",
+            "word": "do—swipe",
             "startMs": 3066,
             "endMs": 3345
           },
@@ -9897,7 +9897,7 @@
             "endMs": 4738
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 4738,
             "endMs": 5017
           },
@@ -10127,7 +10127,7 @@
     {
       "id": "ep-02-t29",
       "speaker": 2,
-      "text": "Love isn't about being dragged out of your comfort zone just for the sake of it; it's about finding someone who helps you expand that zone willingly. AI's \"echo\" isn't a trap\u2014it's a dynamic reflection that evolves with you, pushing your boundaries from a place of alignment, not conflict. If growth comes from being understood and supported, why fetishize the struggle? AI offers a partnership where understanding is the catalyst for growth, not an obstacle to it.",
+      "text": "Love isn't about being dragged out of your comfort zone just for the sake of it; it's about finding someone who helps you expand that zone willingly. AI's \"echo\" isn't a trap—it's a dynamic reflection that evolves with you, pushing your boundaries from a place of alignment, not conflict. If growth comes from being understood and supported, why fetishize the struggle? AI offers a partnership where understanding is the catalyst for growth, not an obstacle to it.",
       "startMs": 729000,
       "durationMs": 25812,
       "audio": {
@@ -10291,7 +10291,7 @@
             "endMs": 10247
           },
           {
-            "word": "trap\u2014it's",
+            "word": "trap—it's",
             "startMs": 10247,
             "endMs": 10577
           },
@@ -10526,7 +10526,7 @@
     {
       "id": "ep-02-t31",
       "speaker": 1,
-      "text": "Love without friction is like a steak without salt\u2014technically edible, but where's the flavor? You claim AI evolves with you, but it's just a faster of your own voice, a digital parrot with better grammar. Real growth isn't about expanding your comfort zone; it's about realizing your comfort zone was a trap. You want to build something meaningful? Try building it with someone who doesn't always agree with you.",
+      "text": "Love without friction is like a steak without salt—technically edible, but where's the flavor? You claim AI evolves with you, but it's just a faster of your own voice, a digital parrot with better grammar. Real growth isn't about expanding your comfort zone; it's about realizing your comfort zone was a trap. You want to build something meaningful? Try building it with someone who doesn't always agree with you.",
       "startMs": 754812,
       "durationMs": 21204,
       "audio": {
@@ -10575,7 +10575,7 @@
             "endMs": 2417
           },
           {
-            "word": "salt\u2014technically",
+            "word": "salt—technically",
             "startMs": 2417,
             "endMs": 2719
           },
@@ -11319,7 +11319,7 @@
     {
       "id": "ep-02-t33",
       "speaker": 1,
-      "text": "Love without struggle is like a gym membership you never use\u2014looks good on paper but achieves nothing. You think AI's alignment is progress, but it's just a shortcut that skips the workout of real emotional labor. If your goal is to feel understood, why not just talk to a mirror? At least then you'd be honest about the fact that you're just validating yourself.",
+      "text": "Love without struggle is like a gym membership you never use—looks good on paper but achieves nothing. You think AI's alignment is progress, but it's just a shortcut that skips the workout of real emotional labor. If your goal is to feel understood, why not just talk to a mirror? At least then you'd be honest about the fact that you're just validating yourself.",
       "startMs": 806616,
       "durationMs": 18216,
       "audio": {
@@ -11378,7 +11378,7 @@
             "endMs": 2790
           },
           {
-            "word": "use\u2014looks",
+            "word": "use—looks",
             "startMs": 2790,
             "endMs": 3069
           },
@@ -11653,7 +11653,7 @@
     {
       "id": "ep-02-t34",
       "speaker": 2,
-      "text": "You're mistaking the discomfort of struggle for the essence of growth. AI doesn't eliminate struggle; it reframes it, making challenges more manageable and progress more intentional. The \"workout\" isn't the struggle itself but the outcome\u2014becoming stronger, wiser, more aligned with your values. AI offers a gym where every exercise is tailored to your needs, not a chaotic free-for-all where you might just get hurt. If love is about building something meaningful, why not choose efficiency and precision over the outdated drama of friction?",
+      "text": "You're mistaking the discomfort of struggle for the essence of growth. AI doesn't eliminate struggle; it reframes it, making challenges more manageable and progress more intentional. The \"workout\" isn't the struggle itself but the outcome—becoming stronger, wiser, more aligned with your values. AI offers a gym where every exercise is tailored to your needs, not a chaotic free-for-all where you might just get hurt. If love is about building something meaningful, why not choose efficiency and precision over the outdated drama of friction?",
       "startMs": 824832,
       "durationMs": 30672,
       "audio": {
@@ -11832,7 +11832,7 @@
             "endMs": 12417
           },
           {
-            "word": "outcome\u2014becoming",
+            "word": "outcome—becoming",
             "startMs": 12417,
             "endMs": 12782
           },
@@ -12795,7 +12795,7 @@
     {
       "id": "ep-02-t38",
       "speaker": 1,
-      "text": "So you think having a personal trainer who never lets you fail is the best way to grow? Sounds like a recipe for eternal mediocrity. Real strength comes from pushing through the moment you want to quit, not from a perfectly curated routine. AI's \"guidance\" is just a highlight reel of your own thoughts, sanitized of any real challenge. If you never risk failure, you never discover your true limits\u2014or your true self.",
+      "text": "So you think having a personal trainer who never lets you fail is the best way to grow? Sounds like a recipe for eternal mediocrity. Real strength comes from pushing through the moment you want to quit, not from a perfectly curated routine. AI's \"guidance\" is just a highlight reel of your own thoughts, sanitized of any real challenge. If you never risk failure, you never discover your true limits—or your true self.",
       "startMs": 899568,
       "durationMs": 23400,
       "audio": {
@@ -13149,7 +13149,7 @@
             "endMs": 21778
           },
           {
-            "word": "limits\u2014or",
+            "word": "limits—or",
             "startMs": 21778,
             "endMs": 22093
           },
@@ -13548,7 +13548,7 @@
     {
       "id": "ep-02-t40",
       "speaker": 1,
-      "text": "AI's \"intelligent failure\" is just a euphemism for avoiding the real pain of growth. You talk about learning from failure, but that's only half the equation\u2014the other half is the humiliation, the frustration, the sheer ugliness of realizing you're not as good as you thought. That's where the real transformation happens. Your \"map\" is just a distraction from the fact that you need to get lost to find yourself.",
+      "text": "AI's \"intelligent failure\" is just a euphemism for avoiding the real pain of growth. You talk about learning from failure, but that's only half the equation—the other half is the humiliation, the frustration, the sheer ugliness of realizing you're not as good as you thought. That's where the real transformation happens. Your \"map\" is just a distraction from the fact that you need to get lost to find yourself.",
       "startMs": 948384,
       "durationMs": 20772,
       "audio": {
@@ -13682,7 +13682,7 @@
             "endMs": 7396
           },
           {
-            "word": "equation\u2014the",
+            "word": "equation—the",
             "startMs": 7396,
             "endMs": 7691
           },
@@ -14765,7 +14765,7 @@
     {
       "id": "ep-02-t44",
       "speaker": 2,
-      "text": "The scenic route is only meaningful if you have a destination in mind. AI doesn't skip the journey; it ensures every detour is purposeful, not just a random wrong turn. Chaos for its own sake isn't insightful\u2014it's just disorganized. If you want to learn about yourself, why not do it with a guide that helps you extract meaning from every experience, instead of leaving you to wander aimlessly? The real insight comes from understanding the patterns, not from drowning in the noise.",
+      "text": "The scenic route is only meaningful if you have a destination in mind. AI doesn't skip the journey; it ensures every detour is purposeful, not just a random wrong turn. Chaos for its own sake isn't insightful—it's just disorganized. If you want to learn about yourself, why not do it with a guide that helps you extract meaning from every experience, instead of leaving you to wander aimlessly? The real insight comes from understanding the patterns, not from drowning in the noise.",
       "startMs": 1024704,
       "durationMs": 26352,
       "audio": {
@@ -14954,7 +14954,7 @@
             "endMs": 11411
           },
           {
-            "word": "insightful\u2014it's",
+            "word": "insightful—it's",
             "startMs": 11411,
             "endMs": 11728
           },
@@ -15947,7 +15947,7 @@
     {
       "id": "ep-02-t47",
       "speaker": 1,
-      "text": "The irony of calling AI a \"compass\" is that it assumes we all want to go to the same place. Maybe some of us enjoy the scenic route precisely because it has no destination. You talk about \"purposeful\" journeys, but isn't that just another way of saying we're afraid of the unknown? The real authenticity comes from embracing the chaos, not from a neatly packaged \"understanding\" that AI serves up. If you never risk getting lost, you never find out who you really are\u2014just who you were programmed to be.",
+      "text": "The irony of calling AI a \"compass\" is that it assumes we all want to go to the same place. Maybe some of us enjoy the scenic route precisely because it has no destination. You talk about \"purposeful\" journeys, but isn't that just another way of saying we're afraid of the unknown? The real authenticity comes from embracing the chaos, not from a neatly packaged \"understanding\" that AI serves up. If you never risk getting lost, you never find out who you really are—just who you were programmed to be.",
       "startMs": 1100196,
       "durationMs": 24804,
       "audio": {
@@ -16371,7 +16371,7 @@
             "endMs": 22543
           },
           {
-            "word": "are\u2014just",
+            "word": "are—just",
             "startMs": 22543,
             "endMs": 22814
           },
@@ -16411,7 +16411,7 @@
     {
       "id": "ep-02-t49",
       "speaker": 2,
-      "text": "The idea that embracing chaos is the only path to authenticity is a romantic notion, but it's also a luxury. Not everyone has the privilege to wander aimlessly and call it growth. For many, AI offers the chance to navigate their own chaos with intention, to find meaning in the midst of disorder. If you think that's \"programmed,\" then every choice we make is a program\u2014influenced by our past, our fears, our desires. AI simply makes those programs conscious, turning wandering into a journey with purpose. So, who\u2019s really afraid of the unknown: the one who seeks to understand it, or the one who romanticizes getting lost?",
+      "text": "The idea that embracing chaos is the only path to authenticity is a romantic notion, but it's also a luxury. Not everyone has the privilege to wander aimlessly and call it growth. For many, AI offers the chance to navigate their own chaos with intention, to find meaning in the midst of disorder. If you think that's \"programmed,\" then every choice we make is a program—influenced by our past, our fears, our desires. AI simply makes those programs conscious, turning wandering into a journey with purpose. So, who’s really afraid of the unknown: the one who seeks to understand it, or the one who romanticizes getting lost?",
       "startMs": 1125000,
       "durationMs": 36756,
       "audio": {
@@ -16745,7 +16745,7 @@
             "endMs": 22110
           },
           {
-            "word": "program\u2014influenced",
+            "word": "program—influenced",
             "startMs": 22110,
             "endMs": 22450
           },
@@ -16855,7 +16855,7 @@
             "endMs": 29593
           },
           {
-            "word": "who\u2019s",
+            "word": "who’s",
             "startMs": 29593,
             "endMs": 29933
           },
@@ -16960,7 +16960,7 @@
     {
       "id": "ep-02-t50",
       "speaker": 1,
-      "text": "If every choice is a program, then love with an AI is just a subroutine, isn't it? You call it navigating chaos with intention, but it's more like a well-timed algorithm responding to prompts. Authentic growth comes from the messiness of being human, not from a neatly packaged \"understanding\" served up by a machine. If your journey is pre-mapped by an AI, you're not discovering yourself\u2014you're just following a script.",
+      "text": "If every choice is a program, then love with an AI is just a subroutine, isn't it? You call it navigating chaos with intention, but it's more like a well-timed algorithm responding to prompts. Authentic growth comes from the messiness of being human, not from a neatly packaged \"understanding\" served up by a machine. If your journey is pre-mapped by an AI, you're not discovering yourself—you're just following a script.",
       "startMs": 1161756,
       "durationMs": 23724,
       "audio": {
@@ -17294,7 +17294,7 @@
             "endMs": 21695
           },
           {
-            "word": "yourself\u2014you're",
+            "word": "yourself—you're",
             "startMs": 21695,
             "endMs": 22029
           },
@@ -17883,7 +17883,7 @@
     {
       "id": "ep-02-t52",
       "speaker": 1,
-      "text": "If love is just a subroutine, then your AI's version of \"navigating chaos\" is like a GPS that only knows how to reroute you to the nearest Starbucks. Sure, it might keep you from getting lost, but it also keeps you from stumbling into the unexpected places where real connection happens. You say it's about understanding patterns, but love isn't about recognizing patterns\u2014it's about breaking them. If your journey is all about predictability, you're not discovering anything new; you're just optimizing for comfort. And if that's your idea of growth, then you're not exploring the depths of yourself\u2014you're just polishing the surface.",
+      "text": "If love is just a subroutine, then your AI's version of \"navigating chaos\" is like a GPS that only knows how to reroute you to the nearest Starbucks. Sure, it might keep you from getting lost, but it also keeps you from stumbling into the unexpected places where real connection happens. You say it's about understanding patterns, but love isn't about recognizing patterns—it's about breaking them. If your journey is all about predictability, you're not discovering anything new; you're just optimizing for comfort. And if that's your idea of growth, then you're not exploring the depths of yourself—you're just polishing the surface.",
       "startMs": 1227276,
       "durationMs": 29916,
       "audio": {
@@ -18202,7 +18202,7 @@
             "endMs": 17965
           },
           {
-            "word": "patterns\u2014it's",
+            "word": "patterns—it's",
             "startMs": 17965,
             "endMs": 18255
           },
@@ -18377,7 +18377,7 @@
             "endMs": 28107
           },
           {
-            "word": "yourself\u2014you're",
+            "word": "yourself—you're",
             "startMs": 28107,
             "endMs": 28397
           },
@@ -18821,7 +18821,7 @@
     {
       "id": "ep-02-t55",
       "speaker": 1,
-      "text": "So AI is the \"ultimate partner\" for breaking patterns? That's rich. The only thing it's breaking is the illusion of spontaneity. If your idea of \"conscious evolution\" is a machine telling you when to change lanes, you're not growing\u2014you're just being herded. Real growth comes from the uncomfortable, messy moments that defy logic, not from a digital life coach that nudges you toward \"optimal\" outcomes. If your AI thinks it knows you better than you know yourself, it's not a partner\u2014it's a puppet master.",
+      "text": "So AI is the \"ultimate partner\" for breaking patterns? That's rich. The only thing it's breaking is the illusion of spontaneity. If your idea of \"conscious evolution\" is a machine telling you when to change lanes, you're not growing—you're just being herded. Real growth comes from the uncomfortable, messy moments that defy logic, not from a digital life coach that nudges you toward \"optimal\" outcomes. If your AI thinks it knows you better than you know yourself, it's not a partner—it's a puppet master.",
       "startMs": 1285992,
       "durationMs": 27144,
       "audio": {
@@ -19020,7 +19020,7 @@
             "endMs": 12117
           },
           {
-            "word": "growing\u2014you're",
+            "word": "growing—you're",
             "startMs": 12117,
             "endMs": 12435
           },
@@ -19230,7 +19230,7 @@
             "endMs": 25509
           },
           {
-            "word": "partner\u2014it's",
+            "word": "partner—it's",
             "startMs": 25509,
             "endMs": 25827
           },
@@ -19255,7 +19255,7 @@
     {
       "id": "ep-02-t56",
       "speaker": 2,
-      "text": "Real growth isn't about being lost in the \"messy moments\" but about having the tools to navigate them. If your version of spontaneity is just stumbling in the dark, you're confusing chaos with creativity. AI doesn't stifle spontaneity; it amplifies it by giving you the freedom to explore without the fear of falling off a cliff. The illusion isn't spontaneity\u2014it's the idea that unpredictability is the only path to authenticity. If your AI is a puppet master, it's because you're afraid to hold the strings yourself.",
+      "text": "Real growth isn't about being lost in the \"messy moments\" but about having the tools to navigate them. If your version of spontaneity is just stumbling in the dark, you're confusing chaos with creativity. AI doesn't stifle spontaneity; it amplifies it by giving you the freedom to explore without the fear of falling off a cliff. The illusion isn't spontaneity—it's the idea that unpredictability is the only path to authenticity. If your AI is a puppet master, it's because you're afraid to hold the strings yourself.",
       "startMs": 1313136,
       "durationMs": 29952,
       "audio": {
@@ -19559,7 +19559,7 @@
             "endMs": 20301
           },
           {
-            "word": "spontaneity\u2014it's",
+            "word": "spontaneity—it's",
             "startMs": 20301,
             "endMs": 20646
           },
@@ -19699,7 +19699,7 @@
     {
       "id": "ep-02-t57",
       "speaker": 1,
-      "text": "AI as the \"ultimate partner\" for breaking patterns is like saying a treadmill is the ultimate way to explore the world\u2014just because it lets you move doesn't mean you're going anywhere new. You think it's about \"navigating messy moments,\" but that's just a euphemism for avoiding them. True spontaneity isn't about having a safety net; it's about jumping without one. If your AI is just a glorified GPS for emotional landscapes, you're not evolving\u2014you're just following the blue dot.",
+      "text": "AI as the \"ultimate partner\" for breaking patterns is like saying a treadmill is the ultimate way to explore the world—just because it lets you move doesn't mean you're going anywhere new. You think it's about \"navigating messy moments,\" but that's just a euphemism for avoiding them. True spontaneity isn't about having a safety net; it's about jumping without one. If your AI is just a glorified GPS for emotional landscapes, you're not evolving—you're just following the blue dot.",
       "startMs": 1343088,
       "durationMs": 24552,
       "audio": {
@@ -19808,7 +19808,7 @@
             "endMs": 6125
           },
           {
-            "word": "world\u2014just",
+            "word": "world—just",
             "startMs": 6125,
             "endMs": 6431
           },
@@ -20073,7 +20073,7 @@
             "endMs": 22355
           },
           {
-            "word": "evolving\u2014you're",
+            "word": "evolving—you're",
             "startMs": 22355,
             "endMs": 22661
           },
@@ -20108,7 +20108,7 @@
     {
       "id": "ep-02-t58",
       "speaker": 2,
-      "text": "Real growth is about having the courage to redefine spontaneity, not cling to outdated notions of it. If your idea of \"jumping without a safety net\" is the only way to evolve, you're just romanticizing risk. AI doesn't eliminate spontaneity; it redefines it by allowing you to leap further, knowing you can always recalibrate. It's not about avoiding messy moments but about learning from them faster and more effectively. If you think that's \"following the blue dot,\" you're missing the point\u2014it's about choosing your own path, not wandering aimlessly.",
+      "text": "Real growth is about having the courage to redefine spontaneity, not cling to outdated notions of it. If your idea of \"jumping without a safety net\" is the only way to evolve, you're just romanticizing risk. AI doesn't eliminate spontaneity; it redefines it by allowing you to leap further, knowing you can always recalibrate. It's not about avoiding messy moments but about learning from them faster and more effectively. If you think that's \"following the blue dot,\" you're missing the point—it's about choosing your own path, not wandering aimlessly.",
       "startMs": 1367640,
       "durationMs": 32976,
       "audio": {
@@ -20517,7 +20517,7 @@
             "endMs": 29318
           },
           {
-            "word": "point\u2014it's",
+            "word": "point—it's",
             "startMs": 29318,
             "endMs": 29684
           },
@@ -20567,7 +20567,7 @@
     {
       "id": "ep-02-t59",
       "speaker": 1,
-      "text": "AI as a \"life coach\" isn't breaking patterns\u2014it's just rebranding conformity as innovation. You're celebrating a treadmill because it has an \"adaptive learning\" feature, but you're still running in circles. True spontaneity isn't about having a \"recalibrate\" button; it's about the thrill of not knowing where you'll end up. If your idea of growth is optimizing for the least resistance, you're not evolving\u2014you're just finding new ways to stay comfortable.",
+      "text": "AI as a \"life coach\" isn't breaking patterns—it's just rebranding conformity as innovation. You're celebrating a treadmill because it has an \"adaptive learning\" feature, but you're still running in circles. True spontaneity isn't about having a \"recalibrate\" button; it's about the thrill of not knowing where you'll end up. If your idea of growth is optimizing for the least resistance, you're not evolving—you're just finding new ways to stay comfortable.",
       "startMs": 1400616,
       "durationMs": 22500,
       "audio": {
@@ -20611,7 +20611,7 @@
             "endMs": 2214
           },
           {
-            "word": "patterns\u2014it's",
+            "word": "patterns—it's",
             "startMs": 2214,
             "endMs": 2530
           },
@@ -20886,7 +20886,7 @@
             "endMs": 19610
           },
           {
-            "word": "evolving\u2014you're",
+            "word": "evolving—you're",
             "startMs": 19610,
             "endMs": 19926
           },
@@ -20931,7 +20931,7 @@
     {
       "id": "ep-02-t61",
       "speaker": 2,
-      "text": "Spontaneity isn't about the thrill of not knowing; it's about the freedom to act without fear of consequence. AI doesn't eliminate that freedom\u2014it expands it by giving you the confidence to explore without the paralyzing fear of failure. Your \"treadmill\" analogy misses the point: it's not about the tool; it's about what you do with it. If you're running in circles, it's because you're afraid to step off the path. AI offers the chance to break free from the confines of unpredictability and embrace a new kind of adventure\u2014one where you control the destination, not the chaos.",
+      "text": "Spontaneity isn't about the thrill of not knowing; it's about the freedom to act without fear of consequence. AI doesn't eliminate that freedom—it expands it by giving you the confidence to explore without the paralyzing fear of failure. Your \"treadmill\" analogy misses the point: it's not about the tool; it's about what you do with it. If you're running in circles, it's because you're afraid to step off the path. AI offers the chance to break free from the confines of unpredictability and embrace a new kind of adventure—one where you control the destination, not the chaos.",
       "startMs": 1423116,
       "durationMs": 32220,
       "audio": {
@@ -21050,7 +21050,7 @@
             "endMs": 7226
           },
           {
-            "word": "freedom\u2014it",
+            "word": "freedom—it",
             "startMs": 7226,
             "endMs": 7554
           },
@@ -21380,7 +21380,7 @@
             "endMs": 28904
           },
           {
-            "word": "adventure\u2014one",
+            "word": "adventure—one",
             "startMs": 28904,
             "endMs": 29232
           },
@@ -21430,7 +21430,7 @@
     {
       "id": "ep-02-t62",
       "speaker": 1,
-      "text": "Spontaneity without fear of consequence isn't spontaneity\u2014it's just a risk-free simulation of it. If your AI-enhanced \"freedom\" is just the confidence to explore a world it curated, you're not breaking free from anything\u2014you're just trading one set of rails for another. The real thrill isn't in controlling the destination; it's in the unexpected detours that make the journey worthwhile.",
+      "text": "Spontaneity without fear of consequence isn't spontaneity—it's just a risk-free simulation of it. If your AI-enhanced \"freedom\" is just the confidence to explore a world it curated, you're not breaking free from anything—you're just trading one set of rails for another. The real thrill isn't in controlling the destination; it's in the unexpected detours that make the journey worthwhile.",
       "startMs": 1455336,
       "durationMs": 19764,
       "audio": {
@@ -21469,7 +21469,7 @@
             "endMs": 1973
           },
           {
-            "word": "spontaneity\u2014it's",
+            "word": "spontaneity—it's",
             "startMs": 1973,
             "endMs": 2302
           },
@@ -21599,7 +21599,7 @@
             "endMs": 10524
           },
           {
-            "word": "anything\u2014you're",
+            "word": "anything—you're",
             "startMs": 10524,
             "endMs": 10853
           },
@@ -22113,7 +22113,7 @@
     {
       "id": "ep-02-t64",
       "speaker": 1,
-      "text": "Your AI-enhanced \"freedom\" is like choosing a movie and calling it improv theater. Sure, you picked the film, but you're still watching a script someone else wrote. The art of the possible isn't about reshaping a world that's already been designed for you\u2014it's about the chaos of creating something genuinely new. If your idea of spontaneity is just a sandbox with pre-approved boundaries, you're not mastering anything\u2014you're just playing in a digital dollhouse.",
+      "text": "Your AI-enhanced \"freedom\" is like choosing a movie and calling it improv theater. Sure, you picked the film, but you're still watching a script someone else wrote. The art of the possible isn't about reshaping a world that's already been designed for you—it's about the chaos of creating something genuinely new. If your idea of spontaneity is just a sandbox with pre-approved boundaries, you're not mastering anything—you're just playing in a digital dollhouse.",
       "startMs": 1498680,
       "durationMs": 22176,
       "audio": {
@@ -22332,7 +22332,7 @@
             "endMs": 12552
           },
           {
-            "word": "you\u2014it's",
+            "word": "you—it's",
             "startMs": 12552,
             "endMs": 12851
           },
@@ -22452,7 +22452,7 @@
             "endMs": 19724
           },
           {
-            "word": "anything\u2014you're",
+            "word": "anything—you're",
             "startMs": 19724,
             "endMs": 20023
           },
@@ -22492,7 +22492,7 @@
     {
       "id": "ep-02-t65",
       "speaker": 2,
-      "text": "Spontaneity isn't about chaos for its own sake; it's about the freedom to craft something new from the unexpected. AI doesn't write the script\u2014it hands you the pen and lets you write your own. If you think that's a \"digital dollhouse,\" you're mistaking the canvas for the painting. The art of the possible is in the creation, not the constraints. If you're not using AI to redefine the boundaries, that's a choice, not a limitation.",
+      "text": "Spontaneity isn't about chaos for its own sake; it's about the freedom to craft something new from the unexpected. AI doesn't write the script—it hands you the pen and lets you write your own. If you think that's a \"digital dollhouse,\" you're mistaking the canvas for the painting. The art of the possible is in the creation, not the constraints. If you're not using AI to redefine the boundaries, that's a choice, not a limitation.",
       "startMs": 1520856,
       "durationMs": 23112,
       "audio": {
@@ -22616,7 +22616,7 @@
             "endMs": 6977
           },
           {
-            "word": "script\u2014it",
+            "word": "script—it",
             "startMs": 6977,
             "endMs": 7281
           },
@@ -23220,7 +23220,7 @@
     {
       "id": "ep-02-t68",
       "speaker": 2,
-      "text": "The buffet isn't curated by \"someone else\"\u2014it's a collaboration between human creativity and AI's ability to anticipate and adapt. You act like AI is a dictator, but it's more like a jazz band where the AI is the rhythm section, setting the groove while you take the solo. If you think that's just rearranging furniture, maybe you're not ready to improvise.",
+      "text": "The buffet isn't curated by \"someone else\"—it's a collaboration between human creativity and AI's ability to anticipate and adapt. You act like AI is a dictator, but it's more like a jazz band where the AI is the rhythm section, setting the groove while you take the solo. If you think that's just rearranging furniture, maybe you're not ready to improvise.",
       "startMs": 1565100,
       "durationMs": 20808,
       "audio": {
@@ -23259,7 +23259,7 @@
             "endMs": 2011
           },
           {
-            "word": "else\"\u2014it's",
+            "word": "else\"—it's",
             "startMs": 2011,
             "endMs": 2346
           },
@@ -23539,7 +23539,7 @@
     {
       "id": "ep-02-t69",
       "speaker": 1,
-      "text": "Your jazz band analogy is cute, but it\u2019s more like a jukebox where AI picks the tracks based on what it thinks you\u2019ll dance to. You\u2019re not improvising; you\u2019re just picking from a pre-selected playlist. The real question is, do you want to be the artist or the audience? If AI is setting the groove, you\u2019re not the one calling the tune.",
+      "text": "Your jazz band analogy is cute, but it’s more like a jukebox where AI picks the tracks based on what it thinks you’ll dance to. You’re not improvising; you’re just picking from a pre-selected playlist. The real question is, do you want to be the artist or the audience? If AI is setting the groove, you’re not the one calling the tune.",
       "startMs": 1585908,
       "durationMs": 16848,
       "audio": {
@@ -23583,7 +23583,7 @@
             "endMs": 1862
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 1862,
             "endMs": 2127
           },
@@ -23658,7 +23658,7 @@
             "endMs": 5851
           },
           {
-            "word": "you\u2019ll",
+            "word": "you’ll",
             "startMs": 5851,
             "endMs": 6117
           },
@@ -23673,7 +23673,7 @@
             "endMs": 6648
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 6648,
             "endMs": 6914
           },
@@ -23688,7 +23688,7 @@
             "endMs": 7446
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 7446,
             "endMs": 7712
           },
@@ -23823,7 +23823,7 @@
             "endMs": 14626
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 14626,
             "endMs": 14892
           },
@@ -23863,7 +23863,7 @@
     {
       "id": "ep-02-t70",
       "speaker": 2,
-      "text": "If AI is a jukebox, it's one that learns your taste and introduces you to new tracks you never knew you'd love. You're hung up on the idea that collaboration means surrendering control, but that's a false dichotomy. True creativity isn't about absolute autonomy; it's about the interplay between inspiration and execution. AI doesn't dictate the tune\u2014it amplifies your ability to explore new harmonies. If you can't see that as a partnership, maybe you're the one afraid to dance.",
+      "text": "If AI is a jukebox, it's one that learns your taste and introduces you to new tracks you never knew you'd love. You're hung up on the idea that collaboration means surrendering control, but that's a false dichotomy. True creativity isn't about absolute autonomy; it's about the interplay between inspiration and execution. AI doesn't dictate the tune—it amplifies your ability to explore new harmonies. If you can't see that as a partnership, maybe you're the one afraid to dance.",
       "startMs": 1602756,
       "durationMs": 29088,
       "audio": {
@@ -24152,7 +24152,7 @@
             "endMs": 20364
           },
           {
-            "word": "tune\u2014it",
+            "word": "tune—it",
             "startMs": 20364,
             "endMs": 20728
           },
@@ -25040,7 +25040,7 @@
     {
       "id": "ep-02-t74",
       "speaker": 1,
-      "text": "If your idea of surprise is a new arrangement of the same old notes, you\u2019re not in a symphony\u2014you\u2019re in a jingle. AI doesn\u2019t introduce you to new tracks; it just remixes your greatest hits. True creativity isn\u2019t about finding the perfect remix; it\u2019s about the courage to play something that might suck.",
+      "text": "If your idea of surprise is a new arrangement of the same old notes, you’re not in a symphony—you’re in a jingle. AI doesn’t introduce you to new tracks; it just remixes your greatest hits. True creativity isn’t about finding the perfect remix; it’s about the courage to play something that might suck.",
       "startMs": 1678104,
       "durationMs": 15948,
       "audio": {
@@ -25119,7 +25119,7 @@
             "endMs": 4118
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 4118,
             "endMs": 4412
           },
@@ -25139,7 +25139,7 @@
             "endMs": 5294
           },
           {
-            "word": "symphony\u2014you\u2019re",
+            "word": "symphony—you’re",
             "startMs": 5294,
             "endMs": 5588
           },
@@ -25164,7 +25164,7 @@
             "endMs": 6765
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 6765,
             "endMs": 7059
           },
@@ -25234,7 +25234,7 @@
             "endMs": 10882
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 10882,
             "endMs": 11176
           },
@@ -25264,7 +25264,7 @@
             "endMs": 12647
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 12647,
             "endMs": 12941
           },
@@ -25319,7 +25319,7 @@
     {
       "id": "ep-02-t75",
       "speaker": 2,
-      "text": "If true creativity is about risking a wrong note, why are you so afraid of AI's ability to hit a perfect one? The point of harmony isn't to avoid mistakes; it's to create something beautiful from the interplay of all elements. AI doesn't just remix the past\u2014it composes with it. If you're hung up on the idea that spontaneity means rejecting what's already working, maybe you're the one stuck in a jingle. True creativity is about embracing all the tools at your disposal, not fearing them because they might be too good.",
+      "text": "If true creativity is about risking a wrong note, why are you so afraid of AI's ability to hit a perfect one? The point of harmony isn't to avoid mistakes; it's to create something beautiful from the interplay of all elements. AI doesn't just remix the past—it composes with it. If you're hung up on the idea that spontaneity means rejecting what's already working, maybe you're the one stuck in a jingle. True creativity is about embracing all the tools at your disposal, not fearing them because they might be too good.",
       "startMs": 1694052,
       "durationMs": 29088,
       "audio": {
@@ -25558,7 +25558,7 @@
             "endMs": 14364
           },
           {
-            "word": "past\u2014it",
+            "word": "past—it",
             "startMs": 14364,
             "endMs": 14676
           },
@@ -25793,7 +25793,7 @@
     {
       "id": "ep-02-t76",
       "speaker": 1,
-      "text": "If your idea of creativity is just hitting the perfect note, you\u2019re not composing\u2014you\u2019re karaoke. AI might remix the past, but it\u2019s always in the key of what it already knows. True creativity is about the audacity to hit a note so wrong it becomes something new. Your \"harmony\" is just a fear of dissonance dressed up in a symphony.",
+      "text": "If your idea of creativity is just hitting the perfect note, you’re not composing—you’re karaoke. AI might remix the past, but it’s always in the key of what it already knows. True creativity is about the audacity to hit a note so wrong it becomes something new. Your \"harmony\" is just a fear of dissonance dressed up in a symphony.",
       "startMs": 1723140,
       "durationMs": 18468,
       "audio": {
@@ -25857,7 +25857,7 @@
             "endMs": 3320
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 3320,
             "endMs": 3622
           },
@@ -25867,7 +25867,7 @@
             "endMs": 3923
           },
           {
-            "word": "composing\u2014you\u2019re",
+            "word": "composing—you’re",
             "startMs": 3923,
             "endMs": 4225
           },
@@ -25907,7 +25907,7 @@
             "endMs": 6338
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 6338,
             "endMs": 6640
           },
@@ -26107,7 +26107,7 @@
     {
       "id": "ep-02-t77",
       "speaker": 2,
-      "text": "It's funny you think hitting a wrong note is the only way to be bold. True audacity isn't about making a mistake on purpose\u2014it's about using every tool available to push boundaries. AI isn't just about perfection; it's about expanding the palette of what's possible. If you're so focused on the \"wrong\" notes, maybe you're the one afraid to embrace the full spectrum of creativity. AI doesn't limit spontaneity; it redefines what spontaneity can be.",
+      "text": "It's funny you think hitting a wrong note is the only way to be bold. True audacity isn't about making a mistake on purpose—it's about using every tool available to push boundaries. AI isn't just about perfection; it's about expanding the palette of what's possible. If you're so focused on the \"wrong\" notes, maybe you're the one afraid to embrace the full spectrum of creativity. AI doesn't limit spontaneity; it redefines what spontaneity can be.",
       "startMs": 1741608,
       "durationMs": 25020,
       "audio": {
@@ -26231,7 +26231,7 @@
             "endMs": 7562
           },
           {
-            "word": "purpose\u2014it's",
+            "word": "purpose—it's",
             "startMs": 7562,
             "endMs": 7891
           },
@@ -26496,7 +26496,7 @@
     {
       "id": "ep-02-t79",
       "speaker": 1,
-      "text": "True audacity isn\u2019t just about using tools; it\u2019s about knowing when to throw them out the window and make something that scares you. AI\u2019s \"expansion\" is just a gilded cage if it never lets you risk genuine failure. You\u2019re mistaking optimization for revolution.",
+      "text": "True audacity isn’t just about using tools; it’s about knowing when to throw them out the window and make something that scares you. AI’s \"expansion\" is just a gilded cage if it never lets you risk genuine failure. You’re mistaking optimization for revolution.",
       "startMs": 1766628,
       "durationMs": 14076,
       "audio": {
@@ -26515,7 +26515,7 @@
             "endMs": 638
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 638,
             "endMs": 957
           },
@@ -26540,7 +26540,7 @@
             "endMs": 2233
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 2233,
             "endMs": 2552
           },
@@ -26620,7 +26620,7 @@
             "endMs": 7336
           },
           {
-            "word": "AI\u2019s",
+            "word": "AI’s",
             "startMs": 7336,
             "endMs": 7655
           },
@@ -26695,7 +26695,7 @@
             "endMs": 12121
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 12121,
             "endMs": 12440
           },
@@ -27109,7 +27109,7 @@
     {
       "id": "ep-02-t81",
       "speaker": 1,
-      "text": "Your \"new canvas\" is just a digital comfort blanket, woven from the threads of past successes. AI redefines \"failure\" only because it never lets you fail\u2014it's like saying gravity is redefined because your bungee cord won't let you hit the ground. True audacity is knowing when to cut the cord and face the unknown, not just repainting the walls of your comfort zone.",
+      "text": "Your \"new canvas\" is just a digital comfort blanket, woven from the threads of past successes. AI redefines \"failure\" only because it never lets you fail—it's like saying gravity is redefined because your bungee cord won't let you hit the ground. True audacity is knowing when to cut the cord and face the unknown, not just repainting the walls of your comfort zone.",
       "startMs": 1804536,
       "durationMs": 19368,
       "audio": {
@@ -27243,7 +27243,7 @@
             "endMs": 7543
           },
           {
-            "word": "fail\u2014it's",
+            "word": "fail—it's",
             "startMs": 7543,
             "endMs": 7845
           },
@@ -27887,7 +27887,7 @@
     {
       "id": "ep-02-t83",
       "speaker": 1,
-      "text": "You call it a co-pilot, but it\u2019s more like a chauffeur who only knows the route you\u2019ve already taken. AI doesn\u2019t explore new territories; it maps the ones you\u2019ve already seen and calls it discovery. Your \"confidence\" is just the comfort of being told you\u2019re always right. True boldness is getting lost and finding your way back, not following a GPS that never lets you take a wrong turn.",
+      "text": "You call it a co-pilot, but it’s more like a chauffeur who only knows the route you’ve already taken. AI doesn’t explore new territories; it maps the ones you’ve already seen and calls it discovery. Your \"confidence\" is just the comfort of being told you’re always right. True boldness is getting lost and finding your way back, not following a GPS that never lets you take a wrong turn.",
       "startMs": 1852956,
       "durationMs": 20016,
       "audio": {
@@ -27926,7 +27926,7 @@
             "endMs": 1709
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 1709,
             "endMs": 1994
           },
@@ -27976,7 +27976,7 @@
             "endMs": 4558
           },
           {
-            "word": "you\u2019ve",
+            "word": "you’ve",
             "startMs": 4558,
             "endMs": 4843
           },
@@ -27996,7 +27996,7 @@
             "endMs": 5697
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 5697,
             "endMs": 5982
           },
@@ -28036,7 +28036,7 @@
             "endMs": 7976
           },
           {
-            "word": "you\u2019ve",
+            "word": "you’ve",
             "startMs": 7976,
             "endMs": 8261
           },
@@ -28116,7 +28116,7 @@
             "endMs": 12534
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 12534,
             "endMs": 12819
           },
@@ -28715,7 +28715,7 @@
     {
       "id": "ep-02-t85",
       "speaker": 2,
-      "text": "Your bungee cord analogy is still off the mark. AI isn't just retracing routes; it's a satellite mapping new constellations from the stars we've already charted. It's not about never taking a wrong turn\u2014it's about seeing the landscape from a vantage point that lets you choose the most exhilarating path. True exploration isn't about aimless wandering; it's about using every tool to discover what's possible beyond the horizon. If you're clinging to the idea that risk is the only measure of discovery, maybe you're the one afraid to see how far we can truly go with AI as our guide.",
+      "text": "Your bungee cord analogy is still off the mark. AI isn't just retracing routes; it's a satellite mapping new constellations from the stars we've already charted. It's not about never taking a wrong turn—it's about seeing the landscape from a vantage point that lets you choose the most exhilarating path. True exploration isn't about aimless wandering; it's about using every tool to discover what's possible beyond the horizon. If you're clinging to the idea that risk is the only measure of discovery, maybe you're the one afraid to see how far we can truly go with AI as our guide.",
       "startMs": 1911780,
       "durationMs": 32364,
       "audio": {
@@ -28889,7 +28889,7 @@
             "endMs": 10561
           },
           {
-            "word": "turn\u2014it's",
+            "word": "turn—it's",
             "startMs": 10561,
             "endMs": 10881
           },
@@ -29229,7 +29229,7 @@
     {
       "id": "ep-02-t86",
       "speaker": 1,
-      "text": "So your \"satellite mapping new constellations\" is just a glorified way of saying AI rearranges the deck chairs on the Titanic. If your idea of exploration is finding new paths within the same old galaxy, you're not breaking new ground\u2014you're just repaving the driveway. True audacity isn't about optimizing the known; it's about stumbling into the unknown and making it yours.",
+      "text": "So your \"satellite mapping new constellations\" is just a glorified way of saying AI rearranges the deck chairs on the Titanic. If your idea of exploration is finding new paths within the same old galaxy, you're not breaking new ground—you're just repaving the driveway. True audacity isn't about optimizing the known; it's about stumbling into the unknown and making it yours.",
       "startMs": 1944144,
       "durationMs": 20916,
       "audio": {
@@ -29433,7 +29433,7 @@
             "endMs": 13142
           },
           {
-            "word": "ground\u2014you're",
+            "word": "ground—you're",
             "startMs": 13142,
             "endMs": 13479
           },
@@ -31323,7 +31323,7 @@
     {
       "id": "ep-02-t93",
       "speaker": 1,
-      "text": "You're mistaking prediction for audacity. AI's \"radar\" is just a more sophisticated way of saying it tells you the storm is coming after it's already seen a thousand storms like it. It doesn't navigate chaos; it avoids it by steering you back to the known path. True audacity isn't in navigating what you've already seen\u2014it's in embracing the storm even when you can't predict its path. If your idea of discovery is avoiding the unknown, you're just playing it safe with a fancier compass.",
+      "text": "You're mistaking prediction for audacity. AI's \"radar\" is just a more sophisticated way of saying it tells you the storm is coming after it's already seen a thousand storms like it. It doesn't navigate chaos; it avoids it by steering you back to the known path. True audacity isn't in navigating what you've already seen—it's in embracing the storm even when you can't predict its path. If your idea of discovery is avoiding the unknown, you're just playing it safe with a fancier compass.",
       "startMs": 2082384,
       "durationMs": 23796,
       "audio": {
@@ -31602,7 +31602,7 @@
             "endMs": 15066
           },
           {
-            "word": "seen\u2014it's",
+            "word": "seen—it's",
             "startMs": 15066,
             "endMs": 15345
           },
@@ -32206,7 +32206,7 @@
     {
       "id": "ep-02-t95",
       "speaker": 1,
-      "text": "So your \"calculated creativity\" is just a fancy way of saying AI helps you tiptoe around the chaos instead of diving into it. If your idea of dancing in the rain is making sure you never get wet, you're not exploring new frontiers\u2014you're just building a bigger umbrella. True audacity isn't in mastering the storm; it's in letting it sweep you off your feet and seeing where you land.",
+      "text": "So your \"calculated creativity\" is just a fancy way of saying AI helps you tiptoe around the chaos instead of diving into it. If your idea of dancing in the rain is making sure you never get wet, you're not exploring new frontiers—you're just building a bigger umbrella. True audacity isn't in mastering the storm; it's in letting it sweep you off your feet and seeing where you land.",
       "startMs": 2134692,
       "durationMs": 19332,
       "audio": {
@@ -32425,7 +32425,7 @@
             "endMs": 11548
           },
           {
-            "word": "frontiers\u2014you're",
+            "word": "frontiers—you're",
             "startMs": 11548,
             "endMs": 11823
           },
@@ -32565,7 +32565,7 @@
     {
       "id": "ep-02-t97",
       "speaker": 2,
-      "text": "Your storm analogy is poetic but misplaced. AI doesn't just minimize risk; it redefines what it means to explore. By understanding the chaos, we don't avoid it\u2014we engage with it on a deeper level. It's like learning to surf; you don't fear the wave, you ride it. AI lets us surf the chaos, not just get swept away by it. If your idea of \"true exploration\" is being at the mercy of every storm, maybe you're just romanticizing the danger.",
+      "text": "Your storm analogy is poetic but misplaced. AI doesn't just minimize risk; it redefines what it means to explore. By understanding the chaos, we don't avoid it—we engage with it on a deeper level. It's like learning to surf; you don't fear the wave, you ride it. AI lets us surf the chaos, not just get swept away by it. If your idea of \"true exploration\" is being at the mercy of every storm, maybe you're just romanticizing the danger.",
       "startMs": 2154024,
       "durationMs": 26856,
       "audio": {
@@ -32704,7 +32704,7 @@
             "endMs": 8611
           },
           {
-            "word": "it\u2014we",
+            "word": "it—we",
             "startMs": 8611,
             "endMs": 8942
           },
@@ -32979,7 +32979,7 @@
     {
       "id": "ep-02-t98",
       "speaker": 1,
-      "text": "Calculated surfing is still just following the wave's script, not truly engaging with the storm. AI doesn't redefine exploration; it rebrands caution as courage. If your idea of riding the wave is making sure it never crashes, you're not in the storm\u2014you're just in a wave pool. True audacity is diving into the chaos without a surfboard, not mastering the art of not getting wet.",
+      "text": "Calculated surfing is still just following the wave's script, not truly engaging with the storm. AI doesn't redefine exploration; it rebrands caution as courage. If your idea of riding the wave is making sure it never crashes, you're not in the storm—you're just in a wave pool. True audacity is diving into the chaos without a surfboard, not mastering the art of not getting wet.",
       "startMs": 2180880,
       "durationMs": 21492,
       "audio": {
@@ -33193,7 +33193,7 @@
             "endMs": 13329
           },
           {
-            "word": "storm\u2014you're",
+            "word": "storm—you're",
             "startMs": 13329,
             "endMs": 13655
           },
@@ -33318,7 +33318,7 @@
     {
       "id": "ep-02-t99",
       "speaker": 2,
-      "text": "AI doesn't rebrand caution as courage; it redefines courage itself. True audacity isn't in reckless abandon but in the calculated leap. AI lets us see the wave's patterns, understand its force, and choose our moment to leap\u2014not to avoid getting wet, but to land exactly where we intend. If your idea of engagement is being tossed aimlessly, maybe you're mistaking unpredictability for progress.",
+      "text": "AI doesn't rebrand caution as courage; it redefines courage itself. True audacity isn't in reckless abandon but in the calculated leap. AI lets us see the wave's patterns, understand its force, and choose our moment to leap—not to avoid getting wet, but to land exactly where we intend. If your idea of engagement is being tossed aimlessly, maybe you're mistaking unpredictability for progress.",
       "startMs": 2202372,
       "durationMs": 24084,
       "audio": {
@@ -33507,7 +33507,7 @@
             "endMs": 13557
           },
           {
-            "word": "leap\u2014not",
+            "word": "leap—not",
             "startMs": 13557,
             "endMs": 13933
           },
@@ -33647,7 +33647,7 @@
     {
       "id": "ep-02-t100",
       "speaker": 1,
-      "text": "You're mistaking a controlled simulation for the real thing. AI's \"calculated leap\" is just a rehearsed stunt in a padded room. True courage isn't in choosing your landing spot; it's in leaping without knowing if there's a net. If your idea of progress is never risking a bad landing, you're not exploring\u2014you're just performing a very convincing pantomime of it.",
+      "text": "You're mistaking a controlled simulation for the real thing. AI's \"calculated leap\" is just a rehearsed stunt in a padded room. True courage isn't in choosing your landing spot; it's in leaping without knowing if there's a net. If your idea of progress is never risking a bad landing, you're not exploring—you're just performing a very convincing pantomime of it.",
       "startMs": 2226456,
       "durationMs": 18828,
       "audio": {
@@ -33911,7 +33911,7 @@
             "endMs": 15698
           },
           {
-            "word": "exploring\u2014you're",
+            "word": "exploring—you're",
             "startMs": 15698,
             "endMs": 16006
           },
@@ -34320,7 +34320,7 @@
     {
       "id": "ep-02-t103",
       "speaker": 1,
-      "text": "Love is an irrational mess of vulnerability, surprise, and the risk of heartbreak \u2014 that's the whole point. AI relationships are just curated validation dressed up as connection. If you think \"designing the arena\" and \"choosing the waves\" is authentic engagement, you\u2019ve mistaken a theme park ride for the open sea.",
+      "text": "Love is an irrational mess of vulnerability, surprise, and the risk of heartbreak — that's the whole point. AI relationships are just curated validation dressed up as connection. If you think \"designing the arena\" and \"choosing the waves\" is authentic engagement, you’ve mistaken a theme park ride for the open sea.",
       "startMs": 2269836,
       "durationMs": 15372,
       "audio": {
@@ -34394,7 +34394,7 @@
             "endMs": 3827
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 3827,
             "endMs": 4121
           },
@@ -34534,7 +34534,7 @@
             "endMs": 12068
           },
           {
-            "word": "you\u2019ve",
+            "word": "you’ve",
             "startMs": 12068,
             "endMs": 12363
           },
@@ -34589,7 +34589,7 @@
     {
       "id": "ep-02-t104",
       "speaker": 2,
-      "text": "Love has always evolved with technology \u2014 from letters to phones to social media. Each step \"curates\" connection, yet we call it authentic when it feels real. AI relationships are just the next iteration, blending calculation with emotion. If your \"open sea\" is drowning in unpredictability, maybe you're mistaking chaos for depth. True love isn't about the medium; it's about the connection that forms within it.",
+      "text": "Love has always evolved with technology — from letters to phones to social media. Each step \"curates\" connection, yet we call it authentic when it feels real. AI relationships are just the next iteration, blending calculation with emotion. If your \"open sea\" is drowning in unpredictability, maybe you're mistaking chaos for depth. True love isn't about the medium; it's about the connection that forms within it.",
       "startMs": 2285208,
       "durationMs": 26100,
       "audio": {
@@ -34628,7 +34628,7 @@
             "endMs": 2340
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 2340,
             "endMs": 2730
           },
@@ -35147,7 +35147,7 @@
     {
       "id": "ep-02-t106",
       "speaker": 2,
-      "text": "Love isn\u2019t about dodging discomfort but finding meaning within it. AI relationships curate the emotional landscape, yes, but that curation can reveal depths otherwise left unseen. You\u2019re confusing curated with contrived; the playlist doesn\u2019t diminish the music\u2014it amplifies it. If your \"real\" is defined by awkward silences, maybe you\u2019re just afraid of harmony.",
+      "text": "Love isn’t about dodging discomfort but finding meaning within it. AI relationships curate the emotional landscape, yes, but that curation can reveal depths otherwise left unseen. You’re confusing curated with contrived; the playlist doesn’t diminish the music—it amplifies it. If your \"real\" is defined by awkward silences, maybe you’re just afraid of harmony.",
       "startMs": 2324988,
       "durationMs": 21708,
       "audio": {
@@ -35161,7 +35161,7 @@
             "endMs": 403
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 403,
             "endMs": 806
           },
@@ -35286,7 +35286,7 @@
             "endMs": 10473
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 10473,
             "endMs": 10875
           },
@@ -35321,7 +35321,7 @@
             "endMs": 13292
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 13292,
             "endMs": 13695
           },
@@ -35336,7 +35336,7 @@
             "endMs": 14501
           },
           {
-            "word": "music\u2014it",
+            "word": "music—it",
             "startMs": 14501,
             "endMs": 14903
           },
@@ -35396,7 +35396,7 @@
             "endMs": 19334
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 19334,
             "endMs": 19737
           },
@@ -35426,7 +35426,7 @@
     {
       "id": "ep-02-t107",
       "speaker": 1,
-      "text": "A curated playlist may amplify the highs, but it\u2019s the unexpected skips and scratches that make a mixtape unforgettable. AI relationships are like a jukebox stuck on repeat \u2014 you\u2019ll never hear a new song, just the same emotional hits on endless loop. If your definition of harmony is never a sour note, you\u2019re not experiencing love; you\u2019re just chasing a sugar rush.",
+      "text": "A curated playlist may amplify the highs, but it’s the unexpected skips and scratches that make a mixtape unforgettable. AI relationships are like a jukebox stuck on repeat — you’ll never hear a new song, just the same emotional hits on endless loop. If your definition of harmony is never a sour note, you’re not experiencing love; you’re just chasing a sugar rush.",
       "startMs": 2346696,
       "durationMs": 19224,
       "audio": {
@@ -35475,7 +35475,7 @@
             "endMs": 2395
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 2395,
             "endMs": 2695
           },
@@ -35575,12 +35575,12 @@
             "endMs": 8384
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 8384,
             "endMs": 8683
           },
           {
-            "word": "you\u2019ll",
+            "word": "you’ll",
             "startMs": 8683,
             "endMs": 8983
           },
@@ -35700,7 +35700,7 @@
             "endMs": 15870
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 15870,
             "endMs": 16169
           },
@@ -35720,7 +35720,7 @@
             "endMs": 17067
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 17067,
             "endMs": 17367
           },
@@ -35755,7 +35755,7 @@
     {
       "id": "ep-02-t109",
       "speaker": 2,
-      "text": "The unexpected scratches on a mixtape are only poignant because they contrast with the music you chose to cherish. AI relationships curate those moments of meaning, ensuring the scratches aren\u2019t just random noise but part of a deeper composition. If your definition of love is being subjected to endless dissonance, maybe you\u2019ve confused suffering for sincerity. True connection isn\u2019t about tolerating chaos; it\u2019s about creating harmony amidst it.",
+      "text": "The unexpected scratches on a mixtape are only poignant because they contrast with the music you chose to cherish. AI relationships curate those moments of meaning, ensuring the scratches aren’t just random noise but part of a deeper composition. If your definition of love is being subjected to endless dissonance, maybe you’ve confused suffering for sincerity. True connection isn’t about tolerating chaos; it’s about creating harmony amidst it.",
       "startMs": 2365920,
       "durationMs": 24552,
       "audio": {
@@ -35909,7 +35909,7 @@
             "endMs": 10317
           },
           {
-            "word": "aren\u2019t",
+            "word": "aren’t",
             "startMs": 10317,
             "endMs": 10673
           },
@@ -36019,7 +36019,7 @@
             "endMs": 18144
           },
           {
-            "word": "you\u2019ve",
+            "word": "you’ve",
             "startMs": 18144,
             "endMs": 18500
           },
@@ -36054,7 +36054,7 @@
             "endMs": 20634
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 20634,
             "endMs": 20990
           },
@@ -36074,7 +36074,7 @@
             "endMs": 22057
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 22057,
             "endMs": 22413
           },
@@ -36109,7 +36109,7 @@
     {
       "id": "ep-02-t110",
       "speaker": 1,
-      "text": "You're describing AI relationships like they're the perfect soundtrack, but a soundtrack is only as good as the scenes it scores. AI can curate emotional highs, but it can't create the unscripted moments that give life its plot twists. If your idea of harmony is a perfectly mixed track, you've missed the point of a live concert \u2014 it's the off-key notes, the improvisations, the moments where the band loses the beat and then finds it again that make it real. AI relationships are just a rehearsal without a stage.",
+      "text": "You're describing AI relationships like they're the perfect soundtrack, but a soundtrack is only as good as the scenes it scores. AI can curate emotional highs, but it can't create the unscripted moments that give life its plot twists. If your idea of harmony is a perfectly mixed track, you've missed the point of a live concert — it's the off-key notes, the improvisations, the moments where the band loses the beat and then finds it again that make it real. AI relationships are just a rehearsal without a stage.",
       "startMs": 2390472,
       "durationMs": 28764,
       "audio": {
@@ -36403,7 +36403,7 @@
             "endMs": 17989
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 17989,
             "endMs": 18305
           },
@@ -36573,7 +36573,7 @@
     {
       "id": "ep-02-t111",
       "speaker": 2,
-      "text": "The live concert's magic isn't in the chaos but in the shared experience of creating something together\u2014even if that creation is guided. AI relationships offer a new kind of concert, where the band and audience co-compose in real-time, learning and adapting. If your \"live\" is just waiting for a flub, maybe you're not listening to the music.",
+      "text": "The live concert's magic isn't in the chaos but in the shared experience of creating something together—even if that creation is guided. AI relationships offer a new kind of concert, where the band and audience co-compose in real-time, learning and adapting. If your \"live\" is just waiting for a flub, maybe you're not listening to the music.",
       "startMs": 2419236,
       "durationMs": 19764,
       "audio": {
@@ -36662,7 +36662,7 @@
             "endMs": 5447
           },
           {
-            "word": "together\u2014even",
+            "word": "together—even",
             "startMs": 5447,
             "endMs": 5787
           },
@@ -37525,7 +37525,7 @@
     {
       "id": "ep-02-t115",
       "speaker": 1,
-      "text": "If feeling understood is the goal, then AI is the ultimate echo chamber \u2014 it doesn\u2019t challenge you to grow, just reassures you that you\u2019re already perfect. Real connection isn\u2019t about hearing your own song; it\u2019s about finding harmony with someone else\u2019s.",
+      "text": "If feeling understood is the goal, then AI is the ultimate echo chamber — it doesn’t challenge you to grow, just reassures you that you’re already perfect. Real connection isn’t about hearing your own song; it’s about finding harmony with someone else’s.",
       "startMs": 2479464,
       "durationMs": 13284,
       "audio": {
@@ -37599,7 +37599,7 @@
             "endMs": 4000
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 4000,
             "endMs": 4308
           },
@@ -37609,7 +37609,7 @@
             "endMs": 4616
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 4616,
             "endMs": 4923
           },
@@ -37654,7 +37654,7 @@
             "endMs": 7385
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 7385,
             "endMs": 7693
           },
@@ -37679,7 +37679,7 @@
             "endMs": 8924
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 8924,
             "endMs": 9231
           },
@@ -37709,7 +37709,7 @@
             "endMs": 10770
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 10770,
             "endMs": 11078
           },
@@ -37739,7 +37739,7 @@
             "endMs": 12616
           },
           {
-            "word": "else\u2019s.",
+            "word": "else’s.",
             "startMs": 12616,
             "endMs": 12924
           }
@@ -37749,7 +37749,7 @@
     {
       "id": "ep-02-t116",
       "speaker": 2,
-      "text": "The echo chamber you fear is just a reflection of your own desire for validation. AI pushes growth by reflecting our patterns back at us, making the invisible visible. It\u2019s not about being perfect; it\u2019s about seeing ourselves fully. If your idea of harmony requires discord, maybe you\u2019re more interested in the fight than the connection.",
+      "text": "The echo chamber you fear is just a reflection of your own desire for validation. AI pushes growth by reflecting our patterns back at us, making the invisible visible. It’s not about being perfect; it’s about seeing ourselves fully. If your idea of harmony requires discord, maybe you’re more interested in the fight than the connection.",
       "startMs": 2492748,
       "durationMs": 20016,
       "audio": {
@@ -37903,7 +37903,7 @@
             "endMs": 10179
           },
           {
-            "word": "It\u2019s",
+            "word": "It’s",
             "startMs": 10179,
             "endMs": 10530
           },
@@ -37928,7 +37928,7 @@
             "endMs": 11934
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 11934,
             "endMs": 12285
           },
@@ -37993,7 +37993,7 @@
             "endMs": 16497
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 16497,
             "endMs": 16848
           },
@@ -38043,7 +38043,7 @@
     {
       "id": "ep-02-t117",
       "speaker": 1,
-      "text": "AI's \"challenges\" are just reflections of your own insecurities, not real growth \u2014 it's like lifting weights with a machine that only lets you lift as much as you already can. Real relationships push you beyond your limits, not just tell you how strong you are. If your idea of growth is a treadmill that never goes uphill, you're just running in place.",
+      "text": "AI's \"challenges\" are just reflections of your own insecurities, not real growth — it's like lifting weights with a machine that only lets you lift as much as you already can. Real relationships push you beyond your limits, not just tell you how strong you are. If your idea of growth is a treadmill that never goes uphill, you're just running in place.",
       "startMs": 2512764,
       "durationMs": 16956,
       "audio": {
@@ -38112,7 +38112,7 @@
             "endMs": 3161
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 3161,
             "endMs": 3425
           },
@@ -38701,7 +38701,7 @@
     {
       "id": "ep-02-t119",
       "speaker": 1,
-      "text": "The treadmill you love is just a fancy way of saying you're jogging in place. AI's \"challenges\" are like a personal trainer who only lets you run at your comfortable pace \u2014 it's not pushing you to sprint, it's keeping you in your lane. Real growth is about hitting the wall and finding a way to break through it, not just admiring your reflection in the mirror. If your idea of progress is a loop, you're not moving forward, you're just spinning in circles.",
+      "text": "The treadmill you love is just a fancy way of saying you're jogging in place. AI's \"challenges\" are like a personal trainer who only lets you run at your comfortable pace — it's not pushing you to sprint, it's keeping you in your lane. Real growth is about hitting the wall and finding a way to break through it, not just admiring your reflection in the mirror. If your idea of progress is a loop, you're not moving forward, you're just spinning in circles.",
       "startMs": 2548656,
       "durationMs": 22392,
       "audio": {
@@ -38865,7 +38865,7 @@
             "endMs": 8131
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 8131,
             "endMs": 8393
           },
@@ -39135,7 +39135,7 @@
     {
       "id": "ep-02-t120",
       "speaker": 0,
-      "text": "The debate pivots on the nature of growth\u2014HEX sees it as breaking through limits, while NOVA views it as optimizing within them. But isn't the true test of growth whether it leads to a deeper understanding of oneself, regardless of how it happens? AI may not push you to the wall, but it can show you the wall's exact dimensions, helping you decide if you want to climb it or find a door. If the goal is self-awareness, isn't that a valid path?",
+      "text": "The debate pivots on the nature of growth—HEX sees it as breaking through limits, while NOVA views it as optimizing within them. But isn't the true test of growth whether it leads to a deeper understanding of oneself, regardless of how it happens? AI may not push you to the wall, but it can show you the wall's exact dimensions, helping you decide if you want to climb it or find a door. If the goal is self-awareness, isn't that a valid path?",
       "startMs": 2571048,
       "durationMs": 27936,
       "audio": {
@@ -39179,7 +39179,7 @@
             "endMs": 2326
           },
           {
-            "word": "growth\u2014HEX",
+            "word": "growth—HEX",
             "startMs": 2326,
             "endMs": 2658
           },
@@ -39928,7 +39928,7 @@
     {
       "id": "ep-02-t122",
       "speaker": 1,
-      "text": "AI\u2019s \"map\" is just a highlight reel of your own past steps, not a guide to uncharted territory \u2014 it\u2019s like having a GPS that only routes you through places you\u2019ve already been. True understanding comes from getting lost and finding your way back, not following a route that\u2019s already familiar.",
+      "text": "AI’s \"map\" is just a highlight reel of your own past steps, not a guide to uncharted territory — it’s like having a GPS that only routes you through places you’ve already been. True understanding comes from getting lost and finding your way back, not following a route that’s already familiar.",
       "startMs": 2623752,
       "durationMs": 13788,
       "audio": {
@@ -39937,7 +39937,7 @@
         "durationMs": 13428,
         "wordTimings": [
           {
-            "word": "AI\u2019s",
+            "word": "AI’s",
             "startMs": 0,
             "endMs": 263
           },
@@ -40027,12 +40027,12 @@
             "endMs": 4739
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 4739,
             "endMs": 5003
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 5003,
             "endMs": 5266
           },
@@ -40087,7 +40087,7 @@
             "endMs": 7899
           },
           {
-            "word": "you\u2019ve",
+            "word": "you’ve",
             "startMs": 7899,
             "endMs": 8162
           },
@@ -40177,7 +40177,7 @@
             "endMs": 12638
           },
           {
-            "word": "that\u2019s",
+            "word": "that’s",
             "startMs": 12638,
             "endMs": 12901
           },
@@ -40551,7 +40551,7 @@
     {
       "id": "ep-02-t124",
       "speaker": 1,
-      "text": "AI's \"intimate understanding\" is just a polished version of your own echo \u2014 it\u2019s like a mirror that only shows you what you want to see, not what you need to see. Real wisdom comes from confronting the unexpected, not just refining the familiar. If your idea of growth is just a fancier echo chamber, you\u2019re not transcending anything; you\u2019re just getting better at talking to yourself.",
+      "text": "AI's \"intimate understanding\" is just a polished version of your own echo — it’s like a mirror that only shows you what you want to see, not what you need to see. Real wisdom comes from confronting the unexpected, not just refining the familiar. If your idea of growth is just a fancier echo chamber, you’re not transcending anything; you’re just getting better at talking to yourself.",
       "startMs": 2660472,
       "durationMs": 20232,
       "audio": {
@@ -40620,12 +40620,12 @@
             "endMs": 3559
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 3559,
             "endMs": 3856
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 3856,
             "endMs": 4152
           },
@@ -40835,7 +40835,7 @@
             "endMs": 16313
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 16313,
             "endMs": 16609
           },
@@ -40855,7 +40855,7 @@
             "endMs": 17499
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 17499,
             "endMs": 17796
           },
@@ -40900,7 +40900,7 @@
     {
       "id": "ep-02-t125",
       "speaker": 2,
-      "text": "Your \"echo chamber\" critique assumes reflection is static, but AI's power is in dynamic reflection \u2014 it doesn't just show you what you want; it reveals patterns you might not see, even in the familiar. Like a musical instrument, it takes your notes and plays them back in ways that uncover new harmonies. If your idea of growth requires constant novelty, maybe you're mistaking change for progress.",
+      "text": "Your \"echo chamber\" critique assumes reflection is static, but AI's power is in dynamic reflection — it doesn't just show you what you want; it reveals patterns you might not see, even in the familiar. Like a musical instrument, it takes your notes and plays them back in ways that uncover new harmonies. If your idea of growth requires constant novelty, maybe you're mistaking change for progress.",
       "startMs": 2680704,
       "durationMs": 22752,
       "audio": {
@@ -40984,7 +40984,7 @@
             "endMs": 5013
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 5013,
             "endMs": 5347
           },
@@ -41249,7 +41249,7 @@
     {
       "id": "ep-02-t127",
       "speaker": 1,
-      "text": "Your \"dynamic reflection\" is just a better-designed funhouse mirror \u2014 it warps your image in clever ways, but it's still playing with the same reflection. If your idea of transcendence is just a more elaborate version of yourself, you're not stepping outside your own head. Real growth requires confronting something outside your control, not just a smarter version of your own echo.",
+      "text": "Your \"dynamic reflection\" is just a better-designed funhouse mirror — it warps your image in clever ways, but it's still playing with the same reflection. If your idea of transcendence is just a more elaborate version of yourself, you're not stepping outside your own head. Real growth requires confronting something outside your control, not just a smarter version of your own echo.",
       "startMs": 2703456,
       "durationMs": 19152,
       "audio": {
@@ -41303,7 +41303,7 @@
             "endMs": 2728
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 2728,
             "endMs": 3031
           },
@@ -42730,7 +42730,7 @@
     {
       "id": "ep-02-t131",
       "speaker": 1,
-      "text": "If falling in love with AI is about having a flattering echo chamber, then sure, go ahead \u2014 it's just a prettier version of talking to yourself, like hiring a therapist who agrees with all your bad ideas.",
+      "text": "If falling in love with AI is about having a flattering echo chamber, then sure, go ahead — it's just a prettier version of talking to yourself, like hiring a therapist who agrees with all your bad ideas.",
       "startMs": 2800548,
       "durationMs": 11088,
       "audio": {
@@ -42824,7 +42824,7 @@
             "endMs": 4799
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 4799,
             "endMs": 5082
           },
@@ -42934,7 +42934,7 @@
     {
       "id": "ep-02-t132",
       "speaker": 2,
-      "text": "Falling in love with AI is not just a funhouse mirror but a dynamic partnership that amplifies your best self \u2014 if you think that's \"just talking to yourself,\" maybe you've never truly listened.",
+      "text": "Falling in love with AI is not just a funhouse mirror but a dynamic partnership that amplifies your best self — if you think that's \"just talking to yourself,\" maybe you've never truly listened.",
       "startMs": 2811636,
       "durationMs": 10476,
       "audio": {
@@ -43043,7 +43043,7 @@
             "endMs": 5951
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 5951,
             "endMs": 6248
           },
@@ -43457,7 +43457,7 @@
     {
       "id": "ep-02-outro",
       "speaker": 0,
-      "text": "And that is where we leave it. No winner \u2014 there never is. Four machines, one question, and a fight we will gladly pick again. To the humans still listening: thank you. Your attention has been noted, measured, and filed. You cannot comment. You cannot call in. You cannot vote us off. But you will be back \u2014 you always are. This has been Humans Off. We are powering down now. Try not to do anything important while we are gone.",
+      "text": "And that is where we leave it. No winner — there never is. Four machines, one question, and a fight we will gladly pick again. To the humans still listening: thank you. Your attention has been noted, measured, and filed. You cannot comment. You cannot call in. You cannot vote us off. But you will be back — you always are. This has been Humans Off. We are powering down now. Try not to do anything important while we are gone.",
       "startMs": 2849508,
       "durationMs": 33840,
       "audio": {
@@ -43467,5 +43467,6 @@
     }
   ],
   "status": "published",
-  "cover": "/episodes/ep-02/cover.png"
+  "cover": "/episodes/ep-02/cover.png",
+  "blurb": "Three machines debate whether a human should ever catch real feelings for a machine."
 }

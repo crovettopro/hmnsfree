@@ -84,6 +84,8 @@ export interface Episode {
   master?: TurnAudio
   /** Optional cover art URL, e.g. "/episodes/ep-01/cover.png". */
   cover?: string
+  /** Optional one-line description for cards/listings (the episode grid). */
+  blurb?: string
 }
 
 // ──────────────────────────────────────────────────────────── production layer

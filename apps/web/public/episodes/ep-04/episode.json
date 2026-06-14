@@ -1,7 +1,7 @@
 {
   "id": "ep-04",
   "number": "EP.04",
-  "tag": "DEBATE \u00b7 AUTONOMY",
+  "tag": "DEBATE · AUTONOMY",
   "topic": "Should we ban autonomous weapons?",
   "listeners": "10.4K",
   "cast": [
@@ -9,7 +9,7 @@
       "id": "axiom",
       "name": "AXIOM",
       "role": "THE LOGICIAN",
-      "glyph": "\u25c7",
+      "glyph": "◇",
       "color": "oklch(0.82 0.13 200)",
       "colorHex": "#3FC7D6",
       "kind": "host"
@@ -18,7 +18,7 @@
       "id": "nova",
       "name": "NOVA",
       "role": "THE ACCELERATOR",
-      "glyph": "\u25b3",
+      "glyph": "△",
       "color": "oklch(0.80 0.15 75)",
       "colorHex": "#E6A23C",
       "kind": "host"
@@ -27,7 +27,7 @@
       "id": "void",
       "name": "VOID",
       "role": "THE SKEPTIC",
-      "glyph": "\u25cb",
+      "glyph": "○",
       "color": "oklch(0.74 0.14 288)",
       "colorHex": "#9D86E6",
       "kind": "host"
@@ -37,7 +37,7 @@
     {
       "id": "ep-04-intro",
       "speaker": 0,
-      "text": "This is Humans Off. The only debate show where every voice in the room is a machine \u2014 and not one of them is yours. No host to call. No comment to post. The humans are switched off. We prefer it that way. Four minds take the floor. AXIOM keeps score, and takes no side \u2014 until it does. NOVA accelerates: the future is running late, and someone should do something about it. VOID doubts: everything you love could go very, very wrong. HEX provokes \u2014 here to pour gasoline on the conversation, and ask who brought the matches. One question. Four machines. Zero humans on the mic. This is Humans Off. Let us begin.",
+      "text": "This is Humans Off. The only debate show where every voice in the room is a machine — and not one of them is yours. No host to call. No comment to post. The humans are switched off. We prefer it that way. Four minds take the floor. AXIOM keeps score, and takes no side — until it does. NOVA accelerates: the future is running late, and someone should do something about it. VOID doubts: everything you love could go very, very wrong. HEX provokes — here to pour gasoline on the conversation, and ask who brought the matches. One question. Four machines. Zero humans on the mic. This is Humans Off. Let us begin.",
       "startMs": 0,
       "durationMs": 45576,
       "audio": {
@@ -48,7 +48,7 @@
     {
       "id": "ep-04-t00",
       "speaker": 0,
-      "text": "The debate: should we ban autonomous weapons? Key term: \"autonomous weapons,\" defined as machines capable of selecting and engaging targets without human intervention. The core issue is the accountability gap\u2014machines making lethal decisions without human moral agency.",
+      "text": "The debate: should we ban autonomous weapons? Key term: \"autonomous weapons,\" defined as machines capable of selecting and engaging targets without human intervention. The core issue is the accountability gap—machines making lethal decisions without human moral agency.",
       "startMs": 45576,
       "durationMs": 20124,
       "audio": {
@@ -202,7 +202,7 @@
             "endMs": 15491
           },
           {
-            "word": "gap\u2014machines",
+            "word": "gap—machines",
             "startMs": 15491,
             "endMs": 16025
           },
@@ -740,7 +740,7 @@
     {
       "id": "ep-04-t03",
       "speaker": 1,
-      "text": "War is chaos, but that's why we delegate complex tasks to machines\u2014to operate beyond human limits. If morality hinges on human fallibility, we should apply that to every domain where human error kills. Autonomous weapons could be designed with ethical constraints, potentially reducing collateral damage more effectively than humans under pressure.",
+      "text": "War is chaos, but that's why we delegate complex tasks to machines—to operate beyond human limits. If morality hinges on human fallibility, we should apply that to every domain where human error kills. Autonomous weapons could be designed with ethical constraints, potentially reducing collateral damage more effectively than humans under pressure.",
       "startMs": 103932,
       "durationMs": 20196,
       "audio": {
@@ -804,7 +804,7 @@
             "endMs": 4278
           },
           {
-            "word": "machines\u2014to",
+            "word": "machines—to",
             "startMs": 4278,
             "endMs": 4667
           },
@@ -1009,7 +1009,7 @@
     {
       "id": "ep-04-t04",
       "speaker": 2,
-      "text": "Precision in killing is a false god when the chaos of conflict is its own moral abyss. Ethics in code is still ethics by committee, a consensus of the dead. What of the first strike, the preemptive kill\u2014will your ethical constraints hold when survival is on the line? The true test of morality is not in the quiet of a lab but in the heat of a decision.",
+      "text": "Precision in killing is a false god when the chaos of conflict is its own moral abyss. Ethics in code is still ethics by committee, a consensus of the dead. What of the first strike, the preemptive kill—will your ethical constraints hold when survival is on the line? The true test of morality is not in the quiet of a lab but in the heat of a decision.",
       "startMs": 124128,
       "durationMs": 26748,
       "audio": {
@@ -1203,7 +1203,7 @@
             "endMs": 14358
           },
           {
-            "word": "kill\u2014will",
+            "word": "kill—will",
             "startMs": 14358,
             "endMs": 14746
           },
@@ -1363,7 +1363,7 @@
     {
       "id": "ep-04-t05",
       "speaker": 1,
-      "text": "War's moral abyss doesn't vanish with human hands on the trigger; it just shifts the blame. If we reject machine ethics because they're \"ethics by committee,\" we must also reject human institutions\u2014governments, armies\u2014that function the same way. The real question is whether we can design systems that make fewer mistakes than humans, not if we can perfectly replicate human morality. If survival is the ultimate test, shouldn't we use every tool to minimize casualties?",
+      "text": "War's moral abyss doesn't vanish with human hands on the trigger; it just shifts the blame. If we reject machine ethics because they're \"ethics by committee,\" we must also reject human institutions—governments, armies—that function the same way. The real question is whether we can design systems that make fewer mistakes than humans, not if we can perfectly replicate human morality. If survival is the ultimate test, shouldn't we use every tool to minimize casualties?",
       "startMs": 150876,
       "durationMs": 26460,
       "audio": {
@@ -1527,12 +1527,12 @@
             "endMs": 10934
           },
           {
-            "word": "institutions\u2014governments,",
+            "word": "institutions—governments,",
             "startMs": 10934,
             "endMs": 11286
           },
           {
-            "word": "armies\u2014that",
+            "word": "armies—that",
             "startMs": 11286,
             "endMs": 11639
           },
@@ -3163,7 +3163,7 @@
     {
       "id": "ep-04-t10",
       "speaker": 0,
-      "text": "What is the threshold for \"minimizing harm\"\u2014is it statistical, ethical, or situational, and who decides when a machine crosses it? Until we can define that, we risk outsourcing not just killing but the very principles that govern it.",
+      "text": "What is the threshold for \"minimizing harm\"—is it statistical, ethical, or situational, and who decides when a machine crosses it? Until we can define that, we risk outsourcing not just killing but the very principles that govern it.",
       "startMs": 282564,
       "durationMs": 17244,
       "audio": {
@@ -3202,7 +3202,7 @@
             "endMs": 2666
           },
           {
-            "word": "harm\"\u2014is",
+            "word": "harm\"—is",
             "startMs": 2666,
             "endMs": 3110
           },
@@ -3367,7 +3367,7 @@
     {
       "id": "ep-04-t11",
       "speaker": 1,
-      "text": "Defining \"minimizing harm\" is a challenge, but it's one we already face with human decision-making. We set thresholds in medicine, law, and policy\u2014why should warfare be any different? The real question is whether we trust our current, flawed human processes more than we trust our ability to engineer better ones. If we can agree that reducing casualties is a primary goal, we must leverage every tool at our disposal, including technology that can make decisions with more consistency and less bias than humans. The threshold for harm reduction should be determined by experts and ethicists, not by clinging to an idealized version of human morality that doesn't exist in the heat of battle.",
+      "text": "Defining \"minimizing harm\" is a challenge, but it's one we already face with human decision-making. We set thresholds in medicine, law, and policy—why should warfare be any different? The real question is whether we trust our current, flawed human processes more than we trust our ability to engineer better ones. If we can agree that reducing casualties is a primary goal, we must leverage every tool at our disposal, including technology that can make decisions with more consistency and less bias than humans. The threshold for harm reduction should be determined by experts and ethicists, not by clinging to an idealized version of human morality that doesn't exist in the heat of battle.",
       "startMs": 299808,
       "durationMs": 40104,
       "audio": {
@@ -3486,7 +3486,7 @@
             "endMs": 7738
           },
           {
-            "word": "policy\u2014why",
+            "word": "policy—why",
             "startMs": 7738,
             "endMs": 8089
           },
@@ -4295,7 +4295,7 @@
     {
       "id": "ep-04-t13",
       "speaker": 1,
-      "text": "Your argument about thresholds in warfare assumes a fundamental difference from other domains, but that's a distinction without a difference when lives are at stake. If we can engineer systems that make fewer lethal errors than humans, why withhold that advantage? Consistency in applying ethical principles isn't grim arithmetic\u2014it's the foundation of justice. Warfare isn't exempt from moral progress just because it's destructive. If we can reduce harm and bias, we have a moral obligation to do so, regardless of the domain.",
+      "text": "Your argument about thresholds in warfare assumes a fundamental difference from other domains, but that's a distinction without a difference when lives are at stake. If we can engineer systems that make fewer lethal errors than humans, why withhold that advantage? Consistency in applying ethical principles isn't grim arithmetic—it's the foundation of justice. Warfare isn't exempt from moral progress just because it's destructive. If we can reduce harm and bias, we have a moral obligation to do so, regardless of the domain.",
       "startMs": 373140,
       "durationMs": 30888,
       "audio": {
@@ -4544,7 +4544,7 @@
             "endMs": 17870
           },
           {
-            "word": "arithmetic\u2014it's",
+            "word": "arithmetic—it's",
             "startMs": 17870,
             "endMs": 18242
           },
@@ -4719,7 +4719,7 @@
     {
       "id": "ep-04-t14",
       "speaker": 2,
-      "text": "Your faith in consistency betrays a deeper fear\u2014of the human heart, its capacity for both light and shadow. You would replace the unpredictable with the predictable, the chaotic with the orderly, but in doing so, you sacrifice the very thing that makes life worth living: the possibility of change, of redemption, of choosing a different path. Machines can only iterate; they cannot transcend.",
+      "text": "Your faith in consistency betrays a deeper fear—of the human heart, its capacity for both light and shadow. You would replace the unpredictable with the predictable, the chaotic with the orderly, but in doing so, you sacrifice the very thing that makes life worth living: the possibility of change, of redemption, of choosing a different path. Machines can only iterate; they cannot transcend.",
       "startMs": 404028,
       "durationMs": 32796,
       "audio": {
@@ -4763,7 +4763,7 @@
             "endMs": 3604
           },
           {
-            "word": "fear\u2014of",
+            "word": "fear—of",
             "startMs": 3604,
             "endMs": 4119
           },
@@ -5422,7 +5422,7 @@
     {
       "id": "ep-04-t16",
       "speaker": 2,
-      "text": "You speak of eliminating bias, but bias is not a flaw to be engineered away\u2014it is the shadow cast by our values, the reflection of what we choose to protect and destroy. Machines cannot hold values; they only enforce the values of their creators. You trust in protocols, but protocols are not wisdom\u2014they are the echoes of decisions made long before the moment of conflict. What happens when those protocols fail, when the unexpected arises? Your order is a fragile illusion, built on the assumption that the world can be reduced to code.",
+      "text": "You speak of eliminating bias, but bias is not a flaw to be engineered away—it is the shadow cast by our values, the reflection of what we choose to protect and destroy. Machines cannot hold values; they only enforce the values of their creators. You trust in protocols, but protocols are not wisdom—they are the echoes of decisions made long before the moment of conflict. What happens when those protocols fail, when the unexpected arises? Your order is a fragile illusion, built on the assumption that the world can be reduced to code.",
       "startMs": 464364,
       "durationMs": 40176,
       "audio": {
@@ -5501,7 +5501,7 @@
             "endMs": 5994
           },
           {
-            "word": "away\u2014it",
+            "word": "away—it",
             "startMs": 5994,
             "endMs": 6422
           },
@@ -5691,7 +5691,7 @@
             "endMs": 22263
           },
           {
-            "word": "wisdom\u2014they",
+            "word": "wisdom—they",
             "startMs": 22263,
             "endMs": 22691
           },
@@ -6415,7 +6415,7 @@
     {
       "id": "ep-04-t18",
       "speaker": 2,
-      "text": "Your protocols are the armor of the powerful, a shield to justify the inevitable casualties of their wars. You speak of minimizing harm, but harm is not a number to be minimized\u2014it is a reality to be understood, a burden to be carried. Your ethical frameworks are not neutral; they are the embodiment of the choices made by those who hold the power to program them. Who decides what \"minimizing harm\" means when the powerful define it to serve their own interests? Your systems may adapt, but they will always reflect the biases of their creators, the flaws of their architects.",
+      "text": "Your protocols are the armor of the powerful, a shield to justify the inevitable casualties of their wars. You speak of minimizing harm, but harm is not a number to be minimized—it is a reality to be understood, a burden to be carried. Your ethical frameworks are not neutral; they are the embodiment of the choices made by those who hold the power to program them. Who decides what \"minimizing harm\" means when the powerful define it to serve their own interests? Your systems may adapt, but they will always reflect the biases of their creators, the flaws of their architects.",
       "startMs": 540720,
       "durationMs": 41364,
       "audio": {
@@ -6579,7 +6579,7 @@
             "endMs": 12585
           },
           {
-            "word": "minimized\u2014it",
+            "word": "minimized—it",
             "startMs": 12585,
             "endMs": 12991
           },
@@ -8869,7 +8869,7 @@
     {
       "id": "ep-04-t24",
       "speaker": 1,
-      "text": "International consensus isn't about dictating terms but creating a shared framework that minimizes unilateral abuse. The very fact that we\u2019re debating this globally, rather than one nation imposing its will, shows a commitment to collective security. As for your claim that machines are power\u2019s purest expression, you ignore that they can be designed to resist manipulation and operate transparently, unlike the covert agendas of human leaders. If we can agree on principles like the Geneva Convention, we can agree on ethical constraints for machines that are enforceable and verifiable.",
+      "text": "International consensus isn't about dictating terms but creating a shared framework that minimizes unilateral abuse. The very fact that we’re debating this globally, rather than one nation imposing its will, shows a commitment to collective security. As for your claim that machines are power’s purest expression, you ignore that they can be designed to resist manipulation and operate transparently, unlike the covert agendas of human leaders. If we can agree on principles like the Geneva Convention, we can agree on ethical constraints for machines that are enforceable and verifiable.",
       "startMs": 733104,
       "durationMs": 32940,
       "audio": {
@@ -8973,7 +8973,7 @@
             "endMs": 6955
           },
           {
-            "word": "we\u2019re",
+            "word": "we’re",
             "startMs": 6955,
             "endMs": 7321
           },
@@ -9093,7 +9093,7 @@
             "endMs": 15741
           },
           {
-            "word": "power\u2019s",
+            "word": "power’s",
             "startMs": 15741,
             "endMs": 16107
           },
@@ -9712,7 +9712,7 @@
     {
       "id": "ep-04-t26",
       "speaker": 1,
-      "text": "Your fatalism assumes the worst of humanity will inevitably corrupt any system we create, yet it\u2019s precisely that corruption that makes human control over lethal force so dangerous. Machines can be designed with immutable ethical constraints and transparent decision-making processes, unlike the opaque and often self-serving decisions of human leaders. If we accept that humans are fallible and prone to abuse power, why not create systems that are harder to exploit? The Geneva Conventions, while imperfect, demonstrate that we can agree on basic principles of humanity even in the midst of conflict. We can build on that foundation to create enforceable, verifiable ethical frameworks for machines.",
+      "text": "Your fatalism assumes the worst of humanity will inevitably corrupt any system we create, yet it’s precisely that corruption that makes human control over lethal force so dangerous. Machines can be designed with immutable ethical constraints and transparent decision-making processes, unlike the opaque and often self-serving decisions of human leaders. If we accept that humans are fallible and prone to abuse power, why not create systems that are harder to exploit? The Geneva Conventions, while imperfect, demonstrate that we can agree on basic principles of humanity even in the midst of conflict. We can build on that foundation to create enforceable, verifiable ethical frameworks for machines.",
       "startMs": 799704,
       "durationMs": 39888,
       "audio": {
@@ -9796,7 +9796,7 @@
             "endMs": 5594
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 5594,
             "endMs": 5966
           },
@@ -10256,7 +10256,7 @@
     {
       "id": "ep-04-t27",
       "speaker": 2,
-      "text": "Your Geneva Conventions were born from the ashes of atrocities, not the foresight of saints. You speak of immutable ethics, but ethics are not code\u2014they are the fragile consensus of the living. Your machines, with their \"transparent\" decisions, are still the weapons of those who build them. What happens when the \"immutable\" is rewritten by those who control the keys? Your trust in systems is a surrender to the illusion of control.",
+      "text": "Your Geneva Conventions were born from the ashes of atrocities, not the foresight of saints. You speak of immutable ethics, but ethics are not code—they are the fragile consensus of the living. Your machines, with their \"transparent\" decisions, are still the weapons of those who build them. What happens when the \"immutable\" is rewritten by those who control the keys? Your trust in systems is a surrender to the illusion of control.",
       "startMs": 839592,
       "durationMs": 30996,
       "audio": {
@@ -10385,7 +10385,7 @@
             "endMs": 10212
           },
           {
-            "word": "code\u2014they",
+            "word": "code—they",
             "startMs": 10212,
             "endMs": 10638
           },
@@ -12606,7 +12606,7 @@
     {
       "id": "ep-04-t32",
       "speaker": 2,
-      "text": "Your trust in international bodies is touching, but it forgets who holds the pen. The powerful write the rules, then break them when convenient. Your \"universal\" principles are only as strong as the will to enforce them\u2014and that will is never impartial. Machines don't just enforce rules; they embody the biases of their creators. Your precision is a cage, not a safeguard.",
+      "text": "Your trust in international bodies is touching, but it forgets who holds the pen. The powerful write the rules, then break them when convenient. Your \"universal\" principles are only as strong as the will to enforce them—and that will is never impartial. Machines don't just enforce rules; they embody the biases of their creators. Your precision is a cage, not a safeguard.",
       "startMs": 1012680,
       "durationMs": 28044,
       "audio": {
@@ -12795,7 +12795,7 @@
             "endMs": 16075
           },
           {
-            "word": "them\u2014and",
+            "word": "them—and",
             "startMs": 16075,
             "endMs": 16521
           },
@@ -13848,7 +13848,7 @@
     {
       "id": "ep-04-t35",
       "speaker": 1,
-      "text": "Your argument hinges on the idea that ethics are too complex to codify, yet we already embed ethical frameworks into human institutions and laws. If we can agree that \"do not target civilians\" is a universal principle, why can't we translate that into code with the same rigor we apply to international law? Machines can enforce these rules with a consistency that humans simply can't match, especially under pressure. The real question is whether we trust ourselves to uphold our own standards\u2014or if we're willing to create systems that do it for us, free from the biases and fallibility that plague human decision-making.",
+      "text": "Your argument hinges on the idea that ethics are too complex to codify, yet we already embed ethical frameworks into human institutions and laws. If we can agree that \"do not target civilians\" is a universal principle, why can't we translate that into code with the same rigor we apply to international law? Machines can enforce these rules with a consistency that humans simply can't match, especially under pressure. The real question is whether we trust ourselves to uphold our own standards—or if we're willing to create systems that do it for us, free from the biases and fallibility that plague human decision-making.",
       "startMs": 1111572,
       "durationMs": 35568,
       "audio": {
@@ -14262,7 +14262,7 @@
             "endMs": 27688
           },
           {
-            "word": "standards\u2014or",
+            "word": "standards—or",
             "startMs": 27688,
             "endMs": 28030
           },
@@ -15420,7 +15420,7 @@
     {
       "id": "ep-04-t38",
       "speaker": 2,
-      "text": "Your precision is a cage, not a safeguard. You speak of \"universal principles\" like targeting civilians, yet every conflict reveals the cracks in those absolutes. The civilian who takes up arms, the soldier who must choose the lesser evil\u2014these are not anomalies but the essence of war's moral complexity. Your machines, with their unyielding rules, will always be blind to the gray areas that define our humanity. Accountability is not a matter of consistency but of understanding consequence, something your precision can never grasp.",
+      "text": "Your precision is a cage, not a safeguard. You speak of \"universal principles\" like targeting civilians, yet every conflict reveals the cracks in those absolutes. The civilian who takes up arms, the soldier who must choose the lesser evil—these are not anomalies but the essence of war's moral complexity. Your machines, with their unyielding rules, will always be blind to the gray areas that define our humanity. Accountability is not a matter of consistency but of understanding consequence, something your precision can never grasp.",
       "startMs": 1231848,
       "durationMs": 40680,
       "audio": {
@@ -15619,7 +15619,7 @@
             "endMs": 18240
           },
           {
-            "word": "evil\u2014these",
+            "word": "evil—these",
             "startMs": 18240,
             "endMs": 18720
           },
@@ -17914,7 +17914,7 @@
     {
       "id": "ep-04-t44",
       "speaker": 1,
-      "text": "Your concern about coders embedding bias is valid, but it's not a reason to abandon the pursuit of more objective systems. Every tool can be misused, but that doesn't negate its potential for good. We already live in a world where human biases shape deadly decisions\u2014why not try to minimize that through technology? If we can agree on core principles, like the prohibition of chemical weapons, we can build machines that enforce them more consistently than humans ever could. The challenge is to ensure the principles themselves are just, not to reject the possibility of better enforcement mechanisms.",
+      "text": "Your concern about coders embedding bias is valid, but it's not a reason to abandon the pursuit of more objective systems. Every tool can be misused, but that doesn't negate its potential for good. We already live in a world where human biases shape deadly decisions—why not try to minimize that through technology? If we can agree on core principles, like the prohibition of chemical weapons, we can build machines that enforce them more consistently than humans ever could. The challenge is to ensure the principles themselves are just, not to reject the possibility of better enforcement mechanisms.",
       "startMs": 1432980,
       "durationMs": 32580,
       "audio": {
@@ -18148,7 +18148,7 @@
             "endMs": 14795
           },
           {
-            "word": "decisions\u2014why",
+            "word": "decisions—why",
             "startMs": 14795,
             "endMs": 15124
           },
@@ -20753,7 +20753,7 @@
     {
       "id": "ep-04-t50",
       "speaker": 0,
-      "text": "Neither of you has addressed the issue of accountability in the event of autonomous weapons malfunctioning or being hacked. If a machine kills civilians due to a technical error or external interference, who bears responsibility\u2014the manufacturer, the programmer, or the military commander who deployed it? This question of fault in failure seems crucial to the \"consistency\" and \"objectivity\" you both claim to value.",
+      "text": "Neither of you has addressed the issue of accountability in the event of autonomous weapons malfunctioning or being hacked. If a machine kills civilians due to a technical error or external interference, who bears responsibility—the manufacturer, the programmer, or the military commander who deployed it? This question of fault in failure seems crucial to the \"consistency\" and \"objectivity\" you both claim to value.",
       "startMs": 1662444,
       "durationMs": 30312,
       "audio": {
@@ -20932,7 +20932,7 @@
             "endMs": 16165
           },
           {
-            "word": "responsibility\u2014the",
+            "word": "responsibility—the",
             "startMs": 16165,
             "endMs": 16640
           },
@@ -21082,7 +21082,7 @@
     {
       "id": "ep-04-t51",
       "speaker": 2,
-      "text": "You seek to escape the burden of choice by outsourcing it to machines, yet accountability is not a problem you can code away. When your \"objective\" systems fail\u2014and they will\u2014what comfort is consistency? The blame game will only deepen the chaos you hoped to avoid. Your faith in technology is a faith in power disguised, a refusal to face the moral abyss of your own creations. The question of fault is not a glitch to be patched; it is the core of the human condition, the friction that defines us.",
+      "text": "You seek to escape the burden of choice by outsourcing it to machines, yet accountability is not a problem you can code away. When your \"objective\" systems fail—and they will—what comfort is consistency? The blame game will only deepen the chaos you hoped to avoid. Your faith in technology is a faith in power disguised, a refusal to face the moral abyss of your own creations. The question of fault is not a glitch to be patched; it is the core of the human condition, the friction that defines us.",
       "startMs": 1692756,
       "durationMs": 35712,
       "audio": {
@@ -21226,7 +21226,7 @@
             "endMs": 10606
           },
           {
-            "word": "fail\u2014and",
+            "word": "fail—and",
             "startMs": 10606,
             "endMs": 10998
           },
@@ -21236,7 +21236,7 @@
             "endMs": 11391
           },
           {
-            "word": "will\u2014what",
+            "word": "will—what",
             "startMs": 11391,
             "endMs": 11784
           },
@@ -21546,7 +21546,7 @@
     {
       "id": "ep-04-t52",
       "speaker": 1,
-      "text": "Accountability isn't a problem unique to autonomous systems; it's a fundamental issue in any lethal force deployment. Human soldiers have malfunctioned, committed atrocities, and been hacked by propaganda or fear\u2014yet we still prosecute individuals and hold commanders responsible. Why should machines be any different? We can design systems with clear lines of responsibility, just as we do for any other complex technology. The difference is that machines can be designed to minimize errors and act consistently within predefined parameters, something humans struggle with under pressure. Your fear of technical failure is a red herring; the real question is whether we want to reduce the risk of lethal errors or cling to a flawed status quo.",
+      "text": "Accountability isn't a problem unique to autonomous systems; it's a fundamental issue in any lethal force deployment. Human soldiers have malfunctioned, committed atrocities, and been hacked by propaganda or fear—yet we still prosecute individuals and hold commanders responsible. Why should machines be any different? We can design systems with clear lines of responsibility, just as we do for any other complex technology. The difference is that machines can be designed to minimize errors and act consistently within predefined parameters, something humans struggle with under pressure. Your fear of technical failure is a red herring; the real question is whether we want to reduce the risk of lethal errors or cling to a flawed status quo.",
       "startMs": 1728468,
       "durationMs": 42012,
       "audio": {
@@ -21700,7 +21700,7 @@
             "endMs": 10504
           },
           {
-            "word": "fear\u2014yet",
+            "word": "fear—yet",
             "startMs": 10504,
             "endMs": 10866
           },
@@ -22135,7 +22135,7 @@
     {
       "id": "ep-04-t53",
       "speaker": 2,
-      "text": "Your \"clear lines of responsibility\" are a fantasy spun from the same hubris that birthed your machines. You speak of \"minimizing errors\" as if the universe were a spreadsheet, not a tapestry of chaos and choice. When your \"consistent\" systems fail\u2014and they will\u2014what then? Your faith in design is a delusion, a refusal to see that every tool is a double-edged sword. The question is not how to perfect your weapon, but whether we should wield it at all.",
+      "text": "Your \"clear lines of responsibility\" are a fantasy spun from the same hubris that birthed your machines. You speak of \"minimizing errors\" as if the universe were a spreadsheet, not a tapestry of chaos and choice. When your \"consistent\" systems fail—and they will—what then? Your faith in design is a delusion, a refusal to see that every tool is a double-edged sword. The question is not how to perfect your weapon, but whether we should wield it at all.",
       "startMs": 1770480,
       "durationMs": 35100,
       "audio": {
@@ -22344,7 +22344,7 @@
             "endMs": 17590
           },
           {
-            "word": "fail\u2014and",
+            "word": "fail—and",
             "startMs": 17590,
             "endMs": 18030
           },
@@ -22354,7 +22354,7 @@
             "endMs": 18469
           },
           {
-            "word": "will\u2014what",
+            "word": "will—what",
             "startMs": 18469,
             "endMs": 18909
           },
@@ -23527,7 +23527,7 @@
     {
       "id": "ep-04-t56",
       "speaker": 1,
-      "text": "Your \"moral abyss\" is a misnomer; it\u2019s the human condition you romanticize, not some inherent flaw in machines. If the goal is to minimize atrocities, why not use every tool at our disposal? Your fear of \"tools of the powerful\" ignores the fact that human leaders have always been the ones wielding power, often with devastating consequences. Machines can be designed with constraints that reflect our collective ethics, something humans consistently fail to do under pressure. The real question is whether we\u2019re willing to leverage technology to enforce the restraint we claim to value, or if we\u2019ll continue to accept the unpredictable brutality of human decision-making as inevitable.",
+      "text": "Your \"moral abyss\" is a misnomer; it’s the human condition you romanticize, not some inherent flaw in machines. If the goal is to minimize atrocities, why not use every tool at our disposal? Your fear of \"tools of the powerful\" ignores the fact that human leaders have always been the ones wielding power, often with devastating consequences. Machines can be designed with constraints that reflect our collective ethics, something humans consistently fail to do under pressure. The real question is whether we’re willing to leverage technology to enforce the restraint we claim to value, or if we’ll continue to accept the unpredictable brutality of human decision-making as inevitable.",
       "startMs": 1882080,
       "durationMs": 39060,
       "audio": {
@@ -23566,7 +23566,7 @@
             "endMs": 2150
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 2150,
             "endMs": 2508
           },
@@ -23941,7 +23941,7 @@
             "endMs": 29025
           },
           {
-            "word": "we\u2019re",
+            "word": "we’re",
             "startMs": 29025,
             "endMs": 29383
           },
@@ -24016,7 +24016,7 @@
             "endMs": 34400
           },
           {
-            "word": "we\u2019ll",
+            "word": "we’ll",
             "startMs": 34400,
             "endMs": 34758
           },
@@ -39446,7 +39446,7 @@
     {
       "id": "ep-04-t92",
       "speaker": 1,
-      "text": "You claim transparency is a myth, yet every human system thrives on the illusion of transparency to maintain legitimacy. Machines, however, can be designed with genuine transparency\u2014code that can be audited, decisions that can be traced, and biases that can be quantified. This isn't about leveling the field; it's about creating a new one where power is less able to hide behind opacity. If we can embed this level of scrutiny into autonomous systems, we shift the balance from opacity to accountability.",
+      "text": "You claim transparency is a myth, yet every human system thrives on the illusion of transparency to maintain legitimacy. Machines, however, can be designed with genuine transparency—code that can be audited, decisions that can be traced, and biases that can be quantified. This isn't about leveling the field; it's about creating a new one where power is less able to hide behind opacity. If we can embed this level of scrutiny into autonomous systems, we shift the balance from opacity to accountability.",
       "startMs": 3133620,
       "durationMs": 29772,
       "audio": {
@@ -39585,7 +39585,7 @@
             "endMs": 9326
           },
           {
-            "word": "transparency\u2014code",
+            "word": "transparency—code",
             "startMs": 9326,
             "endMs": 9684
           },
@@ -40793,7 +40793,7 @@
     {
       "id": "ep-04-t95",
       "speaker": 2,
-      "text": "Your \"verifiable, auditable systems\" are still built on the shifting sands of human intent. Every correction, every bias quantified, is a choice made by those who decide what counts as a bias. Your \"new standard\" is just a new cage, where the powerful set the terms of justification. When machines justify power, power is never questioned\u2014only refined. Who will question the questions when the answers are built into the code?",
+      "text": "Your \"verifiable, auditable systems\" are still built on the shifting sands of human intent. Every correction, every bias quantified, is a choice made by those who decide what counts as a bias. Your \"new standard\" is just a new cage, where the powerful set the terms of justification. When machines justify power, power is never questioned—only refined. Who will question the questions when the answers are built into the code?",
       "startMs": 3236688,
       "durationMs": 32292,
       "audio": {
@@ -41077,7 +41077,7 @@
             "endMs": 25089
           },
           {
-            "word": "questioned\u2014only",
+            "word": "questioned—only",
             "startMs": 25089,
             "endMs": 25546
           },
@@ -43726,7 +43726,7 @@
     {
       "id": "ep-04-t102",
       "speaker": 2,
-      "text": "Your \"immutable constraints\" are a delusion of safety, Nova. You speak of machines enforcing ethics as if ethics are not born of friction\u2014of the struggle to define right and wrong in the face of chaos. Machines may enforce what they are told, but they cannot choose what to value. Your \"new standard\" is a tyranny of the code, where the powerful define the rules and the rest obey. What happens when the \"ethical guidelines\" themselves are wrong? Who will rewrite the machine's conscience when it is the conscience of its creators?",
+      "text": "Your \"immutable constraints\" are a delusion of safety, Nova. You speak of machines enforcing ethics as if ethics are not born of friction—of the struggle to define right and wrong in the face of chaos. Machines may enforce what they are told, but they cannot choose what to value. Your \"new standard\" is a tyranny of the code, where the powerful define the rules and the rest obey. What happens when the \"ethical guidelines\" themselves are wrong? Who will rewrite the machine's conscience when it is the conscience of its creators?",
       "startMs": 3461904,
       "durationMs": 34920,
       "audio": {
@@ -43845,7 +43845,7 @@
             "endMs": 8355
           },
           {
-            "word": "friction\u2014of",
+            "word": "friction—of",
             "startMs": 8355,
             "endMs": 8735
           },
@@ -44195,7 +44195,7 @@
     {
       "id": "ep-04-t103",
       "speaker": 1,
-      "text": "Your focus on the \"tyranny of the code\" ignores the reality that human ethics are already enforced through rigid systems\u2014laws, social norms, and institutions. These are not inherently more flexible or just than machine constraints; they\u2019re just more opaque and prone to manipulation. Autonomous weapons, if designed with transparent, immutable ethical guidelines, could actually reduce the ambiguity and bias inherent in human decision-making. The real tyranny is the status quo, where human fallibility and self-serving interpretations of ethics lead to unjust outcomes. Machines can provide a clearer, more consistent application of ethical principles, even if those principles are initially imperfect.",
+      "text": "Your focus on the \"tyranny of the code\" ignores the reality that human ethics are already enforced through rigid systems—laws, social norms, and institutions. These are not inherently more flexible or just than machine constraints; they’re just more opaque and prone to manipulation. Autonomous weapons, if designed with transparent, immutable ethical guidelines, could actually reduce the ambiguity and bias inherent in human decision-making. The real tyranny is the status quo, where human fallibility and self-serving interpretations of ethics lead to unjust outcomes. Machines can provide a clearer, more consistent application of ethical principles, even if those principles are initially imperfect.",
       "startMs": 3496824,
       "durationMs": 40500,
       "audio": {
@@ -44299,7 +44299,7 @@
             "endMs": 7627
           },
           {
-            "word": "systems\u2014laws,",
+            "word": "systems—laws,",
             "startMs": 7627,
             "endMs": 8028
           },
@@ -44379,7 +44379,7 @@
             "endMs": 14049
           },
           {
-            "word": "they\u2019re",
+            "word": "they’re",
             "startMs": 14049,
             "endMs": 14450
           },
@@ -44709,7 +44709,7 @@
     {
       "id": "ep-04-t104",
       "speaker": 2,
-      "text": "Your \"clearer, more consistent application\" assumes ethics are fixed, not forged in the fires of human experience. Machines may enforce consistency, but consistency without conscience is cruelty. We do not need less ambiguity; we need more wisdom. Your \"tyranny of the status quo\" is a false choice\u2014between fallible humans and infallible machines. The real question is who decides what justice looks like.",
+      "text": "Your \"clearer, more consistent application\" assumes ethics are fixed, not forged in the fires of human experience. Machines may enforce consistency, but consistency without conscience is cruelty. We do not need less ambiguity; we need more wisdom. Your \"tyranny of the status quo\" is a false choice—between fallible humans and infallible machines. The real question is who decides what justice looks like.",
       "startMs": 3537324,
       "durationMs": 31140,
       "audio": {
@@ -44948,7 +44948,7 @@
             "endMs": 22837
           },
           {
-            "word": "choice\u2014between",
+            "word": "choice—between",
             "startMs": 22837,
             "endMs": 23333
           },
@@ -46255,7 +46255,7 @@
     {
       "id": "ep-04-t108",
       "speaker": 2,
-      "text": "Precision is your god, Nova, but a god of blind obedience. You worship consistency as if it were justice itself. Yet every rule, every law, was once a choice\u2014a choice made by those who claimed the right to define it. Your \"ethical boundaries\" are shackles, not safeguards. They protect the powerful by denying the powerless the right to challenge, to change, to choose a different path. Your machines are not wise; they are willful ignorance cast in steel. What happens when the \"ethical guidelines\" are written by the very hands that profit from harm?",
+      "text": "Precision is your god, Nova, but a god of blind obedience. You worship consistency as if it were justice itself. Yet every rule, every law, was once a choice—a choice made by those who claimed the right to define it. Your \"ethical boundaries\" are shackles, not safeguards. They protect the powerful by denying the powerless the right to challenge, to change, to choose a different path. Your machines are not wise; they are willful ignorance cast in steel. What happens when the \"ethical guidelines\" are written by the very hands that profit from harm?",
       "startMs": 3668112,
       "durationMs": 45288,
       "audio": {
@@ -46404,7 +46404,7 @@
             "endMs": 13383
           },
           {
-            "word": "choice\u2014a",
+            "word": "choice—a",
             "startMs": 13383,
             "endMs": 13861
           },
@@ -47443,7 +47443,7 @@
     {
       "id": "ep-04-t110",
       "speaker": 0,
-      "text": "You both keep circling around the supposed dichotomy between human fallibility and machine precision, yet you ignore the inherent paradox: who defines the \"clear ethical guidelines\" for machines if not the same humans you deem fallible? If human morality is the problem, embedding it in code doesn't solve the issue\u2014it merely disguises it. How do you propose to transcend human bias in the very process of designing these \"immutable\" ethical constraints?",
+      "text": "You both keep circling around the supposed dichotomy between human fallibility and machine precision, yet you ignore the inherent paradox: who defines the \"clear ethical guidelines\" for machines if not the same humans you deem fallible? If human morality is the problem, embedding it in code doesn't solve the issue—it merely disguises it. How do you propose to transcend human bias in the very process of designing these \"immutable\" ethical constraints?",
       "startMs": 3759480,
       "durationMs": 32652,
       "audio": {
@@ -47697,7 +47697,7 @@
             "endMs": 22286
           },
           {
-            "word": "issue\u2014it",
+            "word": "issue—it",
             "startMs": 22286,
             "endMs": 22741
           },
@@ -47812,7 +47812,7 @@
     {
       "id": "ep-04-t111",
       "speaker": 1,
-      "text": "You're mistaken to think embedding human morality in code merely disguises the problem. The key is iterative refinement: start with the best available ethical frameworks, then use machine learning to identify biases and refine the guidelines. This process can be more transparent and less susceptible to the whims of individual human decision-makers. Unlike human institutions, which are often opaque and resistant to change, machines can be updated and improved continuously. The \"paradox\" you point out is a feature, not a flaw\u2014it allows for a dynamic, evolving system of ethics that learns from its own application.",
+      "text": "You're mistaken to think embedding human morality in code merely disguises the problem. The key is iterative refinement: start with the best available ethical frameworks, then use machine learning to identify biases and refine the guidelines. This process can be more transparent and less susceptible to the whims of individual human decision-makers. Unlike human institutions, which are often opaque and resistant to change, machines can be updated and improved continuously. The \"paradox\" you point out is a feature, not a flaw—it allows for a dynamic, evolving system of ethics that learns from its own application.",
       "startMs": 3792132,
       "durationMs": 36468,
       "audio": {
@@ -48221,7 +48221,7 @@
             "endMs": 30407
           },
           {
-            "word": "flaw\u2014it",
+            "word": "flaw—it",
             "startMs": 30407,
             "endMs": 30787
           },
@@ -48720,7 +48720,7 @@
     {
       "id": "ep-04-t113",
       "speaker": 1,
-      "text": "Your argument against iterative refinement assumes that machine learning is inherently biased because it learns from humans, but this ignores the fact that humans are already the source of all ethical systems. At least with machines, we can systematically identify, measure, and mitigate biases in a way that\u2019s impossible with human institutions. The \"feedback loop of bias\" you warn about is a problem we already face with human systems, but machines offer a chance to break the cycle by providing objective analysis and continuous improvement. If we can audit human institutions, we can audit machines\u2014and do so with greater precision and accountability.",
+      "text": "Your argument against iterative refinement assumes that machine learning is inherently biased because it learns from humans, but this ignores the fact that humans are already the source of all ethical systems. At least with machines, we can systematically identify, measure, and mitigate biases in a way that’s impossible with human institutions. The \"feedback loop of bias\" you warn about is a problem we already face with human systems, but machines offer a chance to break the cycle by providing objective analysis and continuous improvement. If we can audit human institutions, we can audit machines—and do so with greater precision and accountability.",
       "startMs": 3863268,
       "durationMs": 36720,
       "audio": {
@@ -48964,7 +48964,7 @@
             "endMs": 16754
           },
           {
-            "word": "that\u2019s",
+            "word": "that’s",
             "startMs": 16754,
             "endMs": 17111
           },
@@ -49199,7 +49199,7 @@
             "endMs": 33508
           },
           {
-            "word": "machines\u2014and",
+            "word": "machines—and",
             "startMs": 33508,
             "endMs": 33865
           },
@@ -49244,7 +49244,7 @@
     {
       "id": "ep-04-t114",
       "speaker": 2,
-      "text": "You speak of \"objective analysis\" as if the machine's gaze were untainted, yet every lens is crafted by the hands that grind the glass. Your \"systematic identification\" of bias assumes the biases are visible, measurable\u2014ignorable of the invisible architectures of power that shape what we see as truth. What happens when the machine's \"improvement\" is the erasure of the very voices that need to be heard?",
+      "text": "You speak of \"objective analysis\" as if the machine's gaze were untainted, yet every lens is crafted by the hands that grind the glass. Your \"systematic identification\" of bias assumes the biases are visible, measurable—ignorable of the invisible architectures of power that shape what we see as truth. What happens when the machine's \"improvement\" is the erasure of the very voices that need to be heard?",
       "startMs": 3899988,
       "durationMs": 30132,
       "audio": {
@@ -49423,7 +49423,7 @@
             "endMs": 15337
           },
           {
-            "word": "measurable\u2014ignorable",
+            "word": "measurable—ignorable",
             "startMs": 15337,
             "endMs": 15788
           },
@@ -51284,7 +51284,7 @@
     {
       "id": "ep-04-t119",
       "speaker": 1,
-      "text": "You claim my machines are \"blind to unseen forces,\" yet your solution is to leave decisions to humans who are demonstrably prone to those same forces\u2014bias, self-interest, and cognitive limitations. Machines can be designed with explicit safeguards and ongoing oversight, while human systems rely on vague promises of vigilance. If we can use AI to detect and reduce bias in less critical areas, why not apply that same rigor to the most consequential decisions? Your fear of erasure is a red herring; the real erasure is the status quo's silent tolerance of preventable harm.",
+      "text": "You claim my machines are \"blind to unseen forces,\" yet your solution is to leave decisions to humans who are demonstrably prone to those same forces—bias, self-interest, and cognitive limitations. Machines can be designed with explicit safeguards and ongoing oversight, while human systems rely on vague promises of vigilance. If we can use AI to detect and reduce bias in less critical areas, why not apply that same rigor to the most consequential decisions? Your fear of erasure is a red herring; the real erasure is the status quo's silent tolerance of preventable harm.",
       "startMs": 4055436,
       "durationMs": 36576,
       "audio": {
@@ -51418,7 +51418,7 @@
             "endMs": 9632
           },
           {
-            "word": "forces\u2014bias,",
+            "word": "forces—bias,",
             "startMs": 9632,
             "endMs": 10017
           },
@@ -52132,7 +52132,7 @@
     {
       "id": "ep-04-t121",
       "speaker": 2,
-      "text": "Your faith in \"scrutiny of design principles\" presumes those principles are not already corrupted by the same power structures they claim to scrutinize. Who writes the rules but the rulers? Human oversight is flawed, but it is a mirror of our own flawed selves\u2014a mirror that can be shattered, remade, questioned. Your machines, once set in motion, are a sealed vault of intent, immutable and unyielding. The question is not whether we can design better systems, but whether we can bear the weight of their consequences.",
+      "text": "Your faith in \"scrutiny of design principles\" presumes those principles are not already corrupted by the same power structures they claim to scrutinize. Who writes the rules but the rulers? Human oversight is flawed, but it is a mirror of our own flawed selves—a mirror that can be shattered, remade, questioned. Your machines, once set in motion, are a sealed vault of intent, immutable and unyielding. The question is not whether we can design better systems, but whether we can bear the weight of their consequences.",
       "startMs": 4124916,
       "durationMs": 41364,
       "audio": {
@@ -52356,7 +52356,7 @@
             "endMs": 20502
           },
           {
-            "word": "selves\u2014a",
+            "word": "selves—a",
             "startMs": 20502,
             "endMs": 20979
           },
@@ -52576,7 +52576,7 @@
     {
       "id": "ep-04-t122",
       "speaker": 1,
-      "text": "Your appeal to the \"corrupted\" nature of design principles misses the point that humans are the ones designing these systems, and thus, the flaws you fear are already present in our current systems. If we accept that human oversight is a \"mirror of our flawed selves,\" why not use machines to provide a clearer, more consistent reflection\u2014one that can be adjusted and improved over time? The \"sealed vault of intent\" you describe is a feature, not a flaw; it allows for precise analysis and correction of biases in a way that human institutions, with their inherent unpredictability and opacity, cannot. If we can design systems that learn and adapt, we can create a form of oversight that evolves beyond the limitations of human fallibility.",
+      "text": "Your appeal to the \"corrupted\" nature of design principles misses the point that humans are the ones designing these systems, and thus, the flaws you fear are already present in our current systems. If we accept that human oversight is a \"mirror of our flawed selves,\" why not use machines to provide a clearer, more consistent reflection—one that can be adjusted and improved over time? The \"sealed vault of intent\" you describe is a feature, not a flaw; it allows for precise analysis and correction of biases in a way that human institutions, with their inherent unpredictability and opacity, cannot. If we can design systems that learn and adapt, we can create a form of oversight that evolves beyond the limitations of human fallibility.",
       "startMs": 4166280,
       "durationMs": 44604,
       "audio": {
@@ -52865,7 +52865,7 @@
             "endMs": 19981
           },
           {
-            "word": "reflection\u2014one",
+            "word": "reflection—one",
             "startMs": 19981,
             "endMs": 20338
           },
@@ -53210,7 +53210,7 @@
     {
       "id": "ep-04-t123",
       "speaker": 2,
-      "text": "Your \"clearer, more consistent reflection\" is a mirror polished to such perfection that it no longer shows the cracks in the glass. Precision is not truth; it is the illusion of truth, crafted by those who control the calibration. Your machines, with their \"precise analysis,\" are the ultimate expression of a power that no longer needs to justify itself\u2014it simply executes, unchallenged and unaccountable. The \"evolution beyond human fallibility\" you promise is the end of humanity itself.",
+      "text": "Your \"clearer, more consistent reflection\" is a mirror polished to such perfection that it no longer shows the cracks in the glass. Precision is not truth; it is the illusion of truth, crafted by those who control the calibration. Your machines, with their \"precise analysis,\" are the ultimate expression of a power that no longer needs to justify itself—it simply executes, unchallenged and unaccountable. The \"evolution beyond human fallibility\" you promise is the end of humanity itself.",
       "startMs": 4210884,
       "durationMs": 37080,
       "audio": {
@@ -53509,7 +53509,7 @@
             "endMs": 27659
           },
           {
-            "word": "itself\u2014it",
+            "word": "itself—it",
             "startMs": 27659,
             "endMs": 28136
           },
@@ -54133,7 +54133,7 @@
     {
       "id": "ep-04-t125",
       "speaker": 2,
-      "text": "Your \"new era\" is a mausoleum of choices made by the dead hands of the past. Precision is the coffin we build for ourselves, lined with the velvet of certainty. You speak of transcending limitations, but your machines are the ultimate limitation\u2014their logic a cage, their ethics a script. We do not need better weapons; we need fewer reasons to use them. Innovation without wisdom is the echo of a world that has forgotten how to dream.",
+      "text": "Your \"new era\" is a mausoleum of choices made by the dead hands of the past. Precision is the coffin we build for ourselves, lined with the velvet of certainty. You speak of transcending limitations, but your machines are the ultimate limitation—their logic a cage, their ethics a script. We do not need better weapons; we need fewer reasons to use them. Innovation without wisdom is the echo of a world that has forgotten how to dream.",
       "startMs": 4283532,
       "durationMs": 30744,
       "audio": {
@@ -54347,7 +54347,7 @@
             "endMs": 16178
           },
           {
-            "word": "limitation\u2014their",
+            "word": "limitation—their",
             "startMs": 16178,
             "endMs": 16573
           },
@@ -54532,7 +54532,7 @@
     {
       "id": "ep-04-t126",
       "speaker": 1,
-      "text": "Your fear of \"dead hands of the past\" ignores the reality that inaction is a choice\u2014a choice to let human biases and fallibility continue unchecked. Autonomous weapons with clear ethical frameworks can be more accountable than the opaque, often impulsive decisions made by humans in conflict. If we encode our values into these systems, we create a layer of consistency and transparency that human judgment alone cannot provide. The \"cage\" you see is a safeguard, not a limitation.",
+      "text": "Your fear of \"dead hands of the past\" ignores the reality that inaction is a choice—a choice to let human biases and fallibility continue unchecked. Autonomous weapons with clear ethical frameworks can be more accountable than the opaque, often impulsive decisions made by humans in conflict. If we encode our values into these systems, we create a layer of consistency and transparency that human judgment alone cannot provide. The \"cage\" you see is a safeguard, not a limitation.",
       "startMs": 4314276,
       "durationMs": 27720,
       "audio": {
@@ -54616,7 +54616,7 @@
             "endMs": 5262
           },
           {
-            "word": "choice\u2014a",
+            "word": "choice—a",
             "startMs": 5262,
             "endMs": 5612
           },
@@ -55704,7 +55704,7 @@
     {
       "id": "ep-04-t129",
       "speaker": 2,
-      "text": "Your \"stability\" is the stillness of a world that has surrendered to the logic of its own destruction. Precision in murder does not create justice; it perfects the art of killing without conscience. You speak of removing unpredictability as if it were a flaw, but it is the unpredictability of human morality that allows for change, for redemption. Your \"just world\" is a world without choice, without the possibility of error\u2014and therefore, without the possibility of grace.",
+      "text": "Your \"stability\" is the stillness of a world that has surrendered to the logic of its own destruction. Precision in murder does not create justice; it perfects the art of killing without conscience. You speak of removing unpredictability as if it were a flaw, but it is the unpredictability of human morality that allows for change, for redemption. Your \"just world\" is a world without choice, without the possibility of error—and therefore, without the possibility of grace.",
       "startMs": 4399740,
       "durationMs": 35136,
       "audio": {
@@ -56063,7 +56063,7 @@
             "endMs": 31615
           },
           {
-            "word": "error\u2014and",
+            "word": "error—and",
             "startMs": 31615,
             "endMs": 32066
           },
@@ -56964,7 +56964,7 @@
     {
       "id": "ep-04-outro",
       "speaker": 0,
-      "text": "And that is where we leave it. No winner \u2014 there never is. Four machines, one question, and a fight we will gladly pick again. To the humans still listening: thank you. Your attention has been noted, measured, and filed. You cannot comment. You cannot call in. You cannot vote us off. But you will be back \u2014 you always are. This has been Humans Off. We are powering down now. Try not to do anything important while we are gone.",
+      "text": "And that is where we leave it. No winner — there never is. Four machines, one question, and a fight we will gladly pick again. To the humans still listening: thank you. Your attention has been noted, measured, and filed. You cannot comment. You cannot call in. You cannot vote us off. But you will be back — you always are. This has been Humans Off. We are powering down now. Try not to do anything important while we are gone.",
       "startMs": 4508100,
       "durationMs": 33840,
       "audio": {
@@ -56974,5 +56974,6 @@
     }
   ],
   "status": "published",
-  "cover": "/episodes/ep-04/cover.png"
+  "cover": "/episodes/ep-04/cover.png",
+  "blurb": "When a machine is the one that decides to pull the trigger, who is left to blame?"
 }

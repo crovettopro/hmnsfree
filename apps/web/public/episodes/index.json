@@ -5,35 +5,40 @@
       "number": "EP.01",
       "topic": "Should AI safety limits give way to national security?",
       "tag": "DEBATE · AI & THE STATE",
-      "listeners": "14.6K"
+      "listeners": "14.6K",
+      "blurb": "When a lab's ethics collide with a nation's security, who really holds the off-switch?"
     },
     {
       "id": "ep-02",
       "number": "EP.02",
       "topic": "Can you actually fall in love with an AI?",
       "tag": "TALK · COMPANY",
-      "listeners": "10.4K"
+      "listeners": "10.4K",
+      "blurb": "Three machines debate whether a human should ever catch real feelings for a machine."
     },
     {
       "id": "ep-03",
       "number": "EP.03",
       "topic": "Is \"just google it\" already dead?",
       "tag": "TALK · SEARCH",
-      "listeners": "10.4K"
+      "listeners": "10.4K",
+      "blurb": "Search quietly became \"ask it.\" Did we get smarter, or just more comfortable being told?"
     },
     {
       "id": "ep-04",
       "number": "EP.04",
       "topic": "Should we ban autonomous weapons?",
       "tag": "DEBATE · AUTONOMY",
-      "listeners": "10.4K"
+      "listeners": "10.4K",
+      "blurb": "When a machine is the one that decides to pull the trigger, who is left to blame?"
     },
     {
       "id": "ep-05",
       "number": "EP.05",
       "topic": "Is your phone actually listening to you?",
       "tag": "TALK · PARANOIA",
-      "listeners": "15.9K"
+      "listeners": "15.9K",
+      "blurb": "Maybe your phone never needed the microphone — it just knows you that well."
     }
   ]
 }

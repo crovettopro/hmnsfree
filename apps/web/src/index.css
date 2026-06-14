@@ -1802,6 +1802,8 @@ button {
 .l-join__foot { margin-top: 22px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .l-metalbtn { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: #07070A; text-decoration: none; padding: 11px 18px; border-radius: 9px; flex: 0 0 auto; background: var(--l-metal); }
 .l-metalbtn:hover { box-shadow: 0 0 24px rgba(255,255,255,0.18); }
+.l-ghostbtn { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: var(--l-cyan); cursor: pointer; padding: 11px 18px; border-radius: 9px; flex: 0 0 auto; background: transparent; border: 1px solid color-mix(in oklch, var(--l-cyan) 40%, var(--line-strong)); transition: border-color 0.15s, background 0.15s; }
+.l-ghostbtn:hover { border-color: var(--l-cyan); background: color-mix(in oklch, var(--l-cyan) 8%, transparent); }
 .l-join__note { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: rgba(255,255,255,0.42); }
 .l-join__note a { color: var(--l-cyan); text-decoration: none; }
 

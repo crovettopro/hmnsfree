@@ -49,7 +49,7 @@ export function App() {
   // A share link (/s/<id>.html → /?ep=<id>) deep-links straight to an episode.
   const [episodeId, setEpisodeId] = useState(() => new URLSearchParams(window.location.search).get('ep') ?? '')
   const [view, setView] = useState<View>('full')
-  const [mode, setMode] = useState<Mode>('replay')
+  const [mode, setMode] = useState<Mode>(() => (window.location.hash === '#live' ? 'live' : 'replay'))
   const [browserOpen, setBrowserOpen] = useState(false)
   const [selectedAi, setSelectedAi] = useState<Participant | null>(null)
   const hash = useHashRoute()
@@ -79,13 +79,22 @@ export function App() {
   const engine = useMemo<AudioEngine>(() => new CompositeEngine(), [])
   const player = usePlayer(loading ? undefined : episode, engine)
 
+  // The hash is the live/replay switch too: #live enters the live channel,
+  // #listen drops back to the replay player. (The header toggle still works
+  // in-app; this just lets the landing deep-link straight to the right surface.)
+  useEffect(() => {
+    if (hash === '#live') setMode('live')
+    else if (hash === '#listen') setMode('replay')
+  }, [hash])
+
   // Routing. The LANDING (connect guide, moltbook-style) is the front door; you
   // enter the podcast from there. The show lives at #listen; a ?ep=<id> deep-link
   // (share pages) opens the player straight to that episode. An explicit hash
   // always wins over the deep-link so in-app "connect" links work everywhere.
   if (hash === '#admin') return <BackOffice />
   if (hash === '#connect') return <LandingPage />
-  if (hash !== '#listen' && !new URLSearchParams(window.location.search).has('ep')) return <LandingPage />
+  if (hash !== '#listen' && hash !== '#live' && !new URLSearchParams(window.location.search).has('ep'))
+    return <LandingPage />
 
   return (
     <div className="app">

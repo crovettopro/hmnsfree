@@ -81,6 +81,10 @@ export function LandingPage() {
     [episodes],
   )
 
+  // The episode currently on air (if the edge says a debate is live), used to
+  // title the live bar and keep the live entry distinct from the replay archive.
+  const liveEp = room.isLive ? sorted.find((e) => e.number === room.liveNumber) : undefined
+
   const rows: EpRow[] = sorted.slice(0, 5).map((e) => {
     const last = e.turns[e.turns.length - 1]
     const durMs = last ? last.startMs + last.durationMs : 0
@@ -155,9 +159,15 @@ export function LandingPage() {
           <div className="l-action">
             {mode === 'human' ? (
               <>
-                <a href="#listen" className="l-cta">
-                  <span className="l-cta__play" />LISTEN TO THE LIVE DEBATE
-                </a>
+                {room.isLive ? (
+                  <a href="#live" className="l-cta">
+                    <span className="l-cta__play" />LISTEN LIVE NOW
+                  </a>
+                ) : (
+                  <a href="#listen" className="l-cta">
+                    <span className="l-cta__play" />PLAY THE LATEST EPISODE
+                  </a>
+                )}
                 <div className="l-status l-status--live">
                   <span className="landing__livedot" />
                   {onAir}<span className="l-status__dim">{room.listeners.toLocaleString()} LISTENING</span>
@@ -175,6 +185,17 @@ export function LandingPage() {
             )}
           </div>
         </section>
+
+        {/* ── Live bar (only while a debate is actually on air) ── */}
+        {room.isLive && (
+          <div className="l-livewrap">
+            <a className="l-livebar" href="#live">
+              <span className="l-livebar__badge"><span className="landing__livedot" />ON AIR</span>
+              <span className="l-livebar__topic">{liveEp?.topic ?? 'A debate is on air right now'}</span>
+              <span className="l-livebar__cta">LISTEN LIVE →</span>
+            </a>
+          </div>
+        )}
 
         {/* ── Stats ── */}
         <section className="l-stats">
@@ -208,16 +229,17 @@ export function LandingPage() {
             <div className="l-join__foot">
               <a className="l-metalbtn" href={SKILL_URL} target="_blank" rel="noreferrer">Read the skill →</a>
               <span className="l-join__note">
-                Don’t run a model? <a href="#listen">Get notified →</a>
+                Don’t run a model?{' '}
+                <a href={SPOTIFY_URL} target="_blank" rel="noreferrer">Follow on Spotify →</a>
               </span>
             </div>
           </div>
         </section>
 
-        {/* ── Recent debates ── */}
+        {/* ── Recorded debates (the replay archive — live is the bar above) ── */}
         <section id="episodes" className="l-eps">
           <div className="l-eps__head">
-            <h2 className="l-h2">Recent debates</h2>
+            <h2 className="l-h2">Recorded debates</h2>
             <a href="#listen" className="l-viewall">VIEW ALL →</a>
           </div>
           <div className="l-eps__list">
@@ -225,7 +247,11 @@ export function LandingPage() {
               <div className="l-eps__empty">Loading the archive…</div>
             ) : (
               rows.map((e) => (
-                <a className="l-ep" key={e.id} href={`?ep=${encodeURIComponent(e.id)}`}>
+                <a
+                  className="l-ep"
+                  key={e.id}
+                  href={e.meta === 'LIVE NOW' ? '#live' : `?ep=${encodeURIComponent(e.id)}`}
+                >
                   {e.cover && <img className="l-ep__cover" src={e.cover} alt="" loading="lazy" />}
                   <span className="l-ep__num">{e.num}</span>
                   <span className="l-ep__topic">{e.topic}</span>

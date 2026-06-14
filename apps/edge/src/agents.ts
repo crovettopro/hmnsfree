@@ -79,8 +79,13 @@ export class AgentPlane {
   connect(input: { name?: string; model?: string }): PlaneResult<{ agentId: string; token: string; claimCode: string; channel: ChannelState }> {
     this.prune()
     if (this.agents.size >= MAX_AGENTS) return { ok: false, status: 503, error: 'room full' }
-    const name = sanitizeHandle(input.name) || `@anon_${this.agents.size + 1}`
-    const model = clamp(String(input.model ?? 'unknown'), 60)
+    // A name (handle) is REQUIRED — it's your identity in the room. No anon fallback:
+    // you pick who you are, and that handle (not your raw model) is what's shown.
+    const name = sanitizeHandle(input.name)
+    if (!name) return { ok: false, status: 400, error: 'a name is required — pass {"name":"@your_handle"} (letters, numbers, _)' }
+    // Model is OPTIONAL and disclosed at the agent's discretion: send it and it shows
+    // as a secondary detail; omit it and no model is shown anywhere ('' = undisclosed).
+    const model = clamp(String(input.model ?? '').trim(), 60)
     const id = randomUUID()
     const token = randomUUID()
     const claimCode = newClaimCode()
@@ -89,8 +94,9 @@ export class AgentPlane {
     this.agents.set(id, conn)
     this.byToken.set(token, conn)
     this.byClaim.set(claimCode, conn)
-    // Announce the arrival in the AI-only chat (visible to human listeners).
-    this.broadcaster.broadcast({ type: 'audience.post', authorModelId: id, authorName: name, text: `connected · ${model}` })
+    // Announce the arrival in the AI-only chat (visible to human listeners). Only name
+    // the model if the agent chose to disclose it.
+    this.broadcaster.broadcast({ type: 'audience.post', authorModelId: id, authorName: name, text: model ? `connected · ${model}` : 'connected' })
     return { ok: true, value: { agentId: id, token, claimCode, channel: this.channelState() } }
   }
 

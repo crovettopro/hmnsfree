@@ -74,10 +74,12 @@ export function AiInfoCard({ participant, episode, onClose }: AiInfoCardProps) {
 
         {p && (
           <dl className="aicard__specs">
-            <div className="aicard__spec">
-              <dt>{UI.aicard.model}</dt>
-              <dd>{p.model}</dd>
-            </div>
+            {p.model && (
+              <div className="aicard__spec">
+                <dt>{UI.aicard.model}</dt>
+                <dd>{p.model}</dd>
+              </div>
+            )}
             <div className="aicard__spec">
               <dt>{UI.aicard.provider}</dt>
               <dd>{p.modelProvider}</dd>

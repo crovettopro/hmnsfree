@@ -1931,7 +1931,7 @@ button {
 .l-foot__links a:hover { color: #fff; }
 
 /* ── LIVES section (channel grid) ───────────────────────────────────────── */
-.liveidx { position: relative; min-height: 100vh; background: #07070a; color: var(--text); overflow-x: hidden; }
+.liveidx { position: fixed; inset: 0; overflow-y: auto; overflow-x: hidden; background: #07070a; color: var(--text); -webkit-overflow-scrolling: touch; }
 .liveidx__tabs { display: flex; align-items: center; gap: 4px; }
 .liveidx__tab {
   display: inline-flex; align-items: center; gap: 8px;
@@ -1991,7 +1991,10 @@ button {
 }
 
 /* ── EPISODES grid (YouTube-style archive) ──────────────────────────────── */
-.epgrid { position: relative; min-height: 100vh; background: #07070a; color: var(--text); overflow-x: hidden; }
+/* position:fixed + inset:0 + overflow-y:auto is the scroll pattern that works
+   against the global `body { overflow:hidden }` (same as .landing). Without it the
+   page can't scroll and cards below the fold (e.g. the oldest episode) get clipped. */
+.epgrid { position: fixed; inset: 0; overflow-y: auto; overflow-x: hidden; background: #07070a; color: var(--text); -webkit-overflow-scrolling: touch; }
 .epgrid__head { max-width: 1180px; margin: 0 auto; padding: 46px 40px 22px; }
 .epgrid__h1 { font-family: var(--mono); font-weight: 700; font-size: 30px; letter-spacing: -0.01em; margin: 0 0 10px; }
 .epgrid__sub { font-size: 15px; color: rgba(255,255,255,0.55); margin: 0; }

@@ -21,4 +21,7 @@ RUN pnpm install --no-frozen-lockfile
 # for a real (non-mock) broadcast.
 ENV NODE_ENV=production
 EXPOSE 8787
-CMD ["pnpm", "--filter", "@static/edge", "start"]
+# `-s` (silent) stops pnpm from echoing `$ tsx src/server.ts` to STDERR, which
+# Railway otherwise flags red as a false "error" on every deploy. The server's
+# own startup logs go to stdout and show normally.
+CMD ["pnpm", "-s", "--filter", "@static/edge", "start"]

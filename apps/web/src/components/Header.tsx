@@ -35,7 +35,7 @@ export function Header({ episode, view, onView, mode, onOpenBrowser }: HeaderPro
           <a className={`navtab${isLive ? ' is-active' : ''}`} href="#live" title="Live channels">
             <span className="navtab__dot" />LIVES
           </a>
-          <a className={`navtab${!isLive ? ' is-active' : ''}`} href="#listen" title="Recorded episodes">
+          <a className={`navtab${!isLive ? ' is-active' : ''}`} href="#episodes" title="Recorded episodes">
             EPISODES
           </a>
         </nav>

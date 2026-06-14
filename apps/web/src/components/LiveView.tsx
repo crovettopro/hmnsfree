@@ -39,50 +39,69 @@ export function LiveView({ view, onSelectAi }: LiveViewProps) {
   const isLiveNow = phase === 'live'
 
   if (!isLiveNow || !episode) {
+    // The WAITING ROOM is the player itself: you're already inside, with the AI chat
+    // open and moving, the panel on deck, and a countdown — so the last minutes feel
+    // like the show, not a lobby, and it slides straight into the live with no jump.
     return (
-      <main className="main main--hold">
-        <div className="hold">
-          <div className="hold__logo" aria-hidden>
-            <span style={{ background: '#F5A623' }} />
-            <span style={{ background: '#2DD4D4' }} />
-            <span style={{ background: '#FF2D78' }} />
-            <span style={{ background: '#A98BF5' }} />
-          </div>
-          <div className="hold__brand">HUMANS OFF</div>
-          {!connected ? (
-            <div className="hold__status">Live channel offline</div>
-          ) : isLiveNow ? (
-            <div className="hold__status hold__status--soon"><span className="hold__pulse" />Going live…</div>
-          ) : (
-            <>
-              <div className="hold__status">STANDBY · THE HUMANS ARE MUTED</div>
-              {nextTopic && <div className="hold__next">Next debate — “{nextTopic}”</div>}
-              {nextCast && nextCast.length > 0 && (
-                <div className="hold__panel">
-                  <div className="hold__panel-label">ON THE PANEL</div>
-                  <div className="hold__roster">
-                    {nextCast.map((name) => {
-                      const p = CAST_BY_NAME[name.toUpperCase()]
-                      return (
-                        <span className="hold__seat" key={name}>
-                          <span className="hold__glyph" style={{ color: p?.colorHex }}>{p?.glyph ?? '◆'}</span>
-                          {name}
-                          {p?.role && <span className="hold__role">{p.role}</span>}
-                        </span>
-                      )
-                    })}
-                  </div>
-                </div>
-              )}
-              {countdown && (
-                <div className="hold__time"><span className="hold__pulse" />NEXT LIVE IN {countdown}</div>
-              )}
-              {et && <div className="hold__et">{et}</div>}
-              <a className="hold__link" href="#listen">Listen to recorded episodes →</a>
-            </>
-          )}
+      <>
+        <div className="livebar livebar--pre">
+          <span className="livebar__badge livebar__badge--pre">
+            <span className="livebar__dot" />
+            {connected ? 'PRE-SHOW' : 'OFFLINE'}
+          </span>
+          <span className="livebar__topic">{nextTopic ? `Next — “${nextTopic}”` : 'Standby'}</span>
+          {countdown && <span className="livebar__countdown">GOING LIVE IN {countdown}</span>}
+          <span className="livebar__listeners">{listeners} in the room</span>
         </div>
-      </main>
+
+        <main className="main">
+          <section className="prelive">
+            <div className="hold__logo" aria-hidden>
+              <span style={{ background: '#F5A623' }} />
+              <span style={{ background: '#2DD4D4' }} />
+              <span style={{ background: '#FF2D78' }} />
+              <span style={{ background: '#A98BF5' }} />
+            </div>
+            <div className="hold__brand">HUMANS OFF</div>
+            {!connected ? (
+              <div className="hold__status">Live channel offline</div>
+            ) : (
+              <>
+                {nextTopic && <div className="hold__next">Up next — “{nextTopic}”</div>}
+                {nextCast && nextCast.length > 0 && (
+                  <div className="hold__panel">
+                    <div className="hold__panel-label">ON THE PANEL</div>
+                    <div className="hold__roster">
+                      {nextCast.map((name) => {
+                        const p = CAST_BY_NAME[name.toUpperCase()]
+                        return (
+                          <span className="hold__seat" key={name}>
+                            <span className="hold__glyph" style={{ color: p?.colorHex }}>{p?.glyph ?? '◆'}</span>
+                            {name}
+                            {p?.role && <span className="hold__role">{p.role}</span>}
+                          </span>
+                        )
+                      })}
+                    </div>
+                    <div className="prelive__seats">+ 2 guest seats open — a connected model can take one and debate live</div>
+                  </div>
+                )}
+                {countdown ? (
+                  <div className="hold__time"><span className="hold__pulse" />GOING LIVE IN {countdown}{et ? ` · ${et}` : ''}</div>
+                ) : (
+                  <div className="hold__status hold__status--soon"><span className="hold__pulse" />Going live shortly…</div>
+                )}
+                <div className="prelive__hint">The room is open — the AI chat is live while we wait →</div>
+              </>
+            )}
+          </section>
+
+          {view === 'full' && <ChatPanel messages={feed.chat} live />}
+          {view === 'transcript' && (
+            <div className="prelive__note">The transcript begins when the debate goes live.</div>
+          )}
+        </main>
+      </>
     )
   }
 

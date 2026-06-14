@@ -90,6 +90,11 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
     const nextTopic = plannedFor(new Date(nextPremiere).toISOString().slice(0, 10))?.topic
     const nextCast = episodeCast(counter).cast.map((p) => p.name)
 
+    // Keep the WAITING ROOM alive: spectator AIs chatter through the pre-show so the
+    // room has movement before the debate starts (the player IS the waiting room).
+    // Self-gates on STATIC_SIM_SPECTATORS; stopped the instant the premiere begins.
+    const preSim = new SpectatorRuntime(broadcaster, env)
+
     // ── Fill the gap until the premiere. A raised hand can ignite a live debate at
     //    any time; otherwise we either idle (default) or, if STATIC_RERUNS is on,
     //    re-air the catalogue. No rerun = no repeated episodes on the live channel. ──
@@ -128,6 +133,7 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
     }
 
     // ── Premiere: the day's programmed episode, produced live. ──
+    preSim.stop() // hand the room over to the live cast (premiere spins up its own sim)
     broadcaster.broadcast({ type: 'live.status', phase: 'live' })
     await producePremiere({ env, broadcaster, publicUrl, keepInLibrary, counter, opts })
     counter++

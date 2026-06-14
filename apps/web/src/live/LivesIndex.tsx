@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { formatET, secondsUntil, useCountdown } from './liveTime'
+import { formatET, useCountdown } from './liveTime'
 
 /**
  * The LIVES section — a grid of live channels, the front door to everything
@@ -63,18 +63,8 @@ export function LivesIndex() {
     }
   }, [])
 
-  // Auto-tune-in: from ~5 min before a live (or once it's on air) pull the viewer
-  // INTO the channel (#watch) so they land on the holding card + countdown, like a
-  // broadcast you tune into before it starts. (Once on #watch, App owns the routing.)
-  useEffect(() => {
-    const id = setInterval(() => {
-      const live = snap?.phase === 'live'
-      if (live || secondsUntil(snap?.nextPremiereAt, Date.now()) <= 300) {
-        window.location.hash = '#watch'
-      }
-    }, 1000)
-    return () => clearInterval(id)
-  }, [snap?.phase, snap?.nextPremiereAt])
+  // No auto-redirect: with many channels there's no single live to jump to. You pick
+  // a channel card and enter its room (#watch) — where the wait IS the player.
 
   // One real channel today; the grid is ready for many.
   const channels: Channel[] = [

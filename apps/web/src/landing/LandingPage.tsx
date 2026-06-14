@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 import { loadProducedEpisodes } from '../data/loadProduced'
-import { secondsUntil } from '../live/liveTime'
 import type { Episode } from '../types'
 
 /**
@@ -76,24 +75,8 @@ export function LandingPage() {
     }
   }, [])
 
-  // Live-first front door: when a debate is on air (or a premiere is ≤5 min away)
-  // pull a homepage visitor INTO the player, so they're already on the holding card
-  // + countdown when it starts — no big jump from the marketing page into a live show.
-  // (Choosing EPISODES routes to #listen and unmounts this page, so it never fights a
-  // viewer who wants the archive.)
-  useEffect(() => {
-    // Re-check every second: nextPremiereAt is a FIXED timestamp, so the threshold
-    // is crossed by the passage of time, not by a state change — a one-shot check on
-    // mount would never fire at the 5-min mark. (LivesIndex polls the same way.)
-    const check = () => {
-      if (room.isLive || secondsUntil(room.nextPremiereAt, Date.now()) <= 300) {
-        window.location.hash = '#watch'
-      }
-    }
-    check()
-    const id = setInterval(check, 1000)
-    return () => clearInterval(id)
-  }, [room.isLive, room.nextPremiereAt])
+  // No auto-redirect from the home page into a live: with multiple channels there is
+  // no single "the live" to jump to. You pick a channel in LIVES and enter its room.
 
   const sorted = useMemo(
     () =>

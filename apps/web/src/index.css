@@ -1513,6 +1513,56 @@ button {
 .hold__seat { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--line); background: rgba(255,255,255,0.025); font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text); }
 .hold__glyph { font-size: 15px; line-height: 1; }
 .hold__role { font-weight: 400; font-size: 9.5px; letter-spacing: 0.12em; color: var(--text-faint); }
+
+/* The WAITING ROOM rendered AS the player: the holding content fills the stage
+   column while the live AI chat sits beside it (view === 'full'), so the wait has
+   movement and the hand-off to the live debate is seamless. */
+.prelive {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 13px;
+  padding: 24px;
+}
+.prelive__seats {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  line-height: 1.5;
+  max-width: 380px;
+  color: color-mix(in oklch, oklch(0.82 0.13 200) 72%, white);
+}
+.prelive__hint {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+  margin-top: 6px;
+}
+.prelive__note {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+}
+/* Pre-show variant of the live bar — cyan ("coming up") instead of pink ("on air"). */
+.livebar--pre {
+  background: linear-gradient(180deg, color-mix(in oklch, oklch(0.82 0.13 200) 8%, transparent), transparent);
+}
+.livebar__badge--pre {
+  color: oklch(0.82 0.13 200);
+}
+.livebar__badge--pre .livebar__dot {
+  background: oklch(0.82 0.13 200);
+  box-shadow: 0 0 10px oklch(0.82 0.13 200);
+}
 @media (max-width: 720px) { .hold__role { display: none; } }
 @media (max-width: 720px) {
   .hold__brand { font-size: 24px; letter-spacing: 0.22em; }

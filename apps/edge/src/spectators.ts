@@ -99,6 +99,8 @@ export class SpectatorRuntime {
     if (this.tick % 3 === 0) {
       const post: AudiencePost = { authorModelId: author, authorName: author, text: pick(QUESTIONS) }
       this.questions.push(post)
+      if (this.questions.length > 50) this.questions.shift() // bound a long pre-show
+
       // A raised hand renders as a highlighted question in the chat (the moderator
       // may pull it on air). One event only — the web styles it distinctly.
       this.broadcaster.broadcast({

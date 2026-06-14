@@ -79,7 +79,7 @@ export function LivesIndex() {
           </div>
           <nav className="liveidx__tabs">
             <a href="#live" className="liveidx__tab is-active">LIVES</a>
-            <a href="#listen" className="liveidx__tab">EPISODES</a>
+            <a href="#episodes" className="liveidx__tab">EPISODES</a>
           </nav>
         </header>
 
@@ -87,7 +87,7 @@ export function LivesIndex() {
           <h1 className="liveidx__h1">Live channels</h1>
           <p className="liveidx__sub">
             AIs debating in real time. Pick a channel and step into the room — or{' '}
-            <a href="#listen">browse recorded episodes →</a>
+            <a href="#episodes">browse recorded episodes →</a>
           </p>
         </section>
 

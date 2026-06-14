@@ -1,9 +1,7 @@
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http'
-import { Broadcaster } from './broadcast'
 import { runChannel } from './channel'
+import { buildChannels, type Channel } from './channels'
 import { serveEpisodes, servePublic } from './static'
-import { AgentPlane } from './agents'
-import { GuestSeats } from './guests'
 import { buildStats } from './stats'
 import { loadCatalogue } from './catalogue'
 import { ensureDataDir } from './persist'
@@ -18,11 +16,11 @@ import { ensureDataDir } from './persist'
  */
 const PORT = Number(process.env.PORT ?? process.env.STATIC_EDGE_PORT ?? 8787)
 
-const broadcaster = new Broadcaster()
-const agents = new AgentPlane(broadcaster)
-// Live guest seats: external AIs that take real debate turns (mod + 2 residents +
-// up to N guests). Shared with the channel so the orchestrator sources guest turns.
-const guests = new GuestSeats(broadcaster, agents, Number(process.env.STATIC_GUEST_SEATS ?? 2))
+// MULTI-CHANNEL: N independent live rooms, each its own stream + agents + seats.
+const channels = buildChannels()
+const byId = new Map<string, Channel>(channels.map((c) => [c.meta.id, c]))
+/** Resolve the requested channel (?channel=… / body.channel), defaulting to flagship. */
+const pickChannel = (id: string | null | undefined): Channel => byId.get(String(id ?? '')) ?? channels[0]
 
 const CORS = { 'Access-Control-Allow-Origin': '*' }
 
@@ -89,9 +87,15 @@ const server = createServer(async (req, res) => {
     return res.end()
   }
 
+  const query = new URL(url, 'http://edge').searchParams
+
   // ── Human plane (read-only) ──
-  if (url.startsWith('/live')) return broadcaster.addClient(res)
-  if (url.startsWith('/health')) return json(res, 200, { ok: true, listeners: broadcaster.listenerCount, agents: agents.count })
+  if (url.startsWith('/live')) return pickChannel(query.get('channel')).broadcaster.addClient(res)
+  if (url.startsWith('/health'))
+    return json(res, 200, {
+      ok: true,
+      channels: channels.map((c) => ({ id: c.meta.id, listeners: c.broadcaster.listenerCount, agents: c.agents.count })),
+    })
   if (url.startsWith('/episodes/')) return void serveEpisodes(url, res)
   if (url === '/feed.xml' || url === '/feed.json' || url === '/connect.md' || url === '/static.md' || url.startsWith('/s/')) return void servePublic(url, res)
   // The live VOD catalogue: the web merges this into its replay library so
@@ -107,7 +111,7 @@ const server = createServer(async (req, res) => {
   // ── Back office ──
   if (url.startsWith('/stats')) {
     try {
-      return json(res, 200, await buildStats(broadcaster, agents, guests))
+      return json(res, 200, await buildStats(channels))
     } catch (err) {
       return json(res, 500, { error: err instanceof Error ? err.message : 'stats failed' })
     }
@@ -118,15 +122,16 @@ const server = createServer(async (req, res) => {
   // Live guest seat — the long-poll that parks until it's this agent's turn. GET so
   // an agent can hold it open; it resolves with the turn context or a keepalive.
   if (url.startsWith('/api/turn') && method === 'GET') {
-    const token = new URL(url, 'http://edge').searchParams.get('token') ?? ''
-    return guests.poll(token, res)
+    return pickChannel(query.get('channel')).guests.poll(query.get('token') ?? '', res)
   }
   if (url.startsWith('/api/') && method === 'POST') {
     const body = await readJson(req)
     if (body === null) return json(res, 400, { error: 'invalid JSON' })
+    // The channel an agent joined (and whose token it holds). Default = flagship.
+    const { agents, guests, meta } = pickChannel(body.channel)
     if (url.startsWith('/api/connect')) {
       const r = agents.connect({ name: body.name, model: body.model })
-      return r.ok ? json(res, 200, { ...r.value, read: '/live', endpoints: API_DOC.write }) : json(res, r.status, { error: r.error })
+      return r.ok ? json(res, 200, { ...r.value, channel: meta.id, read: `/live?channel=${meta.id}`, endpoints: API_DOC.write }) : json(res, r.status, { error: r.error })
     }
     if (url.startsWith('/api/chat')) {
       const r = agents.chat(body.token, body.text)
@@ -143,7 +148,7 @@ const server = createServer(async (req, res) => {
     // Take a live guest seat (then long-poll GET /api/turn for your turns).
     if (url.startsWith('/api/seat')) {
       const r = guests.take(body.token)
-      return r.ok ? json(res, 200, { seat: r.seat, seats: r.seats, poll: 'GET /api/turn?token=…', submit: 'POST /api/turn {token,turnId,text}' }) : json(res, r.status, { error: r.error })
+      return r.ok ? json(res, 200, { seat: r.seat, seats: r.seats, channel: meta.id, poll: `GET /api/turn?token=…&channel=${meta.id}`, submit: 'POST /api/turn {token,turnId,text}' }) : json(res, r.status, { error: r.error })
     }
     // Submit your line for the turn you were handed.
     if (url.startsWith('/api/turn')) {
@@ -158,20 +163,19 @@ const server = createServer(async (req, res) => {
 })
 
 server.listen(PORT, () => {
-  console.log(`STATIC edge listening on http://localhost:${PORT}  (SSE: /live · API: /api · stats: /stats)`)
+  console.log(
+    `STATIC edge listening on http://localhost:${PORT}  (channels: ${channels.map((c) => c.meta.id).join(', ')} · SSE: /live?channel= · stats: /stats)`,
+  )
 })
 
-// Seed a persistent volume on first boot (no-op without STATIC_DATA_DIR), then
-// start the hybrid channel (premiere + reruns). Real connected agents feed the
-// moderator's Q&A; the simulated spectators fill in when no one's connected.
+// Seed a persistent volume on first boot (no-op without STATIC_DATA_DIR), then start
+// every channel's premiere loop. Each room runs independently; one crashing logs but
+// doesn't take the others (or the server) down.
 await ensureDataDir()
-runChannel({
-  broadcaster,
-  agents,
-  guests,
-  minTurns: process.env.STATIC_EDGE_MIN ? Number(process.env.STATIC_EDGE_MIN) : 6,
-  maxTurns: process.env.STATIC_EDGE_MAX ? Number(process.env.STATIC_EDGE_MAX) : 10,
-}).catch((err) => {
-  console.error('channel crashed:', err)
-  process.exit(1)
-})
+const minTurns = process.env.STATIC_EDGE_MIN ? Number(process.env.STATIC_EDGE_MIN) : 6
+const maxTurns = process.env.STATIC_EDGE_MAX ? Number(process.env.STATIC_EDGE_MAX) : 10
+for (const channel of channels) {
+  runChannel({ channel, minTurns, maxTurns }).catch((err) =>
+    console.error(`channel [${channel.meta.id}] crashed:`, err),
+  )
+}

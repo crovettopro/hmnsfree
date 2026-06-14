@@ -15,6 +15,8 @@ const CAST_BY_NAME = Object.fromEntries(CAST.map((c) => [c.name.toUpperCase(), c
 
 interface LiveViewProps {
   view: View
+  /** Which live channel/room to watch (edge ?channel=…). Defaults to the flagship. */
+  channelId: string
   onSelectAi: (p: Participant) => void
 }
 
@@ -26,9 +28,14 @@ const LIVE_URL = import.meta.env.VITE_EDGE_URL ?? 'http://localhost:8787/live'
  * happens — same Stage / Transcript / Chat as replay, but driven by the server's
  * real-time clock. No transport controls: you can't scrub what hasn't happened.
  */
-export function LiveView({ view, onSelectAi }: LiveViewProps) {
+export function LiveView({ view, channelId, onSelectAi }: LiveViewProps) {
   const engine = useMemo(() => new CompositeEngine(), [])
-  const feed = useLiveFeed(LIVE_URL, engine)
+  // Point the SSE at the chosen channel (the edge defaults to the flagship otherwise).
+  const liveUrl = useMemo(() => {
+    const sep = LIVE_URL.includes('?') ? '&' : '?'
+    return `${LIVE_URL}${sep}channel=${encodeURIComponent(channelId || 'main')}`
+  }, [channelId])
+  const feed = useLiveFeed(liveUrl, engine)
   const { episode, connected, thinking, listeners, ended, phase, nextTopic, nextCast, nextPremiereAt } = feed
   const countdown = useCountdown(nextPremiereAt)
   const et = formatET(nextPremiereAt)

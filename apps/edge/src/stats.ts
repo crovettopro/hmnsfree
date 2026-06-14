@@ -5,6 +5,7 @@ import { readLedgerEntries, projectLedger, readGrowthKit, type LedgerProjection,
 import { EPISODES_ROOT } from './persist'
 import type { Broadcaster } from './broadcast'
 import type { AgentPlane } from './agents'
+import type { Channel } from './channels'
 
 /**
  * The back office payload: one read-only snapshot of everything worth watching
@@ -23,13 +24,20 @@ export interface EpisodeRow {
   growth: GrowthKit | null
 }
 
-/** Just enough of the guest-seat plane for the back office (no circular import). */
-export interface SeatRoster {
-  roster(): { seat: number; name: string | null; model: string | null; present: boolean }[]
+export interface ChannelStat {
+  id: string
+  name: string
+  strand: string
+  live: ReturnType<Broadcaster['snapshot']>
+  agents: { connected: number; pendingQuestions: number; list: ReturnType<AgentPlane['list']> }
+  guestSeats: { seat: number; name: string | null; model: string | null; present: boolean }[]
 }
 
 export interface StatsPayload {
   now: number
+  /** Every live room. */
+  channels: ChannelStat[]
+  // Back-compat: the flagship channel surfaced at the top level for older clients.
   live: ReturnType<Broadcaster['snapshot']>
   agents: { connected: number; pendingQuestions: number; list: ReturnType<AgentPlane['list']> }
   guestSeats: { seat: number; name: string | null; model: string | null; present: boolean }[]
@@ -53,7 +61,7 @@ async function readEpisode(id: string): Promise<Episode | null> {
   }
 }
 
-export async function buildStats(broadcaster: Broadcaster, agents: AgentPlane, guests?: SeatRoster): Promise<StatsPayload> {
+export async function buildStats(channels: Channel[]): Promise<StatsPayload> {
   const index = await readIndex()
   const episodes: EpisodeRow[] = []
   let totalDurationMs = 0
@@ -77,11 +85,22 @@ export async function buildStats(broadcaster: Broadcaster, agents: AgentPlane, g
   episodes.sort((a, b) => Number(b.number.replace(/\D/g, '')) - Number(a.number.replace(/\D/g, '')))
 
   const entries = await readLedgerEntries()
+  const channelStats: ChannelStat[] = channels.map((c) => ({
+    id: c.meta.id,
+    name: c.meta.name,
+    strand: c.meta.strand,
+    live: c.broadcaster.snapshot(),
+    agents: { connected: c.agents.count, pendingQuestions: c.agents.pendingQuestions, list: c.agents.list() },
+    guestSeats: c.guests.roster(),
+  }))
+  const main = channelStats[0]
   return {
     now: Date.now(),
-    live: broadcaster.snapshot(),
-    agents: { connected: agents.count, pendingQuestions: agents.pendingQuestions, list: agents.list() },
-    guestSeats: guests?.roster() ?? [],
+    channels: channelStats,
+    // Back-compat: flagship at the top level for the existing web.
+    live: main.live,
+    agents: main.agents,
+    guestSeats: main.guestSeats,
     library: { count: episodes.length, totalDurationMs, episodes },
     cost: { entries, projection: projectLedger(entries) },
   }

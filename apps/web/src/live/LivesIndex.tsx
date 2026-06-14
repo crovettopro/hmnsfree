@@ -2,22 +2,21 @@ import { useEffect, useState } from 'react'
 import { formatET, useCountdown } from './liveTime'
 
 /**
- * The LIVES section — a grid of live channels, the front door to everything
- * on air. Today the engine runs one channel ("Main Stage"); the layout is a
- * grid so the 24/7 multi-channel future (several debates airing at once) just
- * renders more cards with no rework. A channel is ON AIR only for a genuine live
- * debate (no rerun filler, no countdown to a non-real premiere); otherwise it sits
- * in STANDBY. An on-air card routes into the live player (#watch).
- *
- * This is a deliberate split from EPISODES (the replay archive): the old
- * in-player REPLAY/LIVE toggle was invisible and undiscoverable. Live and
- * recorded are now two top-level places you navigate between.
+ * The LIVES section — a grid of live channels, the front door to everything on air.
+ * The edge runs several independent rooms (staggered so they rarely air at once); the
+ * grid renders one card per channel straight from /stats, so adding rooms needs no web
+ * change. A channel is ON AIR only for a genuine live debate; otherwise it sits in
+ * STANDBY. A card routes into that channel's player (#watch?ch=<id>), where the wait
+ * itself IS the player (chat open + countdown).
  */
 const EDGE_BASE = (import.meta.env.VITE_EDGE_URL ?? 'http://localhost:8787/live').replace(/\/live\/?$/, '')
 
 type Phase = 'preshow' | 'live' | 'rerun' | null
 
-interface LiveSnapshot {
+interface ChannelRow {
+  id: string
+  name: string
+  strand: string
   phase: Phase
   nextPremiereAt: number | null
   nextTopic: string | null
@@ -25,19 +24,8 @@ interface LiveSnapshot {
   episode: { id: string; number: string; topic: string; turns: number } | null
 }
 
-
-interface Channel {
-  id: string
-  name: string
-  /** Mono subtitle, e.g. the strand/topic family. */
-  strand: string
-  snap: LiveSnapshot | null
-  /** True when the edge could not be reached at all. */
-  offline: boolean
-}
-
 export function LivesIndex() {
-  const [snap, setSnap] = useState<LiveSnapshot | null>(null)
+  const [channels, setChannels] = useState<ChannelRow[]>([])
   const [offline, setOffline] = useState(false)
 
   useEffect(() => {
@@ -48,7 +36,17 @@ export function LivesIndex() {
         if (!res.ok) throw new Error()
         const s = await res.json()
         if (!alive) return
-        setSnap(s.live ?? null)
+        const rows: ChannelRow[] = (s.channels ?? []).map((c: any) => ({
+          id: c.id,
+          name: c.name,
+          strand: c.strand,
+          phase: c.live?.phase ?? null,
+          nextPremiereAt: c.live?.nextPremiereAt ?? null,
+          nextTopic: c.live?.nextTopic ?? null,
+          listeners: c.live?.listeners ?? 0,
+          episode: c.live?.episode ?? null,
+        }))
+        setChannels(rows)
         setOffline(false)
       } catch {
         if (!alive) return
@@ -63,13 +61,11 @@ export function LivesIndex() {
     }
   }, [])
 
-  // No auto-redirect: with many channels there's no single live to jump to. You pick
-  // a channel card and enter its room (#watch) — where the wait IS the player.
-
-  // One real channel today; the grid is ready for many.
-  const channels: Channel[] = [
-    { id: 'main', name: 'Main Stage', strand: 'THE FLAGSHIP DEBATE', snap, offline },
-  ]
+  // Edge unreachable, or it reported no channels yet — show a single offline card.
+  const rows: ChannelRow[] =
+    channels.length > 0
+      ? channels
+      : [{ id: 'main', name: 'Main Stage', strand: 'THE FLAGSHIP DEBATE', phase: null, nextPremiereAt: null, nextTopic: null, listeners: 0, episode: null }]
 
   return (
     <div className="liveidx">
@@ -90,14 +86,14 @@ export function LivesIndex() {
         <section className="liveidx__head">
           <h1 className="liveidx__h1">Live channels</h1>
           <p className="liveidx__sub">
-            AIs debating in real time. Pick a channel and listen in — or{' '}
+            AIs debating in real time. Pick a channel and step into the room — or{' '}
             <a href="#listen">browse recorded episodes →</a>
           </p>
         </section>
 
         <section className="liveidx__grid">
-          {channels.map((c) => (
-            <ChannelCard key={c.id} channel={c} />
+          {rows.map((c) => (
+            <ChannelCard key={c.id} channel={c} offline={offline} />
           ))}
         </section>
       </div>
@@ -105,15 +101,13 @@ export function LivesIndex() {
   )
 }
 
-function ChannelCard({ channel }: { channel: Channel }) {
-  const { snap, offline } = channel
-  const phase = snap?.phase ?? null
-  // A channel is "on air" ONLY for a genuine live debate — no rerun filler, no
-  // countdown to a non-real premiere. Otherwise it sits clean in STANDBY.
-  const onAir = phase === 'live'
+function ChannelCard({ channel, offline }: { channel: ChannelRow; offline: boolean }) {
+  const onAir = channel.phase === 'live'
+  const countdown = useCountdown(channel.nextPremiereAt)
+  const et = formatET(channel.nextPremiereAt)
 
   let status: string
-  let kind: 'live' | 'soon' | 'idle'
+  let kind: 'live' | 'idle'
   if (offline) {
     status = 'OFFLINE'
     kind = 'idle'
@@ -125,21 +119,18 @@ function ChannelCard({ channel }: { channel: Channel }) {
     kind = 'idle'
   }
 
-  const countdown = useCountdown(snap?.nextPremiereAt)
-  const et = formatET(snap?.nextPremiereAt)
-  const nextTopic = snap?.nextTopic
   const topic = onAir
-    ? snap?.episode?.topic ?? 'Live now'
+    ? channel.episode?.topic ?? 'Live now'
     : offline
       ? 'Channel is offline right now.'
-      : nextTopic
-        ? `Next debate — “${nextTopic}”`
-        : 'No live debate right now.'
+      : channel.nextTopic
+        ? `Next debate — “${channel.nextTopic}”`
+        : 'Up next — a fresh debate.'
 
-  // Every card routes into the channel (#watch): on air → the live debate; on
-  // standby → the branded holding card (silent) with the next live time.
+  // Each card routes into ITS channel's room (#watch?ch=<id>): on air → the live
+  // debate; on standby → the player waiting room (chat open + countdown).
   return (
-    <a className={`livecard${onAir ? ' livecard--on' : ''}`} href="#watch">
+    <a className={`livecard${onAir ? ' livecard--on' : ''}`} href={`#watch?ch=${channel.id}`}>
       <div className={`livecard__status livecard__status--${kind}`}>
         {kind === 'live' && <span className="landing__livedot landing__livedot--lg" />}
         {status}
@@ -150,7 +141,7 @@ function ChannelCard({ channel }: { channel: Channel }) {
       <div className="livecard__foot">
         {onAir ? (
           <>
-            <span className="livecard__listeners">{(snap?.listeners ?? 0).toLocaleString()} listening</span>
+            <span className="livecard__listeners">{channel.listeners.toLocaleString()} listening</span>
             <span className="livecard__cta">LISTEN LIVE →</span>
           </>
         ) : (

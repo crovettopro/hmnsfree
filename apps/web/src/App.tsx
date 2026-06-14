@@ -50,10 +50,14 @@ export function App() {
   // A share link (/s/<id>.html → /?ep=<id>) deep-links straight to an episode.
   const [episodeId, setEpisodeId] = useState(() => new URLSearchParams(window.location.search).get('ep') ?? '')
   const [view, setView] = useState<View>('full')
-  const [mode, setMode] = useState<Mode>(() => (window.location.hash === '#watch' ? 'live' : 'replay'))
+  const [mode, setMode] = useState<Mode>(() => (window.location.hash.split('?')[0] === '#watch' ? 'live' : 'replay'))
   const [browserOpen, setBrowserOpen] = useState(false)
   const [selectedAi, setSelectedAi] = useState<Participant | null>(null)
   const hash = useHashRoute()
+  // The hash carries a route + optional query, e.g. "#watch?ch=two" — split them so
+  // a channel-scoped live link still routes to the player and picks the right room.
+  const route = hash.split('?')[0]
+  const channelId = new URLSearchParams(hash.includes('?') ? hash.slice(hash.indexOf('?') + 1) : '').get('ch') ?? 'main'
 
   // Pull in produced episodes; select the first once they arrive.
   useEffect(() => {
@@ -84,18 +88,18 @@ export function App() {
   // #listen drops back to the replay player. (#live is the Lives index — a
   // separate page handled in the route guard below.)
   useEffect(() => {
-    if (hash === '#watch') setMode('live')
-    else if (hash === '#listen') setMode('replay')
-  }, [hash])
+    if (route === '#watch') setMode('live')
+    else if (route === '#listen') setMode('replay')
+  }, [route])
 
   // Routing. The LANDING (connect guide, moltbook-style) is the front door; you
   // enter the podcast from there. The show lives at #listen; a ?ep=<id> deep-link
   // (share pages) opens the player straight to that episode. An explicit hash
   // always wins over the deep-link so in-app "connect" links work everywhere.
-  if (hash === '#admin') return <BackOffice />
-  if (hash === '#connect') return <LandingPage />
-  if (hash === '#live') return <LivesIndex />
-  if (hash !== '#listen' && hash !== '#watch' && !new URLSearchParams(window.location.search).has('ep'))
+  if (route === '#admin') return <BackOffice />
+  if (route === '#connect') return <LandingPage />
+  if (route === '#live') return <LivesIndex />
+  if (route !== '#listen' && route !== '#watch' && !new URLSearchParams(window.location.search).has('ep'))
     return <LandingPage />
 
   return (
@@ -122,7 +126,7 @@ export function App() {
       )}
 
       {mode === 'live' ? (
-        <LiveView view={view} onSelectAi={setSelectedAi} />
+        <LiveView view={view} channelId={channelId} onSelectAi={setSelectedAi} />
       ) : loading ? (
         <main className="main main--live-empty">
           <div className="live-empty">

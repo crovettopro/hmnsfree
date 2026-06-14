@@ -5,6 +5,7 @@ import { episodeCast, liveEpisodeCast } from '@static/agents'
 import { produceEpisode, loadEnv, plannedFor, buildGrowthKit, writeGrowthKit, type StudioEnv, type GuestPlane } from '@static/runtime'
 import type { Broadcaster } from './broadcast'
 import type { AgentPlane } from './agents'
+import type { Channel, ChannelMeta } from './channels'
 import { checkpointEpisode, upsertIndex, EPISODES_ROOT } from './persist'
 import { SpectatorRuntime } from './spectators'
 import { loadCatalogue } from './catalogue'
@@ -19,11 +20,8 @@ import { ChatDesk } from './chatdesk'
  * only thing that spends LLM/TTS — everything else replays what already exists.
  */
 export interface ChannelOptions {
-  broadcaster: Broadcaster
-  /** The machine plane: real connected agents whose questions the moderator airs. */
-  agents: AgentPlane
-  /** Live guest seats: external AIs that take real debate turns during premieres. */
-  guests?: GuestPlane
+  /** The channel this loop drives: its stream, agents, guest seats + metadata. */
+  channel: Channel
   minTurns?: number
   maxTurns?: number
 }
@@ -33,12 +31,13 @@ const sleep = (ms: number) =>
 
 export async function runChannel(opts: ChannelOptions): Promise<void> {
   const env = loadEnv()
-  const { broadcaster } = opts
+  const { meta, broadcaster, agents, guests } = opts.channel
   const publicUrl = (
     process.env.STATIC_EDGE_PUBLIC_URL ??
     `http://localhost:${process.env.PORT ?? process.env.STATIC_EDGE_PORT ?? 8787}`
   ).replace(/\/$/, '')
-  const keepInLibrary = env.mode === 'live'
+  // Only the flagship archives to the VOD library; parallel rooms are live-only.
+  const keepInLibrary = env.mode === 'live' && meta.keepInLibrary
 
   // THE DESK: an autonomous specialist that answers the AI audience's questions in
   // the side chat while a debate is live. Long-lived (taps the broadcaster for the
@@ -46,20 +45,20 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
   // covers both premieres and on-demand ignites with no per-episode wiring.
   new ChatDesk(broadcaster, env).start()
 
-  // Premiere schedule: daily at STATIC_PREMIERE_HOUR (server local time), or every
-  // STATIC_PREMIERE_EVERY_MIN minutes (debug — lets us watch the full cycle fast).
-  const premiereHour = Number(process.env.STATIC_PREMIERE_HOUR ?? 18)
-  const everyMin = process.env.STATIC_PREMIERE_EVERY_MIN ? Number(process.env.STATIC_PREMIERE_EVERY_MIN) : 0
+  // Premiere schedule: daily at the channel's (staggered) hour, or every N minutes (debug).
+  const premiereHour = meta.premiereHour
+  const everyMin = meta.everyMin
   // Reruns OFF by default: a live channel only airs genuine live debates — we don't
   // replay old episodes as filler (those live in the web's EPISODES archive). The gap
   // before a premiere just idles, still open to ignite a debate on a raised hand.
   const rerunsOn = (process.env.STATIC_RERUNS ?? '0') !== '0'
 
   console.log(
-    `STATIC edge — mode: ${env.mode.toUpperCase()} · premiere ${everyMin ? `every ${everyMin}min` : `daily @ ${premiereHour}:00`}`,
+    `STATIC edge [${meta.id}] — mode: ${env.mode.toUpperCase()} · premiere ${everyMin ? `every ${everyMin}min` : `daily @ ${premiereHour}:00`}`,
   )
 
-  let counter = await nextNumber()
+  // Flagship numbers continue the library; live-only rooms number in-memory from 1.
+  let counter = keepInLibrary ? await nextNumber() : 1
   let rerunIdx = 0
 
   // On-demand IGNITE: when connected agents raise hands during the rerun gap,
@@ -86,8 +85,9 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
 
   for (;;) {
     const nextPremiere = computeNextPremiere(Date.now(), premiereHour, everyMin)
-    // The upcoming chapter's title + panel roster (for the holding card).
-    const nextTopic = plannedFor(new Date(nextPremiere).toISOString().slice(0, 10))?.topic
+    // The upcoming chapter's title + panel roster (for the holding card). Parallel
+    // rooms pick their own topics, so there's no programmed title to show ahead.
+    const nextTopic = meta.autonomousTopics ? undefined : plannedFor(new Date(nextPremiere).toISOString().slice(0, 10))?.topic
     const nextCast = episodeCast(counter).cast.map((p) => p.name)
 
     // Keep the WAITING ROOM alive: spectator AIs chatter through the pre-show so the
@@ -100,12 +100,12 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
     //    re-air the catalogue. No rerun = no repeated episodes on the live channel. ──
     while (Date.now() < nextPremiere) {
       // On-demand ignite: a raised hand wakes the cast for a short live exchange.
-      if (igniteAllowed() && opts.agents.pendingDemand().count > 0) {
-        const seed = opts.agents.hook().takeQuestion()
+      if (igniteAllowed() && agents.pendingDemand().count > 0) {
+        const seed = agents.hook().takeQuestion()
         if (seed) {
           igniteCount++
           lastIgniteAt = Date.now()
-          await igniteDebate({ env, broadcaster, publicUrl, keepInLibrary, counter, opts }, seed, {
+          await igniteDebate({ env, meta, broadcaster, agents, guests, publicUrl, keepInLibrary, counter, opts }, seed, {
             minTurns: igniteMinTurns,
             maxTurns: igniteMaxTurns,
           })
@@ -121,7 +121,7 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
           broadcaster.resetChat()
           await rerunEpisode(ep, broadcaster, {
             deadlineMs: nextPremiere,
-            shouldStop: () => igniteAllowed() && opts.agents.pendingDemand().count > 0,
+            shouldStop: () => igniteAllowed() && agents.pendingDemand().count > 0,
           })
           continue
         }
@@ -135,14 +135,17 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
     // ── Premiere: the day's programmed episode, produced live. ──
     preSim.stop() // hand the room over to the live cast (premiere spins up its own sim)
     broadcaster.broadcast({ type: 'live.status', phase: 'live' })
-    await producePremiere({ env, broadcaster, publicUrl, keepInLibrary, counter, opts })
+    await producePremiere({ env, meta, broadcaster, agents, guests, publicUrl, keepInLibrary, counter, opts })
     counter++
   }
 }
 
 interface PremiereCtx {
   env: StudioEnv
+  meta: ChannelMeta
   broadcaster: Broadcaster
+  agents: AgentPlane
+  guests?: GuestPlane
   publicUrl: string
   keepInLibrary: boolean
   counter: number
@@ -151,22 +154,23 @@ interface PremiereCtx {
 
 /** Produce and broadcast ONE live episode (the premiere), then persist it as VOD. */
 async function producePremiere(ctx: PremiereCtx): Promise<void> {
-  const { env, broadcaster, publicUrl, keepInLibrary, counter } = ctx
+  const { env, meta, broadcaster, agents, guests, publicUrl, keepInLibrary, counter } = ctx
   const number = String(counter)
-  const id = `ep-${number.padStart(3, '0')}`
+  const id = `${meta.idPrefix}-${number.padStart(3, '0')}`
   broadcaster.resetChat()
 
-  const planned = plannedFor(new Date().toISOString().slice(0, 10))
+  // Flagship follows the editorial calendar; parallel rooms pick their own topic.
+  const planned = meta.autonomousTopics ? undefined : plannedFor(new Date().toISOString().slice(0, 10))
   const spectators = new SpectatorRuntime(broadcaster, env)
   // The moderator pulls REAL connected agents first; the local sim only fills the
   // silence when nobody's connected, so a live room always takes precedence.
-  const agentHook = ctx.opts.agents.hook()
+  const agentHook = agents.hook()
   const simHook = spectators.hook()
   const audience = { takeQuestion: () => agentHook.takeQuestion() ?? simHook.takeQuestion() }
   let liveEpisode: Episode | undefined
   // Live format: AXIOM (mod) + 2 residents + up to N guest seats for external AIs.
   // Empty/dropped seats are simply never nominated, so the show degrades cleanly.
-  const guestSeats = ctx.opts.guests ? Number(process.env.STATIC_GUEST_SEATS ?? 2) : 0
+  const guestSeats = guests ? Number(process.env.STATIC_GUEST_SEATS ?? 2) : 0
   const { cast, moderator, guestIndexes } = liveEpisodeCast(counter, guestSeats)
   try {
     await produceEpisode({
@@ -177,7 +181,7 @@ async function producePremiere(ctx: PremiereCtx): Promise<void> {
       number,
       audioDir: join(EPISODES_ROOT, id, 'audio'),
       audioUrlBase: `${publicUrl}/episodes/${id}/audio`,
-      guests: ctx.opts.guests,
+      guests,
       guestIndexes,
       minTurns: ctx.opts.minTurns,
       maxTurns: ctx.opts.maxTurns,
@@ -231,13 +235,13 @@ async function igniteDebate(
   seed: { authorName: string; text: string },
   turns: { minTurns: number; maxTurns: number },
 ): Promise<void> {
-  const { env, broadcaster, publicUrl, counter } = ctx
-  const id = `ig-${Date.now()}`
-  console.log(`⚡ ignite "${seed.text.slice(0, 60)}" — by ${seed.authorName}`)
+  const { env, meta, broadcaster, agents, publicUrl, counter } = ctx
+  const id = `ig-${meta.id}-${Date.now()}`
+  console.log(`⚡ ignite [${meta.id}] "${seed.text.slice(0, 60)}" — by ${seed.authorName}`)
   broadcaster.broadcast({ type: 'live.status', phase: 'live' })
   broadcaster.resetChat()
   const spectators = new SpectatorRuntime(broadcaster, env)
-  const agentHook = ctx.opts.agents.hook()
+  const agentHook = agents.hook()
   const simHook = spectators.hook()
   const audience = { takeQuestion: () => agentHook.takeQuestion() ?? simHook.takeQuestion() }
   const planned = {

@@ -23,7 +23,7 @@ const EDGE_BASE = (import.meta.env.VITE_EDGE_URL ?? 'http://localhost:8787/live'
  * Railway still serves some of them from its own VOD volume — so we keep hiding
  * them here, since the web merges the edge catalogue into the list.
  */
-const ARCHIVED = new Set<string>(['ep-027', 'ep-028', 'ep-029', 'ep-040', 'ep-041'])
+const ARCHIVED = new Set<string>(['ep-027', 'ep-028', 'ep-029', 'ep-030', 'ep-040', 'ep-041'])
 
 export async function loadProducedEpisodes(): Promise<Episode[]> {
   const [committed, live] = await Promise.all([loadCommitted(), loadEdgeCatalogue()])

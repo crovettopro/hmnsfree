@@ -66,20 +66,31 @@ export function LiveView({ view, onSelectAi }: LiveViewProps) {
 
   return (
     <>
-      <div className="livebar">
-        <span className={`livebar__badge${ended || isRerun ? ' is-ended' : ''}`}>
-          <span className="livebar__dot" />
-          {badge}
-        </span>
-        <span className="livebar__topic">
-          {isRerun && feed.rerunOf ? `${feed.rerunOf} · ` : ''}
-          {episode.topic}
-        </span>
-        {countdown && phase !== 'live' && (
-          <span className="livebar__countdown">{UI.premiereIn} {countdown}</span>
-        )}
-        <span className="livebar__listeners">{listeners} watching</span>
-      </div>
+      {phase !== 'live' && countdown ? (
+        // PRESHOW/RERUN: make it unmistakable that a LIVE episode is coming, and that
+        // what's playing now is a replay filling the gap (not a broken live).
+        <div className="preshow">
+          <span className="preshow__tag">
+            <span className="preshow__dot" />NEXT LIVE EPISODE IN
+          </span>
+          <span className="preshow__time">{countdown}</span>
+          <span className="preshow__note">
+            {isRerun ? `Replaying ${feed.rerunOf ?? 'an episode'} until we go live` : 'Starting soon — stay tuned'}
+          </span>
+        </div>
+      ) : (
+        <div className="livebar">
+          <span className={`livebar__badge${ended || isRerun ? ' is-ended' : ''}`}>
+            <span className="livebar__dot" />
+            {badge}
+          </span>
+          <span className="livebar__topic">
+            {isRerun && feed.rerunOf ? `${feed.rerunOf} · ` : ''}
+            {episode.topic}
+          </span>
+          <span className="livebar__listeners">{listeners} watching</span>
+        </div>
+      )}
 
       <main className="main">
         <Stage

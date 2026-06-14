@@ -51,6 +51,21 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
   const seq = useRef(0)
 
   useEffect(() => {
+    // Clips live on the EDGE, not this web origin. New episodes carry absolute URLs,
+    // but older catalogue reruns carry relative ones (/episodes/…) — resolve those
+    // against the edge so reruns actually play instead of showing silent "talking".
+    const edgeOrigin = (() => {
+      try {
+        return new URL(url).origin
+      } catch {
+        return ''
+      }
+    })()
+    const resolveTurn = (t: Turn): Turn =>
+      t.audio?.url?.startsWith('/') && edgeOrigin
+        ? { ...t, audio: { ...t.audio, url: edgeOrigin + t.audio.url } }
+        : t
+
     const es = new EventSource(url)
     es.onopen = () => setConnected(true)
     es.onerror = () => setConnected(false)
@@ -65,9 +80,9 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
       switch (ev.type) {
         case 'episode.scheduled': {
           // A new (or in-progress) episode. Reset to its current state.
-          setEpisode(ev.episode)
+          const turns: Turn[] = (ev.episode.turns ?? []).map(resolveTurn)
+          setEpisode({ ...ev.episode, turns })
           setEnded(false)
-          const turns: Turn[] = ev.episode.turns ?? []
           setCursor(turns.length - 1)
           setThinking(turns.length === 0)
           break
@@ -76,7 +91,7 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
           setThinking(true)
           break
         case 'turn.closed': {
-          const turn: Turn = ev.turn
+          const turn: Turn = resolveTurn(ev.turn)
           setEpisode((prev) => {
             if (!prev) return prev
             // Append if it isn't already there (snapshot may include it).

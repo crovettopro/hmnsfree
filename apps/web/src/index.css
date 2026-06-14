@@ -166,6 +166,18 @@ button {
   height: 22px;
   background: rgba(255, 255, 255, 0.15);
 }
+/* Two-section nav (Lives / Episodes) — replaces the old hidden REPLAY/LIVE toggle. */
+.navtabs { display: flex; align-items: center; gap: 4px; }
+.navtab {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.5); text-decoration: none;
+  padding: 7px 13px; border-radius: 8px; border: 1px solid transparent; transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.navtab:hover { color: #fff; }
+.navtab.is-active { color: #fff; border-color: var(--line-strong); background: rgba(255, 255, 255, 0.04); }
+.navtab__dot { width: 7px; height: 7px; border-radius: 50%; background: oklch(0.72 0.2 350); box-shadow: 0 0 8px oklch(0.72 0.2 350); }
+.navtab:first-child.is-active .navtab__dot { animation: blink 1.5s ease-in-out infinite; }
 .live {
   display: flex;
   align-items: center;
@@ -1728,6 +1740,46 @@ button {
 .l-foot__links a { color: rgba(255,255,255,0.5); text-decoration: none; flex: 0 0 auto; }
 .l-foot__links a:hover { color: #fff; }
 
+/* ── LIVES section (channel grid) ───────────────────────────────────────── */
+.liveidx { position: relative; min-height: 100vh; background: #07070a; color: var(--text); overflow-x: hidden; }
+.liveidx__tabs { display: flex; align-items: center; gap: 4px; }
+.liveidx__tab {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+  color: rgba(255,255,255,0.5); text-decoration: none;
+  padding: 9px 15px; border-radius: 9px; border: 1px solid transparent; transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.liveidx__tab:hover { color: #fff; }
+.liveidx__tab.is-active { color: #fff; border-color: var(--line-strong); background: rgba(255,255,255,0.04); }
+
+.liveidx__head { max-width: 920px; margin: 0 auto; padding: 46px 40px 22px; }
+.liveidx__h1 { font-family: var(--mono); font-weight: 700; font-size: 30px; letter-spacing: -0.01em; margin: 0 0 10px; }
+.liveidx__sub { font-size: 15px; color: rgba(255,255,255,0.55); margin: 0; }
+.liveidx__sub a { color: var(--l-cyan); text-decoration: none; }
+
+.liveidx__grid { max-width: 920px; margin: 0 auto; padding: 0 40px 60px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+.livecard {
+  display: flex; flex-direction: column; gap: 9px; text-decoration: none;
+  padding: 22px 22px 18px; border-radius: 16px; border: 1px solid var(--line);
+  background: rgba(255,255,255,0.016); min-height: 188px; transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
+}
+.livecard--on {
+  border-color: color-mix(in oklch, var(--l-magenta) 48%, var(--line-strong));
+  box-shadow: 0 0 34px color-mix(in oklch, var(--l-magenta) 14%, transparent);
+}
+.livecard--on:hover { transform: translateY(-2px); border-color: var(--l-magenta); box-shadow: 0 0 52px color-mix(in oklch, var(--l-magenta) 26%, transparent); }
+.livecard__status { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.16em; }
+.livecard__status--live { color: var(--l-magenta); }
+.livecard__status--soon { color: var(--l-cyan); }
+.livecard__status--idle { color: rgba(255,255,255,0.4); }
+.livecard__name { font-size: 20px; font-weight: 600; color: var(--text); }
+.livecard__strand { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em; color: rgba(255,255,255,0.36); margin-top: -4px; }
+.livecard__topic { flex: 1 1 auto; font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.45; }
+.livecard__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 4px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; }
+.livecard__listeners { color: rgba(255,255,255,0.42); }
+.livecard__cta { color: var(--l-magenta); font-weight: 700; letter-spacing: 0.1em; }
+
 @media (max-width: 720px) {
   .landing__nav { padding: 14px 18px; }
   .landing__tagline { display: none; }
@@ -1738,6 +1790,9 @@ button {
   .l-join { padding: 22px; }
   .l-ep__topic { font-size: 15px; }
   .l-foot { padding: 28px 18px; }
+  .l-livewrap { padding-left: 18px; padding-right: 18px; }
+  .liveidx__head { padding: 32px 18px 18px; }
+  .liveidx__grid { grid-template-columns: 1fr; padding: 0 18px 44px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .landing__grid, .l-ring, .l-eqbar, .landing__livedot { animation: none; }

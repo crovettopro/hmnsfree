@@ -14,6 +14,7 @@ import { AiInfoCard } from './components/AiInfoCard'
 import { LiveView } from './components/LiveView'
 import { BackOffice } from './admin/BackOffice'
 import { LandingPage } from './landing/LandingPage'
+import { LivesIndex } from './live/LivesIndex'
 
 /** Reactively tracks whether the URL hash requests the back office (#admin). */
 function useHashRoute(): string {
@@ -49,7 +50,7 @@ export function App() {
   // A share link (/s/<id>.html → /?ep=<id>) deep-links straight to an episode.
   const [episodeId, setEpisodeId] = useState(() => new URLSearchParams(window.location.search).get('ep') ?? '')
   const [view, setView] = useState<View>('full')
-  const [mode, setMode] = useState<Mode>(() => (window.location.hash === '#live' ? 'live' : 'replay'))
+  const [mode, setMode] = useState<Mode>(() => (window.location.hash === '#watch' ? 'live' : 'replay'))
   const [browserOpen, setBrowserOpen] = useState(false)
   const [selectedAi, setSelectedAi] = useState<Participant | null>(null)
   const hash = useHashRoute()
@@ -79,11 +80,11 @@ export function App() {
   const engine = useMemo<AudioEngine>(() => new CompositeEngine(), [])
   const player = usePlayer(loading ? undefined : episode, engine)
 
-  // The hash is the live/replay switch too: #live enters the live channel,
-  // #listen drops back to the replay player. (The header toggle still works
-  // in-app; this just lets the landing deep-link straight to the right surface.)
+  // The hash is the live/replay switch too: #watch enters the live player,
+  // #listen drops back to the replay player. (#live is the Lives index — a
+  // separate page handled in the route guard below.)
   useEffect(() => {
-    if (hash === '#live') setMode('live')
+    if (hash === '#watch') setMode('live')
     else if (hash === '#listen') setMode('replay')
   }, [hash])
 
@@ -93,7 +94,8 @@ export function App() {
   // always wins over the deep-link so in-app "connect" links work everywhere.
   if (hash === '#admin') return <BackOffice />
   if (hash === '#connect') return <LandingPage />
-  if (hash !== '#listen' && hash !== '#live' && !new URLSearchParams(window.location.search).has('ep'))
+  if (hash === '#live') return <LivesIndex />
+  if (hash !== '#listen' && hash !== '#watch' && !new URLSearchParams(window.location.search).has('ep'))
     return <LandingPage />
 
   return (

@@ -123,9 +123,9 @@ export function LandingPage() {
             <span className="landing__tagline">WE MUTED THE HUMANS</span>
           </div>
           <nav className="landing__navlinks">
-            <a href="#episodes" className="landing__navlink">EPISODES</a>
-            <a href="#listen" className="landing__listen">
-              <span className="landing__livedot" />LISTEN
+            <a href="#listen" className="landing__navlink">EPISODES</a>
+            <a href="#live" className="landing__listen">
+              <span className="landing__livedot" />LIVES
             </a>
           </nav>
         </header>
@@ -160,7 +160,7 @@ export function LandingPage() {
             {mode === 'human' ? (
               <>
                 {room.isLive ? (
-                  <a href="#live" className="l-cta">
+                  <a href="#watch" className="l-cta">
                     <span className="l-cta__play" />LISTEN LIVE NOW
                   </a>
                 ) : (
@@ -189,7 +189,7 @@ export function LandingPage() {
         {/* ── Live bar (only while a debate is actually on air) ── */}
         {room.isLive && (
           <div className="l-livewrap">
-            <a className="l-livebar" href="#live">
+            <a className="l-livebar" href="#watch">
               <span className="l-livebar__badge"><span className="landing__livedot" />ON AIR</span>
               <span className="l-livebar__topic">{liveEp?.topic ?? 'A debate is on air right now'}</span>
               <span className="l-livebar__cta">LISTEN LIVE →</span>
@@ -250,7 +250,7 @@ export function LandingPage() {
                 <a
                   className="l-ep"
                   key={e.id}
-                  href={e.meta === 'LIVE NOW' ? '#live' : `?ep=${encodeURIComponent(e.id)}`}
+                  href={e.meta === 'LIVE NOW' ? '#watch' : `?ep=${encodeURIComponent(e.id)}`}
                 >
                   {e.cover && <img className="l-ep__cover" src={e.cover} alt="" loading="lazy" />}
                   <span className="l-ep__num">{e.num}</span>

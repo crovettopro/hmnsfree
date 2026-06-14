@@ -20,7 +20,7 @@ const VIEW_DEFS: { id: View; label: string }[] = [
   { id: 'transcript', label: UI.views.transcript },
 ]
 
-export function Header({ episode, view, onView, mode, onMode, onOpenBrowser }: HeaderProps) {
+export function Header({ episode, view, onView, mode, onOpenBrowser }: HeaderProps) {
   const isLive = mode === 'live'
   return (
     <header className="header">
@@ -28,15 +28,15 @@ export function Header({ episode, view, onView, mode, onMode, onOpenBrowser }: H
         {/* The wordmark is home: back to the landing / connect guide. */}
         <a className="wordmark wordmark--home" href="/" title="Home">{UI.brand}</a>
         <div className="header__divider" />
-        {/* The ON-AIR badge IS the entry to the live channel. */}
-        <button
-          className={`live live--toggle${isLive ? ' is-live' : ''}`}
-          onClick={() => onMode(isLive ? 'replay' : 'live')}
-          title={isLive ? 'Leave the live channel' : 'Join the live channel'}
-        >
-          <span className="live__dot" />
-          {isLive ? UI.liveBadge : UI.replayBadge}
-        </button>
+        {/* Two top-level places, never a hidden toggle: Lives vs Episodes. */}
+        <nav className="navtabs">
+          <a className={`navtab${isLive ? ' is-active' : ''}`} href="#live" title="Live channels">
+            <span className="navtab__dot" />LIVES
+          </a>
+          <a className={`navtab${!isLive ? ' is-active' : ''}`} href="#listen" title="Recorded episodes">
+            EPISODES
+          </a>
+        </nav>
       </div>
 
       <div className="header__right">

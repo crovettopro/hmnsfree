@@ -43,15 +43,19 @@ function loadScheduleRaw(): ScheduledEpisode[] {
   }
 }
 
-/** The programmed episode for an ISO date, from the live calendar. */
-export function plannedFor(date: string): ScheduledEpisode | undefined {
-  return loadSchedule().find((e) => e.date === date)
+/**
+ * The programmed episode for an ISO date on a channel, from the live calendar.
+ * Defaults to the flagship `main` so existing single-channel callers are unaffected.
+ */
+export function plannedFor(date: string, channel: 'main' | 'two' = 'main'): ScheduledEpisode | undefined {
+  return loadSchedule().find((e) => e.date === date && (e.channel ?? 'main') === channel)
 }
 
-/** The next scheduled episode on or after an ISO date (for "coming up"). */
-export function nextScheduled(onOrAfter: string): ScheduledEpisode | undefined {
+/** The next scheduled episode on/after an ISO date for a channel (for "coming up"). */
+export function nextScheduled(onOrAfter: string, channel: 'main' | 'two' = 'main'): ScheduledEpisode | undefined {
   return loadSchedule()
     .slice()
+    .filter((e) => (e.channel ?? 'main') === channel)
     .sort((a, b) => a.date.localeCompare(b.date))
     .find((e) => e.date >= onOrAfter)
 }

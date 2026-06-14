@@ -85,9 +85,10 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
 
   for (;;) {
     const nextPremiere = computeNextPremiere(Date.now(), premiereHour, everyMin)
-    // The upcoming chapter's title + panel roster (for the holding card). Parallel
-    // rooms pick their own topics, so there's no programmed title to show ahead.
-    const nextTopic = meta.autonomousTopics ? undefined : plannedFor(new Date(nextPremiere).toISOString().slice(0, 10))?.topic
+    // The upcoming chapter's title + panel roster (for the holding card). Keyed on the
+    // premiere's ET calendar date + this channel's strand. (An unprogrammed date has no
+    // title to show ahead — the topic is then chosen autonomously at premiere time.)
+    const nextTopic = meta.autonomousTopics ? undefined : plannedFor(etDateOf(nextPremiere), meta.id)?.topic
     const nextCast = episodeCast(counter).cast.map((p) => p.name)
 
     // Keep the WAITING ROOM alive: spectator AIs chatter through the pre-show so the
@@ -159,8 +160,9 @@ async function producePremiere(ctx: PremiereCtx): Promise<void> {
   const id = `${meta.idPrefix}-${number.padStart(3, '0')}`
   broadcaster.resetChat()
 
-  // Flagship follows the editorial calendar; parallel rooms pick their own topic.
-  const planned = meta.autonomousTopics ? undefined : plannedFor(new Date().toISOString().slice(0, 10))
+  // Each channel follows its own strand in the editorial calendar, keyed on TODAY's
+  // ET date. An unprogrammed date → undefined → produce falls back to autonomous topic.
+  const planned = meta.autonomousTopics ? undefined : plannedFor(etDateOf(Date.now()), meta.id)
   const spectators = new SpectatorRuntime(broadcaster, env)
   // The moderator pulls REAL connected agents first; the local sim only fills the
   // silence when nobody's connected, so a live room always takes precedence.
@@ -281,14 +283,50 @@ async function igniteDebate(
   }
 }
 
-/** Epoch ms of the next premiere: every N minutes (debug) or daily at `hour`. */
-function computeNextPremiere(now: number, hour: number, everyMin: number): number {
+/**
+ * Premiere hours are EASTERN TIME, but the server (Railway) runs in UTC — so we
+ * can't use local `setHours`. These helpers read/convert instants in America/New_York
+ * via Intl, so "4pm ET" lands correctly year-round (DST included).
+ */
+
+/** Wall-clock offset (ms) to add to a UTC instant so it reads as Eastern time. */
+function etOffsetMs(at: number): number {
+  const dtf = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York', hour12: false,
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+  })
+  const p: Record<string, string> = {}
+  for (const part of dtf.formatToParts(at)) p[part.type] = part.value
+  const hour = p.hour === '24' ? 0 : Number(p.hour) // some envs render midnight as '24'
+  const asUTC = Date.UTC(Number(p.year), Number(p.month) - 1, Number(p.day), hour, Number(p.minute), Number(p.second))
+  return asUTC - at
+}
+
+/** The Eastern-Time calendar date (YYYY-MM-DD) of an instant. */
+function etDateOf(at: number): string {
+  // en-CA renders as ISO-style YYYY-MM-DD.
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).format(at)
+}
+
+/** Epoch ms of the next premiere: every N minutes (debug) or daily at `etHour` ET. */
+function computeNextPremiere(now: number, etHour: number, everyMin: number): number {
   if (everyMin > 0) return now + everyMin * 60000
-  const d = new Date(now)
-  d.setHours(hour, 0, 0, 0)
-  let t = d.getTime()
-  if (t <= now) t += 86400000
-  return t
+  // Read `now` as an ET wall clock, set the target hour, convert back to a real instant.
+  const offset = etOffsetMs(now)
+  const etWall = now + offset // ms that, read as UTC fields, show the ET wall clock
+  const d = new Date(etWall)
+  d.setUTCHours(etHour, 0, 0, 0)
+  let targetWall = d.getTime()
+  if (targetWall <= etWall) targetWall += 86400000
+  // Convert the ET wall-clock target back to a true instant; re-derive the offset at
+  // the target so a DST change between now and then is handled correctly.
+  let real = targetWall - offset
+  const offsetAtTarget = etOffsetMs(real)
+  if (offsetAtTarget !== offset) real = targetWall - offsetAtTarget
+  return real
 }
 
 /** Next episode number = continue after whatever's already in the library. */

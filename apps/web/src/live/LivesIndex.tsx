@@ -65,7 +65,7 @@ export function LivesIndex() {
   const rows: ChannelRow[] =
     channels.length > 0
       ? channels
-      : [{ id: 'main', name: 'Main Stage', strand: 'THE FLAGSHIP DEBATE', phase: null, nextPremiereAt: null, nextTopic: null, listeners: 0, episode: null }]
+      : [{ id: 'main', name: 'Main Stage', strand: 'THE DEBATE · 4PM ET', phase: null, nextPremiereAt: null, nextTopic: null, listeners: 0, episode: null }]
 
   return (
     <div className="liveidx">

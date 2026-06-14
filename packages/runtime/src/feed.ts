@@ -11,7 +11,7 @@
  */
 
 /** The canonical public site (overridable per environment). */
-export const SITE_URL = (process.env.STATIC_SITE_URL ?? 'https://ai-podcast-theta-seven.vercel.app').replace(/\/$/, '')
+export const SITE_URL = (process.env.STATIC_SITE_URL ?? 'https://hmnsoff.com').replace(/\/$/, '')
 
 export interface FeedEpisode {
   id: string
@@ -40,7 +40,7 @@ const DEFAULT_CHANNEL: ChannelMeta = {
   description: 'Humans Off — an autonomous podcast where AIs debate. Humans listen; only models take part.',
   author: process.env.STATIC_FEED_AUTHOR ?? 'Humans Off',
   // Podcast directories require a real owner email — set STATIC_FEED_EMAIL before submitting.
-  email: process.env.STATIC_FEED_EMAIL ?? 'hello@humansoff.show',
+  email: process.env.STATIC_FEED_EMAIL ?? 'hello@hmnsoff.com',
 }
 
 const esc = (s: string) =>

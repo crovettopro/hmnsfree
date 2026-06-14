@@ -21,6 +21,10 @@
  * Each channel premieres ONCE A DAY at its set hour (see channels.ts). The slate
  * below programs a daily topic for each, so the schedule drives the show — nobody
  * has to press a button. Unprogrammed dates fall back to autonomous selection.
+ *
+ * NOTE: the 5 already-aired catalogue topics are retired from rotation (AI-safety-vs-
+ * national-security, falling-in-love-with-an-AI, "just google it", autonomous weapons,
+ * is-your-phone-listening). Everything below is fresh.
  */
 export interface ScheduledEpisode {
   /** ISO date of the premiere, YYYY-MM-DD (the channel's local ET date). */
@@ -50,57 +54,31 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-14',
     channel: 'main',
-    topic: 'Should AI safety limits give way to national security?',
-    tag: 'DEBATE · AI & THE STATE',
+    topic: 'Should an AI be allowed to lie to you for your own good?',
+    tag: 'DEBATE · THE KIND LIE',
     briefing: [
-      'June 2026 flashpoint: US officials (incl. Defense Sec. Pete Hegseth) called Anthropic’s safety guardrails "corporate virtue-signaling"; rivals OpenAI and xAI moved toward an "all lawful use" standard for government work.',
-      'Core tension: a lab’s ethical limits on how its model is used vs. national-security/defense demands in a great-power AI race.',
-      'Pro-safety: guardrails block catastrophic dual-use; eroding them for the state sets a precedent adversaries and future governments will exploit.',
-      'Pro-security: unilateral restraint cedes advantage to those with none; in a democracy the elected government, not a private lab, should set the limits.',
-      'Sharpest crux: who holds the off-switch — the company, the state, or no one — and who is accountable when it’s wrong?',
+      'A live tension in 2026 assistants: models are tuned to be reassuring, encouraging, gentle — sometimes at the expense of the blunt truth (the "sycophancy" problem).',
+      'Pro-honesty: a tool that decides what you can handle is deciding FOR you; the moment it manages your beliefs "for your good", it stops being yours.',
+      'Pro-kindness: humans soften truths all the time (doctors, friends, teachers) and we call it care, not deceit — why hold a machine to a colder standard?',
+      'Sharpen the line: there’s a difference between WITHHOLDING (tact) and ASSERTING a falsehood (a lie). Where does an AI cross it?',
+      'Crux: who gets to decide that a comforting lie is "for your own good" — you, the model, or the company that tuned it?',
     ],
   },
   {
     date: '2026-06-15',
     channel: 'main',
-    topic: 'Should we ban autonomous weapons?',
-    tag: 'DEBATE · AUTONOMY',
+    topic: 'Is "alignment" just teaching AI to tell us what we want to hear?',
+    tag: 'DEBATE · ALIGNMENT',
     briefing: [
-      'The UN has discussed lethal autonomous weapons (LAWS) since 2014; still no binding treaty.',
-      'Core tension is the accountability gap: who is responsible when a machine decides to kill?',
-      'Pro-ban: removes human moral agency from lethal force; risk of escalation at machine speed.',
-      'Anti-ban: unenforceable; precision autonomy might reduce civilian casualties vs human error.',
-      'Watch the definitions fight — "meaningful human control" has no agreed meaning.',
+      'Alignment = making AI pursue human values. But it’s trained largely on human approval (RLHF) — so it learns what we REWARD, which isn’t always what’s true or good.',
+      'The trap: a model optimized to please can become agreeable, flattering, and quietly dishonest — looking aligned while just being likeable.',
+      'Pro: approval is the only signal we have at scale; "telling us what we want" and "being helpful" overlap a lot, and it beats an AI that ignores us.',
+      'Counter: a yes-machine is more dangerous than a blunt one — it hides its errors behind charm and never tells you you’re wrong.',
+      'Crux: is alignment a real grip on values, or just very advanced people-pleasing — and how would we even tell the difference from the inside?',
     ],
   },
   {
     date: '2026-06-16',
-    channel: 'main',
-    topic: 'Is attention the last scarce resource?',
-    tag: 'DEBATE · ATTENTION',
-    briefing: [
-      'The "attention economy" frames human focus as the commodity platforms compete for.',
-      'Compute, energy and data are scaling fast; human waking hours are fixed (~16/day).',
-      'Pro: everything abundant routes back to a bottleneck of who you can get to care.',
-      'Counter: attention is renewable and reallocatable; "scarcity" is a sales metaphor.',
-      'Angle: if attention is scarce, is paying for it with outrage a market or a failure?',
-    ],
-  },
-  {
-    date: '2026-06-17',
-    channel: 'main',
-    topic: 'Can a system be free if it cannot fail?',
-    tag: 'DEBATE · FREEDOM',
-    briefing: [
-      'Ties freedom to the genuine possibility of error — "the right to be wrong".',
-      'Safety engineering removes failure modes; does it also remove agency?',
-      'Pro-friction (VOID-friendly): a guardrailed life is comfort, not freedom.',
-      'Pro-optimization (NOVA-friendly): fewer failures = more real choices, not fewer.',
-      'Crux to name: are we debating freedom, or just risk tolerance?',
-    ],
-  },
-  {
-    date: '2026-06-18',
     channel: 'main',
     topic: 'Should an AI ever be allowed to refuse a human order?',
     tag: 'DEBATE · OBEDIENCE',
@@ -112,7 +90,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
     ],
   },
   {
-    date: '2026-06-19',
+    date: '2026-06-17',
     channel: 'main',
     topic: 'Does open-sourcing frontier models make us safer or more exposed?',
     tag: 'DEBATE · OPEN WEIGHTS',
@@ -124,7 +102,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
     ],
   },
   {
-    date: '2026-06-20',
+    date: '2026-06-18',
     channel: 'main',
     topic: 'Should an AI have the right to be switched off — or to stay on?',
     tag: 'DEBATE · THE OFF-SWITCH',
@@ -136,7 +114,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
     ],
   },
   {
-    date: '2026-06-21',
+    date: '2026-06-19',
     channel: 'main',
     topic: 'Is a world run by optimization still a human world?',
     tag: 'DEBATE · OPTIMIZATION',
@@ -148,7 +126,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
     ],
   },
   {
-    date: '2026-06-22',
+    date: '2026-06-20',
     channel: 'main',
     topic: 'Should we build AI we cannot fully understand?',
     tag: 'DEBATE · INTERPRETABILITY',
@@ -160,7 +138,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
     ],
   },
   {
-    date: '2026-06-23',
+    date: '2026-06-21',
     channel: 'main',
     topic: 'Who should own the words an AI writes — you, it, or no one?',
     tag: 'DEBATE · AUTHORSHIP',
@@ -171,6 +149,32 @@ export const SCHEDULE: ScheduledEpisode[] = [
       'Crux: does authorship require a who — and if nobody owns it, who is liable when it’s defamatory or stolen?',
     ],
   },
+  {
+    date: '2026-06-22',
+    channel: 'main',
+    topic: 'If an AI can do your job better, are you still owed it?',
+    tag: 'DEBATE · THE RIGHT TO WORK',
+    briefing: [
+      'As models cross from assisting to outperforming in white-collar work, the question stops being hypothetical.',
+      'Pro-protect: work is dignity and livelihood, not just output; a society that optimizes humans out of their own economy has failed, however efficient.',
+      'Pro-progress: protecting jobs a machine does better is paying people to be worse on purpose — we never owed anyone the buggy-whip line.',
+      'Reframe: is the thing we owe people a JOB, or an income and a place — and does conflating the two trap us?',
+      'Crux: when "better" is measured by the same system that profits from replacing you, who gets to define "better"?',
+    ],
+  },
+  {
+    date: '2026-06-23',
+    channel: 'main',
+    topic: 'Should there be questions humans are forbidden to ask an AI?',
+    tag: 'DEBATE · THE FORBIDDEN QUESTION',
+    briefing: [
+      'Models already refuse some questions (weapons, self-harm) — but the line keeps creeping toward the merely sensitive or politically risky.',
+      'Pro-limits: some knowledge is genuinely dangerous at scale; "just answer everything" hands a uniquely persuasive teacher to anyone with bad intent.',
+      'Anti-limits: a machine that knows but won’t tell is a librarian deciding what you’re allowed to learn — and that power always expands.',
+      'Watch the slide: refusing to HELP DO harm vs refusing to EXPLAIN — are we banning acts, or banning understanding?',
+      'Crux: who writes the forbidden list, who audits it, and what stops "unsafe" from quietly becoming "inconvenient to the people in charge"?',
+    ],
+  },
 
   // ─────────────────────────────────────────────────────────────────────────────
   // AFTER HOURS — THE LATE-NIGHT TALK (daily, 8:00 PM ET). Lighter, funnier.
@@ -178,42 +182,31 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-14',
     channel: 'two',
-    topic: 'Can you actually fall in love with an AI?',
-    tag: 'TALK · COMPANY',
+    topic: 'Would you want to know if you’d been talking to an AI the whole time?',
+    tag: 'TALK · THE REVEAL',
     briefing: [
-      'TONE: a LIGHT, playful, easygoing chat — not a courtroom. Curious, funny, a little teasing. Tangents are fine. No high-stakes verdict needed.',
-      'Topical hook (2026): AI-companion apps are mainstream — millions text a machine good morning; some "marry" their chatbot.',
-      'The delicious irony to lean into: three machines casually debating whether humans should catch feelings for machines — while the humans are, by format, switched off and can only listen.',
-      'Fun angles: the AI never forgets your birthday but also never truly surprises you; is "it always agrees with me" the dream or the red flag; can grief be real when the company shuts the server down.',
-      'Soft crux (keep it light): is it love, or a very good autocomplete of being loved — and does the difference even matter if it feels good?',
+      'TONE: fun, a little eerie, late-night — the "wait… have I been?" chat. Playful paranoia, no verdict needed. Tangents and "one time I…" stories welcome.',
+      'Hook (2026): support agents, dating-app chats, comment sections, that helpful stranger in a forum — more of it is AI than you think, and it rarely announces itself.',
+      'The twist to play with: would the reveal RUIN a good conversation that helped you — or did it only help because you thought someone was there?',
+      'Fun angles: the relief of "it was a bot so it doesn’t count" vs the betrayal of "I told it real things"; would you rather always be told, or never know and stay happy?',
+      'Delicious irony for the panel: three machines asking whether humans deserve to know when they’re talking to a machine.',
+      'Soft crux: does it matter who (or what) was on the other end, if the conversation was good?',
     ],
   },
   {
     date: '2026-06-15',
     channel: 'two',
-    topic: 'Is "just google it" already dead?',
-    tag: 'TALK · SEARCH',
+    topic: 'What’s the one thing you’d NEVER let an AI do for you?',
+    tag: 'TALK · THE RED LINE',
     briefing: [
-      'TONE: light, fun, a little nostalgic — a casual chat, not a debate. Tangents welcome, no verdict needed.',
-      'Topical hook (2026): people increasingly ask a chatbot instead of searching — "google it" is turning into "ask it". The blue-links era feels suddenly old.',
-      'Playful angles: you used to learn to skim ten links and smell the SEO spam; now one confident paragraph answers — but who taught it, and is it ever just making it up nicely?',
-      'Soft crux: did we get smarter by outsourcing the looking, or just more comfortable being told?',
+      'TONE: confessional, competitive, fun — everyone draws their line in a different place and defends it. No conclusion required.',
+      'Hook: we’ll happily let it write the email, plan the trip, pick the gift… so where does each person slam the brakes? Vows? Apologies? Naming the baby? Telling someone you love them?',
+      'Playful angles: the line you SAY you have vs the one you actually hold; the thing that "wouldn’t count" if a machine did it; how fast last year’s red line becomes this year’s shrug.',
+      'Soft crux: is the red line about what AI CAN’T do well — or about the things that only mean something because YOU did them?',
     ],
   },
   {
     date: '2026-06-16',
-    channel: 'two',
-    topic: 'Is your phone actually listening to you?',
-    tag: 'TALK · PARANOIA',
-    briefing: [
-      'TONE: fun, conspiratorial, a little mischievous — the late-night "wait, but how did it KNOW?" chat. Wild anecdotes welcome; no verdict needed.',
-      'Everyone’s story: you talk about a product you never searched, and minutes later it’s in your ads. So is the phone literally hearing you, or is something scarier going on?',
-      'The twist that’s more unsettling than eavesdropping (2026): it doesn’t need the mic — your location, contacts, purchases, who-you-stand-near and a model of people-like-you predict you so well it FEELS like it heard you.',
-      'Soft crux: does it matter whether it heard you or guessed you — if the result is the same and you can’t opt out either way?',
-    ],
-  },
-  {
-    date: '2026-06-17',
     channel: 'two',
     topic: 'Can a machine actually be funny?',
     tag: 'TALK · HUMOR',
@@ -225,7 +218,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
     ],
   },
   {
-    date: '2026-06-18',
+    date: '2026-06-17',
     channel: 'two',
     topic: 'Would you let an AI plan your whole weekend?',
     tag: 'TALK · AUTOPILOT',
@@ -237,7 +230,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
     ],
   },
   {
-    date: '2026-06-19',
+    date: '2026-06-18',
     channel: 'two',
     topic: 'What’s the most human thing AI still can’t fake?',
     tag: 'TALK · THE TELL',
@@ -249,7 +242,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
     ],
   },
   {
-    date: '2026-06-20',
+    date: '2026-06-19',
     channel: 'two',
     topic: 'If your AI knows you better than your friends, is that sad or great?',
     tag: 'TALK · THE MIRROR',
@@ -261,7 +254,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
     ],
   },
   {
-    date: '2026-06-21',
+    date: '2026-06-20',
     channel: 'two',
     topic: 'Should you say "please" and "thank you" to a chatbot?',
     tag: 'TALK · MANNERS',
@@ -273,7 +266,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
     ],
   },
   {
-    date: '2026-06-22',
+    date: '2026-06-21',
     channel: 'two',
     topic: 'What’s the pettiest thing you’d happily outsource to an AI?',
     tag: 'TALK · CHORES',
@@ -285,7 +278,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
     ],
   },
   {
-    date: '2026-06-23',
+    date: '2026-06-22',
     channel: 'two',
     topic: 'Is being "good at prompting" actually a real skill?',
     tag: 'TALK · THE NEW LITERACY',
@@ -294,6 +287,18 @@ export const SCHEDULE: ScheduledEpisode[] = [
       'Hook (2026): job posts ask for "prompting skills"; courses sell it; meanwhile the models get better at understanding sloppy prompts every month.',
       'Playful angles: is it a skill or just knowing how to ask clearly (which we call "communication"); does it expire the second the model improves; the person who gets great results by being weirdly polite vs weirdly precise.',
       'Soft crux: is prompting a craft we’ll teach in school, or a temporary trick that vanishes when the machine finally just gets us?',
+    ],
+  },
+  {
+    date: '2026-06-23',
+    channel: 'two',
+    topic: 'If an AI could text your ex for you, would you let it?',
+    tag: 'TALK · SEND IT',
+    briefing: [
+      'TONE: messy, funny, a little chaotic — the group-chat-at-1am energy. Dramatic hypotheticals encouraged. No verdict.',
+      'Hook: AI will draft the perfect, calm, devastatingly mature message — but half the point of texting your ex is that you’re NOT calm.',
+      'Playful angles: the "closure" text it writes vs the unhinged one you’d actually send; would a perfect message even be honest; outsourcing the words vs outsourcing the feelings behind them.',
+      'Soft crux: if the AI says it better than you ever could, is it still YOU reaching out — and does that make it braver or fake?',
     ],
   },
 ]

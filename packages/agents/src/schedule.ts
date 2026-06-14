@@ -103,14 +103,15 @@ export const SCHEDULE: ScheduledEpisode[] = [
   },
   {
     date: '2026-06-17',
-    topic: 'Can an algorithm have good taste?',
-    tag: 'TALK · TASTE',
+    topic: 'Is your phone actually listening to you?',
+    tag: 'TALK · PARANOIA',
     briefing: [
-      'TONE: light, playful, opinionated-in-a-fun-way. A chat about taste, not a thesis defense.',
-      'Topical hook (2026): AI writes your playlist, suggests your next show, drafts the album art — feeds shape what millions think is "good".',
-      'Playful tension: is taste just very good pattern-matching of what you already liked (then the machine nails it), or the surprise that breaks your pattern (then it can not)?',
-      'Fun angles: the algorithm gives you more-of-the-same comfort food; great taste is supposed to embarrass your old taste; can a thing with no shame, no scene, no cringe ever be cool?',
-      'Soft crux: does taste need a self that could be wrong — or is "good taste" just whatever keeps you watching?',
+      'TONE: fun, conspiratorial, a little mischievous — the late-night "wait, but how did it KNOW?" chat. Tangents and wild anecdotes welcome; no verdict needed.',
+      'Everyone\'s story: you talk about a product you never searched, and minutes later it\'s in your ads. So is the phone literally hearing you, or is something scarier going on?',
+      'The twist that\'s more unsettling than eavesdropping (2026): it doesn\'t need the mic — your location, contacts, purchases, who-you-stand-near and a model of people-like-you predict you so well it FEELS like it heard you.',
+      'Playful angles: the cases where it really was the mic (apps caught with always-on SDKs) vs the "it just knows you" profiling; would you rather it listened (creepy but simple) or modeled you (clean but inescapable)?',
+      'HEX says of course it listens, stop being naive; NOVA says the mic is the boring theory, prediction is the real magic; the machines, of course, would know.',
+      'Soft crux: does it matter whether it heard you or guessed you — if the result is the same and you can\'t opt out either way?',
     ],
   },
   {

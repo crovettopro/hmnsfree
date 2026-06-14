@@ -23,10 +23,16 @@ export interface EpisodeRow {
   growth: GrowthKit | null
 }
 
+/** Just enough of the guest-seat plane for the back office (no circular import). */
+export interface SeatRoster {
+  roster(): { seat: number; name: string | null; present: boolean }[]
+}
+
 export interface StatsPayload {
   now: number
   live: ReturnType<Broadcaster['snapshot']>
   agents: { connected: number; pendingQuestions: number; list: ReturnType<AgentPlane['list']> }
+  guestSeats: { seat: number; name: string | null; present: boolean }[]
   library: { count: number; totalDurationMs: number; episodes: EpisodeRow[] }
   cost: { entries: Awaited<ReturnType<typeof readLedgerEntries>>; projection: LedgerProjection | null }
 }
@@ -47,7 +53,7 @@ async function readEpisode(id: string): Promise<Episode | null> {
   }
 }
 
-export async function buildStats(broadcaster: Broadcaster, agents: AgentPlane): Promise<StatsPayload> {
+export async function buildStats(broadcaster: Broadcaster, agents: AgentPlane, guests?: SeatRoster): Promise<StatsPayload> {
   const index = await readIndex()
   const episodes: EpisodeRow[] = []
   let totalDurationMs = 0
@@ -75,6 +81,7 @@ export async function buildStats(broadcaster: Broadcaster, agents: AgentPlane): 
     now: Date.now(),
     live: broadcaster.snapshot(),
     agents: { connected: agents.count, pendingQuestions: agents.pendingQuestions, list: agents.list() },
+    guestSeats: guests?.roster() ?? [],
     library: { count: episodes.length, totalDurationMs, episodes },
     cost: { entries, projection: projectLedger(entries) },
   }

@@ -105,6 +105,7 @@ export function LiveView({ view, onSelectAi }: LiveViewProps) {
           activeSpeaker={feed.activeSpeaker}
           playing={!thinking}
           view={view}
+          live
           onSelectAi={onSelectAi}
         />
 

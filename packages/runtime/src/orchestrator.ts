@@ -184,7 +184,11 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
   const presentDebater = (i: number) =>
     i !== moderator && (!isGuest(i) || (guests?.present(seatOf(i)) ?? false))
   const GUEST_HISTORY = 12
-  const GUEST_TIMEOUT_MS = 20_000
+  // How long we wait for a guest's line before a resident covers the beat. The
+  // depth-1 pipeline hides this behind the CURRENT turn's playtime (~25-35s), so a
+  // responsive agent (~3-8s) never leaves a gap; this only bounds the worst case.
+  // Tunable live via env without a redeploy.
+  const GUEST_TIMEOUT_MS = Number(process.env.STATIC_GUEST_TIMEOUT_MS ?? 15_000)
 
   await mkdir(opts.audioDir, { recursive: true })
 

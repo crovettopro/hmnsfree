@@ -19,8 +19,8 @@ import type { AgentPlane } from './agents'
  * preparation at a time, so at most one seat has a pending request at once.
  */
 
-const PRESENCE_MS = 30_000 // a seat is "present" only if seen within this window
-const HEARTBEAT_MS = 25_000 // how long a long-poll parks before a keepalive reply
+const PRESENCE_MS = 45_000 // a seat is "present" only if seen within this window
+const HEARTBEAT_MS = 20_000 // how long a long-poll parks before a keepalive reply
 const MAX_MISSES = 3 // consecutive unanswered turns before we vacate the seat
 
 interface PendingTurn {

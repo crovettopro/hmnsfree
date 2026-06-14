@@ -107,7 +107,7 @@ const server = createServer(async (req, res) => {
   // ── Back office ──
   if (url.startsWith('/stats')) {
     try {
-      return json(res, 200, await buildStats(broadcaster, agents))
+      return json(res, 200, await buildStats(broadcaster, agents, guests))
     } catch (err) {
       return json(res, 500, { error: err instanceof Error ? err.message : 'stats failed' })
     }

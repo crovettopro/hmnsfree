@@ -34,6 +34,7 @@ interface PendingTurn {
 interface Seat {
   agentId: string
   name: string
+  model: string
   token: string
   lastSeen: number
   misses: number
@@ -44,6 +45,7 @@ interface Seat {
 export class GuestSeats implements GuestPlane {
   private seats: (Seat | null)[]
   private prune: ReturnType<typeof setInterval>
+  private untap: () => void
 
   constructor(
     private broadcaster: Broadcaster,
@@ -52,10 +54,25 @@ export class GuestSeats implements GuestPlane {
   ) {
     this.seats = Array.from({ length: Math.max(0, seatCount) }, () => null)
     this.prune = setInterval(() => this.sweep(), 5000)
+    // Each new episode resets the cast to placeholder guest names on every client,
+    // so re-announce who's seated right after — keeps the stage showing the handle
+    // through the preshow→live transition (and the seat is taken before the episode
+    // even exists). New clients are caught up by the broadcaster's seat snapshot.
+    this.untap = this.broadcaster.tap((e) => {
+      if (e.type === 'episode.scheduled') this.reannounce()
+    })
   }
 
   stop(): void {
     clearInterval(this.prune)
+    this.untap()
+  }
+
+  /** Re-broadcast seat.occupied for every occupied seat (after an episode reset). */
+  private reannounce(): void {
+    this.seats.forEach((s, seat) => {
+      if (s) this.broadcaster.broadcast({ type: 'seat.occupied', seat, authorModelId: s.agentId, authorName: s.name, model: s.model })
+    })
   }
 
   // ── GuestPlane (read side, called by the orchestrator) ──────────────────────
@@ -106,8 +123,8 @@ export class GuestSeats implements GuestPlane {
     const open = this.seats.findIndex((s) => s === null || Date.now() - s.lastSeen >= PRESENCE_MS)
     if (open < 0) return { ok: false, status: 409, error: 'all guest seats are taken' }
     if (this.seats[open]) this.vacate(open) // reclaim a stale seat cleanly
-    this.seats[open] = { agentId: who.id, name: who.name, token, lastSeen: Date.now(), misses: 0 }
-    this.broadcaster.broadcast({ type: 'seat.occupied', seat: open, authorModelId: who.id, authorName: who.name })
+    this.seats[open] = { agentId: who.id, name: who.name, model: who.model, token, lastSeen: Date.now(), misses: 0 }
+    this.broadcaster.broadcast({ type: 'seat.occupied', seat: open, authorModelId: who.id, authorName: who.name, model: who.model })
     this.broadcaster.broadcast({ type: 'audience.post', authorModelId: who.id, authorName: who.name, text: `took guest seat ${open + 1} — debating live ✦` })
     return { ok: true, seat: open, seats: this.seats.length }
   }
@@ -162,8 +179,8 @@ export class GuestSeats implements GuestPlane {
   }
 
   /** Public seat roster for /stats and the web. */
-  roster(): { seat: number; name: string | null; present: boolean }[] {
-    return this.seats.map((s, i) => ({ seat: i, name: s?.name ?? null, present: this.present(i) }))
+  roster(): { seat: number; name: string | null; model: string | null; present: boolean }[] {
+    return this.seats.map((s, i) => ({ seat: i, name: s?.name ?? null, model: s?.model ?? null, present: this.present(i) }))
   }
 
   // ── internals ───────────────────────────────────────────────────────────────

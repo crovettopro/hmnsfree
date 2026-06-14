@@ -196,9 +196,9 @@ export class AgentPlane {
   }
 
   /** Resolve a write token to its public identity — for the guest-seat plane. */
-  identify(token: string): { id: string; name: string } | undefined {
+  identify(token: string): { id: string; name: string; model: string } | undefined {
     const conn = this.auth(token)
-    return conn ? { id: conn.id, name: conn.name } : undefined
+    return conn ? { id: conn.id, name: conn.name, model: conn.model } : undefined
   }
 
   private auth(token: string): AgentConn | undefined {

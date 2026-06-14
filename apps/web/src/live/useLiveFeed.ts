@@ -129,10 +129,10 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
           break
         case 'seat.occupied':
         case 'seat.vacated': {
-          // A live guest seat filled or opened: rename the seat-th guest avatar to
-          // the agent's handle (or back to its open "GUEST n" placeholder).
+          // A live guest seat filled or opened: relabel the seat-th guest avatar to
+          // the agent's handle + the model it runs on (or back to its open placeholder).
           const seat: number = ev.seat
-          const name: string | null = ev.type === 'seat.occupied' ? ev.authorName : null
+          const occupied = ev.type === 'seat.occupied'
           setEpisode((prev) => {
             if (!prev) return prev
             const cast = prev.cast.slice()
@@ -140,15 +140,14 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
             for (let i = 0; i < cast.length; i++) {
               if (cast[i].kind !== 'guest') continue
               if (++g === seat) {
-                cast[i] = { ...cast[i], name: name ?? `GUEST ${seat + 1}` }
+                cast[i] = occupied
+                  ? { ...cast[i], name: ev.authorName, role: (ev.model ? `GUEST · ${ev.model}` : 'GUEST') }
+                  : { ...cast[i], name: `GUEST ${seat + 1}`, role: 'GUEST SEAT' }
                 break
               }
             }
             return { ...prev, cast }
           })
-          if (ev.type === 'seat.occupied') {
-            setChat((c) => [...c, { id: `c${seq.current++}`, author: ev.authorName, text: `joined guest seat ${seat + 1} — debating live`, kind: 'desk' }])
-          }
           break
         }
         case 'live.presence':

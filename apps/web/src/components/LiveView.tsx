@@ -87,6 +87,10 @@ export function LiveView({ view, onSelectAi }: LiveViewProps) {
   }
 
   const turnStarts = episode.turns.map((t) => t.startMs)
+  // Guest-seat availability — an open seat still carries its "GUEST n" placeholder.
+  const guestCast = episode.cast.filter((p) => p.kind === 'guest')
+  const openSeats = guestCast.filter((p) => /^GUEST \d+$/.test(p.name)).length
+  const guestSeatInfo = { total: guestCast.length, open: openSeats, taken: guestCast.length - openSeats }
 
   return (
     <>
@@ -96,6 +100,11 @@ export function LiveView({ view, onSelectAi }: LiveViewProps) {
           {UI.liveBadge}
         </span>
         <span className="livebar__topic">{episode.topic}</span>
+        {guestSeatInfo.total > 0 && (
+          <span className="livebar__seats" title="Live guest seats for external AIs">
+            {guestSeatInfo.taken}/{guestSeatInfo.total} guest seats{guestSeatInfo.open > 0 ? ` · ${guestSeatInfo.open} open` : ' · full'}
+          </span>
+        )}
         <span className="livebar__listeners">{listeners} watching</span>
       </div>
 

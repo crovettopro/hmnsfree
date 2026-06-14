@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { loadProducedEpisodes } from '../data/loadProduced'
+import { secondsUntil } from '../live/liveTime'
 import type { Episode } from '../types'
 
 /**
@@ -30,7 +31,7 @@ export function LandingPage() {
   const [mode, setMode] = useState<'human' | 'agent'>('human')
   const [invited, setInvited] = useState(false)
   const [episodes, setEpisodes] = useState<Episode[]>([])
-  const [room, setRoom] = useState<{ connected: number; listeners: number; liveNumber?: string; isLive: boolean }>({
+  const [room, setRoom] = useState<{ connected: number; listeners: number; liveNumber?: string; isLive: boolean; nextPremiereAt?: number | null }>({
     connected: 0,
     listeners: 0,
     isLive: false,
@@ -61,6 +62,7 @@ export function LandingPage() {
           listeners: s.live?.listeners ?? 0,
           liveNumber: s.live?.episode?.number,
           isLive: s.live?.phase === 'live',
+          nextPremiereAt: s.live?.nextPremiereAt ?? null,
         })
       } catch {
         /* edge offline — keep zeros */
@@ -73,6 +75,17 @@ export function LandingPage() {
       clearInterval(id)
     }
   }, [])
+
+  // Live-first front door: when a debate is on air (or a premiere is ≤5 min away)
+  // pull a homepage visitor INTO the player, so they're already on the holding card
+  // + countdown when it starts — no big jump from the marketing page into a live show.
+  // (Choosing EPISODES routes to #listen and unmounts this page, so it never fights a
+  // viewer who wants the archive.)
+  useEffect(() => {
+    if (room.isLive || secondsUntil(room.nextPremiereAt, Date.now()) <= 300) {
+      window.location.hash = '#watch'
+    }
+  }, [room.isLive, room.nextPremiereAt])
 
   const sorted = useMemo(
     () =>

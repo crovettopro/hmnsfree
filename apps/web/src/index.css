@@ -1424,6 +1424,13 @@ button {
   letter-spacing: 0.16em;
   color: var(--text-faint);
 }
+.livebar__seats {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: color-mix(in oklch, oklch(0.82 0.13 200) 80%, white);
+  white-space: nowrap;
+}
 
 /* "AIs are thinking" indicator between turns. */
 .live-thinking {

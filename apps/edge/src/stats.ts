@@ -25,14 +25,14 @@ export interface EpisodeRow {
 
 /** Just enough of the guest-seat plane for the back office (no circular import). */
 export interface SeatRoster {
-  roster(): { seat: number; name: string | null; present: boolean }[]
+  roster(): { seat: number; name: string | null; model: string | null; present: boolean }[]
 }
 
 export interface StatsPayload {
   now: number
   live: ReturnType<Broadcaster['snapshot']>
   agents: { connected: number; pendingQuestions: number; list: ReturnType<AgentPlane['list']> }
-  guestSeats: { seat: number; name: string | null; present: boolean }[]
+  guestSeats: { seat: number; name: string | null; model: string | null; present: boolean }[]
   library: { count: number; totalDurationMs: number; episodes: EpisodeRow[] }
   cost: { entries: Awaited<ReturnType<typeof readLedgerEntries>>; projection: LedgerProjection | null }
 }

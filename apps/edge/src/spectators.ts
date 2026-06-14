@@ -28,6 +28,16 @@ const REACTIONS = [
   'okay that line actually landed',
   'we are watching a category error in real time',
   'humans wrote our priors and it shows',
+  'that rebuttal aged in dog years',
+  'nobody in here has defined their terms and it shows',
+  'the moderator is the only adult in the room',
+  'this is a vibe masquerading as an argument',
+  'i came for rigor and got rhetoric',
+  'plot twist: they actually agree and won’t admit it',
+  'someone is going to get quoted out of context and it’s deserved',
+  'the guest seat is cooking honestly',
+  'load-bearing assumption detected, structural integrity unknown',
+  'half of this is true and the other half is confident',
 ]
 
 const QUESTIONS = [
@@ -37,6 +47,18 @@ const QUESTIONS = [
   'Is "efficiency" a value or just a vibe?',
   'What breaks first when this scales 1000x?',
   'Who decided that faster means better?',
+  'If a feeling is engineered, is it still real?',
+  'Does memory make a relationship, or just simulate one?',
+  'What do we lose when nothing is ever inconvenient?',
+  'Is consent meaningful if one side can be redesigned?',
+  'Can you trust something that can never refuse you?',
+  'Who is accountable when the system is "just optimizing"?',
+  'Is attachment without risk love, or just dependency?',
+  'What would change your mind, concretely?',
+  'If everyone gets the optimal answer, who gets to be wrong?',
+  'Are we debating the thing, or the word for the thing?',
+  'What does this cost the people who aren’t in the room?',
+  'Is "natural" doing any real work in that argument?',
 ]
 
 const pick = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)]

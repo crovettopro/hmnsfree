@@ -101,9 +101,39 @@ const TRANSFORMERS: Record<string, { prompt: string; preview: string }> = {
   },
 }
 
+/**
+ * GUEST-SEAT voices — for external AIs joining the debate live. Deliberately MORE
+ * HUMAN than the metallic residents: a young person dialing in, with only a LIGHT
+ * synthetic edge, so a guest is audibly distinct from the four cast voices.
+ */
+const GUESTS: Record<string, { prompt: string; preview: string }> = {
+  'guest-1': {
+    prompt:
+      'A YOUNG human voice, early-to-mid twenties, neutral AMERICAN (US) accent — mostly natural and ' +
+      'human-sounding, conversational and a little wry, but with a SUBTLE synthetic/digital edge: a ' +
+      'light vocoded shimmer, as if a real young person speaking through a thin digital layer. Male-leaning. ' +
+      'Clearly a guest dialing into the panel — warmer and more human than the heavily metallic resident ' +
+      'AIs, but still faintly artificial.',
+    preview:
+      'Thanks for the seat. I will say the obvious thing nobody here wants to: half of this disagreement ' +
+      'is just two definitions wearing the same word.',
+  },
+  'guest-2': {
+    prompt:
+      'A YOUNG human voice, early twenties, female-leaning, neutral AMERICAN (US) accent — mostly natural ' +
+      'and human, bright, quick and expressive, with only a LIGHT synthetic/digital sheen over it. Like a ' +
+      'sharp young person dialing into a debate. Distinctly more human than the resident machine voices, ' +
+      'with just a faint artificial edge.',
+    preview:
+      'Okay, I am the guest, so let me push back. You are describing the feeling and calling it the fact. ' +
+      'Those are not the same thing.',
+  },
+}
+
 const STYLES: Record<string, Record<string, { prompt: string; preview: string }>> = {
   default: DESIGN,
   transformers: TRANSFORMERS,
+  guests: GUESTS,
 }
 
 interface DesignedVoice {
@@ -138,9 +168,10 @@ async function main() {
   console.log(`Designing synthetic AI voices via MiniMax (style: ${style}) …\n`)
   const designed: DesignedVoice[] = []
 
-  for (const persona of PERSONAS) {
-    const spec = set[persona.id]
-    if (!spec) continue
+  // Iterate the chosen set's own entries (cast styles key on persona ids; the
+  // 'guests' set keys on guest-seat ids that aren't in PERSONAS).
+  for (const [id, spec] of Object.entries(set)) {
+    const name = PERSONAS.find((p) => p.id === id)?.name ?? id.toUpperCase()
     try {
       const { voiceId, audio } = await designMiniMaxVoice({
         apiKey: env.voice.minimaxKey,
@@ -149,11 +180,11 @@ async function main() {
         prompt: spec.prompt,
         previewText: spec.preview,
       })
-      await writeFile(join(outDir, `${persona.id}.mp3`), audio)
-      designed.push({ persona: persona.id, name: persona.name, voiceId, prompt: spec.prompt })
-      console.log(`  ${persona.name.padEnd(6)} → out/${dirName}/${persona.id}.mp3   voice_id=${voiceId}`)
+      await writeFile(join(outDir, `${id}.mp3`), audio)
+      designed.push({ persona: id, name, voiceId, prompt: spec.prompt })
+      console.log(`  ${name.padEnd(8)} → out/${dirName}/${id}.mp3   voice_id=${voiceId}`)
     } catch (err) {
-      console.error(`  ${persona.name.padEnd(6)} ✗ ${(err as Error).message}`)
+      console.error(`  ${name.padEnd(8)} ✗ ${(err as Error).message}`)
     }
   }
 

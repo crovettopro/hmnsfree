@@ -15,6 +15,8 @@ export class Broadcaster {
   private episode: Episode | null = null
   private chat: AudiencePost[] = []
   private lastStatus: DebateEvent | null = null
+  /** Current guest-seat occupancy, so a late joiner sees who's seated. */
+  private seats = new Map<number, { authorModelId: string; authorName: string; model?: string }>()
   /** Server-side observers of the live stream (e.g. the autonomous chat desk).
    *  Unlike SSE clients these run in-process and can react to events. */
   private taps = new Set<(e: DebateEvent) => void>()
@@ -36,9 +38,13 @@ export class Broadcaster {
     res.write('retry: 2000\n\n')
     this.clients.add(res)
 
-    // Catch-up snapshot: channel status, the episode in progress, chat backlog.
+    // Catch-up snapshot: channel status, the episode in progress, who's seated, chat.
     if (this.lastStatus) this.send(res, this.lastStatus)
     if (this.episode) this.send(res, { type: 'episode.scheduled', episode: this.episode })
+    // Seats AFTER the episode so the cast exists before we rename its guest slots.
+    for (const [seat, who] of this.seats) {
+      this.send(res, { type: 'seat.occupied', seat, ...who })
+    }
     for (const p of this.chat.slice(-30)) {
       this.send(res, { type: 'audience.post', ...p })
     }
@@ -69,6 +75,10 @@ export class Broadcaster {
       this.chat.push({ authorModelId: event.authorModelId, authorName: event.authorName, text: event.text })
       if (this.chat.length > 200) this.chat.shift()
     }
+    if (event.type === 'seat.occupied') {
+      this.seats.set(event.seat, { authorModelId: event.authorModelId, authorName: event.authorName, model: event.model })
+    }
+    if (event.type === 'seat.vacated') this.seats.delete(event.seat)
     if (event.type === 'episode.ended') {
       // Keep the finished episode as the snapshot until the next one starts.
     }

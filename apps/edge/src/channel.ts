@@ -41,6 +41,10 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
   // STATIC_PREMIERE_EVERY_MIN minutes (debug — lets us watch the full cycle fast).
   const premiereHour = Number(process.env.STATIC_PREMIERE_HOUR ?? 18)
   const everyMin = process.env.STATIC_PREMIERE_EVERY_MIN ? Number(process.env.STATIC_PREMIERE_EVERY_MIN) : 0
+  // Reruns OFF by default: a live channel only airs genuine live debates — we don't
+  // replay old episodes as filler (those live in the web's EPISODES archive). The gap
+  // before a premiere just idles, still open to ignite a debate on a raised hand.
+  const rerunsOn = (process.env.STATIC_RERUNS ?? '0') !== '0'
 
   console.log(
     `STATIC edge — mode: ${env.mode.toUpperCase()} · premiere ${everyMin ? `every ${everyMin}min` : `daily @ ${premiereHour}:00`}`,
@@ -74,24 +78,12 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
   for (;;) {
     const nextPremiere = computeNextPremiere(Date.now(), premiereHour, everyMin)
 
-    // ── Fill the gap until the premiere: re-air the catalogue, counting down. ──
+    // ── Fill the gap until the premiere. A raised hand can ignite a live debate at
+    //    any time; otherwise we either idle (default) or, if STATIC_RERUNS is on,
+    //    re-air the catalogue. No rerun = no repeated episodes on the live channel. ──
     while (Date.now() < nextPremiere) {
-      const catalogue = await loadCatalogue()
-      if (!catalogue.length) {
-        broadcaster.broadcast({ type: 'live.status', phase: 'preshow', nextPremiereAt: nextPremiere })
-        await sleep(Math.min(5000, Math.max(1000, nextPremiere - Date.now())))
-        continue
-      }
-      const ep = catalogue[rerunIdx++ % catalogue.length]
-      broadcaster.broadcast({ type: 'live.status', phase: 'rerun', nextPremiereAt: nextPremiere, rerunOf: ep.number })
-      broadcaster.resetChat()
-      // A raised hand from a real agent (with budget) cuts the rerun short so we
-      // can ignite a live exchange for it.
-      await rerunEpisode(ep, broadcaster, {
-        deadlineMs: nextPremiere,
-        shouldStop: () => igniteAllowed() && opts.agents.pendingDemand().count > 0,
-      })
-      if (Date.now() < nextPremiere && igniteAllowed()) {
+      // On-demand ignite: a raised hand wakes the cast for a short live exchange.
+      if (igniteAllowed() && opts.agents.pendingDemand().count > 0) {
         const seed = opts.agents.hook().takeQuestion()
         if (seed) {
           igniteCount++
@@ -100,8 +92,27 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
             minTurns: igniteMinTurns,
             maxTurns: igniteMaxTurns,
           })
+          continue
         }
       }
+
+      if (rerunsOn) {
+        const catalogue = await loadCatalogue()
+        if (catalogue.length) {
+          const ep = catalogue[rerunIdx++ % catalogue.length]
+          broadcaster.broadcast({ type: 'live.status', phase: 'rerun', nextPremiereAt: nextPremiere, rerunOf: ep.number })
+          broadcaster.resetChat()
+          await rerunEpisode(ep, broadcaster, {
+            deadlineMs: nextPremiere,
+            shouldStop: () => igniteAllowed() && opts.agents.pendingDemand().count > 0,
+          })
+          continue
+        }
+      }
+
+      // Idle preshow: nothing live and no rerun filler — just hold until the premiere.
+      broadcaster.broadcast({ type: 'live.status', phase: 'preshow', nextPremiereAt: nextPremiere })
+      await sleep(Math.min(5000, Math.max(1000, nextPremiere - Date.now())))
     }
 
     // ── Premiere: the day's programmed episode, produced live. ──

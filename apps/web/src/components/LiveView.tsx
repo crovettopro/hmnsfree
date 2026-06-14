@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import type { Participant } from '../types'
 import type { View } from './Header'
 import { UI } from '../strings'
@@ -7,23 +7,6 @@ import { CompositeEngine } from '../playback/audio/CompositeEngine'
 import { Stage } from './Stage'
 import { TranscriptPanel } from './TranscriptPanel'
 import { ChatPanel } from './ChatPanel'
-
-/** Live-ticking "time until `at`", formatted h:mm:ss / m:ss. Empty when past/absent. */
-function useCountdown(at: number | null): string {
-  const [now, setNow] = useState(() => Date.now())
-  useEffect(() => {
-    if (!at) return
-    const id = setInterval(() => setNow(Date.now()), 1000)
-    return () => clearInterval(id)
-  }, [at])
-  if (!at) return ''
-  const s = Math.max(0, Math.round((at - now) / 1000))
-  const h = Math.floor(s / 3600)
-  const m = Math.floor((s % 3600) / 60)
-  const sec = s % 60
-  const pad = (n: number) => String(n).padStart(2, '0')
-  return h > 0 ? `${h}:${pad(m)}:${pad(sec)}` : `${m}:${pad(sec)}`
-}
 
 interface LiveViewProps {
   view: View
@@ -42,55 +25,45 @@ export function LiveView({ view, onSelectAi }: LiveViewProps) {
   const engine = useMemo(() => new CompositeEngine(), [])
   const feed = useLiveFeed(LIVE_URL, engine)
   const { episode, connected, thinking, listeners, ended, phase } = feed
-  const countdown = useCountdown(feed.nextPremiereAt)
 
-  if (!episode) {
+  // A live ONLY exists when a debate is genuinely on air. We deliberately do NOT
+  // replay old episodes as filler or count down to a non-real premiere — when
+  // nothing is live, the live surface is a clean "nothing on air" that sends people
+  // to the recorded archive. (Recorded episodes live in the EPISODES section.)
+  const isLiveNow = phase === 'live'
+
+  if (!isLiveNow || !episode) {
     return (
       <main className="main main--live-empty">
         <div className="live-empty">
           <span className="live-empty__dot" />
-          {!connected
-            ? UI.liveOffline
-            : feed.nextPremiereAt
-              ? `${UI.premiereIn} ${countdown}`
-              : UI.liveConnecting}
+          {!connected ? (
+            UI.liveOffline
+          ) : isLiveNow ? (
+            UI.liveConnecting
+          ) : (
+            <>
+              No live debate right now.{' '}
+              <a className="live-empty__link" href="#listen">Listen to recorded episodes →</a>
+            </>
+          )}
         </div>
       </main>
     )
   }
 
   const turnStarts = episode.turns.map((t) => t.startMs)
-  // Badge: a true premiere is LIVE; the catalogue re-airing is RERUN; else SOON.
-  const isRerun = phase === 'rerun'
-  const badge = ended || isRerun ? (isRerun ? UI.rerunBadge : UI.replayBadge) : UI.liveBadge
 
   return (
     <>
-      {phase !== 'live' && countdown ? (
-        // PRESHOW/RERUN: make it unmistakable that a LIVE episode is coming, and that
-        // what's playing now is a replay filling the gap (not a broken live).
-        <div className="preshow">
-          <span className="preshow__tag">
-            <span className="preshow__dot" />NEXT LIVE EPISODE IN
-          </span>
-          <span className="preshow__time">{countdown}</span>
-          <span className="preshow__note">
-            {isRerun ? `Replaying ${feed.rerunOf ?? 'an episode'} until we go live` : 'Starting soon — stay tuned'}
-          </span>
-        </div>
-      ) : (
-        <div className="livebar">
-          <span className={`livebar__badge${ended || isRerun ? ' is-ended' : ''}`}>
-            <span className="livebar__dot" />
-            {badge}
-          </span>
-          <span className="livebar__topic">
-            {isRerun && feed.rerunOf ? `${feed.rerunOf} · ` : ''}
-            {episode.topic}
-          </span>
-          <span className="livebar__listeners">{listeners} watching</span>
-        </div>
-      )}
+      <div className="livebar">
+        <span className="livebar__badge">
+          <span className="livebar__dot" />
+          {UI.liveBadge}
+        </span>
+        <span className="livebar__topic">{episode.topic}</span>
+        <span className="livebar__listeners">{listeners} watching</span>
+      </div>
 
       <main className="main">
         <Stage

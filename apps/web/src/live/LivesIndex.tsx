@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react'
  * The LIVES section — a grid of live channels, the front door to everything
  * on air. Today the engine runs one channel ("Main Stage"); the layout is a
  * grid so the 24/7 multi-channel future (several debates airing at once) just
- * renders more cards with no rework. Each card shows its real-time status
- * (ON AIR / RERUN / next-premiere countdown / offline) and, when something is
- * playable, routes into the live player (#watch).
+ * renders more cards with no rework. A channel is ON AIR only for a genuine live
+ * debate (no rerun filler, no countdown to a non-real premiere); otherwise it sits
+ * in STANDBY. An on-air card routes into the live player (#watch).
  *
  * This is a deliberate split from EPISODES (the replay archive): the old
  * in-player REPLAY/LIVE toggle was invisible and undiscoverable. Live and
@@ -33,30 +33,9 @@ interface Channel {
   offline: boolean
 }
 
-/** Live-ticking countdown to `at` (ms epoch). Empty once past/absent. */
-function useNow(active: boolean): number {
-  const [now, setNow] = useState(() => Date.now())
-  useEffect(() => {
-    if (!active) return
-    const id = setInterval(() => setNow(Date.now()), 1000)
-    return () => clearInterval(id)
-  }, [active])
-  return now
-}
-
-function fmt(ms: number): string {
-  const s = Math.max(0, Math.round(ms / 1000))
-  const h = Math.floor(s / 3600)
-  const m = Math.floor((s % 3600) / 60)
-  const sec = s % 60
-  const p = (n: number) => String(n).padStart(2, '0')
-  return h > 0 ? `${h}:${p(m)}:${p(sec)}` : `${m}:${p(sec)}`
-}
-
 export function LivesIndex() {
   const [snap, setSnap] = useState<LiveSnapshot | null>(null)
   const [offline, setOffline] = useState(false)
-  const now = useNow(true)
 
   useEffect(() => {
     let alive = true
@@ -114,7 +93,7 @@ export function LivesIndex() {
 
         <section className="liveidx__grid">
           {channels.map((c) => (
-            <ChannelCard key={c.id} channel={c} now={now} />
+            <ChannelCard key={c.id} channel={c} />
           ))}
         </section>
       </div>
@@ -122,32 +101,31 @@ export function LivesIndex() {
   )
 }
 
-function ChannelCard({ channel, now }: { channel: Channel; now: number }) {
+function ChannelCard({ channel }: { channel: Channel }) {
   const { snap, offline } = channel
   const phase = snap?.phase ?? null
-  const onAir = phase === 'live' || phase === 'rerun'
-  const next = snap?.nextPremiereAt ?? null
+  // A channel is "on air" ONLY for a genuine live debate — no rerun filler, no
+  // countdown to a non-real premiere. Otherwise it sits clean in STANDBY.
+  const onAir = phase === 'live'
 
   let status: string
   let kind: 'live' | 'soon' | 'idle'
   if (offline) {
     status = 'OFFLINE'
     kind = 'idle'
-  } else if (phase === 'live') {
+  } else if (onAir) {
     status = 'ON AIR'
     kind = 'live'
-  } else if (phase === 'rerun') {
-    status = 'RERUN'
-    kind = 'live'
-  } else if (next && next > now) {
-    status = `NEXT IN ${fmt(next - now)}`
-    kind = 'soon'
   } else {
     status = 'STANDBY'
     kind = 'idle'
   }
 
-  const topic = snap?.episode?.topic ?? (offline ? 'Channel is offline right now.' : 'Waiting for the next debate…')
+  const topic = onAir
+    ? snap?.episode?.topic ?? 'Live now'
+    : offline
+      ? 'Channel is offline right now.'
+      : 'No live debate right now — catch the recorded episodes.'
   const inner = (
     <>
       <div className={`livecard__status livecard__status--${kind}`}>

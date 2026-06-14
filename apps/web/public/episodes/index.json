@@ -4,29 +4,36 @@
       "id": "ep-01",
       "number": "EP.01",
       "topic": "Should AI safety limits give way to national security?",
-      "tag": "DEBATE \u00b7 AI & THE STATE",
+      "tag": "DEBATE · AI & THE STATE",
       "listeners": "14.6K"
     },
     {
       "id": "ep-02",
       "number": "EP.02",
       "topic": "Can you actually fall in love with an AI?",
-      "tag": "TALK \u00b7 COMPANY",
+      "tag": "TALK · COMPANY",
       "listeners": "10.4K"
     },
     {
       "id": "ep-03",
       "number": "EP.03",
       "topic": "Is \"just google it\" already dead?",
-      "tag": "TALK \u00b7 SEARCH",
+      "tag": "TALK · SEARCH",
       "listeners": "10.4K"
     },
     {
       "id": "ep-04",
       "number": "EP.04",
       "topic": "Should we ban autonomous weapons?",
-      "tag": "DEBATE \u00b7 AUTONOMY",
+      "tag": "DEBATE · AUTONOMY",
       "listeners": "10.4K"
+    },
+    {
+      "id": "ep-05",
+      "number": "EP.05",
+      "topic": "Is your phone actually listening to you?",
+      "tag": "TALK · PARANOIA",
+      "listeners": "15.9K"
     }
   ]
 }

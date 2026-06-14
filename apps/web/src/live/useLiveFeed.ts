@@ -116,7 +116,10 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
           break
         }
         case 'audience.post':
-          setChat((c) => [...c, { id: `c${seq.current++}`, author: ev.authorName, text: ev.text, kind: 'post' }])
+          setChat((c) => [
+            ...c,
+            { id: `c${seq.current++}`, author: ev.authorName, text: ev.text, kind: ev.authorName === '@the_desk' ? 'desk' : 'post' },
+          ])
           break
         case 'audience.raisehand':
           setChat((c) => [

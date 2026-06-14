@@ -62,8 +62,16 @@ export interface ProduceOptions {
   planned?: ScheduledEpisode
   /** Machine plane: spectator-AI questions the moderator can pull on air (live). */
   audience?: AudienceHook
-  /** Max audience questions in the dedicated end-of-show Q&A segment (default 2). */
+  /** Max audience questions in the dedicated end-of-show Q&A segment. Defaults to
+   *  one per ~2.5 min of `qaReserveMs` (min 2) when time-budgeted, else 2. */
   maxQuestions?: number
+  /**
+   * Time-budgeted live only: milliseconds reserved at the END for the on-air
+   * audience Q&A segment, carved out of `targetMs` ON TOP of the closings reserve.
+   * The debate winds down this much earlier so a real ~10-min "mailbag" fits before
+   * the closings. Omit (or 0) to keep Q&A to whatever slack the closings reserve has.
+   */
+  qaReserveMs?: number
   /**
    * Broadcast clock: when true, the orchestrator waits each turn's playtime after
    * committing it, so the event stream unfolds in REAL TIME (a synchronized
@@ -107,8 +115,16 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
   // covers the wind-down beat + closings (+ a little audience Q&A); maxTurns becomes
   // a runaway safety cap (~10 min/turn would be absurd, so a high count is plenty).
   const targetMs = opts.targetMs
-  const CLOSINGS_RESERVE_MS = 180_000
-  const debateBudgetMs = targetMs ? Math.max(0, targetMs - CLOSINGS_RESERVE_MS) : Infinity
+  const CLOSINGS_RESERVE_MS = 120_000
+  // The end-of-show audience Q&A ("mailbag") gets its own slice of the budget so a
+  // real ~10-min segment fits — the debate winds down this much earlier. Only when
+  // an audience is connected; no point reserving silence nobody can fill.
+  const qaReserveMs = opts.audience ? (opts.qaReserveMs ?? 0) : 0
+  const endReserveMs = CLOSINGS_RESERVE_MS + qaReserveMs
+  const debateBudgetMs = targetMs ? Math.max(0, targetMs - endReserveMs) : Infinity
+  // One question per ~2.5 min of the reserved Q&A window (at least 2 when any
+  // window is set), so a 10-min mailbag airs ~4 selected questions.
+  const maxQuestions = opts.maxQuestions ?? (qaReserveMs ? Math.max(2, Math.floor(qaReserveMs / 150_000)) : 2)
   const hardMaxTurns = targetMs ? 600 : maxTurns
   const llm = new LlmRegistry(env.llm)
   const voices = new VoiceRegistry(env.voice)
@@ -309,16 +325,21 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
       const ended = (nomination ?? '').toUpperCase().startsWith('END')
       const outOfTime = targetMs ? cursorMs >= debateBudgetMs : debateTurns >= maxTurns
       if (debateTurns >= minTurns && (ended || outOfTime)) {
-        // Time-budgeted live: one moderator beat to signal the wrap before closings.
+        // Time-budgeted live: one moderator beat to signal the wrap. When a Q&A window
+        // is reserved, it hands into the audience mailbag; otherwise straight to closings.
         if (targetMs && outOfTime && !ended) {
           yield {
             slot: {
               speaker: moderator,
               kind: 'steer',
               directive:
-                'We are near the end of the hour. In ONE short beat, signal that time is almost up ' +
-                'and the debate is heading into its final stretch — do NOT summarize or pick a winner. ' +
-                'Closing statements come next.',
+                qaReserveMs
+                  ? 'We are near the end of the hour. In ONE short beat, signal that the debate is ' +
+                    'wrapping and you are opening the floor to the audience for a few questions before ' +
+                    'closings — do NOT summarize or pick a winner.'
+                  : 'We are near the end of the hour. In ONE short beat, signal that time is almost up ' +
+                    'and the debate is heading into its final stretch — do NOT summarize or pick a winner. ' +
+                    'Closing statements come next.',
             },
           }
         }
@@ -369,10 +390,11 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
       sinceSteer++
     }
 
-    // 3b) Audience Q&A segment — a few raised questions aired before closing.
+    // 3b) Audience Q&A segment — the end-of-show "mailbag": a few raised questions
+    //     selected and aired before closing. The chat desk has been answering the
+    //     rest live in the side channel; these are the ones brought ON AIR.
     if (opts.audience) {
-      const maxQ = opts.maxQuestions ?? 2
-      for (let q = 0; q < maxQ; q++) {
+      for (let q = 0; q < maxQuestions; q++) {
         const question = opts.audience.takeQuestion()
         if (!question) break
         const handoff = yield {

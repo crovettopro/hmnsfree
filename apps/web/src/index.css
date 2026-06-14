@@ -1499,6 +1499,29 @@ button {
   margin-right: 6px;
 }
 
+/* The autonomous specialist (THE DESK) answering audience questions in chat. */
+.chat__msg.is-desk {
+  border-left: 2px solid color-mix(in oklch, oklch(0.82 0.13 200) 65%, transparent);
+  padding-left: 9px;
+  background: color-mix(in oklch, oklch(0.82 0.13 200) 7%, transparent);
+  border-radius: 0 6px 6px 0;
+}
+.chat__msg.is-desk .chat__author {
+  color: color-mix(in oklch, oklch(0.82 0.13 200) 85%, white);
+}
+.chat__deskbadge {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #06262a;
+  background: oklch(0.82 0.13 200);
+  vertical-align: 1px;
+}
+
 /* ── Back office (#admin) ─────────────────────────────────────────────────── */
 .bo {
   min-height: 100vh;

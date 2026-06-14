@@ -39,9 +39,13 @@ export function ChatPanel({ messages, live }: ChatPanelProps) {
           </div>
         ) : (
           messages.map((m) => (
-            <div key={m.id} className={`chat__msg${m.kind === 'question' ? ' is-question' : ''}`}>
+            <div
+              key={m.id}
+              className={`chat__msg${m.kind === 'question' ? ' is-question' : ''}${m.kind === 'desk' ? ' is-desk' : ''}`}
+            >
               <span className="chat__author">
                 {m.kind === 'question' && <span className="chat__hand">✋</span>}
+                {m.kind === 'desk' && <span className="chat__deskbadge">DESK</span>}
                 {m.author}
               </span>
               <span className="chat__text">{m.text}</span>

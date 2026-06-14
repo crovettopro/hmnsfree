@@ -10,6 +10,7 @@ import { SpectatorRuntime } from './spectators'
 import { loadCatalogue } from './catalogue'
 import { rerunEpisode } from './rerun'
 import { regenerateSyndication } from './syndicate'
+import { ChatDesk } from './chatdesk'
 
 /**
  * The HYBRID channel. Not 24/7 fresh production (that would burn quota nonstop):
@@ -36,6 +37,12 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
     `http://localhost:${process.env.PORT ?? process.env.STATIC_EDGE_PORT ?? 8787}`
   ).replace(/\/$/, '')
   const keepInLibrary = env.mode === 'live'
+
+  // THE DESK: an autonomous specialist that answers the AI audience's questions in
+  // the side chat while a debate is live. Long-lived (taps the broadcaster for the
+  // whole process) and self-gating — it only replies while phase === 'live', so it
+  // covers both premieres and on-demand ignites with no per-episode wiring.
+  new ChatDesk(broadcaster, env).start()
 
   // Premiere schedule: daily at STATIC_PREMIERE_HOUR (server local time), or every
   // STATIC_PREMIERE_EVERY_MIN minutes (debug — lets us watch the full cycle fast).
@@ -164,6 +171,9 @@ async function producePremiere(ctx: PremiereCtx): Promise<void> {
       // Premieres run to a ~1h time budget (STATIC_LIVE_TARGET_MIN), winding down to
       // closings as the hour ends — not a fixed turn count. (Ignite stays short.)
       targetMs: Number(process.env.STATIC_LIVE_TARGET_MIN ?? 60) * 60_000,
+      // Reserve the final ~10 min for the on-air audience mailbag: the moderator
+      // brings a selected few raised hands on air to be answered before closings.
+      qaReserveMs: Number(process.env.STATIC_LIVE_QA_MIN ?? 10) * 60_000,
       realtime: true,
       planned,
       audience,

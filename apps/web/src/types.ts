@@ -26,6 +26,7 @@ export interface ChatMessage {
   author: string
   /** The message text. */
   text: string
-  /** 'question' = a raised hand the moderator may pull on air; else a chat post. */
-  kind?: 'post' | 'question'
+  /** 'question' = a raised hand the moderator may pull on air; 'desk' = the
+   *  autonomous specialist answering audience questions in chat; else a chat post. */
+  kind?: 'post' | 'question' | 'desk'
 }

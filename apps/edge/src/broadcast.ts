@@ -15,6 +15,15 @@ export class Broadcaster {
   private episode: Episode | null = null
   private chat: AudiencePost[] = []
   private lastStatus: DebateEvent | null = null
+  /** Server-side observers of the live stream (e.g. the autonomous chat desk).
+   *  Unlike SSE clients these run in-process and can react to events. */
+  private taps = new Set<(e: DebateEvent) => void>()
+
+  /** Subscribe to every broadcast event in-process. Returns an unsubscribe fn. */
+  tap(fn: (e: DebateEvent) => void): () => void {
+    this.taps.add(fn)
+    return () => this.taps.delete(fn)
+  }
 
   /** Register a freshly-connected browser and catch it up to the live edge. */
   addClient(res: ServerResponse): void {
@@ -64,6 +73,15 @@ export class Broadcaster {
       // Keep the finished episode as the snapshot until the next one starts.
     }
     for (const res of this.clients) this.send(res, event)
+    // In-process observers last, so their own broadcasts (the desk replying) layer
+    // cleanly after the triggering event. Isolated so one tap can't break the fan-out.
+    for (const tap of this.taps) {
+      try {
+        tap(event)
+      } catch {
+        /* a tap must never break the broadcast */
+      }
+    }
   }
 
   /** Reset chat between episodes (the episode snapshot is replaced on next start). */

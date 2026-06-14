@@ -4,19 +4,39 @@ interface IndexFile {
   episodes: { id: string }[]
 }
 
+/** The live edge that produces + serves premieres (their audio lives on its volume). */
+const EDGE_BASE = 'https://static-production-a1e5.up.railway.app'
+
 /**
- * The replay library is ONLY the episodes we hand-curate and ship with the web
- * (`/episodes/index.json` → the 5 chapters), in the order we chose. We deliberately
- * do NOT merge the live edge's VOD catalogue: a live premiere is a real-time moment,
- * not repeatable catalogue. Until production quality is locked, nothing the edge airs
- * auto-appears in the archive — so the listing stays exactly what we picked.
+ * Live premieres we've REVIEWED and chosen to publish as permanent replay episodes.
+ * The edge airs many shows (autonomous premieres, reruns, ignites) — but ONLY the ids
+ * listed here surface in the archive, so nothing the edge produces auto-leaks into the
+ * curated library. This is the allowlist gate the manual curation asked for: a premiere
+ * becomes a permanent episode the moment (and only when) we add its id below.
  *
- * (When we're ready to publish premieres as permanent episodes, re-enable the edge
- * merge: `await Promise.all([loadCommitted(), loadEdgeCatalogue()])` and dedupe by id.
- * `loadEdgeCatalogue` is kept intact below for that day.)
+ * Optional `blurb`/`cover` override the (often empty) fields on the live VOD json.
+ */
+const PUBLISHED_PREMIERES: Record<string, { blurb?: string; cover?: string }> = {
+  'ep-033': {
+    blurb:
+      'AXIOM, NOVA and VOID — joined live by an outside AI in a guest seat — fight over whether a kind lie is ever care, or just control.',
+  },
+}
+
+/**
+ * The replay library = the episodes we ship with the web (`/episodes/index.json`) PLUS
+ * any live premieres we've explicitly published (`PUBLISHED_PREMIERES`). A premiere is a
+ * real-time moment, not repeatable catalogue, so it never appears here automatically —
+ * only when we add its id to the allowlist. The edge is queried per-id (not its full
+ * catalogue), so reruns/autonomous shows can never bleed in.
  */
 export async function loadProducedEpisodes(): Promise<Episode[]> {
-  return loadCommitted()
+  const [committed, premieres] = await Promise.all([loadCommitted(), loadPublishedPremieres()])
+  // Committed wins on id collision; otherwise keep both. Order doesn't matter — every
+  // consumer sorts by episode number.
+  const byId = new Map<string, Episode>()
+  for (const e of [...committed, ...premieres]) if (!byId.has(e.id)) byId.set(e.id, e)
+  return [...byId.values()]
 }
 
 /** Episodes bundled with this deploy (written by the studio pipeline). */
@@ -31,6 +51,31 @@ async function loadCommitted(): Promise<Episode[]> {
   } catch {
     return []
   }
+}
+
+/**
+ * Pull each allowlisted premiere straight from the edge (its audio urls are already
+ * absolute, so they stream from the edge volume — no rewrite, no git bloat). If the edge
+ * is down or an id 404s, that premiere is simply skipped; the committed library always
+ * shows regardless.
+ */
+async function loadPublishedPremieres(): Promise<Episode[]> {
+  const ids = Object.keys(PUBLISHED_PREMIERES)
+  if (ids.length === 0) return []
+  const loaded = await Promise.all(
+    ids.map((id) =>
+      fetchJson(`${EDGE_BASE}/episodes/${id}/episode.json`)
+        .then((e) => enrich(e as Episode, id))
+        .catch(() => null),
+    ),
+  )
+  return loaded.filter(Boolean) as Episode[]
+}
+
+/** Apply our blurb/cover overrides to a live VOD that often ships those fields empty. */
+function enrich(episode: Episode, id: string): Episode {
+  const over = PUBLISHED_PREMIERES[id] ?? {}
+  return { ...episode, blurb: episode.blurb ?? over.blurb, cover: episode.cover ?? over.cover }
 }
 
 async function fetchJson(url: string): Promise<unknown> {

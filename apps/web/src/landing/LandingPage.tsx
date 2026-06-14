@@ -82,9 +82,17 @@ export function LandingPage() {
   // (Choosing EPISODES routes to #listen and unmounts this page, so it never fights a
   // viewer who wants the archive.)
   useEffect(() => {
-    if (room.isLive || secondsUntil(room.nextPremiereAt, Date.now()) <= 300) {
-      window.location.hash = '#watch'
+    // Re-check every second: nextPremiereAt is a FIXED timestamp, so the threshold
+    // is crossed by the passage of time, not by a state change — a one-shot check on
+    // mount would never fire at the 5-min mark. (LivesIndex polls the same way.)
+    const check = () => {
+      if (room.isLive || secondsUntil(room.nextPremiereAt, Date.now()) <= 300) {
+        window.location.hash = '#watch'
+      }
     }
+    check()
+    const id = setInterval(check, 1000)
+    return () => clearInterval(id)
   }, [room.isLive, room.nextPremiereAt])
 
   const sorted = useMemo(

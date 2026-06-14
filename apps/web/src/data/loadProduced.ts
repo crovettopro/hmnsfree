@@ -18,11 +18,11 @@ const EDGE_BASE = (import.meta.env.VITE_EDGE_URL ?? 'http://localhost:8787/live'
  * source failing is non-fatal — we return whatever we got.
  */
 /**
- * Early short episodes, kept in the repo but retired from the public series:
- * EP.030 (74 min) is the real Episode 1. These stay archived — never listed,
- * even if the live edge still serves them from its VOD volume.
+ * Early short prototype episodes (027/028/029) were moved out of the repo into a
+ * local `_pruebas/` folder, so there's nothing to filter here anymore. Episodes
+ * are now ep-01, ep-02, ep-03… (folder id matches the episode number).
  */
-const ARCHIVED = new Set(['ep-027', 'ep-028', 'ep-029'])
+const ARCHIVED = new Set<string>([])
 
 export async function loadProducedEpisodes(): Promise<Episode[]> {
   const [committed, live] = await Promise.all([loadCommitted(), loadEdgeCatalogue()])

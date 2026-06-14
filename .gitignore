@@ -16,3 +16,6 @@ content/
 # Branded bumpers (regenerated via 'pnpm --filter @static/studio intro')
 apps/web/public/intro.mp3
 apps/web/public/outro.mp3
+
+# Local test/prototype episodes (not for git)
+_pruebas/

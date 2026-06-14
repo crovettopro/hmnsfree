@@ -33,6 +33,8 @@ export type DebateEvent =
       phase: 'preshow' | 'live' | 'rerun'
       /** Epoch ms of the next premiere (for the preshow countdown). */
       nextPremiereAt?: number
+      /** Programmed topic of the next premiere (the upcoming chapter's title). */
+      nextTopic?: string
       /** While 'rerun', which episode is replaying. */
       rerunOf?: string
     }

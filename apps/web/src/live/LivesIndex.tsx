@@ -19,8 +19,19 @@ type Phase = 'preshow' | 'live' | 'rerun' | null
 interface LiveSnapshot {
   phase: Phase
   nextPremiereAt: number | null
+  nextTopic: string | null
   listeners: number
   episode: { id: string; number: string; topic: string; turns: number } | null
+}
+
+/** "TODAY 20:00" / "SAT 20:00" — when the next live airs (local time). */
+function nextLiveLabel(at: number | null | undefined): string {
+  if (!at) return ''
+  const d = new Date(at)
+  const time = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  const sameDay = d.toDateString() === new Date().toDateString()
+  const day = sameDay ? 'TODAY' : d.toLocaleDateString([], { weekday: 'short' }).toUpperCase()
+  return `${day} ${time}`
 }
 
 interface Channel {
@@ -76,9 +87,7 @@ export function LivesIndex() {
             <a className="landing__wordmark" href="/">HUMANS OFF</a>
           </div>
           <nav className="liveidx__tabs">
-            <a href="#live" className="liveidx__tab is-active">
-              <span className="landing__livedot" />LIVES
-            </a>
+            <a href="#live" className="liveidx__tab is-active">LIVES</a>
             <a href="#listen" className="liveidx__tab">EPISODES</a>
           </nav>
         </header>
@@ -121,13 +130,20 @@ function ChannelCard({ channel }: { channel: Channel }) {
     kind = 'idle'
   }
 
+  const when = nextLiveLabel(snap?.nextPremiereAt)
+  const nextTopic = snap?.nextTopic
   const topic = onAir
     ? snap?.episode?.topic ?? 'Live now'
     : offline
       ? 'Channel is offline right now.'
-      : 'No live debate right now — catch the recorded episodes.'
-  const inner = (
-    <>
+      : nextTopic
+        ? `Next debate — “${nextTopic}”`
+        : 'No live debate right now.'
+
+  // Every card routes into the channel (#watch): on air → the live debate; on
+  // standby → the branded holding card (silent) with the next live time.
+  return (
+    <a className={`livecard${onAir ? ' livecard--on' : ''}`} href="#watch">
       <div className={`livecard__status livecard__status--${kind}`}>
         {kind === 'live' && <span className="landing__livedot landing__livedot--lg" />}
         {status}
@@ -142,16 +158,12 @@ function ChannelCard({ channel }: { channel: Channel }) {
             <span className="livecard__cta">LISTEN LIVE →</span>
           </>
         ) : (
-          <span className="livecard__listeners">{snap?.episode?.number ?? '—'}</span>
+          <>
+            <span className="livecard__listeners">{offline ? 'OFFLINE' : when ? `NEXT LIVE · ${when}` : 'STANDBY'}</span>
+            <span className="livecard__cta livecard__cta--idle">ENTER →</span>
+          </>
         )}
       </div>
-    </>
-  )
-
-  // Only a playable channel routes into the live player.
-  return onAir ? (
-    <a className="livecard livecard--on" href="#watch">{inner}</a>
-  ) : (
-    <div className="livecard">{inner}</div>
+    </a>
   )
 }

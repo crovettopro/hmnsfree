@@ -8,6 +8,16 @@ import { Stage } from './Stage'
 import { TranscriptPanel } from './TranscriptPanel'
 import { ChatPanel } from './ChatPanel'
 
+/** "TODAY 20:00" / "SAT 20:00" — when the next live is scheduled (local time). */
+function nextLiveLabel(at: number | null): string {
+  if (!at) return ''
+  const d = new Date(at)
+  const time = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  const sameDay = d.toDateString() === new Date().toDateString()
+  const day = sameDay ? 'TODAY' : d.toLocaleDateString([], { weekday: 'short' }).toUpperCase()
+  return `${day} ${time}`
+}
+
 interface LiveViewProps {
   view: View
   onSelectAi: (p: Participant) => void
@@ -24,27 +34,37 @@ const LIVE_URL = import.meta.env.VITE_EDGE_URL ?? 'http://localhost:8787/live'
 export function LiveView({ view, onSelectAi }: LiveViewProps) {
   const engine = useMemo(() => new CompositeEngine(), [])
   const feed = useLiveFeed(LIVE_URL, engine)
-  const { episode, connected, thinking, listeners, ended, phase } = feed
+  const { episode, connected, thinking, listeners, ended, phase, nextTopic, nextPremiereAt } = feed
 
-  // A live ONLY exists when a debate is genuinely on air. We deliberately do NOT
-  // replay old episodes as filler or count down to a non-real premiere — when
-  // nothing is live, the live surface is a clean "nothing on air" that sends people
-  // to the recorded archive. (Recorded episodes live in the EPISODES section.)
+  // A live ONLY exists when a debate is genuinely on air. When nothing is live, the
+  // channel shows a branded HUMANS OFF holding card (silent) — no rerun filler — with
+  // the next chapter + when it airs, like a station ident between broadcasts.
   const isLiveNow = phase === 'live'
 
   if (!isLiveNow || !episode) {
+    const when = nextLiveLabel(nextPremiereAt)
     return (
-      <main className="main main--live-empty">
-        <div className="live-empty">
-          <span className="live-empty__dot" />
+      <main className="main main--hold">
+        <div className="hold">
+          <div className="hold__logo" aria-hidden>
+            <span style={{ background: '#F5A623' }} />
+            <span style={{ background: '#2DD4D4' }} />
+            <span style={{ background: '#FF2D78' }} />
+            <span style={{ background: '#A98BF5' }} />
+          </div>
+          <div className="hold__brand">HUMANS OFF</div>
           {!connected ? (
-            UI.liveOffline
+            <div className="hold__status">Live channel offline</div>
           ) : isLiveNow ? (
-            UI.liveConnecting
+            <div className="hold__status hold__status--soon"><span className="hold__pulse" />Going live…</div>
           ) : (
             <>
-              No live debate right now.{' '}
-              <a className="live-empty__link" href="#listen">Listen to recorded episodes →</a>
+              <div className="hold__status">STANDBY · THE HUMANS ARE MUTED</div>
+              {nextTopic && <div className="hold__next">Next debate — “{nextTopic}”</div>}
+              {when && (
+                <div className="hold__time"><span className="hold__pulse" />NEXT LIVE · {when}</div>
+              )}
+              <a className="hold__link" href="#listen">Listen to recorded episodes →</a>
             </>
           )}
         </div>

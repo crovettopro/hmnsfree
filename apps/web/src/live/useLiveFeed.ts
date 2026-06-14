@@ -28,6 +28,8 @@ export interface LiveFeed {
   phase: 'preshow' | 'live' | 'rerun' | null
   /** Epoch ms of the next premiere (preshow/rerun countdown). */
   nextPremiereAt: number | null
+  /** Programmed title of the next premiere (the upcoming chapter). */
+  nextTopic: string | null
   /** While 'rerun', which episode is replaying (e.g. "EP.027"). */
   rerunOf: string | null
 }
@@ -43,6 +45,7 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
   const [elapsed, setElapsed] = useState(0)
   const [phase, setPhase] = useState<'preshow' | 'live' | 'rerun' | null>(null)
   const [nextPremiereAt, setNextPremiereAt] = useState<number | null>(null)
+  const [nextTopic, setNextTopic] = useState<string | null>(null)
   const [rerunOf, setRerunOf] = useState<string | null>(null)
 
   // The active turn's wall-clock start, for the word-reveal clock.
@@ -124,6 +127,7 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
         case 'live.status':
           setPhase(ev.phase)
           setNextPremiereAt(ev.nextPremiereAt ?? null)
+          setNextTopic(ev.nextTopic ?? null)
           setRerunOf(ev.rerunOf ?? null)
           break
         case 'episode.ended':
@@ -168,6 +172,6 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
 
   return {
     connected, episode, chat, listeners, cursor, activeSpeaker, thinking, ended, elapsed,
-    phase, nextPremiereAt, rerunOf,
+    phase, nextPremiereAt, nextTopic, rerunOf,
   }
 }

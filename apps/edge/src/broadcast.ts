@@ -79,6 +79,7 @@ export class Broadcaster {
   snapshot(): {
     phase: 'preshow' | 'live' | 'rerun' | null
     nextPremiereAt: number | null
+    nextTopic: string | null
     rerunOf: string | null
     listeners: number
     episode: { id: string; number: string; topic: string; turns: number } | null
@@ -88,6 +89,7 @@ export class Broadcaster {
     return {
       phase: status?.phase ?? null,
       nextPremiereAt: status?.nextPremiereAt ?? null,
+      nextTopic: status?.nextTopic ?? null,
       rerunOf: status?.rerunOf ?? null,
       listeners: this.clients.size,
       episode: this.episode

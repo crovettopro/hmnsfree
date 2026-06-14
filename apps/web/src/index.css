@@ -20,6 +20,12 @@
 
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --sans: 'Space Grotesk', system-ui, sans-serif;
+
+  /* Brand accents — global so surfaces outside .landing (the LIVES section, the
+     holding card) that reuse .landing__* classes render correctly. */
+  --l-metal: linear-gradient(180deg, #fdfdff, #cfd3dd 46%, #9aa0ad 54%, #eef0f6);
+  --l-magenta: oklch(0.72 0.2 350);
+  --l-cyan: oklch(0.82 0.13 200);
 }
 
 * {
@@ -1448,6 +1454,25 @@ button {
 }
 .live-empty__link:hover { text-decoration: underline; }
 
+/* Branded HUMANS OFF holding card — the silent station ident shown on the live
+   channel between broadcasts (no rerun, no audio), with the next chapter + time. */
+.main--hold { display: grid; place-items: center; }
+.hold { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; padding: 40px 24px; max-width: 600px; }
+.hold__logo { display: flex; gap: 11px; margin-bottom: 6px; }
+.hold__logo span { width: 14px; height: 14px; border-radius: 50%; box-shadow: 0 0 14px currentColor; }
+.hold__brand { font-family: var(--mono); font-weight: 700; font-size: 30px; letter-spacing: 0.3em; color: #fff; }
+.hold__status { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.24em; color: var(--text-faint); }
+.hold__status--soon { display: inline-flex; align-items: center; gap: 8px; color: oklch(0.72 0.2 350); }
+.hold__next { font-size: 18px; line-height: 1.4; color: var(--text-body); margin-top: 2px; }
+.hold__time { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.16em; color: oklch(0.82 0.13 200); }
+.hold__pulse { width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; animation: blink 1.5s ease-in-out infinite; }
+.hold__link { margin-top: 10px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: oklch(0.82 0.13 200); text-decoration: none; }
+.hold__link:hover { text-decoration: underline; }
+@media (max-width: 720px) {
+  .hold__brand { font-size: 24px; letter-spacing: 0.22em; }
+  .hold__next { font-size: 16px; }
+}
+
 /* Live chat: connected status + raised-hand questions. */
 .chat__status.is-live {
   color: oklch(0.72 0.2 350);
@@ -1815,6 +1840,7 @@ button {
   box-shadow: 0 0 34px color-mix(in oklch, var(--l-magenta) 14%, transparent);
 }
 .livecard--on:hover { transform: translateY(-2px); border-color: var(--l-magenta); box-shadow: 0 0 52px color-mix(in oklch, var(--l-magenta) 26%, transparent); }
+.livecard:not(.livecard--on):hover { transform: translateY(-2px); border-color: var(--line-strong); background: rgba(255,255,255,0.03); }
 .livecard__status { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.16em; }
 .livecard__status--live { color: var(--l-magenta); }
 .livecard__status--soon { color: var(--l-cyan); }
@@ -1825,6 +1851,7 @@ button {
 .livecard__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 4px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; }
 .livecard__listeners { color: rgba(255,255,255,0.42); }
 .livecard__cta { color: var(--l-magenta); font-weight: 700; letter-spacing: 0.1em; }
+.livecard__cta--idle { color: var(--l-cyan); }
 
 @media (max-width: 720px) {
   .landing__nav { padding: 14px 18px; }

@@ -1816,7 +1816,10 @@ button {
   position: fixed;
   inset: 0;
   overflow-y: auto;
-  background: var(--bg);
+  /* Lifted off near-black to a soft dark gradient (matches #episodes / #live) so the
+     marketing page is easy to read and box edges are visible. */
+  background: linear-gradient(180deg, #191921 0%, #111119 100%);
+  background-attachment: fixed;
   color: var(--text);
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
@@ -1829,7 +1832,7 @@ button {
 .landing__z { position: relative; z-index: 1; }
 
 /* nav */
-.landing__nav { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 40px; border-bottom: 1px solid var(--line); background: rgba(7,7,10,0.72); backdrop-filter: blur(12px); }
+.landing__nav { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 40px; border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(18,18,26,0.78); backdrop-filter: blur(12px); }
 .landing__brand { display: flex; align-items: center; gap: 16px; min-width: 0; }
 .landing__wordmark { font-family: var(--mono); font-weight: 700; font-size: 19px; letter-spacing: 0.2em; white-space: nowrap; background: var(--l-metal); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
 .landing__divider { width: 1px; height: 18px; background: rgba(255,255,255,0.15); flex: 0 0 auto; }
@@ -1849,7 +1852,7 @@ button {
 .l-ring:nth-child(3) { animation-delay: 1.8s; }
 .l-eq { display: flex; align-items: flex-end; gap: 4px; height: 30px; }
 .l-eqbar { width: 4px; flex: 0 0 auto; border-radius: 2px; background: rgba(255,255,255,0.85); transform-origin: bottom; animation: l-eq 0.9s ease-in-out infinite; }
-.l-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.26em; color: rgba(255,255,255,0.45); margin-bottom: 26px; }
+.l-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.26em; color: var(--l-cyan); margin-bottom: 26px; }
 .l-h1 { margin: 0 0 22px; font-size: clamp(36px, 6vw, 66px); line-height: 1.04; font-weight: 700; letter-spacing: -0.025em; color: var(--text-strong); text-wrap: balance; }
 .l-sub { max-width: 560px; margin: 0 auto 38px; font-size: clamp(16px, 2vw, 20px); line-height: 1.6; color: #C4C4CE; text-wrap: balance; }
 .l-sub span { color: var(--text-strong); }
@@ -1882,21 +1885,32 @@ button {
 .l-livebar__topic { flex: 1 1 auto; min-width: 0; font-size: 15px; font-weight: 500; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .l-livebar__cta { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: var(--l-magenta); flex: 0 0 auto; }
 
+/* daily-rhythm schedule (two programmed shows) */
+.l-sched { max-width: 920px; margin: 0 auto; padding: 26px 40px 6px; }
+.l-sched__head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+.l-sched__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.l-show { display: flex; flex-direction: column; gap: 6px; padding: 22px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); text-decoration: none; transition: border-color 0.18s, background 0.18s, transform 0.18s; }
+.l-show:hover { border-color: rgba(255,255,255,0.26); background: rgba(255,255,255,0.06); transform: translateY(-2px); }
+.l-show__time { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: var(--l-cyan); }
+.l-show__name { font-size: 20px; font-weight: 600; color: var(--text-strong); }
+.l-show__strand { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em; color: rgba(255,255,255,0.46); margin-top: -2px; }
+.l-show__blurb { font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.64); margin-top: 4px; }
+
 /* stats */
 .l-stats { max-width: 920px; margin: 0 auto; padding: 24px 40px 8px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.l-stat { border: 1px solid var(--line); border-radius: 14px; padding: 24px 18px; text-align: center; background: rgba(255,255,255,0.018); }
+.l-stat { border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 24px 18px; text-align: center; background: rgba(255,255,255,0.045); }
 .l-stat__n { display: flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--mono); font-size: clamp(26px, 4vw, 38px); font-weight: 700; letter-spacing: -0.02em; color: var(--text-strong); }
-.l-stat__l { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.16em; color: rgba(255,255,255,0.4); margin-top: 10px; }
+.l-stat__l { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.16em; color: rgba(255,255,255,0.55); margin-top: 10px; }
 
 /* join box */
 .l-joinwrap { max-width: 920px; margin: 0 auto; padding: 30px 40px; }
-.l-join { border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 34px; background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.008)); }
+.l-join { border: 1px solid rgba(255,255,255,0.14); border-radius: 20px; padding: 34px; background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025)); }
 .l-join__head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
 .l-h2 { margin: 0; font-size: clamp(20px, 2.6vw, 28px); font-weight: 600; letter-spacing: -0.015em; color: var(--text-strong); }
 .l-join__tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: rgba(255,255,255,0.4); }
 .l-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.l-step { display: flex; flex-direction: column; gap: 11px; padding: 18px; border-radius: 13px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); }
-.l-step__n { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: rgba(255,255,255,0.38); }
+.l-step { display: flex; flex-direction: column; gap: 11px; padding: 18px; border-radius: 13px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.11); }
+.l-step__n { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: var(--l-cyan); }
 .l-step__t { font-size: 15px; font-weight: 500; color: var(--text); line-height: 1.4; }
 .l-code { font-family: var(--mono); font-size: 11.5px; color: var(--l-cyan); background: #0B0B11; border: 1px solid var(--line); border-radius: 7px; padding: 9px 11px; overflow-x: auto; white-space: nowrap; }
 .l-join__foot { margin-top: 22px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
@@ -1913,10 +1927,10 @@ button {
 .l-viewall { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: var(--l-cyan); text-decoration: none; flex: 0 0 auto; }
 .l-eps__list { display: flex; flex-direction: column; gap: 7px; }
 .l-eps__empty { font-family: var(--mono); font-size: 12px; color: var(--text-muted); padding: 16px 20px; }
-.l-ep { display: flex; align-items: center; gap: 18px; text-decoration: none; padding: 16px 20px; border-radius: 12px; border: 1px solid var(--line); background: rgba(255,255,255,0.014); transition: border-color 0.18s, background 0.18s; }
-.l-ep:hover { border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.03); }
-.l-ep__cover { width: 52px; height: 52px; flex: 0 0 auto; border-radius: 9px; object-fit: cover; border: 1px solid var(--line); background: #07070a; }
-.l-ep__num { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); min-width: 58px; flex: 0 0 auto; }
+.l-ep { display: flex; align-items: center; gap: 18px; text-decoration: none; padding: 16px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); transition: border-color 0.18s, background 0.18s, transform 0.18s; }
+.l-ep:hover { border-color: rgba(255,255,255,0.24); background: rgba(255,255,255,0.06); transform: translateY(-1px); }
+.l-ep__cover { width: 52px; height: 52px; flex: 0 0 auto; border-radius: 9px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1); background: #07070a; }
+.l-ep__num { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: var(--l-cyan); min-width: 58px; flex: 0 0 auto; }
 .l-ep__topic { flex: 1 1 auto; font-size: 16px; font-weight: 500; color: var(--text); min-width: 0; }
 .l-ep__meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: rgba(255,255,255,0.34); flex: 0 0 auto; }
 .l-ep__meta.is-live { color: var(--l-magenta); }
@@ -1931,7 +1945,7 @@ button {
 .l-foot__links a:hover { color: #fff; }
 
 /* ── LIVES section (channel grid) ───────────────────────────────────────── */
-.liveidx { position: fixed; inset: 0; overflow-y: auto; overflow-x: hidden; background: #07070a; color: var(--text); -webkit-overflow-scrolling: touch; }
+.liveidx { position: fixed; inset: 0; overflow-y: auto; overflow-x: hidden; background: linear-gradient(180deg, #191921 0%, #111119 100%); background-attachment: fixed; color: var(--text); -webkit-overflow-scrolling: touch; }
 .liveidx__tabs { display: flex; align-items: center; gap: 4px; }
 .liveidx__tab {
   display: inline-flex; align-items: center; gap: 8px;
@@ -1951,8 +1965,8 @@ button {
 
 .livecard {
   display: flex; flex-direction: column; gap: 9px; text-decoration: none;
-  padding: 22px 22px 18px; border-radius: 16px; border: 1px solid var(--line);
-  background: rgba(255,255,255,0.016); min-height: 188px; transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
+  padding: 22px 22px 18px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04); min-height: 188px; transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
 }
 .livecard--on {
   border-color: color-mix(in oklch, var(--l-magenta) 48%, var(--line-strong));
@@ -1977,6 +1991,8 @@ button {
   .landing__tagline { display: none; }
   .landing__hero { padding: 64px 18px 48px; }
   .l-stats { grid-template-columns: repeat(2, 1fr); padding: 24px 18px 8px; }
+  .l-sched { padding-left: 18px; padding-right: 18px; }
+  .l-sched__grid { grid-template-columns: 1fr; }
   .l-joinwrap, .l-eps { padding-left: 18px; padding-right: 18px; }
   .l-steps { grid-template-columns: 1fr; }
   .l-join { padding: 22px; }

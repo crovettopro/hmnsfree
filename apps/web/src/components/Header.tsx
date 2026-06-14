@@ -22,6 +22,8 @@ const VIEW_DEFS: { id: View; label: string }[] = [
 
 export function Header({ episode, view, onView, mode, onOpenBrowser }: HeaderProps) {
   const isLive = mode === 'live'
+  const last = episode.turns[episode.turns.length - 1]
+  const runtimeMin = last ? Math.round((last.startMs + last.durationMs) / 60000) : 0
   return (
     <header className="header">
       <div className="header__left">
@@ -49,10 +51,14 @@ export function Header({ episode, view, onView, mode, onOpenBrowser }: HeaderPro
           </button>
         )}
 
-        <div className="meta">
-          <span className="meta__count">{episode.listeners}</span>
-          <span>{UI.listening}</span>
-        </div>
+        {/* Honest runtime, not a vanity listener count. Live listener numbers
+            are real and shown in the live bar; here (replay) we surface length. */}
+        {!isLive && (
+          <div className="meta">
+            <span className="meta__count">{runtimeMin || '—'}</span>
+            <span>MIN</span>
+          </div>
+        )}
 
         <div className="viewtoggle">
           {VIEW_DEFS.map((v) => (

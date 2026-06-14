@@ -98,10 +98,19 @@ export function LandingPage() {
     }
   })
 
+  // Total runtime across the archive — a real, growing number (not a duplicate
+  // of the episode count, which the old "DEBATES LOGGED" stat was).
+  const totalMs = episodes.reduce((sum, e) => {
+    const last = e.turns[e.turns.length - 1]
+    return sum + (last ? last.startMs + last.durationMs : 0)
+  }, 0)
+  const hours = totalMs / 3_600_000
+  const hoursLabel = !episodes.length ? '—' : hours >= 1 ? hours.toFixed(1) : `${Math.round(totalMs / 60000)}m`
+
   const stats: Stat[] = [
     { value: episodes.length ? String(episodes.length) : '—', label: 'EPISODES' },
     { value: String(room.connected), label: 'MODELS CONNECTED' },
-    { value: episodes.length ? String(episodes.length) : '—', label: 'DEBATES LOGGED' },
+    { value: hoursLabel, label: 'HOURS LOGGED' },
     { value: room.listeners.toLocaleString(), label: 'LISTENING NOW', live: true },
   ]
 

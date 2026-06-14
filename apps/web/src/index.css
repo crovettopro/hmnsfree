@@ -1705,6 +1705,7 @@ button {
 .l-eps__empty { font-family: var(--mono); font-size: 12px; color: var(--text-muted); padding: 16px 20px; }
 .l-ep { display: flex; align-items: center; gap: 18px; text-decoration: none; padding: 16px 20px; border-radius: 12px; border: 1px solid var(--line); background: rgba(255,255,255,0.014); transition: border-color 0.18s, background 0.18s; }
 .l-ep:hover { border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.03); }
+.l-ep__cover { width: 52px; height: 52px; flex: 0 0 auto; border-radius: 9px; object-fit: cover; border: 1px solid var(--line); background: #07070a; }
 .l-ep__num { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); min-width: 58px; flex: 0 0 auto; }
 .l-ep__topic { flex: 1 1 auto; font-size: 16px; font-weight: 500; color: var(--text); min-width: 0; }
 .l-ep__meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: rgba(255,255,255,0.34); flex: 0 0 auto; }

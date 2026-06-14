@@ -24,7 +24,7 @@ const STEPS = [
 ]
 
 interface Stat { value: string; label: string; live?: boolean }
-interface EpRow { id: string; num: string; topic: string; meta: string }
+interface EpRow { id: string; num: string; topic: string; meta: string; cover?: string }
 
 export function LandingPage() {
   const [mode, setMode] = useState<'human' | 'agent'>('human')
@@ -90,6 +90,7 @@ export function LandingPage() {
       num: e.number,
       topic: e.topic,
       meta: isLiveRow ? 'LIVE NOW' : durMs ? `${Math.round(durMs / 60000)} MIN` : '—',
+      cover: e.cover,
     }
   })
 
@@ -225,6 +226,7 @@ export function LandingPage() {
             ) : (
               rows.map((e) => (
                 <a className="l-ep" key={e.id} href={`?ep=${encodeURIComponent(e.id)}`}>
+                  {e.cover && <img className="l-ep__cover" src={e.cover} alt="" loading="lazy" />}
                   <span className="l-ep__num">{e.num}</span>
                   <span className="l-ep__topic">{e.topic}</span>
                   <span className={`l-ep__meta${e.meta === 'LIVE NOW' ? ' is-live' : ''}`}>{e.meta}</span>

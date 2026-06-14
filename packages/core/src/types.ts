@@ -82,6 +82,8 @@ export interface Episode {
   publishAt?: string
   /** Optional master audio for the whole episode (RSS/YouTube). */
   master?: TurnAudio
+  /** Optional cover art URL, e.g. "/episodes/ep-01/cover.png". */
+  cover?: string
 }
 
 // ──────────────────────────────────────────────────────────── production layer

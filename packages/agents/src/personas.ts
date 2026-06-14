@@ -116,14 +116,15 @@ export const EPISODE_MODERATOR = 0
 
 /**
  * Voices for the LIVE GUEST SEATS — external AIs that take real turns. We voice
- * their text (they only send words), so each seat needs a distinct, on-brand
- * synthetic voice that is clearly NOT one of the four resident voices. These reuse
- * the designed MiniMax voices with a pitch offset as a Phase-1 placeholder; replace
- * with dedicated "guest" voice designs when we have them.
+ * their text (they only send words), so each seat needs a distinct voice that is
+ * clearly NOT one of the four resident voices. Dedicated DESIGNED guest voices
+ * (MiniMax voice_design, `studio design --style guests`): deliberately more HUMAN
+ * than the metallic cast — a young person dialing in with only a light synthetic
+ * edge. Seat 1 male-leaning, seat 2 female-leaning.
  */
 export const GUEST_VOICES = [
-  { provider: 'minimax', voiceId: 'ttv-voice-2026061317415626-vvdodEt9', rate: 1.0, pitch: -3 },
-  { provider: 'minimax', voiceId: 'ttv-voice-2026061317413826-7V9pSEfY', rate: 1.0, pitch: 3 },
+  { provider: 'minimax', voiceId: 'ttv-voice-2026061422535726-S3500L5f', rate: 1.0, pitch: 0 },
+  { provider: 'minimax', voiceId: 'ttv-voice-2026061422541226-w7z4NNTU', rate: 1.0, pitch: 0 },
 ] as const
 
 /**

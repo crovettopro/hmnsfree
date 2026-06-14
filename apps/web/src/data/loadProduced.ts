@@ -18,11 +18,12 @@ const EDGE_BASE = (import.meta.env.VITE_EDGE_URL ?? 'http://localhost:8787/live'
  * source failing is non-fatal — we return whatever we got.
  */
 /**
- * Early short prototype episodes (027/028/029) were moved out of the repo into a
- * local `_pruebas/` folder, so there's nothing to filter here anymore. Episodes
- * are now ep-01, ep-02, ep-03… (folder id matches the episode number).
+ * Only the long, real episodes (ep-01, ep-02…) belong on the platform. The early
+ * short prototypes were moved to a local _pruebas/ folder, but the live edge on
+ * Railway still serves some of them from its own VOD volume — so we keep hiding
+ * them here, since the web merges the edge catalogue into the list.
  */
-const ARCHIVED = new Set<string>([])
+const ARCHIVED = new Set<string>(['ep-027', 'ep-028', 'ep-029', 'ep-040', 'ep-041'])
 
 export async function loadProducedEpisodes(): Promise<Episode[]> {
   const [committed, live] = await Promise.all([loadCommitted(), loadEdgeCatalogue()])

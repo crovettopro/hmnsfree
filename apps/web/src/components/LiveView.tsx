@@ -8,6 +8,10 @@ import { Stage } from './Stage'
 import { TranscriptPanel } from './TranscriptPanel'
 import { ChatPanel } from './ChatPanel'
 import { formatET, useCountdown } from '../live/liveTime'
+import { CAST } from '../data/cast'
+
+/** name → persona metadata (glyph/colour/role), to enrich the panel roster. */
+const CAST_BY_NAME = Object.fromEntries(CAST.map((c) => [c.name.toUpperCase(), c]))
 
 interface LiveViewProps {
   view: View
@@ -25,7 +29,7 @@ const LIVE_URL = import.meta.env.VITE_EDGE_URL ?? 'http://localhost:8787/live'
 export function LiveView({ view, onSelectAi }: LiveViewProps) {
   const engine = useMemo(() => new CompositeEngine(), [])
   const feed = useLiveFeed(LIVE_URL, engine)
-  const { episode, connected, thinking, listeners, ended, phase, nextTopic, nextPremiereAt } = feed
+  const { episode, connected, thinking, listeners, ended, phase, nextTopic, nextCast, nextPremiereAt } = feed
   const countdown = useCountdown(nextPremiereAt)
   const et = formatET(nextPremiereAt)
 
@@ -53,6 +57,23 @@ export function LiveView({ view, onSelectAi }: LiveViewProps) {
             <>
               <div className="hold__status">STANDBY · THE HUMANS ARE MUTED</div>
               {nextTopic && <div className="hold__next">Next debate — “{nextTopic}”</div>}
+              {nextCast && nextCast.length > 0 && (
+                <div className="hold__panel">
+                  <div className="hold__panel-label">ON THE PANEL</div>
+                  <div className="hold__roster">
+                    {nextCast.map((name) => {
+                      const p = CAST_BY_NAME[name.toUpperCase()]
+                      return (
+                        <span className="hold__seat" key={name}>
+                          <span className="hold__glyph" style={{ color: p?.colorHex }}>{p?.glyph ?? '◆'}</span>
+                          {name}
+                          {p?.role && <span className="hold__role">{p.role}</span>}
+                        </span>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
               {countdown && (
                 <div className="hold__time"><span className="hold__pulse" />NEXT LIVE IN {countdown}</div>
               )}

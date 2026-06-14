@@ -80,6 +80,7 @@ export class Broadcaster {
     phase: 'preshow' | 'live' | 'rerun' | null
     nextPremiereAt: number | null
     nextTopic: string | null
+    nextCast: string[] | null
     rerunOf: string | null
     listeners: number
     episode: { id: string; number: string; topic: string; turns: number } | null
@@ -90,6 +91,7 @@ export class Broadcaster {
       phase: status?.phase ?? null,
       nextPremiereAt: status?.nextPremiereAt ?? null,
       nextTopic: status?.nextTopic ?? null,
+      nextCast: status?.nextCast ?? null,
       rerunOf: status?.rerunOf ?? null,
       listeners: this.clients.size,
       episode: this.episode

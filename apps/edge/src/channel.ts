@@ -77,8 +77,9 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
 
   for (;;) {
     const nextPremiere = computeNextPremiere(Date.now(), premiereHour, everyMin)
-    // The upcoming chapter's title (so the web can show "next: …" on the holding card).
+    // The upcoming chapter's title + panel roster (for the holding card).
     const nextTopic = plannedFor(new Date(nextPremiere).toISOString().slice(0, 10))?.topic
+    const nextCast = episodeCast(counter).cast.map((p) => p.name)
 
     // ── Fill the gap until the premiere. A raised hand can ignite a live debate at
     //    any time; otherwise we either idle (default) or, if STATIC_RERUNS is on,
@@ -113,7 +114,7 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
       }
 
       // Idle preshow: nothing live and no rerun filler — just hold until the premiere.
-      broadcaster.broadcast({ type: 'live.status', phase: 'preshow', nextPremiereAt: nextPremiere, nextTopic })
+      broadcaster.broadcast({ type: 'live.status', phase: 'preshow', nextPremiereAt: nextPremiere, nextTopic, nextCast })
       await sleep(Math.min(5000, Math.max(1000, nextPremiere - Date.now())))
     }
 

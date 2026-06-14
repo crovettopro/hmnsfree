@@ -35,6 +35,8 @@ export type DebateEvent =
       nextPremiereAt?: number
       /** Programmed topic of the next premiere (the upcoming chapter's title). */
       nextTopic?: string
+      /** Names of the cast debating the next premiere (the panel roster). */
+      nextCast?: string[]
       /** While 'rerun', which episode is replaying. */
       rerunOf?: string
     }

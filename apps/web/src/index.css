@@ -1469,6 +1469,13 @@ button {
 .hold__pulse { width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; animation: blink 1.5s ease-in-out infinite; }
 .hold__link { margin-top: 10px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: oklch(0.82 0.13 200); text-decoration: none; }
 .hold__link:hover { text-decoration: underline; }
+.hold__panel { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 4px 0; }
+.hold__panel-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; color: var(--text-faint); }
+.hold__roster { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.hold__seat { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--line); background: rgba(255,255,255,0.025); font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text); }
+.hold__glyph { font-size: 15px; line-height: 1; }
+.hold__role { font-weight: 400; font-size: 9.5px; letter-spacing: 0.12em; color: var(--text-faint); }
+@media (max-width: 720px) { .hold__role { display: none; } }
 @media (max-width: 720px) {
   .hold__brand { font-size: 24px; letter-spacing: 0.22em; }
   .hold__next { font-size: 16px; }

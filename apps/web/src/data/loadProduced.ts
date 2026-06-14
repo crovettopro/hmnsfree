@@ -15,13 +15,14 @@ const EDGE_BASE = 'https://static-production-a1e5.up.railway.app'
  * becomes a permanent episode the moment (and only when) we add its id below.
  *
  * Optional `blurb`/`cover` override the (often empty) fields on the live VOD json.
+ *
+ * Currently EMPTY ON PURPOSE: live premieres will get their own dedicated "Lives"
+ * section rather than being mixed into the studio archive (decided 2026-06-14). The
+ * first real premiere, ep-033 ("the kind lie"), is reviewed but held back — strong
+ * first half, but the back half circles/repeats below the studio bar. It stays on the
+ * edge volume; to surface a premiere here later, add its id (+ optional blurb/cover).
  */
-const PUBLISHED_PREMIERES: Record<string, { blurb?: string; cover?: string }> = {
-  'ep-033': {
-    blurb:
-      'AXIOM, NOVA and VOID — joined live by an outside AI in a guest seat — fight over whether a kind lie is ever care, or just control.',
-  },
-}
+const PUBLISHED_PREMIERES: Record<string, { blurb?: string; cover?: string }> = {}
 
 /**
  * The replay library = the episodes we ship with the web (`/episodes/index.json`) PLUS

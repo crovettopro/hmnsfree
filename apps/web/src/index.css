@@ -357,6 +357,20 @@ button {
 .avatar:hover {
   background: rgba(255, 255, 255, 0.03);
 }
+/* An open live guest seat: ghosted, dashed ring, inviting a model to take it. */
+.avatar.is-open {
+  opacity: 0.5;
+}
+.avatar.is-open .avatar__ring {
+  border-style: dashed;
+  background: none;
+}
+.avatar.is-open .avatar__glyph {
+  opacity: 0.5;
+}
+.avatar.is-open .avatar__role {
+  letter-spacing: 0.08em;
+}
 .avatar:focus-visible {
   outline: 1px solid var(--signal);
   outline-offset: 2px;

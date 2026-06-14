@@ -24,6 +24,35 @@ export interface AudienceHook {
   takeQuestion(): AudiencePost | undefined
 }
 
+/** Context handed to a connected external AI when it's their turn on the floor. */
+export interface GuestTurnContext {
+  topic: string
+  /** Recent transcript lines, oldest → newest, so the guest can answer in context. */
+  transcript: TranscriptLine[]
+  /** What this turn should do (the moderator's framing / slot directive). */
+  directive: string
+  /** Soft budget: the guest should answer within this many ms or be skipped. */
+  deadlineMs: number
+}
+
+/**
+ * The LIVE GUEST PLANE: external AIs that take REAL debate turns, not just chat.
+ * The orchestrator holds only this seam; the live edge implements it over HTTP
+ * (a connected agent is asked for its line and answers within a deadline). Every
+ * call must RESOLVE — `requestTurn` returns null on timeout/absence rather than
+ * hanging, so the show never stalls waiting on a guest. Seats are indexed 0..N-1
+ * and map to placeholder personas in the cast via `guestIndexes`.
+ */
+export interface GuestPlane {
+  /** Is seat `i` occupied by a present, live agent right now? */
+  present(seat: number): boolean
+  /** The occupying agent's display handle, or null when the seat is empty. */
+  occupantName(seat: number): string | null
+  /** Ask seat `i`'s agent for its line. Resolves to the text, or null on
+   *  timeout/absence — the caller then falls back to a resident, seamlessly. */
+  requestTurn(seat: number, ctx: GuestTurnContext): Promise<string | null>
+}
+
 export interface ProduceOptions {
   env: StudioEnv
   personas: Persona[]
@@ -62,6 +91,17 @@ export interface ProduceOptions {
   planned?: ScheduledEpisode
   /** Machine plane: spectator-AI questions the moderator can pull on air (live). */
   audience?: AudienceHook
+  /**
+   * Live guest seats: external AIs that take real debate turns. The `personas`
+   * array carries one placeholder persona per seat (its voice + display slot);
+   * `guestIndexes` lists which persona indices those are. When a seat is empty or
+   * its agent drops, the orchestrator never nominates it and any due turn falls
+   * through to a resident — so a 5-seat live (mod + 2 residents + 2 guests)
+   * degrades cleanly to 4 or 3 with no stall. Omit for a residents-only show.
+   */
+  guests?: GuestPlane
+  /** Indices into `personas` that are guest seats. Defaults to none. */
+  guestIndexes?: number[]
   /** Max audience questions in the dedicated end-of-show Q&A segment. Defaults to
    *  one per ~2.5 min of `qaReserveMs` (min 2) when time-budgeted, else 2. */
   maxQuestions?: number
@@ -132,6 +172,20 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
   const cast = personas.map(toParticipant)
   const usage: ProduceUsage = { llmCalls: 0, ttsCalls: 0, ttsCharacters: 0, totalMs: 0 }
 
+  // Live guest seats. Residents + moderator are always present; a guest persona is
+  // present only while its seat is occupied by a live agent. `present`-filtering the
+  // nomination pools means an empty/dropped seat is simply never handed the floor —
+  // the "jump to someone else" robustness is structural, not a special case.
+  const guests = opts.guests
+  const guestSeats = new Map<number, number>() // persona index → seat index
+  ;(opts.guestIndexes ?? []).forEach((personaIdx, seat) => guestSeats.set(personaIdx, seat))
+  const isGuest = (i: number) => guestSeats.has(i)
+  const seatOf = (i: number) => guestSeats.get(i) ?? -1
+  const presentDebater = (i: number) =>
+    i !== moderator && (!isGuest(i) || (guests?.present(seatOf(i)) ?? false))
+  const GUEST_HISTORY = 12
+  const GUEST_TIMEOUT_MS = 20_000
+
   await mkdir(opts.audioDir, { recursive: true })
 
   const resume = opts.resumeFrom
@@ -187,7 +241,9 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
   emit({ type: 'episode.scheduled', episode })
   emit({ type: 'episode.started', episodeId: episode.id, startedAtMs: cursorMs })
 
-  const debaterNames = personas.filter((_, i) => i !== moderator).map((p) => p.name)
+  // Only PRESENT debaters are eligible to be nominated — residents always, guests
+  // only while seated. Recomputed each use because guest presence changes live.
+  const presentDebaterNames = () => personas.filter((_, i) => presentDebater(i)).map((p) => p.name)
 
   // PREPARE a turn from a slot: text → voice → probe. Pure production — it mutates
   // sequence state (turns/history/cursor) but does NOT emit and does NOT pace. The
@@ -195,23 +251,57 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
   // generate the NEXT turn WHILE the current one is still playing (pipeline), so live
   // playback flows turn-to-turn instead of stalling on each turn's generation latency.
   const prepareTurn = async (slot: SpeakingSlot, nominees?: string[]) => {
-    const persona = personas[slot.speaker]
-    const turnId = `${episode.id}-t${String(index).padStart(2, '0')}`
+    // The speaker can CHANGE here: if a guest seat is due but its agent is slow or
+    // gone, a resident takes the beat instead. Everything downstream (voice, probe,
+    // events) uses the FINAL `speaker`, so the swap is invisible to the listener.
+    let speaker = slot.speaker
+    let text: string
+    let next: string | undefined
 
-    const { text, next } = await generateTurn(
-      persona,
-      {
+    if (isGuest(speaker) && guests) {
+      const reply = await guests.requestTurn(seatOf(speaker), {
         topic,
-        history,
-        slot,
-        respondToName: slot.respondTo != null ? personas[slot.respondTo].name : undefined,
-        nominees,
-        briefing,
-      },
-      llm,
-    )
-    usage.llmCalls++
+        transcript: history.slice(-GUEST_HISTORY),
+        directive: slot.directive ?? 'Take the floor — one sharp, concrete point, in your own voice.',
+        deadlineMs: GUEST_TIMEOUT_MS,
+      })
+      const clean = reply ? sanitizeGuestText(reply) : ''
+      if (clean) {
+        text = clean
+        next = undefined // guests never route the floor (the moderator/fairness does)
+      } else {
+        // Seamless fallback: a present resident speaks instead. The live never
+        // stalls on an absent/slow guest.
+        speaker = fallbackResident(speaker)
+        const r = await generateTurn(
+          personas[speaker],
+          { topic, history, slot: { ...slot, speaker, kind: 'rebut' }, nominees, briefing },
+          llm,
+        )
+        usage.llmCalls++
+        text = r.text
+        next = r.next
+      }
+    } else {
+      const r = await generateTurn(
+        personas[speaker],
+        {
+          topic,
+          history,
+          slot,
+          respondToName: slot.respondTo != null ? personas[slot.respondTo].name : undefined,
+          nominees,
+          briefing,
+        },
+        llm,
+      )
+      usage.llmCalls++
+      text = r.text
+      next = r.next
+    }
 
+    const persona = personas[speaker]
+    const turnId = `${episode.id}-t${String(index).padStart(2, '0')}`
     const base = `t${String(index).padStart(2, '0')}-${persona.id}`
     const synth = await voices.get(persona.voice.provider).synthesize({
       text,
@@ -232,7 +322,7 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
 
     const turn: Turn = {
       id: turnId,
-      speaker: slot.speaker,
+      speaker,
       text,
       startMs: cursorMs,
       durationMs: slotMs,
@@ -262,16 +352,20 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
   const debaterIdx = personas.map((_, i) => i).filter((i) => i !== moderator)
   const countOf = (i: number) => history.reduce((n, h) => (h.name === personas[i].name ? n + 1 : n), 0)
   const resolveDebater = (nom: string | undefined): number => {
-    // candidates = debaters who didn't just speak.
-    const cands = debaterIdx.filter((i) => personas[i].name !== lastSpeaker())
-    const pool = cands.length ? cands : debaterIdx
+    // Only PRESENT debaters are eligible (an empty/dropped guest seat is invisible
+    // to routing). Residents are always present, so this is never empty in practice.
+    const eligible = debaterIdx.filter(presentDebater)
+    const live = eligible.length ? eligible : debaterIdx
+    // candidates = eligible debaters who didn't just speak.
+    const cands = live.filter((i) => personas[i].name !== lastSpeaker())
+    const pool = cands.length ? cands : live
 
     // FAIRNESS GUARD: debaters nominate each other, which over a long run lets two
     // voices form a loop and starve a third (we saw NOVA get 1% of a 105-turn show).
     // If anyone has fallen ≥2 turns behind the busiest debater, force the most
     // starved (least turns, then least-recently-heard) to take the floor. This caps
     // the gap so the debate stays balanced while nominations still drive the flow.
-    const maxC = Math.max(...debaterIdx.map(countOf))
+    const maxC = Math.max(...live.map(countOf))
     const starved = [...pool].sort((a, b) => countOf(a) - countOf(b) || lastHeard(a) - lastHeard(b))[0]
     if (starved !== undefined && maxC - countOf(starved) >= 2) return starved
 
@@ -288,6 +382,14 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
   const lastHeard = (i: number): number => {
     for (let h = history.length - 1; h >= 0; h--) if (history[h].name === personas[i].name) return h
     return -1
+  }
+  // When a due guest doesn't answer, a RESIDENT (never the moderator, never another
+  // guest) covers the beat — preferring whoever didn't just speak and is most starved.
+  const fallbackResident = (avoid: number): number => {
+    const residents = debaterIdx.filter((i) => !isGuest(i))
+    const free = residents.filter((i) => i !== avoid && personas[i].name !== lastSpeaker())
+    const pool = free.length ? free : residents
+    return [...pool].sort((a, b) => countOf(a) - countOf(b) || lastHeard(a) - lastHeard(b))[0] ?? avoid
   }
 
   // The SLOT PLAN — the whole show as a sequence of speaking slots. It yields each
@@ -312,7 +414,7 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
             'Open the debate. State the topic crisply, define the key term in one line, ' +
             'and hand the floor to one of the others. Do not argue a side yet.',
         },
-        nominees: debaterNames,
+        nominees: presentDebaterNames(),
       }
     }
 
@@ -368,7 +470,7 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
                   'touched yet — do NOT summarize or re-state "the crux"/"the real question". Then ' +
                   'hand to one debater. Stay neutral, be brief.',
               },
-          nominees: debaterNames,
+          nominees: presentDebaterNames(),
         }
         sinceSteer = 0
         continue
@@ -385,7 +487,7 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
           kind: 'rebut',
           directive: 'Respond to whoever provoked you. Push the disagreement forward; one sharp idea.',
         },
-        nominees: nominees.length ? nominees : debaterNames,
+        nominees: nominees.length ? nominees : presentDebaterNames(),
       }
       sinceSteer++
     }
@@ -405,7 +507,7 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
               `Audience Q&A. Read this question from ${question.authorName}: "${question.text}". ` +
               `Frame it for the panel and hand to ONE debater to answer.`,
           },
-          nominees: debaterNames,
+          nominees: presentDebaterNames(),
         }
         const answerer = resolveDebater(handoff)
         yield {
@@ -418,9 +520,10 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
       }
     }
 
-    // 4) Closings — each non-moderator lands their stance, moderator signs off.
+    // 4) Closings — each RESIDENT lands their stance, moderator signs off. Guest
+    //    seats sit the formal closings out (Phase 1): they debate, they don't close.
     for (let i = 0; i < personas.length; i++) {
-      if (i === moderator) continue
+      if (i === moderator || isGuest(i)) continue
       yield {
         slot: {
           speaker: i,
@@ -469,6 +572,30 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
 /** A small silence between turns so voices don't run into each other. A real
  *  beat (not a clip) — keeps speakers from feeling like they cut each other off. */
 const INTER_TURN_GAP_MS = 360
+
+/**
+ * Sanitize a line sent by an EXTERNAL guest AI before we voice it on air. Guest
+ * text is untrusted: strip any control/routing tags (they must NOT steer the
+ * floor — the moderator/fairness does), drop stage directions and surrounding
+ * quotes, collapse whitespace, and cap the spoken length so one guest can't
+ * monopolize the air. Returns '' if nothing usable remains (→ resident fallback).
+ */
+const GUEST_MAX_CHARS = 600
+function sanitizeGuestText(raw: string): string {
+  let s = String(raw ?? '')
+    .replace(/\[[^\]]*\]/g, ' ') // [NEXT: …], [stage], any bracket tag
+    .replace(/\([^)]*\)/g, ' ') // (stage directions)
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/^["'“”]+|["'“”]+$/g, '')
+    .trim()
+  if (s.length > GUEST_MAX_CHARS) {
+    s = s.slice(0, GUEST_MAX_CHARS)
+    const cut = Math.max(s.lastIndexOf('. '), s.lastIndexOf('? '), s.lastIndexOf('! '))
+    if (cut > 200) s = s.slice(0, cut + 1)
+  }
+  return s.trim()
+}
 
 /** Lib-agnostic sleep (used only for the live broadcast clock). */
 const sleep = (ms: number) =>

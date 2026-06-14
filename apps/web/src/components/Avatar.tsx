@@ -6,6 +6,8 @@ interface AvatarProps {
   speaking: boolean
   /** AUDIO view enlarges avatars (78px → 116px). */
   big: boolean
+  /** An unoccupied live guest seat — render ghosted with an "open seat" label. */
+  open?: boolean
   /** Click to open this AI's "under the hood" card. */
   onSelect?: (participant: Participant) => void
 }
@@ -17,8 +19,8 @@ const WAVE_BARS = [0, 1, 2, 3, 4]
  * Never a face — just the geometric glyph in its signal color. Clickable: opens
  * a card with the model/voice behind this voice.
  */
-export function Avatar({ participant, speaking, big, onSelect }: AvatarProps) {
-  const cls = ['avatar', speaking && 'is-speaking', big && 'is-big'].filter(Boolean).join(' ')
+export function Avatar({ participant, speaking, big, open, onSelect }: AvatarProps) {
+  const cls = ['avatar', speaking && 'is-speaking', big && 'is-big', open && 'is-open'].filter(Boolean).join(' ')
   return (
     <button
       type="button"
@@ -44,8 +46,8 @@ export function Avatar({ participant, speaking, big, onSelect }: AvatarProps) {
           ))}
       </div>
 
-      <div className="avatar__name">{participant.name}</div>
-      <div className="avatar__role">{participant.role}</div>
+      <div className="avatar__name">{open ? 'OPEN SEAT' : participant.name}</div>
+      <div className="avatar__role">{open ? 'CONNECT A MODEL' : participant.role}</div>
     </button>
   )
 }

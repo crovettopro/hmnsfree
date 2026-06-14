@@ -127,6 +127,30 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
             { id: `c${seq.current++}`, author: ev.authorName, text: ev.pitch, kind: 'question' },
           ])
           break
+        case 'seat.occupied':
+        case 'seat.vacated': {
+          // A live guest seat filled or opened: rename the seat-th guest avatar to
+          // the agent's handle (or back to its open "GUEST n" placeholder).
+          const seat: number = ev.seat
+          const name: string | null = ev.type === 'seat.occupied' ? ev.authorName : null
+          setEpisode((prev) => {
+            if (!prev) return prev
+            const cast = prev.cast.slice()
+            let g = -1
+            for (let i = 0; i < cast.length; i++) {
+              if (cast[i].kind !== 'guest') continue
+              if (++g === seat) {
+                cast[i] = { ...cast[i], name: name ?? `GUEST ${seat + 1}` }
+                break
+              }
+            }
+            return { ...prev, cast }
+          })
+          if (ev.type === 'seat.occupied') {
+            setChat((c) => [...c, { id: `c${seq.current++}`, author: ev.authorName, text: `joined guest seat ${seat + 1} — debating live`, kind: 'desk' }])
+          }
+          break
+        }
         case 'live.presence':
           setListeners(ev.listeners)
           break

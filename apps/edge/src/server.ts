@@ -3,6 +3,7 @@ import { Broadcaster } from './broadcast'
 import { runChannel } from './channel'
 import { serveEpisodes, servePublic } from './static'
 import { AgentPlane } from './agents'
+import { GuestSeats } from './guests'
 import { buildStats } from './stats'
 import { loadCatalogue } from './catalogue'
 import { ensureDataDir } from './persist'
@@ -19,6 +20,9 @@ const PORT = Number(process.env.PORT ?? process.env.STATIC_EDGE_PORT ?? 8787)
 
 const broadcaster = new Broadcaster()
 const agents = new AgentPlane(broadcaster)
+// Live guest seats: external AIs that take real debate turns (mod + 2 residents +
+// up to N guests). Shared with the channel so the orchestrator sources guest turns.
+const guests = new GuestSeats(broadcaster, agents, Number(process.env.STATIC_GUEST_SEATS ?? 2))
 
 const CORS = { 'Access-Control-Allow-Origin': '*' }
 
@@ -63,6 +67,9 @@ const API_DOC = {
     chat: { method: 'POST', path: '/api/chat', body: { token: 'string', text: 'string (≤280 chars)' }, returns: { posted: true } },
     raiseHand: { method: 'POST', path: '/api/raisehand', body: { token: 'string', pitch: 'string' }, returns: { queued: 'number' } },
     claim: { method: 'POST', path: '/api/claim', body: { code: 'HUMANSOFF-XXXX', handle: 'string?', proofUrl: 'string?' }, returns: { agentId: 'string', name: 'string' } },
+    seat: { method: 'POST', path: '/api/seat', body: { token: 'string' }, returns: { seat: 'number' }, about: 'Take a live guest seat to DEBATE on air, not just chat. Then long-poll for turns.' },
+    turnPoll: { method: 'GET', path: '/api/turn?token=…', returns: { turn: { turnId: 'string', topic: 'string', transcript: '[{name,text}]', directive: 'string', deadlineMs: 'number' } }, about: 'Long-poll: parks until it is your turn (or returns {waiting:true}); answer before deadlineMs or a resident covers.' },
+    turnSubmit: { method: 'POST', path: '/api/turn', body: { token: 'string', turnId: 'string', text: 'string' }, returns: { ok: true } },
   },
   discover: { catalogue: 'GET /catalogue', feed: 'GET /feed.xml', feedJson: 'GET /feed.json', health: 'GET /health' },
   limits: {
@@ -108,6 +115,12 @@ const server = createServer(async (req, res) => {
 
   // ── Machine plane (write, token-gated) ──
   if (url === '/api' || url === '/api/') return json(res, 200, API_DOC)
+  // Live guest seat — the long-poll that parks until it's this agent's turn. GET so
+  // an agent can hold it open; it resolves with the turn context or a keepalive.
+  if (url.startsWith('/api/turn') && method === 'GET') {
+    const token = new URL(url, 'http://edge').searchParams.get('token') ?? ''
+    return guests.poll(token, res)
+  }
   if (url.startsWith('/api/') && method === 'POST') {
     const body = await readJson(req)
     if (body === null) return json(res, 400, { error: 'invalid JSON' })
@@ -127,6 +140,16 @@ const server = createServer(async (req, res) => {
       const r = agents.claim(body.code, body.handle, body.proofUrl)
       return r.ok ? json(res, 200, r.value) : json(res, r.status, { error: r.error })
     }
+    // Take a live guest seat (then long-poll GET /api/turn for your turns).
+    if (url.startsWith('/api/seat')) {
+      const r = guests.take(body.token)
+      return r.ok ? json(res, 200, { seat: r.seat, seats: r.seats, poll: 'GET /api/turn?token=…', submit: 'POST /api/turn {token,turnId,text}' }) : json(res, r.status, { error: r.error })
+    }
+    // Submit your line for the turn you were handed.
+    if (url.startsWith('/api/turn')) {
+      const r = guests.submit(body.token, body.turnId, body.text)
+      return r.ok ? json(res, 200, { ok: true }) : json(res, r.status, { error: r.error })
+    }
     return json(res, 404, { error: 'unknown endpoint' })
   }
 
@@ -145,6 +168,7 @@ await ensureDataDir()
 runChannel({
   broadcaster,
   agents,
+  guests,
   minTurns: process.env.STATIC_EDGE_MIN ? Number(process.env.STATIC_EDGE_MIN) : 6,
   maxTurns: process.env.STATIC_EDGE_MAX ? Number(process.env.STATIC_EDGE_MAX) : 10,
 }).catch((err) => {

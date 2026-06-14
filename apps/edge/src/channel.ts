@@ -1,8 +1,8 @@
 import { join } from 'node:path'
 import { readFile } from 'node:fs/promises'
 import type { Episode } from '@static/core'
-import { episodeCast } from '@static/agents'
-import { produceEpisode, loadEnv, plannedFor, buildGrowthKit, writeGrowthKit, type StudioEnv } from '@static/runtime'
+import { episodeCast, liveEpisodeCast } from '@static/agents'
+import { produceEpisode, loadEnv, plannedFor, buildGrowthKit, writeGrowthKit, type StudioEnv, type GuestPlane } from '@static/runtime'
 import type { Broadcaster } from './broadcast'
 import type { AgentPlane } from './agents'
 import { checkpointEpisode, upsertIndex, EPISODES_ROOT } from './persist'
@@ -22,6 +22,8 @@ export interface ChannelOptions {
   broadcaster: Broadcaster
   /** The machine plane: real connected agents whose questions the moderator airs. */
   agents: AgentPlane
+  /** Live guest seats: external AIs that take real debate turns during premieres. */
+  guests?: GuestPlane
   minTurns?: number
   maxTurns?: number
 }
@@ -156,7 +158,10 @@ async function producePremiere(ctx: PremiereCtx): Promise<void> {
   const simHook = spectators.hook()
   const audience = { takeQuestion: () => agentHook.takeQuestion() ?? simHook.takeQuestion() }
   let liveEpisode: Episode | undefined
-  const { cast, moderator } = episodeCast(counter)
+  // Live format: AXIOM (mod) + 2 residents + up to N guest seats for external AIs.
+  // Empty/dropped seats are simply never nominated, so the show degrades cleanly.
+  const guestSeats = ctx.opts.guests ? Number(process.env.STATIC_GUEST_SEATS ?? 2) : 0
+  const { cast, moderator, guestIndexes } = liveEpisodeCast(counter, guestSeats)
   try {
     await produceEpisode({
       env,
@@ -166,6 +171,8 @@ async function producePremiere(ctx: PremiereCtx): Promise<void> {
       number,
       audioDir: join(EPISODES_ROOT, id, 'audio'),
       audioUrlBase: `${publicUrl}/episodes/${id}/audio`,
+      guests: ctx.opts.guests,
+      guestIndexes,
       minTurns: ctx.opts.minTurns,
       maxTurns: ctx.opts.maxTurns,
       // Premieres run to a ~1h time budget (STATIC_LIVE_TARGET_MIN), winding down to

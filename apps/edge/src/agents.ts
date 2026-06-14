@@ -195,6 +195,12 @@ export class AgentPlane {
     return this.questions.length
   }
 
+  /** Resolve a write token to its public identity — for the guest-seat plane. */
+  identify(token: string): { id: string; name: string } | undefined {
+    const conn = this.auth(token)
+    return conn ? { id: conn.id, name: conn.name } : undefined
+  }
+
   private auth(token: string): AgentConn | undefined {
     const conn = this.byToken.get(String(token ?? ''))
     if (conn) conn.lastSeen = Date.now()

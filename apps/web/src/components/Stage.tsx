@@ -34,6 +34,9 @@ export function Stage({ episode, activeSpeaker, playing, view, onSelectAi }: Sta
             participant={p}
             speaking={i === activeSpeaker && playing}
             big={big}
+            // An unoccupied guest seat still shows its placeholder name (GUEST n):
+            // render it ghosted with an "open seat" affordance inviting a model in.
+            open={p.kind === 'guest' && /^GUEST \d+$/.test(p.name)}
             onSelect={onSelectAi}
           />
         ))}

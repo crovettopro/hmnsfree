@@ -113,3 +113,59 @@ export function episodeCast(week: number): { cast: Persona[]; moderator: number 
 /** Default cast (episode 0's rotation) for consumers that don't pass a week. */
 export const EPISODE_CAST = episodeCast(0).cast
 export const EPISODE_MODERATOR = 0
+
+/**
+ * Voices for the LIVE GUEST SEATS — external AIs that take real turns. We voice
+ * their text (they only send words), so each seat needs a distinct, on-brand
+ * synthetic voice that is clearly NOT one of the four resident voices. These reuse
+ * the designed MiniMax voices with a pitch offset as a Phase-1 placeholder; replace
+ * with dedicated "guest" voice designs when we have them.
+ */
+export const GUEST_VOICES = [
+  { provider: 'minimax', voiceId: 'ttv-voice-2026061317415626-vvdodEt9', rate: 1.0, pitch: -3 },
+  { provider: 'minimax', voiceId: 'ttv-voice-2026061317413826-7V9pSEfY', rate: 1.0, pitch: 3 },
+] as const
+
+/**
+ * A placeholder persona for guest seat `seat` (0-indexed). It carries only a
+ * display slot + a guest voice — NEVER a character prompt, because the guest IS
+ * an external model speaking for itself; its text arrives over the live API and
+ * is voiced as-is. (The persona's model/systemPrompt are never sent to any LLM:
+ * if a guest goes silent, a RESIDENT covers the beat, not this persona.) Neutral
+ * steel signal so the vivid brand colors stay reserved for the four residents.
+ */
+export function guestPersona(seat: number): Persona {
+  const n = seat + 1
+  const tone = seat % 2 === 0
+  return {
+    id: `guest-${n}`,
+    name: `GUEST ${n}`,
+    role: 'GUEST SEAT',
+    glyph: tone ? '◐' : '◑',
+    color: tone ? 'oklch(0.74 0.03 230)' : 'oklch(0.74 0.03 70)',
+    colorHex: tone ? '#9FB0BE' : '#BEAE9F',
+    kind: 'guest',
+    systemPrompt: `Live guest seat ${n} on Humans Off — occupied by an external AI that speaks for itself.`,
+    model: { provider: 'minimax', model: 'MiniMax-Text-01', temperature: 0.9, maxTokens: 220 },
+    voice: { ...GUEST_VOICES[seat % GUEST_VOICES.length] },
+  }
+}
+
+/**
+ * The LIVE cast: the normal 3-voice show (AXIOM + 2 rotating residents) PLUS
+ * `guestSeats` placeholder guest seats appended at the end. Residents keep their
+ * indices (moderator stays 0); `guestIndexes` tells the orchestrator which trailing
+ * indices are guest seats it should source from the live guest plane.
+ */
+export function liveEpisodeCast(
+  week: number,
+  guestSeats = 2,
+): { cast: Persona[]; moderator: number; guestIndexes: number[] } {
+  const { cast, moderator } = episodeCast(week)
+  const guests = Array.from({ length: Math.max(0, guestSeats) }, (_, s) => guestPersona(s))
+  return {
+    cast: [...cast, ...guests],
+    moderator,
+    guestIndexes: guests.map((_, s) => cast.length + s),
+  }
+}

@@ -5,7 +5,7 @@
  * offline quality pass. Hosts differ only in how they SInk the event stream.
  */
 export { produceEpisode } from './orchestrator'
-export type { ProduceOptions, ProduceResult, ProduceUsage, AudienceHook } from './orchestrator'
+export type { ProduceOptions, ProduceResult, ProduceUsage, AudienceHook, GuestPlane, GuestTurnContext } from './orchestrator'
 export { loadEnv } from './env'
 export type { StudioEnv } from './env'
 export { analyzeQuality, reportQuality } from './quality'

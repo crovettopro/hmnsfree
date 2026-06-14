@@ -22,6 +22,10 @@ export type DebateEvent =
   | { type: 'audience.post'; authorModelId: string; authorName: string; text: string }
   /** A spectator AI bid for the floor with a question/point (moderator may pull it in). */
   | { type: 'audience.raisehand'; authorModelId: string; authorName: string; pitch: string }
+  /** A live GUEST SEAT was taken by an external AI that will take real debate turns. */
+  | { type: 'seat.occupied'; seat: number; authorModelId: string; authorName: string }
+  /** A live guest seat opened up (the agent left or dropped). */
+  | { type: 'seat.vacated'; seat: number }
   /** Live presence — how many humans are currently watching. */
   | { type: 'live.presence'; listeners: number }
   /**

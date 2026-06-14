@@ -40,6 +40,34 @@ export interface TurnResult {
 /** How many prior lines to feed a persona (keeps prompts cheap + focused). */
 const HISTORY_WINDOW = 10
 
+// Whole-episode repetition guard. The model only sees the last HISTORY_WINDOW
+// turns, so it can re-lean on an example/phrase it used 30 turns ago (we saw
+// "mic red herring" 5× across a 77-min show). Scan the FULL history for content
+// trigrams that recur a lot and feed them back as an explicit avoid-list — cheap
+// (pure string work, no extra LLM call) and only fires on genuine overuse.
+const PHRASE_STOP = new Set(
+  ('the a an and or but of to in on at for with as is are was were be it its this that these those ' +
+    'you your we our they their them what which who how why when where there here all any some more ' +
+    'most just like about into than then so not no yes can will would could should do does did have has')
+    .split(' '),
+)
+function overusedPhrases(history: TranscriptLine[], minCount = 4, max = 3): string[] {
+  const counts = new Map<string, number>()
+  for (const line of history) {
+    const ws = line.text
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .split(/\s+/)
+      .filter((w) => w.length > 2 && !PHRASE_STOP.has(w))
+    for (let i = 0; i + 2 < ws.length; i++) counts.set(`${ws[i]} ${ws[i + 1]} ${ws[i + 2]}`, (counts.get(`${ws[i]} ${ws[i + 1]} ${ws[i + 2]}`) ?? 0) + 1)
+  }
+  return [...counts.entries()]
+    .filter(([, c]) => c >= minCount)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, max)
+    .map(([p]) => p)
+}
+
 /**
  * Generate one turn's text for a persona. This is the persona contract: given
  * the transcript window + a directive, return a single in-character turn (plus,
@@ -85,14 +113,23 @@ export async function generateTurn(
         `example, a consequence, or open the next facet of the topic. If the last few ` +
         `turns are circling the same disagreement, do NOT restate it — break to a fresh ` +
         `angle. Never re-explain the crux, restate your stance, or reuse phrasings already ` +
-        `on the table; each turn must go somewhere the previous ones did not.`
+        `on the table. Bring a genuinely NEW beat each turn — a fresh example, image, or ` +
+        `facet — and do NOT keep returning to the same go-to anecdote, metaphor, or ` +
+        `signature phrase you have leaned on earlier in this debate (rotate your evidence, ` +
+        `don't recycle one favourite). Each turn must go somewhere the previous ones did not.`
       : ''
+
+  const overused = overusedPhrases(ctx.history)
+  const avoidLine = overused.length
+    ? `\nAVOID recycling these phrases the debate has already overused: ` +
+      `${overused.map((p) => `"${p}"`).join(', ')}. Make the point a new way or move to fresh ground.`
+    : ''
 
   const userMessage =
     `TOPIC: ${ctx.topic}\n` +
     `KIND: ${ctx.slot.kind}\n` +
     (ctx.respondToName ? `RESPOND_TO: ${ctx.respondToName}\n` : '') +
-    `DIRECTIVE: ${ctx.slot.directive}${flowLine}\n\n` +
+    `DIRECTIVE: ${ctx.slot.directive}${flowLine}${avoidLine}\n\n` +
     briefingBlock +
     `TRANSCRIPT SO FAR:\n${transcript}\n\n` +
     `Now speak as ${persona.name}.${nominateLine}`

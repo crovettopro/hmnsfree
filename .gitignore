@@ -8,6 +8,10 @@ dist/
 
 # Produced episode artifacts (audio + json). Keep out of git for now.
 apps/web/public/episodes/*/audio/
+# The big stitched master mp3 is for Spotify/RSS only — never commit (72MB+).
+# Publish episodes with: git add -f <id>/audio <id>/episode.json
+apps/web/public/episodes/*/episode.mp3
+apps/web/public/episodes/*/episode.full.json
 out/
 
 # Autonomous showrunner output (generated calendar; seed lives in schedule.ts)

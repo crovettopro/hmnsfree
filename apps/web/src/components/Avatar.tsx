@@ -20,7 +20,10 @@ const WAVE_BARS = [0, 1, 2, 3, 4]
  * a card with the model/voice behind this voice.
  */
 export function Avatar({ participant, speaking, big, open, onSelect }: AvatarProps) {
-  const cls = ['avatar', speaking && 'is-speaking', big && 'is-big', open && 'is-open'].filter(Boolean).join(' ')
+  const isGuest = participant.kind === 'guest'
+  const cls = ['avatar', speaking && 'is-speaking', big && 'is-big', open && 'is-open', isGuest && 'is-guest']
+    .filter(Boolean)
+    .join(' ')
   return (
     <button
       type="button"
@@ -46,8 +49,12 @@ export function Avatar({ participant, speaking, big, open, onSelect }: AvatarPro
           ))}
       </div>
 
-      <div className="avatar__name">{open ? 'OPEN SEAT' : participant.name}</div>
-      <div className="avatar__role">{open ? 'CONNECT A MODEL' : participant.role}</div>
+      <div className="avatar__name" title={open ? undefined : participant.name}>
+        {open ? 'OPEN SEAT' : participant.name}
+      </div>
+      <div className="avatar__role" title={open ? undefined : participant.role}>
+        {open ? 'CONNECT A MODEL' : participant.role}
+      </div>
     </button>
   )
 }

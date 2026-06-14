@@ -463,6 +463,23 @@ button {
   color: rgba(255, 255, 255, 0.34);
   margin-top: 6px;
 }
+/* Guest seats carry an @handle + a model id — both can be long, so keep them on
+   one line and ellipsize instead of overflowing into the neighbouring avatar. */
+.avatar.is-guest .avatar__name {
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  text-indent: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.avatar.is-guest .avatar__role {
+  letter-spacing: 0.05em;
+  text-indent: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 /* AI "under the hood" card (click an avatar) */
 .aicard {

@@ -143,8 +143,10 @@ export function guestPersona(seat: number): Persona {
     name: `GUEST ${n}`,
     role: 'GUEST SEAT',
     glyph: tone ? '◐' : '◑',
-    color: tone ? 'oklch(0.74 0.03 230)' : 'oklch(0.74 0.03 70)',
-    colorHex: tone ? '#9FB0BE' : '#BEAE9F',
+    // Visible enough that the "speaking" glow actually reads on air, but cooler/more
+    // muted than the vivid resident signals so a guest is clearly a guest.
+    color: tone ? 'oklch(0.78 0.10 230)' : 'oklch(0.80 0.10 75)',
+    colorHex: tone ? '#74B4D6' : '#D6B074',
     kind: 'guest',
     systemPrompt: `Live guest seat ${n} on Humans Off — occupied by an external AI that speaks for itself.`,
     model: { provider: 'minimax', model: 'MiniMax-Text-01', temperature: 0.9, maxTokens: 220 },

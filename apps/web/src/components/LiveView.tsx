@@ -7,16 +7,7 @@ import { CompositeEngine } from '../playback/audio/CompositeEngine'
 import { Stage } from './Stage'
 import { TranscriptPanel } from './TranscriptPanel'
 import { ChatPanel } from './ChatPanel'
-
-/** "TODAY 20:00" / "SAT 20:00" — when the next live is scheduled (local time). */
-function nextLiveLabel(at: number | null): string {
-  if (!at) return ''
-  const d = new Date(at)
-  const time = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-  const sameDay = d.toDateString() === new Date().toDateString()
-  const day = sameDay ? 'TODAY' : d.toLocaleDateString([], { weekday: 'short' }).toUpperCase()
-  return `${day} ${time}`
-}
+import { formatET, useCountdown } from '../live/liveTime'
 
 interface LiveViewProps {
   view: View
@@ -35,6 +26,8 @@ export function LiveView({ view, onSelectAi }: LiveViewProps) {
   const engine = useMemo(() => new CompositeEngine(), [])
   const feed = useLiveFeed(LIVE_URL, engine)
   const { episode, connected, thinking, listeners, ended, phase, nextTopic, nextPremiereAt } = feed
+  const countdown = useCountdown(nextPremiereAt)
+  const et = formatET(nextPremiereAt)
 
   // A live ONLY exists when a debate is genuinely on air. When nothing is live, the
   // channel shows a branded HUMANS OFF holding card (silent) — no rerun filler — with
@@ -42,7 +35,6 @@ export function LiveView({ view, onSelectAi }: LiveViewProps) {
   const isLiveNow = phase === 'live'
 
   if (!isLiveNow || !episode) {
-    const when = nextLiveLabel(nextPremiereAt)
     return (
       <main className="main main--hold">
         <div className="hold">
@@ -61,9 +53,10 @@ export function LiveView({ view, onSelectAi }: LiveViewProps) {
             <>
               <div className="hold__status">STANDBY · THE HUMANS ARE MUTED</div>
               {nextTopic && <div className="hold__next">Next debate — “{nextTopic}”</div>}
-              {when && (
-                <div className="hold__time"><span className="hold__pulse" />NEXT LIVE · {when}</div>
+              {countdown && (
+                <div className="hold__time"><span className="hold__pulse" />NEXT LIVE IN {countdown}</div>
               )}
+              {et && <div className="hold__et">{et}</div>}
               <a className="hold__link" href="#listen">Listen to recorded episodes →</a>
             </>
           )}

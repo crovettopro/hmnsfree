@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { formatET, secondsUntil, useCountdown } from './liveTime'
 
 /**
  * The LIVES section — a grid of live channels, the front door to everything
@@ -24,15 +25,6 @@ interface LiveSnapshot {
   episode: { id: string; number: string; topic: string; turns: number } | null
 }
 
-/** "TODAY 20:00" / "SAT 20:00" — when the next live airs (local time). */
-function nextLiveLabel(at: number | null | undefined): string {
-  if (!at) return ''
-  const d = new Date(at)
-  const time = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-  const sameDay = d.toDateString() === new Date().toDateString()
-  const day = sameDay ? 'TODAY' : d.toLocaleDateString([], { weekday: 'short' }).toUpperCase()
-  return `${day} ${time}`
-}
 
 interface Channel {
   id: string
@@ -70,6 +62,19 @@ export function LivesIndex() {
       clearInterval(id)
     }
   }, [])
+
+  // Auto-tune-in: from ~5 min before a live (or once it's on air) pull the viewer
+  // INTO the channel (#watch) so they land on the holding card + countdown, like a
+  // broadcast you tune into before it starts. (Once on #watch, App owns the routing.)
+  useEffect(() => {
+    const id = setInterval(() => {
+      const live = snap?.phase === 'live'
+      if (live || secondsUntil(snap?.nextPremiereAt, Date.now()) <= 300) {
+        window.location.hash = '#watch'
+      }
+    }, 1000)
+    return () => clearInterval(id)
+  }, [snap?.phase, snap?.nextPremiereAt])
 
   // One real channel today; the grid is ready for many.
   const channels: Channel[] = [
@@ -130,7 +135,8 @@ function ChannelCard({ channel }: { channel: Channel }) {
     kind = 'idle'
   }
 
-  const when = nextLiveLabel(snap?.nextPremiereAt)
+  const countdown = useCountdown(snap?.nextPremiereAt)
+  const et = formatET(snap?.nextPremiereAt)
   const nextTopic = snap?.nextTopic
   const topic = onAir
     ? snap?.episode?.topic ?? 'Live now'
@@ -159,7 +165,9 @@ function ChannelCard({ channel }: { channel: Channel }) {
           </>
         ) : (
           <>
-            <span className="livecard__listeners">{offline ? 'OFFLINE' : when ? `NEXT LIVE · ${when}` : 'STANDBY'}</span>
+            <span className="livecard__listeners">
+              {offline ? 'OFFLINE' : countdown ? `NEXT LIVE · ${countdown}${et ? ` · ${et}` : ''}` : 'STANDBY'}
+            </span>
             <span className="livecard__cta livecard__cta--idle">ENTER →</span>
           </>
         )}

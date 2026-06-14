@@ -1464,7 +1464,8 @@ button {
 .hold__status { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.24em; color: var(--text-faint); }
 .hold__status--soon { display: inline-flex; align-items: center; gap: 8px; color: oklch(0.72 0.2 350); }
 .hold__next { font-size: 18px; line-height: 1.4; color: var(--text-body); margin-top: 2px; }
-.hold__time { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.16em; color: oklch(0.82 0.13 200); }
+.hold__time { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: 0.16em; color: oklch(0.82 0.13 200); font-variant-numeric: tabular-nums; }
+.hold__et { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: var(--text-faint); margin-top: -6px; }
 .hold__pulse { width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; animation: blink 1.5s ease-in-out infinite; }
 .hold__link { margin-top: 10px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: oklch(0.82 0.13 200); text-decoration: none; }
 .hold__link:hover { text-decoration: underline; }

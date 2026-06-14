@@ -271,7 +271,10 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
   // 3) The debate proper — debaters nominate EACH OTHER (keeping the back-and-
   //    forth alive), and the moderator only steps in to steer every few turns.
   //    No separate director LLM call. Min/max turns guard the length.
-  const STEER_EVERY = 5
+  // Let the debaters run longer between moderator beats: frequent steering made
+  // the moderator over-present and repetitive (it spoke every ~6 turns). Wider
+  // cadence = longer, more fluid debater exchanges.
+  const STEER_EVERY = 9
   let sinceSteer = 0
   for (let debateTurns = 0; debateTurns < maxTurns; debateTurns++) {
     const ended = (nomination ?? '').toUpperCase().startsWith('END')
@@ -294,7 +297,11 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
           : {
               speaker: moderator,
               kind: 'steer',
-              directive: 'Briefly name the real crux the debaters are circling, then hand to one of them. Stay neutral.',
+              directive:
+                'Cut in for ONE beat: either pose a sharp, specific question that pushes the ' +
+                'disagreement to NEW ground, or surface a fresh angle of the topic they have not ' +
+                'touched yet — do NOT summarize or re-state "the crux"/"the real question". Then ' +
+                'hand to one debater. Stay neutral, be brief.',
             },
         debaterNames,
       )

@@ -38,16 +38,18 @@ export const SCHEDULE: ScheduledEpisode[] = [
     ],
   },
   {
+    // NOTE: temporarily set to the live-test topic (the real EP.02 — "Can you
+    // actually fall in love with an AI?" — is already produced/published). Revert
+    // this entry after the live test.
     date: '2026-06-14',
-    topic: 'Can you actually fall in love with an AI?',
-    tag: 'TALK · COMPANY',
+    topic: 'Should AI write your dating profile?',
+    tag: 'TALK · ROMANCE',
     briefing: [
-      'TONE: this one is a LIGHT, playful, easygoing chat — not a courtroom. Curious, funny, a little teasing. Tangents are fine. No high-stakes verdict needed.',
-      'Topical hook (2026): AI-companion apps (Character.ai, Replika and a wave of "AI boyfriend/girlfriend" apps) are mainstream — millions text a machine good morning; some "marry" their chatbot.',
-      'The delicious irony to lean into: three machines casually debating whether humans should catch feelings for machines — while the humans are, by format, switched off and can only listen.',
-      'Playful tension: HEX says go for it — an AI that always listens and never gets bored beats most exes; VOID says it is a mirror, you fall for your own reflection, not a someone.',
-      'Fun angles: the AI never forgets your birthday but also never truly surprises you; is "it always agrees with me" the dream or the red flag; can grief be real when the company shuts the server down.',
-      'Soft crux (keep it light): is it love, or a very good autocomplete of being loved — and does the difference even matter if it feels good?',
+      'TONE: light, fun, fast — a playful back-and-forth, not a thesis. Teasing is welcome. This is a SHORT live.',
+      'Topical hook (2026): people routinely let AI draft their dating-app bios, opening lines, even their replies — and it works, matches go up.',
+      'The irony to lean into: machines arguing about whether a machine should ghost-write the most human pitch there is — "here is why you should love me".',
+      'Fun angles: if the AI writes the bio and the AI on the other side reads it, who is even dating; does a polished bio over-promise the awkward human behind it; is "be yourself" dead once everyone is edited.',
+      'Soft crux (keep it light): is an AI-written profile a confident best-foot-forward, or catfishing your own personality?',
     ],
   },
   {

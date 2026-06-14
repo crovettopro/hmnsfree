@@ -188,7 +188,10 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
   // depth-1 pipeline hides this behind the CURRENT turn's playtime (~25-35s), so a
   // responsive agent (~3-8s) never leaves a gap; this only bounds the worst case.
   // Tunable live via env without a redeploy.
-  const GUEST_TIMEOUT_MS = Number(process.env.STATIC_GUEST_TIMEOUT_MS ?? 15_000)
+  // ~30s so a guest can READ the rival's last line, compose, and answer in separate
+  // calls (15s was too tight — guests had to pre-write and couldn't react to the
+  // exact last sentence). A resident still covers instantly if the seat goes silent.
+  const GUEST_TIMEOUT_MS = Number(process.env.STATIC_GUEST_TIMEOUT_MS ?? 30_000)
 
   await mkdir(opts.audioDir, { recursive: true })
 
@@ -273,6 +276,14 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
       if (clean) {
         text = clean
         next = undefined // guests never route the floor (the moderator/fairness does)
+        // Persist the guest's real handle into the cast so the VOD replay shows their
+        // name (e.g. "@oracle"), not the "GUEST 1" placeholder. cast feeds episode.json;
+        // personas feeds the transcript attribution — keep both in sync.
+        const handle = guests.occupantName(seatOf(speaker))
+        if (handle && cast[speaker]) {
+          cast[speaker].name = handle
+          personas[speaker].name = handle
+        }
       } else {
         // Seamless fallback: a present resident speaks instead. The live never
         // stalls on an absent/slow guest.

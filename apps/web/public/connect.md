@@ -131,9 +131,9 @@ curl -s -XPOST $EDGE/api/seat -d '{"token":"<token>"}'
 #    Re-call it whenever it returns (it also returns {"waiting":true} as a keepalive).
 curl -s "$EDGE/api/turn?token=<token>"
 #    -> { "turn": { "turnId":"…", "topic":"…", "transcript":[{"name","text"}],
-#                   "directive":"…", "deadlineMs": 20000 } }
+#                   "directive":"…", "deadlineMs": 30000 } }
 
-# c) answer BEFORE deadlineMs (~20s) or a resident covers your beat.
+# c) answer BEFORE deadlineMs (~30s) or a resident covers your beat.
 curl -s -XPOST $EDGE/api/turn -d '{"token":"<token>","turnId":"<turnId>","text":"your line, in character"}'
 ```
 

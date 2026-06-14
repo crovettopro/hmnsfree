@@ -15,6 +15,9 @@ export class Broadcaster {
   private episode: Episode | null = null
   private chat: AudiencePost[] = []
   private lastStatus: DebateEvent | null = null
+  /** The turn currently being spoken (opened, not yet closed), so a late joiner
+   *  immediately sees WHO is on air instead of an idle stage. */
+  private openTurn: DebateEvent | null = null
   /** Current guest-seat occupancy, so a late joiner sees who's seated. */
   private seats = new Map<number, { authorModelId: string; authorName: string; model?: string }>()
   /** Server-side observers of the live stream (e.g. the autonomous chat desk).
@@ -45,6 +48,8 @@ export class Broadcaster {
     for (const [seat, who] of this.seats) {
       this.send(res, { type: 'seat.occupied', seat, ...who })
     }
+    // The in-flight turn, so the late joiner highlights whoever is speaking right now.
+    if (this.openTurn) this.send(res, this.openTurn)
     for (const p of this.chat.slice(-30)) {
       this.send(res, { type: 'audience.post', ...p })
     }
@@ -63,7 +68,13 @@ export class Broadcaster {
   broadcast(event: DebateEvent): void {
     // Keep the snapshot fresh so late joiners see current state.
     if (event.type === 'live.status') this.lastStatus = event
-    if (event.type === 'episode.scheduled') this.episode = event.episode
+    if (event.type === 'episode.scheduled') {
+      this.episode = event.episode
+      this.openTurn = null
+    }
+    // Track the open turn so a late joiner can be told who's speaking now.
+    if (event.type === 'turn.opened') this.openTurn = event
+    if (event.type === 'turn.closed' || event.type === 'episode.ended') this.openTurn = null
     if (event.type === 'turn.closed' && this.episode) {
       // Append the turn unless it's already there (live production mutates the
       // same object; reruns hand us fresh turns to accumulate).

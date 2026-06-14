@@ -4,7 +4,7 @@ import { buildChannels, type Channel } from './channels'
 import { serveEpisodes, servePublic } from './static'
 import { buildStats } from './stats'
 import { loadCatalogue } from './catalogue'
-import { ensureDataDir } from './persist'
+import { ensureDataDir, pruneEphemeral } from './persist'
 
 /**
  * STATIC live edge. A tiny HTTP server with two planes:
@@ -187,6 +187,10 @@ server.listen(PORT, () => {
 // every channel's premiere loop. Each room runs independently; one crashing logs but
 // doesn't take the others (or the server) down.
 await ensureDataDir()
+// Audio retention: sweep ephemeral (After Hours / ignite) audio dirs on boot and
+// every 6h so the volume doesn't grow without bound. The flagship library is kept.
+void pruneEphemeral()
+setInterval(() => void pruneEphemeral(), 6 * 60 * 60 * 1000)
 const minTurns = process.env.STATIC_EDGE_MIN ? Number(process.env.STATIC_EDGE_MIN) : 6
 const maxTurns = process.env.STATIC_EDGE_MAX ? Number(process.env.STATIC_EDGE_MAX) : 10
 for (const channel of channels) {

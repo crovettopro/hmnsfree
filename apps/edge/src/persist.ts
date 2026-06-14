@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
-import { mkdir, readFile, writeFile, cp, access } from 'node:fs/promises'
+import { mkdir, readFile, writeFile, cp, access, readdir, stat, rm } from 'node:fs/promises'
 import type { Episode } from '@static/core'
 
 /**
@@ -53,6 +53,41 @@ export async function ensureDataDir(): Promise<void> {
   } catch (err) {
     console.warn('data-dir seed skipped:', err instanceof Error ? err.message : err)
   }
+}
+
+/**
+ * Audio retention. Ephemeral rooms (After Hours `c2-*`, ignites `ig-*`) write a full
+ * episode's audio (~100-150MB) to the volume on every show but are NEVER part of the
+ * library — with reruns off, that audio is dead weight the moment the show ends. This
+ * deletes those dirs once they're older than the retention window so the volume (and
+ * Railway storage cost) doesn't grow without bound. The flagship `ep-*` library is the
+ * record of truth and is left untouched.
+ */
+const EPHEMERAL_DIR_RE = /^(c2|ig)-/
+export async function pruneEphemeral(): Promise<void> {
+  const maxAgeMs = Number(process.env.STATIC_AUDIO_RETENTION_HOURS ?? 12) * 3_600_000
+  let entries: import('node:fs').Dirent[]
+  try {
+    entries = await readdir(EPISODES_ROOT, { withFileTypes: true })
+  } catch {
+    return
+  }
+  const now = Date.now()
+  let removed = 0
+  for (const e of entries) {
+    if (!e.isDirectory() || !EPHEMERAL_DIR_RE.test(e.name)) continue
+    const dir = join(EPISODES_ROOT, e.name)
+    try {
+      const s = await stat(dir)
+      if (now - s.mtimeMs > maxAgeMs) {
+        await rm(dir, { recursive: true, force: true })
+        removed++
+      }
+    } catch {
+      /* ignore a dir that vanished or can't be read */
+    }
+  }
+  if (removed) console.log(`audio retention: pruned ${removed} ephemeral dir(s) > ${maxAgeMs / 3_600_000}h old`)
 }
 
 /** Per-turn checkpoint: write just this episode's JSON. Safe to call often. */

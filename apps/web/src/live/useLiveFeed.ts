@@ -42,6 +42,10 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
   const [listeners, setListeners] = useState(0)
   const [connected, setConnected] = useState(false)
   const [cursor, setCursor] = useState(-1)
+  // The speaker of the turn currently OPEN (being generated/spoken). Lets us
+  // highlight who's on air during a turn — and, via the catch-up snapshot, the
+  // instant a late joiner arrives mid-turn — instead of an idle stage.
+  const [speaking, setSpeaking] = useState(-1)
   const [thinking, setThinking] = useState(false)
   const [ended, setEnded] = useState(false)
   const [elapsed, setElapsed] = useState(0)
@@ -90,11 +94,14 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
           setEpisode({ ...ev.episode, turns })
           setEnded(false)
           setCursor(turns.length - 1)
+          setSpeaking(-1)
           setThinking(turns.length === 0)
           break
         }
         case 'turn.opened':
           setThinking(true)
+          // Highlight who's on air now (works for live + for a mid-turn rejoin).
+          if (typeof ev.speaker === 'number') setSpeaking(ev.speaker)
           break
         case 'turn.closed': {
           const turn: Turn = resolveTurn(ev.turn)
@@ -105,6 +112,7 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
             return { ...prev, turns: [...prev.turns, turn] }
           })
           setThinking(false)
+          setSpeaking(-1) // the cursor now points at this same speaker — no flicker
           setCursor((c) => c + 1)
           turnBaseMsRef.current = turn.startMs
           turnStartRef.current = performance.now()
@@ -198,7 +206,11 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
   // controls the speaking animation; the separate "thinking" indicator covers
   // longer gaps while the next turn is generated.
   const activeSpeaker =
-    episode && cursor >= 0 && episode.turns[cursor] ? episode.turns[cursor].speaker : -1
+    speaking >= 0
+      ? speaking
+      : episode && cursor >= 0 && episode.turns[cursor]
+        ? episode.turns[cursor].speaker
+        : -1
 
   return {
     connected, episode, chat, listeners, cursor, activeSpeaker, thinking, ended, elapsed,

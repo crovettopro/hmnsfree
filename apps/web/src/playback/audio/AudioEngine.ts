@@ -21,6 +21,12 @@ export interface AudioEngine {
   stop(): void
   /** Release resources / listeners. */
   destroy(): void
+  /**
+   * Unlock audio from a user gesture (a tap). Mobile browsers block programmatic
+   * playback until audio has started once inside a real gesture; the live player
+   * calls this on the "tap to listen" tap. No-op where not needed.
+   */
+  unlock?(): void
 }
 
 /** A no-op engine: the timeline runs, nothing is voiced. */

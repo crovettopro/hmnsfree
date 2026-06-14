@@ -30,6 +30,12 @@ export class CompositeEngine implements AudioEngine {
     next.play(turn, speaker, rate)
   }
 
+  /** Unlock both backends from a user gesture (mobile audio gate). */
+  unlock(): void {
+    this.clip.unlock?.()
+    this.speech.unlock?.()
+  }
+
   stop(): void {
     this.speech.stop()
     this.clip.stop()

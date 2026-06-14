@@ -77,6 +77,19 @@ export class WebSpeechEngine implements AudioEngine {
     this.synth.speak(u)
   }
 
+  /** Unlock speechSynthesis from a user gesture (iOS gates it like audio). */
+  unlock(): void {
+    if (!this.synth) return
+    try {
+      const u = new SpeechSynthesisUtterance('')
+      u.volume = 0
+      this.synth.speak(u)
+      this.synth.cancel()
+    } catch {
+      /* best-effort */
+    }
+  }
+
   stop(): void {
     this.current = null
     this.synth?.cancel()

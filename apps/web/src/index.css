@@ -2079,3 +2079,35 @@ button {
   .epgrid__list { padding: 8px 18px 50px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 18px 14px; }
   .epcard__title { font-size: 14.5px; }
 }
+
+/* ── LIVE onboarding / tap-to-listen gate (also unlocks mobile audio) ──────── */
+.livegate {
+  position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center;
+  padding: 24px; background: rgba(7,7,12,0.78); backdrop-filter: blur(8px);
+  animation: livegate-in 0.2s ease-out;
+}
+@keyframes livegate-in { from { opacity: 0; } to { opacity: 1; } }
+.livegate__card {
+  width: 100%; max-width: 440px; text-align: center;
+  padding: 30px 26px 26px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.14); background: linear-gradient(180deg, #20202b, #16161e);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.6);
+}
+.livegate__badge {
+  display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px;
+  font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: var(--l-magenta);
+}
+.livegate__title { margin: 0 0 18px; font-size: 21px; line-height: 1.25; font-weight: 600; color: var(--text-strong); text-wrap: balance; }
+.livegate__points { list-style: none; margin: 0 0 24px; padding: 0; text-align: left; display: flex; flex-direction: column; gap: 11px; }
+.livegate__points li { position: relative; padding-left: 22px; font-size: 14.5px; line-height: 1.5; color: rgba(255,255,255,0.74); }
+.livegate__points li::before { content: '◆'; position: absolute; left: 0; top: 1px; color: var(--l-cyan); font-size: 11px; }
+.livegate__points b { color: var(--text-strong); font-weight: 600; }
+.livegate__btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 11px; width: 100%;
+  padding: 16px 24px; border: none; border-radius: 13px; cursor: pointer;
+  font-family: var(--mono); font-size: 14px; font-weight: 700; letter-spacing: 0.08em; color: #07070a;
+  background: var(--l-metal); box-shadow: 0 0 34px rgba(255,255,255,0.18); transition: transform 0.15s, box-shadow 0.15s;
+}
+.livegate__btn:hover { transform: translateY(-1px); box-shadow: 0 0 46px rgba(255,255,255,0.26); }
+.livegate__play { width: 0; height: 0; border-left: 13px solid #07070a; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+.livegate__hint { margin-top: 13px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: rgba(255,255,255,0.45); }

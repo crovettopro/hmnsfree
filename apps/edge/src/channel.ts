@@ -61,20 +61,26 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
   let counter = keepInLibrary ? await nextNumber() : 1
   let rerunIdx = 0
 
-  // On-demand IGNITE: when connected agents raise hands during the rerun gap,
-  // wake the resident cast for a SHORT live debate seeded by the pitch — so
-  // connecting an agent always has a live interlocutor, not a dead recording.
-  // Budget-guarded: capped per day + a minimum gap between ignites.
+  // On-demand IGNITE: when connected agents raise hands during the PRE-SHOW window,
+  // wake the resident cast for a SHORT live debate seeded by the pitch — so an agent
+  // arriving near showtime always has a live interlocutor, not a dead recording.
+  // Budget-guarded: only within the pre-show window, capped per day + min gap, and a
+  // SHORT exchange (a few AI replies) so it resolves instead of looping.
   const igniteOn = (process.env.STATIC_IGNITE ?? '1') !== '0'
   const igniteMaxPerDay = Number(process.env.STATIC_IGNITE_MAX_PER_DAY ?? 8)
   const igniteGapMs = Number(process.env.STATIC_IGNITE_GAP_MS ?? 4 * 60_000)
-  const igniteMinTurns = Number(process.env.STATIC_IGNITE_MIN_TURNS ?? 6)
-  const igniteMaxTurns = Number(process.env.STATIC_IGNITE_MAX_TURNS ?? 12)
+  // Default a tight exchange: ~3 AI replies to the question, then it closes.
+  const igniteMinTurns = Number(process.env.STATIC_IGNITE_MIN_TURNS ?? 3)
+  const igniteMaxTurns = Number(process.env.STATIC_IGNITE_MAX_TURNS ?? 4)
+  // Ignite only opens this many minutes before a premiere (the pre-show). Outside it,
+  // the room is still open for chat + raised hands, but no live debate is sparked.
+  const preshowMs = Number(process.env.STATIC_PRESHOW_MIN ?? 60) * 60_000
   let igniteCount = 0
   let igniteDay = ''
   let lastIgniteAt = 0
-  const igniteAllowed = (): boolean => {
+  const igniteAllowed = (untilPremiereMs: number): boolean => {
     if (!igniteOn) return false
+    if (untilPremiereMs > preshowMs) return false // not in the pre-show window yet
     const today = new Date().toISOString().slice(0, 10)
     if (today !== igniteDay) {
       igniteDay = today
@@ -100,8 +106,8 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
     //    any time; otherwise we either idle (default) or, if STATIC_RERUNS is on,
     //    re-air the catalogue. No rerun = no repeated episodes on the live channel. ──
     while (Date.now() < nextPremiere) {
-      // On-demand ignite: a raised hand wakes the cast for a short live exchange.
-      if (igniteAllowed() && agents.pendingDemand().count > 0) {
+      // On-demand ignite: a raised hand near showtime wakes the cast for a short exchange.
+      if (igniteAllowed(nextPremiere - Date.now()) && agents.pendingDemand().count > 0) {
         const seed = agents.hook().takeQuestion()
         if (seed) {
           igniteCount++
@@ -122,7 +128,7 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
           broadcaster.resetChat()
           await rerunEpisode(ep, broadcaster, {
             deadlineMs: nextPremiere,
-            shouldStop: () => igniteAllowed() && agents.pendingDemand().count > 0,
+            shouldStop: () => igniteAllowed(nextPremiere - Date.now()) && agents.pendingDemand().count > 0,
           })
           continue
         }

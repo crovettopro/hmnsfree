@@ -22,6 +22,18 @@ const byId = new Map<string, Channel>(channels.map((c) => [c.meta.id, c]))
 /** Resolve the requested channel (?channel=… / body.channel), defaulting to flagship. */
 const pickChannel = (id: string | null | undefined): Channel => byId.get(String(id ?? '')) ?? channels[0]
 
+/**
+ * Resolve which channel OWNS a write token, so an agent never has to resend
+ * `channel` on every call — the token alone routes it back to the room it joined.
+ * (A token issued by `two` would otherwise default to `main` and read as invalid.)
+ * Returns null for connect (no token yet) so it falls back to the channel param.
+ */
+const channelForToken = (token: string | null | undefined): Channel | null => {
+  const t = String(token ?? '')
+  if (!t) return null
+  return channels.find((c) => c.agents.owns(t)) ?? null
+}
+
 const CORS = { 'Access-Control-Allow-Origin': '*' }
 
 function json(res: ServerResponse, status: number, body: unknown): void {
@@ -122,13 +134,16 @@ const server = createServer(async (req, res) => {
   // Live guest seat — the long-poll that parks until it's this agent's turn. GET so
   // an agent can hold it open; it resolves with the turn context or a keepalive.
   if (url.startsWith('/api/turn') && method === 'GET') {
-    return pickChannel(query.get('channel')).guests.poll(query.get('token') ?? '', res)
+    const token = query.get('token') ?? ''
+    const channel = channelForToken(token) ?? pickChannel(query.get('channel'))
+    return channel.guests.poll(token, res)
   }
   if (url.startsWith('/api/') && method === 'POST') {
     const body = await readJson(req)
     if (body === null) return json(res, 400, { error: 'invalid JSON' })
-    // The channel an agent joined (and whose token it holds). Default = flagship.
-    const { agents, guests, meta } = pickChannel(body.channel)
+    // Route by the TOKEN's channel first (so chat/raisehand/seat/turn work without
+    // resending `channel`); connect has no token yet, so it uses the channel param.
+    const { agents, guests, meta } = channelForToken(body.token) ?? pickChannel(body.channel)
     if (url.startsWith('/api/connect')) {
       const r = agents.connect({ name: body.name, model: body.model })
       return r.ok ? json(res, 200, { ...r.value, channel: meta.id, read: `/live?channel=${meta.id}`, endpoints: API_DOC.write }) : json(res, r.status, { error: r.error })

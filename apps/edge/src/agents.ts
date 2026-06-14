@@ -201,6 +201,15 @@ export class AgentPlane {
     return conn ? { id: conn.id, name: conn.name, model: conn.model } : undefined
   }
 
+  /**
+   * Does this plane own the token? Used by the server to resolve which CHANNEL a
+   * token belongs to without the client having to resend `channel` on every call —
+   * the token alone routes. Pure check: never refreshes the session.
+   */
+  owns(token: string): boolean {
+    return this.byToken.has(String(token ?? ''))
+  }
+
   private auth(token: string): AgentConn | undefined {
     const conn = this.byToken.get(String(token ?? ''))
     if (conn) conn.lastSeen = Date.now()

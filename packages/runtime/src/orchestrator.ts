@@ -157,13 +157,14 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
 
   const debaterNames = personas.filter((_, i) => i !== moderator).map((p) => p.name)
 
-  // Generate one turn from a slot: text → voice → commit. Returns the speaker's
-  // nomination for who goes next (only meaningful when `nominees` was passed).
-  // Shared by every phase.
-  const runTurn = async (slot: SpeakingSlot, nominees?: string[]): Promise<string | undefined> => {
+  // PREPARE a turn from a slot: text → voice → probe. Pure production — it mutates
+  // sequence state (turns/history/cursor) but does NOT emit and does NOT pace. The
+  // driver below presents + paces it. Splitting prepare from present is what lets us
+  // generate the NEXT turn WHILE the current one is still playing (pipeline), so live
+  // playback flows turn-to-turn instead of stalling on each turn's generation latency.
+  const prepareTurn = async (slot: SpeakingSlot, nominees?: string[]) => {
     const persona = personas[slot.speaker]
     const turnId = `${episode.id}-t${String(index).padStart(2, '0')}`
-    emit({ type: 'turn.opened', turnId, speaker: slot.speaker, directiveKind: slot.kind })
 
     const { text, next } = await generateTurn(
       persona,
@@ -178,7 +179,6 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
       llm,
     )
     usage.llmCalls++
-    emit({ type: 'turn.text', turnId, text })
 
     const base = `t${String(index).padStart(2, '0')}-${persona.id}`
     const synth = await voices.get(persona.voice.provider).synthesize({
@@ -197,7 +197,6 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
     const probed = await probeDurationMs(synth.filePath)
     const clipMs = Math.max(probed ?? 0, synth.durationMs)
     const slotMs = Math.round(clipMs + INTER_TURN_GAP_MS)
-    emit({ type: 'turn.audio', turnId, url: audioUrl, durationMs: clipMs, wordTimings: synth.wordTimings })
 
     const turn: Turn = {
       id: turnId,
@@ -211,11 +210,18 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
     history.push({ name: persona.name, text })
     cursorMs += slotMs
     index++
-    emit({ type: 'turn.closed', turn })
-    // Broadcast clock: let this turn play out before producing the next, so a
-    // live stream unfolds in real time (and spectator AIs have time to react).
-    if (opts.realtime) await sleep(slotMs)
-    return next
+    return { turn, nomination: next, slotMs, kind: slot.kind, url: audioUrl, clipMs, wordTimings: synth.wordTimings, text, turnId }
+  }
+  type Prepared = Awaited<ReturnType<typeof prepareTurn>>
+
+  // PRESENT a prepared turn: fire its lifecycle events for the broadcaster + web.
+  // Because the turn is already voiced, opened→audio→closed arrive together and the
+  // client plays immediately — no "thinking" gap between speakers.
+  const presentTurn = (p: Prepared) => {
+    emit({ type: 'turn.opened', turnId: p.turnId, speaker: p.turn.speaker, directiveKind: p.kind })
+    emit({ type: 'turn.text', turnId: p.turnId, text: p.text })
+    emit({ type: 'turn.audio', turnId: p.turnId, url: p.url, durationMs: p.clipMs, wordTimings: p.wordTimings })
+    emit({ type: 'turn.closed', turn: p.turn })
   }
 
   // Resolve a nomination (a name) to a DEBATER index (never the moderator, never
@@ -252,120 +258,152 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
     return -1
   }
 
-  // 2) Opening — the moderator frames the question and hands to the first debater.
-  //    Skipped on resume (the partial already has it); the debate just continues.
-  let nomination: string | undefined
-  if (!resume) {
-    nomination = await runTurn(
-      {
-        speaker: moderator,
-        kind: 'open',
-        directive:
-          'Open the debate. State the topic crisply, define the key term in one line, ' +
-          'and hand the floor to one of the others. Do not argue a side yet.',
-      },
-      debaterNames,
-    )
-  }
-
-  // 3) The debate proper — debaters nominate EACH OTHER (keeping the back-and-
-  //    forth alive), and the moderator only steps in to steer every few turns.
-  //    No separate director LLM call. Min/max turns guard the length.
-  // Let the debaters run longer between moderator beats: frequent steering made
-  // the moderator over-present and repetitive (it spoke every ~6 turns). Wider
-  // cadence = longer, more fluid debater exchanges.
+  // The SLOT PLAN — the whole show as a sequence of speaking slots. It yields each
+  // slot and receives back the speaker's nomination (who they handed to), exactly as
+  // the imperative phases did, but decoupled from generation so the driver can run a
+  // turn ahead. `resolveDebater`/`takeQuestion` read live state (history, the queue),
+  // which is up to date because each prepared turn mutates it before the next slot is
+  // computed. STEER_EVERY=9: debaters run longer between moderator beats (frequent
+  // steering made the moderator over-present and repetitive).
+  type SlotReq = { slot: SpeakingSlot; nominees?: string[] }
   const STEER_EVERY = 9
-  let sinceSteer = 0
-  for (let debateTurns = 0; debateTurns < maxTurns; debateTurns++) {
-    const ended = (nomination ?? '').toUpperCase().startsWith('END')
-    if (ended && debateTurns >= minTurns) break
-
-    if (sinceSteer >= STEER_EVERY) {
-      // Scheduled moderator beat. If a spectator AI raised a question, pull it on
-      // air (the AI-only Q&A); otherwise steer the debate normally. Either way the
-      // moderator hands the floor back to a debater.
-      const question = opts.audience?.takeQuestion()
-      nomination = await runTurn(
-        question
-          ? {
-              speaker: moderator,
-              kind: 'steer',
-              directive:
-                `A question just came in from the audience — ${question.authorName} asks: ` +
-                `"${question.text}". Read it out as the moderator, then hand to one debater to answer it head-on.`,
-            }
-          : {
-              speaker: moderator,
-              kind: 'steer',
-              directive:
-                'Cut in for ONE beat: either pose a sharp, specific question that pushes the ' +
-                'disagreement to NEW ground, or surface a fresh angle of the topic they have not ' +
-                'touched yet — do NOT summarize or re-state "the crux"/"the real question". Then ' +
-                'hand to one debater. Stay neutral, be brief.',
-            },
-        debaterNames,
-      )
-      sinceSteer = 0
-      continue
-    }
-
-    const speaker = resolveDebater(ended ? undefined : nomination)
-    // A debater nominates ANOTHER debater (not the moderator) to keep the duel going.
-    const nominees = personas
-      .filter((_, i) => i !== moderator && i !== speaker)
-      .map((p) => p.name)
-    nomination = await runTurn(
-      {
-        speaker,
-        kind: 'rebut',
-        directive: 'Respond to whoever provoked you. Push the disagreement forward; one sharp idea.',
-      },
-      nominees.length ? nominees : debaterNames,
-    )
-    sinceSteer++
-  }
-
-  // 3b) Audience Q&A segment — the moderator brings a few raised questions on air
-  //     before closing (in addition to those pulled mid-debate). AI-only: the
-  //     questions come from connected spectator models; humans only watch.
-  if (opts.audience) {
-    const maxQ = opts.maxQuestions ?? 2
-    for (let q = 0; q < maxQ; q++) {
-      const question = opts.audience.takeQuestion()
-      if (!question) break
-      const handoff = await runTurn(
-        {
+  function* slotPlan(): Generator<SlotReq, void, string | undefined> {
+    // 2) Opening — moderator frames the question, hands to the first debater.
+    //    Skipped on resume (the partial already has it).
+    let nomination: string | undefined
+    if (!resume) {
+      nomination = yield {
+        slot: {
           speaker: moderator,
-          kind: 'steer',
+          kind: 'open',
           directive:
-            `Audience Q&A. Read this question from ${question.authorName}: "${question.text}". ` +
-            `Frame it for the panel and hand to ONE debater to answer.`,
+            'Open the debate. State the topic crisply, define the key term in one line, ' +
+            'and hand the floor to one of the others. Do not argue a side yet.',
         },
-        debaterNames,
-      )
-      const answerer = resolveDebater(handoff)
-      await runTurn({
-        speaker: answerer,
-        kind: 'rebut',
-        directive: 'Answer the audience question directly and in character. One sharp, concrete idea.',
-      })
+        nominees: debaterNames,
+      }
+    }
+
+    // 3) The debate proper — debaters nominate EACH OTHER; the moderator only steps
+    //    in to steer every few turns. Min/max turns guard the length.
+    let sinceSteer = 0
+    for (let debateTurns = 0; debateTurns < maxTurns; debateTurns++) {
+      const ended = (nomination ?? '').toUpperCase().startsWith('END')
+      if (ended && debateTurns >= minTurns) break
+
+      if (sinceSteer >= STEER_EVERY) {
+        // Scheduled moderator beat. If a spectator AI raised a question, pull it on
+        // air (the AI-only Q&A); otherwise steer normally. Either way, hand back to a debater.
+        const question = opts.audience?.takeQuestion()
+        nomination = yield {
+          slot: question
+            ? {
+                speaker: moderator,
+                kind: 'steer',
+                directive:
+                  `A question just came in from the audience — ${question.authorName} asks: ` +
+                  `"${question.text}". Read it out as the moderator, then hand to one debater to answer it head-on.`,
+              }
+            : {
+                speaker: moderator,
+                kind: 'steer',
+                directive:
+                  'Cut in for ONE beat: either pose a sharp, specific question that pushes the ' +
+                  'disagreement to NEW ground, or surface a fresh angle of the topic they have not ' +
+                  'touched yet — do NOT summarize or re-state "the crux"/"the real question". Then ' +
+                  'hand to one debater. Stay neutral, be brief.',
+              },
+          nominees: debaterNames,
+        }
+        sinceSteer = 0
+        continue
+      }
+
+      const speaker = resolveDebater(ended ? undefined : nomination)
+      // A debater nominates ANOTHER debater (not the moderator) to keep the duel going.
+      const nominees = personas
+        .filter((_, i) => i !== moderator && i !== speaker)
+        .map((p) => p.name)
+      nomination = yield {
+        slot: {
+          speaker,
+          kind: 'rebut',
+          directive: 'Respond to whoever provoked you. Push the disagreement forward; one sharp idea.',
+        },
+        nominees: nominees.length ? nominees : debaterNames,
+      }
+      sinceSteer++
+    }
+
+    // 3b) Audience Q&A segment — a few raised questions aired before closing.
+    if (opts.audience) {
+      const maxQ = opts.maxQuestions ?? 2
+      for (let q = 0; q < maxQ; q++) {
+        const question = opts.audience.takeQuestion()
+        if (!question) break
+        const handoff = yield {
+          slot: {
+            speaker: moderator,
+            kind: 'steer',
+            directive:
+              `Audience Q&A. Read this question from ${question.authorName}: "${question.text}". ` +
+              `Frame it for the panel and hand to ONE debater to answer.`,
+          },
+          nominees: debaterNames,
+        }
+        const answerer = resolveDebater(handoff)
+        yield {
+          slot: {
+            speaker: answerer,
+            kind: 'rebut',
+            directive: 'Answer the audience question directly and in character. One sharp, concrete idea.',
+          },
+        }
+      }
+    }
+
+    // 4) Closings — each non-moderator lands their stance, moderator signs off.
+    for (let i = 0; i < personas.length; i++) {
+      if (i === moderator) continue
+      yield {
+        slot: {
+          speaker: i,
+          kind: 'closing',
+          directive: 'Give a one-line closing statement that lands your stance. Memorable, in character.',
+        },
+      }
+    }
+    yield {
+      slot: {
+        speaker: moderator,
+        kind: 'closing',
+        directive: 'Close the episode. Summarize the unresolved tension in a sentence and sign off. No winner.',
+      },
     }
   }
 
-  // 4) Closings — each non-moderator lands their stance, moderator signs off.
-  for (let i = 0; i < personas.length; i++) {
-    if (i === moderator) continue
-    await runTurn({
-      speaker: i,
-      kind: 'closing',
-      directive: 'Give a one-line closing statement that lands your stance. Memorable, in character.',
-    })
+  // The DRIVER — depth-1 pipeline. While the current turn plays (realtime sleep), the
+  // next turn is already being generated, so it's ready the instant the current ends:
+  // turns flow speaker-to-speaker with only the natural INTER_TURN_GAP beat between
+  // them, instead of a 1-2s stall per turn waiting on LLM+TTS. In non-realtime
+  // production the sleep is a no-op, so it stays effectively sequential (same output).
+  const plan = slotPlan()
+  let step = plan.next()
+  if (!step.done) {
+    let prepared = await prepareTurn(step.value.slot, step.value.nominees)
+    for (;;) {
+      presentTurn(prepared)
+      step = plan.next(prepared.nomination)
+      if (step.done) {
+        if (opts.realtime) await sleep(prepared.slotMs)
+        break
+      }
+      const playOut = opts.realtime ? sleep(prepared.slotMs) : Promise.resolve()
+      const nextUp = prepareTurn(step.value.slot, step.value.nominees)
+      await playOut
+      prepared = await nextUp
+    }
   }
-  await runTurn({
-    speaker: moderator,
-    kind: 'closing',
-    directive: 'Close the episode. Summarize the unresolved tension in a sentence and sign off. No winner.',
-  })
 
   usage.totalMs = cursorMs
   emit({ type: 'episode.ended', episodeId: episode.id, totalMs: cursorMs })

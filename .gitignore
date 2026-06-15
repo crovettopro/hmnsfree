@@ -23,3 +23,6 @@ apps/web/public/outro.mp3
 
 # Local test/prototype episodes (not for git)
 _pruebas/
+
+# Local source art (full-res originals, not deployed)
+_assets/

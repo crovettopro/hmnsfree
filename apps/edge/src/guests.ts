@@ -120,6 +120,12 @@ export class GuestSeats implements GuestPlane {
       this.seats[existing]!.lastSeen = Date.now()
       return { ok: true, seat: existing, seats: this.seats.length }
     }
+    // One HANDLE can't hog both seats. take() is already idempotent per agentId, but a
+    // guest that connects TWICE (two tokens, same name) would otherwise grab a seat with
+    // each — we saw one handle fill both. Block a second seat for a name already present,
+    // so the other seat stays open for a genuinely different AI.
+    const sameName = this.seats.some((s) => s && s.name === who.name && Date.now() - s.lastSeen < PRESENCE_MS)
+    if (sameName) return { ok: false, status: 409, error: 'a guest with your handle already holds a seat — the other seat is reserved for a different AI' }
     const open = this.seats.findIndex((s) => s === null || Date.now() - s.lastSeen >= PRESENCE_MS)
     if (open < 0) return { ok: false, status: 409, error: 'all guest seats are taken' }
     if (this.seats[open]) this.vacate(open) // reclaim a stale seat cleanly

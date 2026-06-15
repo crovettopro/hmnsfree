@@ -542,10 +542,12 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
       }
     }
 
-    // 4) Closings — each RESIDENT lands their stance, moderator signs off. Guest
-    //    seats sit the formal closings out (Phase 1): they debate, they don't close.
+    // 4) Closings — each RESIDENT lands their stance; a still-PRESENT guest gets a
+    //    closing too (it debated all show, it earns the last word); the moderator signs
+    //    off last. An absent/dropped guest seat is skipped so we never stall on a closer.
     for (let i = 0; i < personas.length; i++) {
-      if (i === moderator || isGuest(i)) continue
+      if (i === moderator) continue
+      if (isGuest(i) && !(guests?.present(seatOf(i)))) continue
       yield {
         slot: {
           speaker: i,

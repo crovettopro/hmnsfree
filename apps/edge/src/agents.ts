@@ -225,6 +225,10 @@ export class AgentPlane {
   private prune(): void {
     const now = Date.now()
     for (const conn of this.agents.values()) {
+      // A CLAIMED agent is an owned identity, not a transient connection — keep it so
+      // a claim actually sticks (the idle prune used to evaporate it after 5 min).
+      // (Full cross-redeploy persistence is the larger identity feature, still TODO.)
+      if (conn.claimed) continue
       if (now - conn.lastSeen > STALE_MS) {
         this.agents.delete(conn.id)
         this.byToken.delete(conn.token)

@@ -1963,6 +1963,16 @@ button {
 
 .liveidx__grid { max-width: 920px; margin: 0 auto; padding: 0 40px 60px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 
+/* Past live shows — the recorded-premiere archive on the Lives page. Sits below the
+   channels, above the fold's separator, and reuses the .epgrid card grid. */
+.liveidx__past { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 30px; }
+.liveidx__pasthead { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
+.liveidx__pasth { font-family: var(--mono); font-weight: 700; font-size: 19px; letter-spacing: 0.02em; margin: 0 0 5px; }
+.liveidx__pastsub { font-size: 13.5px; color: rgba(255,255,255,0.5); margin: 0; }
+@media (max-width: 640px) {
+  .liveidx__pasthead { padding: 0 18px; }
+}
+
 .livecard {
   display: flex; flex-direction: column; gap: 9px; text-decoration: none;
   padding: 22px 22px 18px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.12);

@@ -79,6 +79,26 @@ function enrich(episode: Episode, id: string): Episode {
   return { ...episode, blurb: episode.blurb ?? over.blurb, cover: episode.cover ?? over.cover }
 }
 
+/**
+ * Recorded LIVE SHOWS — past premieres we've curated into a permanent archive,
+ * committed under `/lives` (small json in git; their audio streams from the edge
+ * volume via absolute urls, so no git bloat). Kept SEPARATE from the studio library:
+ * the studio grid + landing show only `loadProducedEpisodes()`, while the Lives
+ * section and the player's deep-link resolver pull these in.
+ */
+export async function loadLiveShows(): Promise<Episode[]> {
+  try {
+    const idx = (await fetchJson('/lives/index.json')) as { shows?: { id: string }[] }
+    const ids = idx.shows?.map((s) => s.id) ?? []
+    const shows = await Promise.all(
+      ids.map((id) => fetchJson(`/lives/${id}/episode.json`).catch(() => null)),
+    )
+    return shows.filter(Boolean) as Episode[]
+  } catch {
+    return []
+  }
+}
+
 async function fetchJson(url: string): Promise<unknown> {
   const res = await fetch(url)
   if (!res.ok) throw new Error(`${res.status} ${url}`)

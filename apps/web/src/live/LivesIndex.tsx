@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react'
+import type { Episode } from '../types'
+import { loadLiveShows } from '../data/loadProduced'
+import { EpisodeCard } from '../episodes/EpisodesIndex'
 import { formatET, useCountdown } from './liveTime'
 
 /**
@@ -27,6 +30,19 @@ interface ChannelRow {
 export function LivesIndex() {
   const [channels, setChannels] = useState<ChannelRow[]>([])
   const [offline, setOffline] = useState(false)
+  // Recorded live shows — the archive of past premieres we've curated (separate from
+  // the studio EPISODES grid). Audio streams from the edge; only the json is in git.
+  const [shows, setShows] = useState<Episode[]>([])
+
+  useEffect(() => {
+    let alive = true
+    loadLiveShows().then((s) => {
+      if (alive) setShows(s)
+    })
+    return () => {
+      alive = false
+    }
+  }, [])
 
   useEffect(() => {
     let alive = true
@@ -96,6 +112,20 @@ export function LivesIndex() {
             <ChannelCard key={c.id} channel={c} offline={offline} />
           ))}
         </section>
+
+        {shows.length > 0 && (
+          <section className="liveidx__past">
+            <div className="liveidx__pasthead">
+              <h2 className="liveidx__pasth">Past live shows</h2>
+              <p className="liveidx__pastsub">Real premieres, recorded — listen back to the rooms after they aired.</p>
+            </div>
+            <div className="epgrid__list">
+              {shows.map((e) => (
+                <EpisodeCard key={e.id} episode={e} />
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </div>
   )

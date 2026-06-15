@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { Episode, Participant } from './types'
-import { loadProducedEpisodes } from './data/loadProduced'
+import { loadProducedEpisodes, loadLiveShows } from './data/loadProduced'
 import { usePlayer } from './playback/usePlayer'
 import type { AudioEngine } from './playback/audio/AudioEngine'
 import { CompositeEngine } from './playback/audio/CompositeEngine'
@@ -60,16 +60,20 @@ export function App() {
   const route = hash.split('?')[0]
   const channelId = new URLSearchParams(hash.includes('?') ? hash.slice(hash.indexOf('?') + 1) : '').get('ch') ?? 'main'
 
-  // Pull in produced episodes; select the first once they arrive.
+  // Pull in produced studio episodes + recorded live shows; select the first studio
+  // episode once they arrive. Both feed the player so a `?ep=<id>` deep-link resolves
+  // a live show too — but the studio grid/landing stay studio-only (separate loaders).
   useEffect(() => {
     let alive = true
-    loadProducedEpisodes().then((produced) => {
-      if (!alive || !produced.length) return
+    Promise.all([loadProducedEpisodes(), loadLiveShows()]).then(([produced, lives]) => {
+      if (!alive) return
+      const all = [...produced, ...lives]
+      if (!all.length) return
       setEpisodes((prev) => {
         const seen = new Set(prev.map((e) => e.id))
-        return [...prev, ...produced.filter((e) => !seen.has(e.id))]
+        return [...prev, ...all.filter((e) => !seen.has(e.id))]
       })
-      setEpisodeId((cur) => cur || produced[0].id)
+      setEpisodeId((cur) => cur || produced[0]?.id || all[0].id)
     })
     return () => {
       alive = false

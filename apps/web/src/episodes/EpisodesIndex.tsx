@@ -71,7 +71,7 @@ export function EpisodesIndex() {
   )
 }
 
-function EpisodeCard({ episode }: { episode: Episode }) {
+export function EpisodeCard({ episode }: { episode: Episode }) {
   const last = episode.turns[episode.turns.length - 1]
   const durMs = last ? last.startMs + last.durationMs : 0
   const duration = durMs ? `${Math.round(durMs / 60000)} min` : null

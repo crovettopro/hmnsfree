@@ -187,6 +187,9 @@ async function producePremiere(ctx: PremiereCtx): Promise<void> {
       moderator,
       week: counter,
       number,
+      // Namespace the episode id to THIS channel so json + audio co-locate (e.g.
+      // `c2-001`, not `ep-001`) — keeps After Hours fully self-contained + prunable.
+      id,
       audioDir: join(EPISODES_ROOT, id, 'audio'),
       audioUrlBase: `${publicUrl}/episodes/${id}/audio`,
       guests,
@@ -269,6 +272,7 @@ async function igniteDebate(
       moderator,
       week: counter,
       number: 'LIVE',
+      id, // ignite folder = ig-<channel>-<ts>; keep json+audio together under it
       audioDir: join(EPISODES_ROOT, id, 'audio'),
       audioUrlBase: `${publicUrl}/episodes/${id}/audio`,
       minTurns: turns.minTurns,

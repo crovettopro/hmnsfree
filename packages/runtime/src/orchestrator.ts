@@ -59,6 +59,13 @@ export interface ProduceOptions {
   moderator: number
   week: number
   number: string
+  /**
+   * Episode id (its on-disk folder + the id in episode.json). MUST match the channel's
+   * namespace so the json lands in the SAME dir as the audio (e.g. `c2-001`, not the
+   * default `ep-001`) — otherwise a non-`ep` channel splits json and audio across dirs.
+   * Defaults to `ep-<number>` for backward compatibility.
+   */
+  id?: string
   /** Directory for this episode's audio files. */
   audioDir: string
   /** URL prefix the web app will use to fetch the audio (e.g. /episodes/ep-027/audio). */
@@ -224,7 +231,7 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
   const episode: Episode = resume
     ? { ...resume, status: 'published' } // keep id/number/cast and the turns produced so far
     : {
-        id: `ep-${opts.number.padStart(3, '0')}`,
+        id: opts.id ?? `ep-${opts.number.padStart(3, '0')}`,
         number: `EP.${opts.number.padStart(3, '0')}`,
         tag,
         topic,

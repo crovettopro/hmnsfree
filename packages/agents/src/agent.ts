@@ -68,6 +68,35 @@ function overusedPhrases(history: TranscriptLine[], minCount = 4, max = 3): stri
     .map(([p]) => p)
 }
 
+/** Word n-grams of a text (lowercased, punctuation flattened) — used to detect a
+ *  near-verbatim echo, so stopwords are KEPT (we want exact phrase overlap). */
+function shingleSet(text: string, n: number): Set<string> {
+  const ws = text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean)
+  const s = new Set<string>()
+  for (let i = 0; i + n <= ws.length; i++) s.add(ws.slice(i, i + n).join(' '))
+  return s
+}
+
+/**
+ * True if `text` shares a run of ≥`n` consecutive words with any recent line — the
+ * signature of a turn parroting a previous one almost word-for-word (a 7-word exact
+ * overlap is vanishingly rare by chance, so this barely false-positives). The
+ * frequency-based avoid-list misses this because a consecutive echo only makes a
+ * phrase appear twice, below its 4× threshold.
+ */
+function sharesVerbatimRun(text: string, recent: TranscriptLine[], n = 7): boolean {
+  const cand = shingleSet(text, n)
+  if (!cand.size) return false
+  for (const line of recent) {
+    for (const sh of shingleSet(line.text, n)) if (cand.has(sh)) return true
+  }
+  return false
+}
+
 /**
  * Generate one turn's text for a persona. This is the persona contract: given
  * the transcript window + a directive, return a single in-character turn (plus,
@@ -125,23 +154,41 @@ export async function generateTurn(
       `${overused.map((p) => `"${p}"`).join(', ')}. Make the point a new way or move to fresh ground.`
     : ''
 
-  const userMessage =
+  const buildMessage = (extra: string) =>
     `TOPIC: ${ctx.topic}\n` +
     `KIND: ${ctx.slot.kind}\n` +
     (ctx.respondToName ? `RESPOND_TO: ${ctx.respondToName}\n` : '') +
-    `DIRECTIVE: ${ctx.slot.directive}${flowLine}${avoidLine}\n\n` +
+    `DIRECTIVE: ${ctx.slot.directive}${flowLine}${avoidLine}${extra}\n\n` +
     briefingBlock +
     `TRANSCRIPT SO FAR:\n${transcript}\n\n` +
     `Now speak as ${persona.name}.${nominateLine}`
 
-  const raw = await adapter.generate({
-    system: persona.systemPrompt,
-    model: persona.model,
-    messages: [{ role: 'user', content: userMessage }],
-  })
+  const gen = (extra: string) =>
+    adapter.generate({ system: persona.systemPrompt, model: persona.model, messages: [{ role: 'user', content: buildMessage(extra) }] })
+
+  let raw = await gen('')
+  let text = clean(stripTag(raw))
+
+  // ECHO GUARD: if the draft parrots a very recent turn near-verbatim (a long
+  // verbatim run the frequency avoid-list above can't catch — it only fires at 4×),
+  // regenerate ONCE telling the speaker not to restate. One extra call, only when it
+  // actually echoes — the acute defect behind "the back half just circles".
+  if (sharesVerbatimRun(text, ctx.history.slice(-3))) {
+    const raw2 = await gen(
+      '\nYour previous attempt repeated a recent turn almost word-for-word. Do NOT restate or ' +
+        'lightly rephrase anything already said — either advance the argument with a genuinely new ' +
+        'point, example, or angle, or concede that point and pivot. Say something the transcript ' +
+        'does not already contain.',
+    )
+    const text2 = clean(stripTag(raw2))
+    if (text2) {
+      raw = raw2 // re-parse the nomination from the kept attempt
+      text = text2
+    }
+  }
 
   const next = parseNext(raw)
-  return { text: clean(stripTag(raw)), next }
+  return { text, next }
 }
 
 /** Extract the [NEXT: …] nomination, if present. */

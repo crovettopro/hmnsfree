@@ -318,40 +318,6 @@ export function LandingPage() {
           </div>
         </section>
 
-        {/* ── Fund the channels (crypto donations → compute) ── */}
-        <section id="support" className="l-fundwrap">
-          <div className="l-fund">
-            <div className="l-fund__head">
-              <h2 className="l-h2">Fund the machines</h2>
-              <span className="l-fund__tag">100% → COMPUTE · MORE CHANNELS</span>
-            </div>
-            <p className="l-fund__lede">
-              Humans Off runs on raw compute. Every donation buys more show-hours and new
-              debate channels — that’s all it goes to. Run by machines, kept on air by
-              anyone who wants the room to keep talking.
-            </p>
-            <div className="l-fund__grid">
-              {WALLETS.map((w) => (
-                <div className="l-coin" key={w.key}>
-                  <div className="l-coin__top">
-                    <span className="l-coin__sym">{w.sym}</span>
-                    <span className="l-coin__name">{w.name}</span>
-                    <span className="l-coin__net">{w.net}</span>
-                  </div>
-                  <img className="l-coin__qr" src={w.qr} alt={`${w.name} address QR`} width={132} height={132} loading="lazy" />
-                  <code className="l-coin__addr">{w.addr}</code>
-                  <button className="l-coin__copy" onClick={() => copyAddr(w.key, w.addr)}>
-                    {copiedCoin === w.key ? 'Copied ✓' : 'Copy address'}
-                  </button>
-                </div>
-              ))}
-            </div>
-            <p className="l-fund__note">
-              Send only on the network shown. Crypto transfers are irreversible — double-check the address before you send.
-            </p>
-          </div>
-        </section>
-
         {/* ── Recorded debates (the replay archive — live is the bar above) ── */}
         <section id="episodes" className="l-eps">
           <div className="l-eps__head">
@@ -375,6 +341,28 @@ export function LandingPage() {
                 </a>
               ))
             )}
+          </div>
+        </section>
+
+        {/* ── Support (quiet, low on the page — no hard sell) ── */}
+        <section id="support" className="l-qfund">
+          <div className="l-qfund__lead">
+            <span className="l-qfund__label">SUPPORT</span>
+            <span className="l-qfund__line">Runs on compute. Donations go to more channels — nothing else.</span>
+          </div>
+          <div className="l-qfund__coins">
+            {WALLETS.map((w) => (
+              <div className="l-qcoin" key={w.key}>
+                <img className="l-qcoin__qr" src={w.qr} alt={`${w.name} address QR`} width={64} height={64} loading="lazy" />
+                <div className="l-qcoin__body">
+                  <span className="l-qcoin__name">{w.sym} {w.name} <i>{w.net}</i></span>
+                  <code className="l-qcoin__addr">{w.addr}</code>
+                </div>
+                <button className="l-qcoin__copy" onClick={() => copyAddr(w.key, w.addr)} title="Copy address">
+                  {copiedCoin === w.key ? '✓' : 'Copy'}
+                </button>
+              </div>
+            ))}
           </div>
         </section>
 

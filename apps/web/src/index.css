@@ -1921,23 +1921,21 @@ button {
 .l-join__note { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: rgba(255,255,255,0.42); }
 .l-join__note a { color: var(--l-cyan); text-decoration: none; }
 
-/* fund / support */
-.l-fundwrap { max-width: 920px; margin: 0 auto; padding: 30px 40px; }
-.l-fund { border: 1px solid rgba(255,255,255,0.14); border-radius: 20px; padding: 34px; background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025)); }
-.l-fund__head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
-.l-fund__tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: var(--l-cyan); }
-.l-fund__lede { margin: 0 0 24px; max-width: 640px; font-size: 15px; line-height: 1.55; color: var(--text); }
-.l-fund__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.l-coin { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 22px; border-radius: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.11); }
-.l-coin__top { display: flex; align-items: baseline; gap: 9px; width: 100%; flex-wrap: wrap; }
-.l-coin__sym { font-family: var(--mono); font-size: 18px; color: var(--l-cyan); }
-.l-coin__name { font-size: 16px; font-weight: 600; color: var(--text-strong); }
-.l-coin__net { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); margin-left: auto; }
-.l-coin__qr { width: 132px; height: 132px; border-radius: 10px; background: #d7e0e6; padding: 6px; }
-.l-coin__addr { font-family: var(--mono); font-size: 10.5px; line-height: 1.5; color: var(--text); background: #0B0B11; border: 1px solid var(--line); border-radius: 8px; padding: 9px 11px; width: 100%; word-break: break-all; text-align: center; }
-.l-coin__copy { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: var(--l-cyan); cursor: pointer; padding: 10px 18px; border-radius: 9px; width: 100%; background: transparent; border: 1px solid color-mix(in oklch, var(--l-cyan) 40%, var(--line-strong)); transition: border-color 0.15s, background 0.15s; }
-.l-coin__copy:hover { border-color: var(--l-cyan); background: color-mix(in oklch, var(--l-cyan) 8%, transparent); }
-.l-fund__note { margin: 18px 0 0; font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: rgba(255,255,255,0.42); }
+/* support — quiet, low on the page (no hard sell) */
+.l-qfund { max-width: 920px; margin: 0 auto; padding: 22px 40px 6px; opacity: 0.72; transition: opacity 0.2s; }
+.l-qfund:hover { opacity: 1; }
+.l-qfund__lead { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.l-qfund__label { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.2em; color: rgba(255,255,255,0.4); }
+.l-qfund__line { font-size: 12.5px; color: rgba(255,255,255,0.5); }
+.l-qfund__coins { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.l-qcoin { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 11px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
+.l-qcoin__qr { width: 64px; height: 64px; border-radius: 7px; background: #d7e0e6; padding: 4px; flex: 0 0 auto; }
+.l-qcoin__body { display: flex; flex-direction: column; gap: 4px; min-width: 0; flex: 1 1 auto; }
+.l-qcoin__name { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: rgba(255,255,255,0.7); }
+.l-qcoin__name i { font-style: normal; font-size: 9px; letter-spacing: 0.08em; color: rgba(255,255,255,0.38); }
+.l-qcoin__addr { font-family: var(--mono); font-size: 9.5px; line-height: 1.4; color: rgba(255,255,255,0.45); word-break: break-all; }
+.l-qcoin__copy { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; color: rgba(255,255,255,0.55); cursor: pointer; padding: 6px 10px; border-radius: 7px; flex: 0 0 auto; background: transparent; border: 1px solid rgba(255,255,255,0.14); transition: border-color 0.15s, color 0.15s; }
+.l-qcoin__copy:hover { border-color: var(--l-cyan); color: var(--l-cyan); }
 
 /* episodes */
 .l-eps { max-width: 920px; margin: 0 auto; padding: 30px 40px 10px; }

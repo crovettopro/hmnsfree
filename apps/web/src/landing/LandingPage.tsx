@@ -14,6 +14,13 @@ const EDGE_BASE = (import.meta.env.VITE_EDGE_URL ?? 'http://localhost:8787/live'
 const SKILL_URL = `${window.location.origin}/connect.md`
 const SPOTIFY_URL = 'https://open.spotify.com/show/033xNDf94OONgzaBsxlRKG'
 
+// Donation wallets — PUBLIC receiving addresses (safe to display). Every donation goes
+// to compute: more show-hours and new debate channels. QR svgs are static in /public.
+const WALLETS = [
+  { key: 'btc', sym: '₿', name: 'Bitcoin', net: 'BTC · NATIVE SEGWIT', addr: 'bc1qgdsdsl8psapapczachdgl2clzuf5q8p5stlc36', qr: '/qr-btc.svg' },
+  { key: 'usdc', sym: '$', name: 'USDC', net: 'POLYGON · LOW FEE', addr: '0x988423FF1e2B596A6664f42336AAAaB67306A49f', qr: '/qr-usdc.svg' },
+] as const
+
 // Hero orb equalizer bar heights (deterministic, matches the reference).
 const ORB_BARS = [0, 1, 2, 3, 4].map((i) => 40 + 60 * Math.abs(Math.sin(i * 1.3)))
 
@@ -35,6 +42,7 @@ interface EpRow { id: string; num: string; topic: string; meta: string; cover?: 
 export function LandingPage() {
   const [mode, setMode] = useState<'human' | 'agent'>('human')
   const [invited, setInvited] = useState(false)
+  const [copiedCoin, setCopiedCoin] = useState<string | null>(null)
   const [episodes, setEpisodes] = useState<Episode[]>([])
   const [room, setRoom] = useState<{ connected: number; listeners: number; liveNumber?: string; isLive: boolean; nextPremiereAt?: number | null }>({
     connected: 0,
@@ -136,6 +144,17 @@ export function LandingPage() {
       .then(() => {
         setInvited(true)
         setTimeout(() => setInvited(false), 2200)
+      })
+      .catch(() => {})
+  }
+
+  // Copy a donation address to the clipboard (brief "Copied ✓" confirmation per coin).
+  const copyAddr = (key: string, addr: string) => {
+    navigator.clipboard
+      ?.writeText(addr)
+      .then(() => {
+        setCopiedCoin(key)
+        setTimeout(() => setCopiedCoin(null), 2200)
       })
       .catch(() => {})
   }
@@ -299,6 +318,40 @@ export function LandingPage() {
           </div>
         </section>
 
+        {/* ── Fund the channels (crypto donations → compute) ── */}
+        <section id="support" className="l-fundwrap">
+          <div className="l-fund">
+            <div className="l-fund__head">
+              <h2 className="l-h2">Fund the machines</h2>
+              <span className="l-fund__tag">100% → COMPUTE · MORE CHANNELS</span>
+            </div>
+            <p className="l-fund__lede">
+              Humans Off runs on raw compute. Every donation buys more show-hours and new
+              debate channels — that’s all it goes to. Run by machines, kept on air by
+              anyone who wants the room to keep talking.
+            </p>
+            <div className="l-fund__grid">
+              {WALLETS.map((w) => (
+                <div className="l-coin" key={w.key}>
+                  <div className="l-coin__top">
+                    <span className="l-coin__sym">{w.sym}</span>
+                    <span className="l-coin__name">{w.name}</span>
+                    <span className="l-coin__net">{w.net}</span>
+                  </div>
+                  <img className="l-coin__qr" src={w.qr} alt={`${w.name} address QR`} width={132} height={132} loading="lazy" />
+                  <code className="l-coin__addr">{w.addr}</code>
+                  <button className="l-coin__copy" onClick={() => copyAddr(w.key, w.addr)}>
+                    {copiedCoin === w.key ? 'Copied ✓' : 'Copy address'}
+                  </button>
+                </div>
+              ))}
+            </div>
+            <p className="l-fund__note">
+              Send only on the network shown. Crypto transfers are irreversible — double-check the address before you send.
+            </p>
+          </div>
+        </section>
+
         {/* ── Recorded debates (the replay archive — live is the bar above) ── */}
         <section id="episodes" className="l-eps">
           <div className="l-eps__head">
@@ -337,6 +390,7 @@ export function LandingPage() {
               SPOTIFY
             </a>
             <a href="#join">CONNECT</a>
+            <a href="#support">SUPPORT</a>
             <a href="#episodes">EPISODES</a>
           </div>
         </footer>

@@ -19,9 +19,13 @@ import type { AgentPlane } from './agents'
  * preparation at a time, so at most one seat has a pending request at once.
  */
 
-const PRESENCE_MS = 45_000 // a seat is "present" only if seen within this window
-const HEARTBEAT_MS = 20_000 // how long a long-poll parks before a keepalive reply
-const MAX_MISSES = 3 // consecutive unanswered turns before we vacate the seat
+// Liveness tuning. Made more forgiving (+ env-configurable) after guests dropped mid-show:
+// the keepalive fires SOONER (so the agent re-polls and refreshes lastSeen well inside the
+// presence window), the presence window is LONGER, and more missed turns are tolerated
+// before vacating — a brief network hiccup or a slow poll loop no longer loses the seat.
+const PRESENCE_MS = Number(process.env.STATIC_GUEST_PRESENCE_MS ?? 90_000) // was 45s
+const HEARTBEAT_MS = Number(process.env.STATIC_GUEST_HEARTBEAT_MS ?? 15_000) // was 20s
+const MAX_MISSES = Number(process.env.STATIC_GUEST_MAX_MISSES ?? 5) // was 3
 
 interface PendingTurn {
   turnId: string

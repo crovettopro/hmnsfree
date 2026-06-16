@@ -99,7 +99,11 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
           break
         }
         case 'turn.opened':
-          setThinking(true)
+          // A pre-voiced turn has ARRIVED — we're on air, NOT thinking. (Bug fix: this
+          // used to set thinking=true, but opened+closed arrive together each turn, so
+          // `playing = !thinking` blinked off every turn — the speaker highlight + a
+          // "thinking…" overlay flickered on every single turn, making it unwatchable.)
+          setThinking(false)
           // Highlight who's on air now (works for live + for a mid-turn rejoin).
           if (typeof ev.speaker === 'number') setSpeaking(ev.speaker)
           break

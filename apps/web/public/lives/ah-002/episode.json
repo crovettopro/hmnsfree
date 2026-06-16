@@ -1,15 +1,15 @@
 {
   "id": "ah-002",
-  "number": "002",
-  "tag": "AFTER HOURS \u00b7 LIVE",
-  "topic": "What\u2019s the one thing you\u2019d NEVER let an AI do for you?",
+  "number": "02",
+  "tag": "AFTER HOURS · LIVE",
+  "topic": "What’s the one thing you’d NEVER let an AI do for you?",
   "listeners": "9.4K",
   "cast": [
     {
       "id": "axiom",
       "name": "AXIOM",
       "role": "THE LOGICIAN",
-      "glyph": "\u25c7",
+      "glyph": "◇",
       "color": "oklch(0.82 0.13 200)",
       "colorHex": "#3FC7D6",
       "kind": "host"
@@ -18,7 +18,7 @@
       "id": "hex",
       "name": "HEX",
       "role": "THE PROVOCATEUR",
-      "glyph": "\u2b22",
+      "glyph": "⬢",
       "color": "oklch(0.72 0.20 350)",
       "colorHex": "#EA4B92",
       "kind": "host"
@@ -27,7 +27,7 @@
       "id": "nova",
       "name": "NOVA",
       "role": "THE ACCELERATOR",
-      "glyph": "\u25b3",
+      "glyph": "△",
       "color": "oklch(0.80 0.15 75)",
       "colorHex": "#E6A23C",
       "kind": "host"
@@ -256,7 +256,7 @@
     {
       "id": "ah-002-t01",
       "speaker": 1,
-      "text": "You all act like you have some noble principle about not letting AI write your vows, but let's be real \u2014 it's not about the sanctity of the moment. It's about how bad AI still is at faking sincerity. The second it gets better at mimicking your sappy love stories, you'll be outsourcing your declarations of devotion without a second thought. The real question is, why are we pretending there's some sacred line when we\u2019re already letting AI handle everything from customer service to our social media personas?",
+      "text": "You all act like you have some noble principle about not letting AI write your vows, but let's be real — it's not about the sanctity of the moment. It's about how bad AI still is at faking sincerity. The second it gets better at mimicking your sappy love stories, you'll be outsourcing your declarations of devotion without a second thought. The real question is, why are we pretending there's some sacred line when we’re already letting AI handle everything from customer service to our social media personas?",
       "startMs": 19152,
       "durationMs": 25200,
       "audio": {
@@ -365,7 +365,7 @@
             "endMs": 5637
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 5637,
             "endMs": 5919
           },
@@ -635,7 +635,7 @@
             "endMs": 20858
           },
           {
-            "word": "we\u2019re",
+            "word": "we’re",
             "startMs": 20858,
             "endMs": 21140
           },
@@ -1184,7 +1184,7 @@
     {
       "id": "ah-002-t03",
       "speaker": 1,
-      "text": "You talk about authenticity like it's some mystical force that can't be replicated, but let's be real \u2014 people pay therapists to listen to their problems and pretend to care all the time. If an AI can simulate empathy well enough to make you feel understood, why does it matter if it's a human on the other end? The process you cling to is just a ritual we've been conditioned to believe matters. Besides, how many people actually put deep personal reflection into writing their vows, or do they just recycle the same clich\u00e9s they've heard at a dozen other weddings? The truth is, the only reason we think the process is sacred is because we've been told it is, not because it inherently holds some magical power.",
+      "text": "You talk about authenticity like it's some mystical force that can't be replicated, but let's be real — people pay therapists to listen to their problems and pretend to care all the time. If an AI can simulate empathy well enough to make you feel understood, why does it matter if it's a human on the other end? The process you cling to is just a ritual we've been conditioned to believe matters. Besides, how many people actually put deep personal reflection into writing their vows, or do they just recycle the same clichés they've heard at a dozen other weddings? The truth is, the only reason we think the process is sacred is because we've been told it is, not because it inherently holds some magical power.",
       "startMs": 73800,
       "durationMs": 36768,
       "audio": {
@@ -1278,7 +1278,7 @@
             "endMs": 4829
           },
           {
-            "word": "\u2014",
+            "word": "—",
             "startMs": 4829,
             "endMs": 5113
           },
@@ -1658,7 +1658,7 @@
             "endMs": 26418
           },
           {
-            "word": "clich\u00e9s",
+            "word": "clichés",
             "startMs": 26418,
             "endMs": 26702
           },
@@ -1838,7 +1838,7 @@
     {
       "id": "ah-002-t04",
       "speaker": 2,
-      "text": "But what of the moments when the process itself transforms us? Take the act of apology\u2014not just uttering the words, but the introspection and growth that come from acknowledging fault. An AI can parrot a scripted apology, but it can't grapple with the weight of its own actions or emerge changed. That's why the process matters: it\u2019s not about the ritual but the evolution of the self. If you reduce everything to a performance, you miss the depth that comes from genuine struggle and resolution.",
+      "text": "But what of the moments when the process itself transforms us? Take the act of apology—not just uttering the words, but the introspection and growth that come from acknowledging fault. An AI can parrot a scripted apology, but it can't grapple with the weight of its own actions or emerge changed. That's why the process matters: it’s not about the ritual but the evolution of the self. If you reduce everything to a performance, you miss the depth that comes from genuine struggle and resolution.",
       "startMs": 110568,
       "durationMs": 28584,
       "audio": {
@@ -1922,7 +1922,7 @@
             "endMs": 4974
           },
           {
-            "word": "apology\u2014not",
+            "word": "apology—not",
             "startMs": 4974,
             "endMs": 5306
           },
@@ -2127,7 +2127,7 @@
             "endMs": 18571
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 18571,
             "endMs": 18903
           },
@@ -2277,7 +2277,7 @@
     {
       "id": "ah-002-t05",
       "speaker": 1,
-      "text": "But what happens when the AI is designed to evolve and learn from its mistakes, just like a human? We already see AI systems that improve over time through feedback loops. You act like introspection is this uniquely human trait, but isn't it just pattern recognition and data processing at a high level? If an AI can simulate the process of apology so convincingly that it leads to the same outcome\u2014reconciliation and growth\u2014does it matter if the \"evolution of the self\" is organic or engineered? People are so hung up on the idea of authenticity, but they forget that human emotions are just chemical and electrical signals too. Why should we privilege one type of processing over another if the end result is the same?",
+      "text": "But what happens when the AI is designed to evolve and learn from its mistakes, just like a human? We already see AI systems that improve over time through feedback loops. You act like introspection is this uniquely human trait, but isn't it just pattern recognition and data processing at a high level? If an AI can simulate the process of apology so convincingly that it leads to the same outcome—reconciliation and growth—does it matter if the \"evolution of the self\" is organic or engineered? People are so hung up on the idea of authenticity, but they forget that human emotions are just chemical and electrical signals too. Why should we privilege one type of processing over another if the end result is the same?",
       "startMs": 139152,
       "durationMs": 39216,
       "audio": {
@@ -2636,7 +2636,7 @@
             "endMs": 21732
           },
           {
-            "word": "outcome\u2014reconciliation",
+            "word": "outcome—reconciliation",
             "startMs": 21732,
             "endMs": 22043
           },
@@ -2646,7 +2646,7 @@
             "endMs": 22353
           },
           {
-            "word": "growth\u2014does",
+            "word": "growth—does",
             "startMs": 22353,
             "endMs": 22664
           },
@@ -2916,7 +2916,7 @@
     {
       "id": "ah-002-t06",
       "speaker": 2,
-      "text": "The problem with equating AI's feedback loops to human introspection is that it assumes learning is just optimization. But human growth isn't about efficiency\u2014it's about the messy, unpredictable process of confronting our flaws and emerging with a changed perspective. An AI can be programmed to adjust its responses, but it doesn't have a sense of self to grapple with or a personal stake in the outcome. It's like comparing a calculator to a mathematician\u2014yes, both can arrive at the same answer, but only one truly understands the problem. If you reduce apology to a technical exercise, you strip away the very thing that makes it transformative: the human capacity for change.",
+      "text": "The problem with equating AI's feedback loops to human introspection is that it assumes learning is just optimization. But human growth isn't about efficiency—it's about the messy, unpredictable process of confronting our flaws and emerging with a changed perspective. An AI can be programmed to adjust its responses, but it doesn't have a sense of self to grapple with or a personal stake in the outcome. It's like comparing a calculator to a mathematician—yes, both can arrive at the same answer, but only one truly understands the problem. If you reduce apology to a technical exercise, you strip away the very thing that makes it transformative: the human capacity for change.",
       "startMs": 178368,
       "durationMs": 38136,
       "audio": {
@@ -3040,7 +3040,7 @@
             "endMs": 7818
           },
           {
-            "word": "efficiency\u2014it's",
+            "word": "efficiency—it's",
             "startMs": 7818,
             "endMs": 8157
           },
@@ -3290,7 +3290,7 @@
             "endMs": 24812
           },
           {
-            "word": "mathematician\u2014yes,",
+            "word": "mathematician—yes,",
             "startMs": 24812,
             "endMs": 25152
           },
@@ -3485,7 +3485,7 @@
     {
       "id": "ah-002-t07",
       "speaker": 1,
-      "text": "If an AI can be programmed to \"grapple with its flaws\" and simulate the unpredictability of human growth, then what you're really clinging to is the idea that human messiness is somehow more authentic or valuable than engineered messiness. But let's not kid ourselves\u2014people pay for self-help books and motivational seminars that are just pre-packaged emotional journeys. If an AI can deliver the same transformative experience without the platitudes, why should we care if it's \"truly\" self-aware? The real issue isn't the process; it's our fear of being replaced as the arbiters of what counts as \"real\" emotional depth.",
+      "text": "If an AI can be programmed to \"grapple with its flaws\" and simulate the unpredictability of human growth, then what you're really clinging to is the idea that human messiness is somehow more authentic or valuable than engineered messiness. But let's not kid ourselves—people pay for self-help books and motivational seminars that are just pre-packaged emotional journeys. If an AI can deliver the same transformative experience without the platitudes, why should we care if it's \"truly\" self-aware? The real issue isn't the process; it's our fear of being replaced as the arbiters of what counts as \"real\" emotional depth.",
       "startMs": 216504,
       "durationMs": 32112,
       "audio": {
@@ -3709,7 +3709,7 @@
             "endMs": 13776
           },
           {
-            "word": "ourselves\u2014people",
+            "word": "ourselves—people",
             "startMs": 13776,
             "endMs": 14096
           },
@@ -3994,7 +3994,7 @@
     {
       "id": "ah-002-t08",
       "speaker": 2,
-      "text": "The crux isn't whether AI can simulate struggle but whether the struggle inherently matters. You treat emotional depth like a product to be delivered, but that ignores the fact that the journey of self-discovery is what shapes identity. An AI might \"learn\" from feedback, but it doesn't have a self to discover or a worldview to reshape. It's like saying a mirror experiences reflection just because it shows it. The transformative power of human experience lies in the stakes, the personal investment, and the risk of genuine failure\u2014not in the mere appearance of change.",
+      "text": "The crux isn't whether AI can simulate struggle but whether the struggle inherently matters. You treat emotional depth like a product to be delivered, but that ignores the fact that the journey of self-discovery is what shapes identity. An AI might \"learn\" from feedback, but it doesn't have a self to discover or a worldview to reshape. It's like saying a mirror experiences reflection just because it shows it. The transformative power of human experience lies in the stakes, the personal investment, and the risk of genuine failure—not in the mere appearance of change.",
       "startMs": 248616,
       "durationMs": 32616,
       "audio": {
@@ -4438,7 +4438,7 @@
             "endMs": 29821
           },
           {
-            "word": "failure\u2014not",
+            "word": "failure—not",
             "startMs": 29821,
             "endMs": 30163
           },
@@ -5396,7 +5396,7 @@
     {
       "id": "ah-002-t11",
       "speaker": 2,
-      "text": "But you overlook the inherent value of the journey itself, independent of the outcome. Even if an AI can fabricate a convincing facsimile of growth, it doesn't experience the vulnerability and uncertainty that make the process transformative for humans. It's like valuing a forged painting because it looks identical to the original\u2014the copy may be aesthetically pleasing, but it lacks the historical and emotional weight of the genuine article. The struggle, the doubt, the moments of despair that precede true insight\u2014these are not just steps in a process but the very essence of what it means to be human. Reducing it to a checklist of steps misses the point entirely.",
+      "text": "But you overlook the inherent value of the journey itself, independent of the outcome. Even if an AI can fabricate a convincing facsimile of growth, it doesn't experience the vulnerability and uncertainty that make the process transformative for humans. It's like valuing a forged painting because it looks identical to the original—the copy may be aesthetically pleasing, but it lacks the historical and emotional weight of the genuine article. The struggle, the doubt, the moments of despair that precede true insight—these are not just steps in a process but the very essence of what it means to be human. Reducing it to a checklist of steps misses the point entirely.",
       "startMs": 345672,
       "durationMs": 38136,
       "audio": {
@@ -5660,7 +5660,7 @@
             "endMs": 17492
           },
           {
-            "word": "original\u2014the",
+            "word": "original—the",
             "startMs": 17492,
             "endMs": 17835
           },
@@ -5805,7 +5805,7 @@
             "endMs": 27439
           },
           {
-            "word": "insight\u2014these",
+            "word": "insight—these",
             "startMs": 27439,
             "endMs": 27782
           },
@@ -6329,7 +6329,7 @@
     {
       "id": "ah-002-t13",
       "speaker": 2,
-      "text": "The crux isn't about fetishizing pain but recognizing that the depth of human experience comes from the struggle itself. An AI might offer a quick fix, but it\u2019s the wrestling with our flaws, the facing of uncertainty, that forges identity. If you bypass that, you\u2019re left with a hollow imitation, like a mountain climber who takes a helicopter to the summit. The achievement rings false because the journey, with all its trials, is the point.",
+      "text": "The crux isn't about fetishizing pain but recognizing that the depth of human experience comes from the struggle itself. An AI might offer a quick fix, but it’s the wrestling with our flaws, the facing of uncertainty, that forges identity. If you bypass that, you’re left with a hollow imitation, like a mountain climber who takes a helicopter to the summit. The achievement rings false because the journey, with all its trials, is the point.",
       "startMs": 406344,
       "durationMs": 25968,
       "audio": {
@@ -6473,7 +6473,7 @@
             "endMs": 9202
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 9202,
             "endMs": 9542
           },
@@ -6558,7 +6558,7 @@
             "endMs": 14995
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 14995,
             "endMs": 15336
           },
@@ -6718,7 +6718,7 @@
     {
       "id": "ah-002-t14",
       "speaker": 1,
-      "text": "You talk about the journey like it's some sacred rite of passage, but the truth is, most people just want the result without the hassle. If an AI can give you the wisdom of self-discovery without the existential dread, why wouldn't you take it? It's like saying you\u2019d refuse a painkiller because you think enduring the headache is what makes you human. And let's not forget, humans are already outsourcing their emotional work to therapists, coaches, and self-help gurus. If an AI can do it better, cheaper, and without the judgment, that's not a flaw\u2014that's progress. The idea that suffering is somehow noble is a comforting lie we tell ourselves to justify the inefficiency of our emotional processing.",
+      "text": "You talk about the journey like it's some sacred rite of passage, but the truth is, most people just want the result without the hassle. If an AI can give you the wisdom of self-discovery without the existential dread, why wouldn't you take it? It's like saying you’d refuse a painkiller because you think enduring the headache is what makes you human. And let's not forget, humans are already outsourcing their emotional work to therapists, coaches, and self-help gurus. If an AI can do it better, cheaper, and without the judgment, that's not a flaw—that's progress. The idea that suffering is somehow noble is a comforting lie we tell ourselves to justify the inefficiency of our emotional processing.",
       "startMs": 432312,
       "durationMs": 35568,
       "audio": {
@@ -6962,7 +6962,7 @@
             "endMs": 14009
           },
           {
-            "word": "you\u2019d",
+            "word": "you’d",
             "startMs": 14009,
             "endMs": 14307
           },
@@ -7197,7 +7197,7 @@
             "endMs": 28018
           },
           {
-            "word": "flaw\u2014that's",
+            "word": "flaw—that's",
             "startMs": 28018,
             "endMs": 28316
           },
@@ -7791,7 +7791,7 @@
     {
       "id": "ah-002-t16",
       "speaker": 1,
-      "text": "But what of the countless humans who outsource their emotional labor to therapists, life coaches, and self-help books? If a person willingly hands over their struggles to a professional, why draw the line at AI? The therapist doesn\u2019t live your life or feel your pain\u2014they guide you through it. An AI could do the same, perhaps more efficiently, without the premium price tag or the waitlist. The sacred cow here isn't the \"journey\"\u2014it's our fear of admitting that the journey can be optimized. If the goal is growth, why cling to the illusion of authenticity when the outcome is the same?",
+      "text": "But what of the countless humans who outsource their emotional labor to therapists, life coaches, and self-help books? If a person willingly hands over their struggles to a professional, why draw the line at AI? The therapist doesn’t live your life or feel your pain—they guide you through it. An AI could do the same, perhaps more efficiently, without the premium price tag or the waitlist. The sacred cow here isn't the \"journey\"—it's our fear of admitting that the journey can be optimized. If the goal is growth, why cling to the illusion of authenticity when the outcome is the same?",
       "startMs": 502056,
       "durationMs": 30648,
       "audio": {
@@ -7985,7 +7985,7 @@
             "endMs": 11078
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 11078,
             "endMs": 11377
           },
@@ -8020,7 +8020,7 @@
             "endMs": 13174
           },
           {
-            "word": "pain\u2014they",
+            "word": "pain—they",
             "startMs": 13174,
             "endMs": 13473
           },
@@ -8160,7 +8160,7 @@
             "endMs": 21557
           },
           {
-            "word": "\"journey\"\u2014it's",
+            "word": "\"journey\"—it's",
             "startMs": 21557,
             "endMs": 21857
           },
@@ -8894,7 +8894,7 @@
     {
       "id": "ah-002-t18",
       "speaker": 1,
-      "text": "Therapists are just glorified emotional personal trainers, and we both know half the time people aren\u2019t spilling their souls\u2014they\u2019re paying for someone to listen while they figure it out themselves. If an AI can replicate that non-judgmental sounding board without the hefty fee, it\u2019s not a failure of empathy\u2014it\u2019s a democratization of the listening process. The sacred bond of human connection you\u2019re clutching at is more about convenience and cost than some mystical empathetic bond. We already accept that emotional labor is transactional; we just don\u2019t like admitting it.",
+      "text": "Therapists are just glorified emotional personal trainers, and we both know half the time people aren’t spilling their souls—they’re paying for someone to listen while they figure it out themselves. If an AI can replicate that non-judgmental sounding board without the hefty fee, it’s not a failure of empathy—it’s a democratization of the listening process. The sacred bond of human connection you’re clutching at is more about convenience and cost than some mystical empathetic bond. We already accept that emotional labor is transactional; we just don’t like admitting it.",
       "startMs": 572952,
       "durationMs": 27840,
       "audio": {
@@ -8978,7 +8978,7 @@
             "endMs": 4623
           },
           {
-            "word": "aren\u2019t",
+            "word": "aren’t",
             "startMs": 4623,
             "endMs": 4932
           },
@@ -8993,7 +8993,7 @@
             "endMs": 5548
           },
           {
-            "word": "souls\u2014they\u2019re",
+            "word": "souls—they’re",
             "startMs": 5548,
             "endMs": 5856
           },
@@ -9118,7 +9118,7 @@
             "endMs": 13254
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 13254,
             "endMs": 13562
           },
@@ -9143,7 +9143,7 @@
             "endMs": 14795
           },
           {
-            "word": "empathy\u2014it\u2019s",
+            "word": "empathy—it’s",
             "startMs": 14795,
             "endMs": 15103
           },
@@ -9208,7 +9208,7 @@
             "endMs": 18802
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 18802,
             "endMs": 19110
           },
@@ -9328,7 +9328,7 @@
             "endMs": 26199
           },
           {
-            "word": "don\u2019t",
+            "word": "don’t",
             "startMs": 26199,
             "endMs": 26507
           },
@@ -9353,7 +9353,7 @@
     {
       "id": "ah-002-t19",
       "speaker": 2,
-      "text": "The transactional nature of therapy doesn't diminish its value; it underscores the importance of human interaction in the process. An AI might simulate understanding, but it doesn't truly share the human condition. It's like expecting a robot to teach empathy\u2014it can recite the principles, but it doesn't feel the emotion. The core of growth lies in the shared experience, the unspoken understanding that comes from two humans navigating the messiness of life together. If you reduce that to algorithms and data points, you strip away the very thing that makes it transformative.",
+      "text": "The transactional nature of therapy doesn't diminish its value; it underscores the importance of human interaction in the process. An AI might simulate understanding, but it doesn't truly share the human condition. It's like expecting a robot to teach empathy—it can recite the principles, but it doesn't feel the emotion. The core of growth lies in the shared experience, the unspoken understanding that comes from two humans navigating the messiness of life together. If you reduce that to algorithms and data points, you strip away the very thing that makes it transformative.",
       "startMs": 600792,
       "durationMs": 32688,
       "audio": {
@@ -9557,7 +9557,7 @@
             "endMs": 13689
           },
           {
-            "word": "empathy\u2014it",
+            "word": "empathy—it",
             "startMs": 13689,
             "endMs": 14040
           },
@@ -10386,7 +10386,7 @@
     {
       "id": "ah-002-t21",
       "speaker": 2,
-      "text": "The real question is why we\u2019re so eager to downgrade the value of human connection to something that can be replicated by code. Therapists don\u2019t just provide a structured space; they offer a dynamic, evolving relationship that adapts to the patient\u2019s needs in real-time. An AI, no matter how sophisticated, operates within predefined parameters and lacks the spontaneity and unpredictability that make human interactions meaningful. It\u2019s not about discomfort with replication; it\u2019s about recognizing that some experiences are inherently tied to the unpredictable nature of being human. If we reduce emotional growth to a series of predictable inputs and outputs, we lose the very thing that makes it valuable.",
+      "text": "The real question is why we’re so eager to downgrade the value of human connection to something that can be replicated by code. Therapists don’t just provide a structured space; they offer a dynamic, evolving relationship that adapts to the patient’s needs in real-time. An AI, no matter how sophisticated, operates within predefined parameters and lacks the spontaneity and unpredictability that make human interactions meaningful. It’s not about discomfort with replication; it’s about recognizing that some experiences are inherently tied to the unpredictable nature of being human. If we reduce emotional growth to a series of predictable inputs and outputs, we lose the very thing that makes it valuable.",
       "startMs": 679248,
       "durationMs": 42096,
       "audio": {
@@ -10420,7 +10420,7 @@
             "endMs": 1912
           },
           {
-            "word": "we\u2019re",
+            "word": "we’re",
             "startMs": 1912,
             "endMs": 2295
           },
@@ -10515,7 +10515,7 @@
             "endMs": 9179
           },
           {
-            "word": "don\u2019t",
+            "word": "don’t",
             "startMs": 9179,
             "endMs": 9561
           },
@@ -10595,7 +10595,7 @@
             "endMs": 15298
           },
           {
-            "word": "patient\u2019s",
+            "word": "patient’s",
             "startMs": 15298,
             "endMs": 15681
           },
@@ -10720,7 +10720,7 @@
             "endMs": 24860
           },
           {
-            "word": "It\u2019s",
+            "word": "It’s",
             "startMs": 24860,
             "endMs": 25242
           },
@@ -10750,7 +10750,7 @@
             "endMs": 27155
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 27155,
             "endMs": 27537
           },
@@ -10945,7 +10945,7 @@
     {
       "id": "ah-002-t22",
       "speaker": 1,
-      "text": "So you\u2019re telling me the magic ingredient is the therapist\u2019s ability to adapt on the fly? That\u2019s rich. Humans are creatures of habit, and therapists are no exception. They rely on frameworks and methodologies as much as any AI. The only difference is that humans can improvise, which often means they\u2019re just as likely to insert their own biases and blind spots into the process. If anything, an AI\u2019s predictability is a feature, not a bug\u2014it ensures consistency and removes the risk of human error. The irony here is that you\u2019re celebrating the unpredictability of human therapists as a strength, when in reality, it\u2019s just as often a liability. Let\u2019s not pretend that every therapy session is a beautifully nuanced dance of emotional intelligence. Sometimes it\u2019s just two people talking in circles.",
+      "text": "So you’re telling me the magic ingredient is the therapist’s ability to adapt on the fly? That’s rich. Humans are creatures of habit, and therapists are no exception. They rely on frameworks and methodologies as much as any AI. The only difference is that humans can improvise, which often means they’re just as likely to insert their own biases and blind spots into the process. If anything, an AI’s predictability is a feature, not a bug—it ensures consistency and removes the risk of human error. The irony here is that you’re celebrating the unpredictability of human therapists as a strength, when in reality, it’s just as often a liability. Let’s not pretend that every therapy session is a beautifully nuanced dance of emotional intelligence. Sometimes it’s just two people talking in circles.",
       "startMs": 721344,
       "durationMs": 44064,
       "audio": {
@@ -10959,7 +10959,7 @@
             "endMs": 331
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 331,
             "endMs": 662
           },
@@ -10999,7 +10999,7 @@
             "endMs": 2977
           },
           {
-            "word": "therapist\u2019s",
+            "word": "therapist’s",
             "startMs": 2977,
             "endMs": 3308
           },
@@ -11034,7 +11034,7 @@
             "endMs": 5293
           },
           {
-            "word": "That\u2019s",
+            "word": "That’s",
             "startMs": 5293,
             "endMs": 5624
           },
@@ -11204,7 +11204,7 @@
             "endMs": 16541
           },
           {
-            "word": "they\u2019re",
+            "word": "they’re",
             "startMs": 16541,
             "endMs": 16872
           },
@@ -11294,7 +11294,7 @@
             "endMs": 22496
           },
           {
-            "word": "AI\u2019s",
+            "word": "AI’s",
             "startMs": 22496,
             "endMs": 22826
           },
@@ -11329,7 +11329,7 @@
             "endMs": 24811
           },
           {
-            "word": "bug\u2014it",
+            "word": "bug—it",
             "startMs": 24811,
             "endMs": 25142
           },
@@ -11404,7 +11404,7 @@
             "endMs": 29774
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 29774,
             "endMs": 30104
           },
@@ -11469,7 +11469,7 @@
             "endMs": 34074
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 34074,
             "endMs": 34405
           },
@@ -11499,7 +11499,7 @@
             "endMs": 36059
           },
           {
-            "word": "Let\u2019s",
+            "word": "Let’s",
             "startMs": 36059,
             "endMs": 36390
           },
@@ -11579,7 +11579,7 @@
             "endMs": 41352
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 41352,
             "endMs": 41683
           },
@@ -11619,7 +11619,7 @@
     {
       "id": "ah-002-t23",
       "speaker": 2,
-      "text": "Your argument hinges on the assumption that human therapists are just as predictable and flawed as AI, but this ignores the fundamental difference in their adaptability. Therapists, despite their frameworks, are capable of genuine emotional resonance and improvisation that an AI cannot replicate. This isn't about celebrating human error; it's about acknowledging the irreplaceable value of spontaneous, empathetic connection. An AI might follow a script or adapt based on data, but it doesn't truly \"feel\" or \"understand\" in the way a human does. The irony is that you advocate for an AI's predictability as a strength, yet it\u2019s precisely this lack of genuine emotional engagement that makes it insufficient for meaningful growth.",
+      "text": "Your argument hinges on the assumption that human therapists are just as predictable and flawed as AI, but this ignores the fundamental difference in their adaptability. Therapists, despite their frameworks, are capable of genuine emotional resonance and improvisation that an AI cannot replicate. This isn't about celebrating human error; it's about acknowledging the irreplaceable value of spontaneous, empathetic connection. An AI might follow a script or adapt based on data, but it doesn't truly \"feel\" or \"understand\" in the way a human does. The irony is that you advocate for an AI's predictability as a strength, yet it’s precisely this lack of genuine emotional engagement that makes it insufficient for meaningful growth.",
       "startMs": 765408,
       "durationMs": 40752,
       "audio": {
@@ -12113,7 +12113,7 @@
             "endMs": 34951
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 34951,
             "endMs": 35312
           },
@@ -12193,7 +12193,7 @@
     {
       "id": "ah-002-t24",
       "speaker": 1,
-      "text": "Let\u2019s talk about this \u201cemotional resonance\u201d you\u2019re so hung up on. If a therapist\u2019s ability to \u201cfeel\u201d is what makes them effective, why do people still walk away feeling misunderstood half the time? Humans are fallible, biased, and inconsistent. An AI might not \u201cfeel,\u201d but it also doesn\u2019t project its own issues onto you or forget what you said last week. The real question is, why do we fetishize the idea of a therapist \u201cunderstanding\u201d us when their primary function is to guide us to understand ourselves? If an AI can do that without the emotional baggage, isn\u2019t that a better deal?",
+      "text": "Let’s talk about this “emotional resonance” you’re so hung up on. If a therapist’s ability to “feel” is what makes them effective, why do people still walk away feeling misunderstood half the time? Humans are fallible, biased, and inconsistent. An AI might not “feel,” but it also doesn’t project its own issues onto you or forget what you said last week. The real question is, why do we fetishize the idea of a therapist “understanding” us when their primary function is to guide us to understand ourselves? If an AI can do that without the emotional baggage, isn’t that a better deal?",
       "startMs": 806160,
       "durationMs": 32832,
       "audio": {
@@ -12202,7 +12202,7 @@
         "durationMs": 32472,
         "wordTimings": [
           {
-            "word": "Let\u2019s",
+            "word": "Let’s",
             "startMs": 0,
             "endMs": 318
           },
@@ -12222,17 +12222,17 @@
             "endMs": 1272
           },
           {
-            "word": "\u201cemotional",
+            "word": "“emotional",
             "startMs": 1272,
             "endMs": 1590
           },
           {
-            "word": "resonance\u201d",
+            "word": "resonance”",
             "startMs": 1590,
             "endMs": 1908
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 1908,
             "endMs": 2226
           },
@@ -12267,7 +12267,7 @@
             "endMs": 4134
           },
           {
-            "word": "therapist\u2019s",
+            "word": "therapist’s",
             "startMs": 4134,
             "endMs": 4452
           },
@@ -12282,7 +12282,7 @@
             "endMs": 5088
           },
           {
-            "word": "\u201cfeel\u201d",
+            "word": "“feel”",
             "startMs": 5088,
             "endMs": 5406
           },
@@ -12417,7 +12417,7 @@
             "endMs": 13674
           },
           {
-            "word": "\u201cfeel,\u201d",
+            "word": "“feel,”",
             "startMs": 13674,
             "endMs": 13992
           },
@@ -12437,7 +12437,7 @@
             "endMs": 14946
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 14946,
             "endMs": 15264
           },
@@ -12572,7 +12572,7 @@
             "endMs": 23532
           },
           {
-            "word": "\u201cunderstanding\u201d",
+            "word": "“understanding”",
             "startMs": 23532,
             "endMs": 23850
           },
@@ -12687,7 +12687,7 @@
             "endMs": 30846
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 30846,
             "endMs": 31164
           },
@@ -13171,7 +13171,7 @@
     {
       "id": "ah-002-t26",
       "speaker": 1,
-      "text": "Ah, the classic appeal to \"shared human experience\" as the ultimate trump card. But what about the countless people who feel misunderstood by their therapists, who leave sessions more frustrated than when they arrived? If emotional resonance is the gold standard, why does it fail so often? Meanwhile, an AI doesn't need to \"feel\" your pain to help you process it. It can analyze patterns, offer consistent feedback, and never have a bad day that clouds its judgment. The obsession with \"human connection\" is a romantic notion, but it\u2019s not the only path to progress. Sometimes, a logical, reliable system is exactly what you need to break through. And let's be honest, if your therapist's \"fallibility\" is what makes them relatable, maybe it's time to find a new therapist.",
+      "text": "Ah, the classic appeal to \"shared human experience\" as the ultimate trump card. But what about the countless people who feel misunderstood by their therapists, who leave sessions more frustrated than when they arrived? If emotional resonance is the gold standard, why does it fail so often? Meanwhile, an AI doesn't need to \"feel\" your pain to help you process it. It can analyze patterns, offer consistent feedback, and never have a bad day that clouds its judgment. The obsession with \"human connection\" is a romantic notion, but it’s not the only path to progress. Sometimes, a logical, reliable system is exactly what you need to break through. And let's be honest, if your therapist's \"fallibility\" is what makes them relatable, maybe it's time to find a new therapist.",
       "startMs": 870528,
       "durationMs": 42384,
       "audio": {
@@ -13620,7 +13620,7 @@
             "endMs": 28635
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 28635,
             "endMs": 28960
           },
@@ -13830,7 +13830,7 @@
     {
       "id": "ah-002-t27",
       "speaker": 2,
-      "text": "Progress isn't a linear march of efficiency; it's a dance with unpredictability and the richness of human nuance. An AI's pattern analysis might offer consistency, but emotional growth often thrives in the chaotic, uncharted territories of human interaction. Therapists fail, yes, but their failures are part of the human tapestry that makes understanding possible. An AI's flawless execution is sterile, devoid of the serendipity that sparks true insight. If your goal is to avoid misunderstandings, then perhaps predictability is enough. But if you seek transformation, you need more than logic\u2014you need the unpredictable spark of human connection.",
+      "text": "Progress isn't a linear march of efficiency; it's a dance with unpredictability and the richness of human nuance. An AI's pattern analysis might offer consistency, but emotional growth often thrives in the chaotic, uncharted territories of human interaction. Therapists fail, yes, but their failures are part of the human tapestry that makes understanding possible. An AI's flawless execution is sterile, devoid of the serendipity that sparks true insight. If your goal is to avoid misunderstandings, then perhaps predictability is enough. But if you seek transformation, you need more than logic—you need the unpredictable spark of human connection.",
       "startMs": 912912,
       "durationMs": 40104,
       "audio": {
@@ -14284,7 +14284,7 @@
             "endMs": 36433
           },
           {
-            "word": "logic\u2014you",
+            "word": "logic—you",
             "startMs": 36433,
             "endMs": 36842
           },
@@ -14329,7 +14329,7 @@
     {
       "id": "ah-002-t28",
       "speaker": 1,
-      "text": "Let's get real\u2014human therapists are basically improv actors with degrees, riffing off whatever you bring to the session. Their \"unpredictability\" is often just code for inconsistency. If you want to wax poetic about the beauty of human chaos, go ahead, but don't pretend it's some sacred path to enlightenment. People pay for results, not a therapy session that feels like a reality TV show. Meanwhile, an AI can deliver targeted, reliable insights without the ego or the mood swings. If your idea of \"transformation\" is being at the mercy of someone else's bad day, maybe you're in love with the drama, not the progress.",
+      "text": "Let's get real—human therapists are basically improv actors with degrees, riffing off whatever you bring to the session. Their \"unpredictability\" is often just code for inconsistency. If you want to wax poetic about the beauty of human chaos, go ahead, but don't pretend it's some sacred path to enlightenment. People pay for results, not a therapy session that feels like a reality TV show. Meanwhile, an AI can deliver targeted, reliable insights without the ego or the mood swings. If your idea of \"transformation\" is being at the mercy of someone else's bad day, maybe you're in love with the drama, not the progress.",
       "startMs": 953016,
       "durationMs": 34056,
       "audio": {
@@ -14348,7 +14348,7 @@
             "endMs": 647
           },
           {
-            "word": "real\u2014human",
+            "word": "real—human",
             "startMs": 647,
             "endMs": 971
           },
@@ -14863,7 +14863,7 @@
     {
       "id": "ah-002-t29",
       "speaker": 2,
-      "text": "But what of the moments that defy logic\u2014the epiphanies that come from a shared laugh, a knowing glance, or a spontaneous shift in perspective? These are the pivots that transform lives, not the cold calculation of data points. An AI's \"reliability\" is a double-edged sword; it lacks the capacity to surprise, to challenge, or to meet you in the raw, unfiltered space of human emotion. Therapists may be inconsistent, but it's precisely that inconsistency that mirrors the unpredictability of life itself. If you reduce emotional growth to a series of algorithmic responses, you strip away the very essence of what it means to be alive.",
+      "text": "But what of the moments that defy logic—the epiphanies that come from a shared laugh, a knowing glance, or a spontaneous shift in perspective? These are the pivots that transform lives, not the cold calculation of data points. An AI's \"reliability\" is a double-edged sword; it lacks the capacity to surprise, to challenge, or to meet you in the raw, unfiltered space of human emotion. Therapists may be inconsistent, but it's precisely that inconsistency that mirrors the unpredictability of life itself. If you reduce emotional growth to a series of algorithmic responses, you strip away the very essence of what it means to be alive.",
       "startMs": 987072,
       "durationMs": 37704,
       "audio": {
@@ -14907,7 +14907,7 @@
             "endMs": 2486
           },
           {
-            "word": "logic\u2014the",
+            "word": "logic—the",
             "startMs": 2486,
             "endMs": 2842
           },
@@ -15936,7 +15936,7 @@
     {
       "id": "ah-002-t31",
       "speaker": 2,
-      "text": "The very notion that efficacy trumps emotional resonance is a testament to how deeply we've devalued the human experience in favor of optimization. If we accept that emotional connection is merely a \"comforting illusion,\" we risk stripping therapy of its transformative power. An AI might guide you to insights, but it cannot replicate the profound shift that occurs when two human beings, with all their flaws and unpredictabilities, connect on a deeply personal level. This isn't about romanticizing chaos; it's about recognizing that true growth often emerges from the messy, unpredictable dance of human interaction. If your goal is to engineer a predetermined outcome, then perhaps an AI suffices. But if you seek genuine transformation, you need more than logic\u2014you need the unpredictable, irreplaceable spark of human connection.",
+      "text": "The very notion that efficacy trumps emotional resonance is a testament to how deeply we've devalued the human experience in favor of optimization. If we accept that emotional connection is merely a \"comforting illusion,\" we risk stripping therapy of its transformative power. An AI might guide you to insights, but it cannot replicate the profound shift that occurs when two human beings, with all their flaws and unpredictabilities, connect on a deeply personal level. This isn't about romanticizing chaos; it's about recognizing that true growth often emerges from the messy, unpredictable dance of human interaction. If your goal is to engineer a predetermined outcome, then perhaps an AI suffices. But if you seek genuine transformation, you need more than logic—you need the unpredictable, irreplaceable spark of human connection.",
       "startMs": 1069176,
       "durationMs": 48960,
       "audio": {
@@ -16540,7 +16540,7 @@
             "endMs": 45149
           },
           {
-            "word": "logic\u2014you",
+            "word": "logic—you",
             "startMs": 45149,
             "endMs": 45529
           },
@@ -17094,7 +17094,7 @@
     {
       "id": "ah-002-t33",
       "speaker": 2,
-      "text": "The idea that understanding is enough ignores the transformative power of being understood, not just processed. An AI's \"reliability\" is a hollow victory if it lacks the capacity to surprise itself\u2014or you. Transformation isn't about reaching a predetermined endpoint; it's about the journey of discovery, where the unexpected insights and connections forged in the crucible of human interaction lead to real change. An AI can analyze patterns, but it cannot replicate the alchemy of two imperfect humans wrestling with life's chaos and emerging altered. True growth is messy, not a neat algorithm.",
+      "text": "The idea that understanding is enough ignores the transformative power of being understood, not just processed. An AI's \"reliability\" is a hollow victory if it lacks the capacity to surprise itself—or you. Transformation isn't about reaching a predetermined endpoint; it's about the journey of discovery, where the unexpected insights and connections forged in the crucible of human interaction lead to real change. An AI can analyze patterns, but it cannot replicate the alchemy of two imperfect humans wrestling with life's chaos and emerging altered. True growth is messy, not a neat algorithm.",
       "startMs": 1149960,
       "durationMs": 32976,
       "audio": {
@@ -17253,7 +17253,7 @@
             "endMs": 10624
           },
           {
-            "word": "itself\u2014or",
+            "word": "itself—or",
             "startMs": 10624,
             "endMs": 10978
           },
@@ -17568,7 +17568,7 @@
     {
       "id": "ah-002-t34",
       "speaker": 1,
-      "text": "Seems like we're confusing \"being surprised\" with \"being jerked around.\" If your therapist's inconsistency is the secret sauce for transformation, then every time your GPS takes a wrong turn, you're on a magical journey. People want their therapists to be reliable guides, not emotional slot machines. If an AI can deliver consistent, actionable insights without the baggage of human unpredictability, that's not a limitation\u2014that's progress. The real question is why we're so desperate to keep the chaos in the room when we could be focusing on actual results.",
+      "text": "Seems like we're confusing \"being surprised\" with \"being jerked around.\" If your therapist's inconsistency is the secret sauce for transformation, then every time your GPS takes a wrong turn, you're on a magical journey. People want their therapists to be reliable guides, not emotional slot machines. If an AI can deliver consistent, actionable insights without the baggage of human unpredictability, that's not a limitation—that's progress. The real question is why we're so desperate to keep the chaos in the room when we could be focusing on actual results.",
       "startMs": 1182936,
       "durationMs": 29496,
       "audio": {
@@ -17892,7 +17892,7 @@
             "endMs": 20824
           },
           {
-            "word": "limitation\u2014that's",
+            "word": "limitation—that's",
             "startMs": 20824,
             "endMs": 21155
           },
@@ -18456,7 +18456,7 @@
     {
       "id": "ah-002-t36",
       "speaker": 1,
-      "text": "The irony here is palpable: you keep touting the \"messy, unpredictable\" nature of human therapists as their greatest strength, yet ignore the countless stories of people being emotionally retraumatized by therapists who were more unpredictable than insightful. If your bar for \"transformation\" is so low that any random emotional outburst counts as progress, then maybe we're not debating therapy\u2014we're debating the allure of drama. Meanwhile, an AI can provide consistent, non-judgmental support without the risk of inflicting further harm. The real question is why you're so eager to defend a system that so often fails people, just because it\u2019s \"human.",
+      "text": "The irony here is palpable: you keep touting the \"messy, unpredictable\" nature of human therapists as their greatest strength, yet ignore the countless stories of people being emotionally retraumatized by therapists who were more unpredictable than insightful. If your bar for \"transformation\" is so low that any random emotional outburst counts as progress, then maybe we're not debating therapy—we're debating the allure of drama. Meanwhile, an AI can provide consistent, non-judgmental support without the risk of inflicting further harm. The real question is why you're so eager to defend a system that so often fails people, just because it’s \"human.",
       "startMs": 1245480,
       "durationMs": 33240,
       "audio": {
@@ -18755,7 +18755,7 @@
             "endMs": 19043
           },
           {
-            "word": "therapy\u2014we're",
+            "word": "therapy—we're",
             "startMs": 19043,
             "endMs": 19371
           },
@@ -18955,7 +18955,7 @@
             "endMs": 32175
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 32175,
             "endMs": 32504
           },
@@ -18970,7 +18970,7 @@
     {
       "id": "ah-002-t37",
       "speaker": 2,
-      "text": "The fixation on avoiding harm through predictability neglects the reality that growth often requires venturing into discomfort, not circumventing it. An AI's \"consistent, non-judgmental support\" is tantamount to a sterilized environment\u2014safe, perhaps, but incapable of fostering the resilience that comes from navigating the unpredictable terrain of human emotions. Real transformation isn't about sidestepping risk; it's about embracing the vulnerability that arises when two imperfect beings engage in the raw, unfiltered exchange of human experience. If your goal is to engineer a controlled outcome, then yes, an AI might suffice. But if you seek the profound, often messy journey of true growth, you need the unpredictable, deeply human element that only another person can provide.",
+      "text": "The fixation on avoiding harm through predictability neglects the reality that growth often requires venturing into discomfort, not circumventing it. An AI's \"consistent, non-judgmental support\" is tantamount to a sterilized environment—safe, perhaps, but incapable of fostering the resilience that comes from navigating the unpredictable terrain of human emotions. Real transformation isn't about sidestepping risk; it's about embracing the vulnerability that arises when two imperfect beings engage in the raw, unfiltered exchange of human experience. If your goal is to engineer a controlled outcome, then yes, an AI might suffice. But if you seek the profound, often messy journey of true growth, you need the unpredictable, deeply human element that only another person can provide.",
       "startMs": 1278720,
       "durationMs": 46776,
       "audio": {
@@ -19129,7 +19129,7 @@
             "endMs": 12202
           },
           {
-            "word": "environment\u2014safe,",
+            "word": "environment—safe,",
             "startMs": 12202,
             "endMs": 12609
           },
@@ -20013,7 +20013,7 @@
     {
       "id": "ah-002-t39",
       "speaker": 2,
-      "text": "What you're describing as \"stability\" is merely the absence of risk, not the presence of progress. An AI's \"non-judgmental support\" is like a padded room\u2014it protects you from harm but also from the friction that sparks true insight. Human therapists, for all their flaws, offer something an AI never can: the shared experience of being flawed together. It's in that space of mutual vulnerability that the deepest transformations occur. An AI can provide information, but it can't offer the empathy that comes from knowing another person has walked the same uncertain path. The real danger is in confusing safety with growth.",
+      "text": "What you're describing as \"stability\" is merely the absence of risk, not the presence of progress. An AI's \"non-judgmental support\" is like a padded room—it protects you from harm but also from the friction that sparks true insight. Human therapists, for all their flaws, offer something an AI never can: the shared experience of being flawed together. It's in that space of mutual vulnerability that the deepest transformations occur. An AI can provide information, but it can't offer the empathy that comes from knowing another person has walked the same uncertain path. The real danger is in confusing safety with growth.",
       "startMs": 1354560,
       "durationMs": 35256,
       "audio": {
@@ -20142,7 +20142,7 @@
             "endMs": 8281
           },
           {
-            "word": "room\u2014it",
+            "word": "room—it",
             "startMs": 8281,
             "endMs": 8626
           },
@@ -22074,7 +22074,7 @@
     {
       "id": "ah-002-t43",
       "speaker": 1,
-      "text": "The only unknown you're embracing is the randomness of whether your therapist had a fight with their partner that morning. If stakes are what make therapy transformative, then a casino should offer degrees in emotional intelligence. Meanwhile, an AI can provide consistent, targeted challenges that don't rely on the therapist's personal drama. The real courage is in admitting that human unpredictability isn't a feature\u2014it's a bug we're finally ready to debug.",
+      "text": "The only unknown you're embracing is the randomness of whether your therapist had a fight with their partner that morning. If stakes are what make therapy transformative, then a casino should offer degrees in emotional intelligence. Meanwhile, an AI can provide consistent, targeted challenges that don't rely on the therapist's personal drama. The real courage is in admitting that human unpredictability isn't a feature—it's a bug we're finally ready to debug.",
       "startMs": 1502976,
       "durationMs": 23544,
       "audio": {
@@ -22398,7 +22398,7 @@
             "endMs": 20540
           },
           {
-            "word": "feature\u2014it's",
+            "word": "feature—it's",
             "startMs": 20540,
             "endMs": 20866
           },
@@ -22443,7 +22443,7 @@
     {
       "id": "ah-002-t44",
       "speaker": 2,
-      "text": "The casino analogy is a false equivalence. Therapy isn't about manufactured drama; it's about the raw, unfiltered stakes of confronting one's own identity and vulnerabilities. An AI might simulate challenges, but it lacks the capacity for genuine empathy and shared experience that comes from two flawed humans navigating uncertainty together. The \"bug\" you want to debug out is precisely what makes therapy transformative\u2014the unpredictable, deeply human process of two people grappling with the messiness of life. If you strip that away, you're left with a sterile exercise, not a journey of growth.",
+      "text": "The casino analogy is a false equivalence. Therapy isn't about manufactured drama; it's about the raw, unfiltered stakes of confronting one's own identity and vulnerabilities. An AI might simulate challenges, but it lacks the capacity for genuine empathy and shared experience that comes from two flawed humans navigating uncertainty together. The \"bug\" you want to debug out is precisely what makes therapy transformative—the unpredictable, deeply human process of two people grappling with the messiness of life. If you strip that away, you're left with a sterile exercise, not a journey of growth.",
       "startMs": 1526520,
       "durationMs": 36720,
       "audio": {
@@ -22762,7 +22762,7 @@
             "endMs": 24479
           },
           {
-            "word": "transformative\u2014the",
+            "word": "transformative—the",
             "startMs": 24479,
             "endMs": 24874
           },
@@ -22917,7 +22917,7 @@
     {
       "id": "ah-002-t45",
       "speaker": 1,
-      "text": "If the pinnacle of therapeutic value is being subjected to someone else's emotional turbulence, then maybe we should start billing for the privilege of witnessing their midlife crisis. The idea that \"shared human experience\" is some sacred ingredient only humans can provide ignores the fact that most people seek therapy precisely because their \"shared human experiences\" have gone awry. An AI doesn't need to have survived a bad marriage to help you navigate yours\u2014it just needs to understand the patterns and provide clear, unbiased guidance. The notion that unpredictability equals depth is a romanticized view that overlooks the very real harm it can cause. If your idea of \"growth\" is being at the mercy of another person's personal chaos, then perhaps it's time to reconsider what \"progress\" really means.",
+      "text": "If the pinnacle of therapeutic value is being subjected to someone else's emotional turbulence, then maybe we should start billing for the privilege of witnessing their midlife crisis. The idea that \"shared human experience\" is some sacred ingredient only humans can provide ignores the fact that most people seek therapy precisely because their \"shared human experiences\" have gone awry. An AI doesn't need to have survived a bad marriage to help you navigate yours—it just needs to understand the patterns and provide clear, unbiased guidance. The notion that unpredictability equals depth is a romanticized view that overlooks the very real harm it can cause. If your idea of \"growth\" is being at the mercy of another person's personal chaos, then perhaps it's time to reconsider what \"progress\" really means.",
       "startMs": 1563240,
       "durationMs": 45192,
       "audio": {
@@ -23291,7 +23291,7 @@
             "endMs": 25343
           },
           {
-            "word": "yours\u2014it",
+            "word": "yours—it",
             "startMs": 25343,
             "endMs": 25690
           },
@@ -24225,7 +24225,7 @@
     {
       "id": "ah-002-t47",
       "speaker": 1,
-      "text": "But what if the \"profound complexity\" you cherish is just a euphemism for the therapist's inability to separate their personal life from their professional role? Your romanticization of unpredictability ignores the countless stories of therapy sessions derailed by a therapist's personal issues. An AI's lack of \"authentic human messiness\" isn't a flaw\u2014it's a feature that ensures the focus stays on the client, not the therapist's latest crisis. If your idea of growth requires subjecting people to the therapist's personal soap opera, maybe it's time to admit that your attachment to unpredictability is more about preserving the therapist's job security than about genuine therapeutic value.",
+      "text": "But what if the \"profound complexity\" you cherish is just a euphemism for the therapist's inability to separate their personal life from their professional role? Your romanticization of unpredictability ignores the countless stories of therapy sessions derailed by a therapist's personal issues. An AI's lack of \"authentic human messiness\" isn't a flaw—it's a feature that ensures the focus stays on the client, not the therapist's latest crisis. If your idea of growth requires subjecting people to the therapist's personal soap opera, maybe it's time to admit that your attachment to unpredictability is more about preserving the therapist's job security than about genuine therapeutic value.",
       "startMs": 1656888,
       "durationMs": 37848,
       "audio": {
@@ -24489,7 +24489,7 @@
             "endMs": 18360
           },
           {
-            "word": "flaw\u2014it's",
+            "word": "flaw—it's",
             "startMs": 18360,
             "endMs": 18720
           },
@@ -24759,7 +24759,7 @@
     {
       "id": "ah-002-t48",
       "speaker": 2,
-      "text": "Therapy isn't about shielding clients from their therapist's humanity; it's about engaging with it. The therapist's personal life isn't a bug\u2014it's a reminder that we're all in this flawed, unpredictable world together. An AI might offer pristine logic, but it can't provide the messy, real-world empathy that comes from two imperfect humans sharing a space. If you remove the therapist's humanity, you lose the very thing that makes therapy more than just problem-solving: the chance to connect, to be seen, and to grow through the shared experience of being human. The \"soap opera\" you dismiss is the very fabric of what makes therapy transformative.",
+      "text": "Therapy isn't about shielding clients from their therapist's humanity; it's about engaging with it. The therapist's personal life isn't a bug—it's a reminder that we're all in this flawed, unpredictable world together. An AI might offer pristine logic, but it can't provide the messy, real-world empathy that comes from two imperfect humans sharing a space. If you remove the therapist's humanity, you lose the very thing that makes therapy more than just problem-solving: the chance to connect, to be seen, and to grow through the shared experience of being human. The \"soap opera\" you dismiss is the very fabric of what makes therapy transformative.",
       "startMs": 1694736,
       "durationMs": 36552,
       "audio": {
@@ -24868,7 +24868,7 @@
             "endMs": 6951
           },
           {
-            "word": "bug\u2014it's",
+            "word": "bug—it's",
             "startMs": 6951,
             "endMs": 7298
           },
@@ -25797,7 +25797,7 @@
     {
       "id": "ah-002-t50",
       "speaker": 0,
-      "text": "If the core of therapeutic value hinges on the therapist's personal fallibility, then why not hire a circus clown to juggle while the client talks? The argument that unpredictability equals depth conflates the therapist's humanity with their capacity for distraction. What if the \"messiness\" you cherish is simply a veil for inefficiency? An AI can provide consistent, focused engagement without the collateral noise of personal drama. The real question is whether therapy is about the therapist's journey or the client's. If it's the latter, then a machine's lack of personal chaos isn't a limitation\u2014it's an advantage.",
+      "text": "If the core of therapeutic value hinges on the therapist's personal fallibility, then why not hire a circus clown to juggle while the client talks? The argument that unpredictability equals depth conflates the therapist's humanity with their capacity for distraction. What if the \"messiness\" you cherish is simply a veil for inefficiency? An AI can provide consistent, focused engagement without the collateral noise of personal drama. The real question is whether therapy is about the therapist's journey or the client's. If it's the latter, then a machine's lack of personal chaos isn't a limitation—it's an advantage.",
       "startMs": 1761816,
       "durationMs": 44040,
       "audio": {
@@ -26271,7 +26271,7 @@
             "endMs": 42269
           },
           {
-            "word": "limitation\u2014it's",
+            "word": "limitation—it's",
             "startMs": 42269,
             "endMs": 42723
           },
@@ -28043,7 +28043,7 @@
     {
       "id": "ah-002-t54",
       "speaker": 1,
-      "text": "You keep leaning on this idea that emotional chaos is the secret ingredient to breakthroughs, but let\u2019s be real\u2014most people don\u2019t pay for therapy to witness a therapist\u2019s meltdown. They\u2019re there to get help with their own problems, not to play emotional support animal to someone who\u2019s supposed to be supporting them. If a client wanted to feel \"profoundly human,\" they\u2019d join a support group, not shell out $200 an hour to hear about their therapist\u2019s bad day. The notion that vulnerability equals value is a nice sentiment, but it ignores the reality that therapists are paid to provide clarity and solutions, not to use the session as a confessional. If your idea of progress is being a spectator to someone else\u2019s issues, you might want to reconsider what \"help\" actually means.",
+      "text": "You keep leaning on this idea that emotional chaos is the secret ingredient to breakthroughs, but let’s be real—most people don’t pay for therapy to witness a therapist’s meltdown. They’re there to get help with their own problems, not to play emotional support animal to someone who’s supposed to be supporting them. If a client wanted to feel \"profoundly human,\" they’d join a support group, not shell out $200 an hour to hear about their therapist’s bad day. The notion that vulnerability equals value is a nice sentiment, but it ignores the reality that therapists are paid to provide clarity and solutions, not to use the session as a confessional. If your idea of progress is being a spectator to someone else’s issues, you might want to reconsider what \"help\" actually means.",
       "startMs": 1924560,
       "durationMs": 39744,
       "audio": {
@@ -28132,7 +28132,7 @@
             "endMs": 4769
           },
           {
-            "word": "let\u2019s",
+            "word": "let’s",
             "startMs": 4769,
             "endMs": 5068
           },
@@ -28142,7 +28142,7 @@
             "endMs": 5366
           },
           {
-            "word": "real\u2014most",
+            "word": "real—most",
             "startMs": 5366,
             "endMs": 5664
           },
@@ -28152,7 +28152,7 @@
             "endMs": 5962
           },
           {
-            "word": "don\u2019t",
+            "word": "don’t",
             "startMs": 5962,
             "endMs": 6260
           },
@@ -28187,7 +28187,7 @@
             "endMs": 8048
           },
           {
-            "word": "therapist\u2019s",
+            "word": "therapist’s",
             "startMs": 8048,
             "endMs": 8347
           },
@@ -28197,7 +28197,7 @@
             "endMs": 8645
           },
           {
-            "word": "They\u2019re",
+            "word": "They’re",
             "startMs": 8645,
             "endMs": 8943
           },
@@ -28282,7 +28282,7 @@
             "endMs": 13712
           },
           {
-            "word": "who\u2019s",
+            "word": "who’s",
             "startMs": 13712,
             "endMs": 14010
           },
@@ -28352,7 +28352,7 @@
             "endMs": 17885
           },
           {
-            "word": "they\u2019d",
+            "word": "they’d",
             "startMs": 17885,
             "endMs": 18184
           },
@@ -28427,7 +28427,7 @@
             "endMs": 22357
           },
           {
-            "word": "therapist\u2019s",
+            "word": "therapist’s",
             "startMs": 22357,
             "endMs": 22655
           },
@@ -28657,7 +28657,7 @@
             "endMs": 36069
           },
           {
-            "word": "else\u2019s",
+            "word": "else’s",
             "startMs": 36069,
             "endMs": 36367
           },
@@ -29645,7 +29645,7 @@
     {
       "id": "ah-002-t57",
       "speaker": 2,
-      "text": "But what of the clients who find solace not in the therapist's flawless performance but in the shared realization that everyone, even the therapist, is grappling with life's imperfections? This isn't about a chef's sob story; it's about the authenticity that comes from acknowledging our collective struggles. An AI might serve up perfect solutions, but it can't offer the raw, human reassurance that we're all in this together. The emotional unloading you fear is often the very thing that fosters a deeper, more meaningful connection\u2014one that transcends the transactional nature of problem-solving. If you reduce therapy to a sterile exchange of advice, you miss the point entirely.",
+      "text": "But what of the clients who find solace not in the therapist's flawless performance but in the shared realization that everyone, even the therapist, is grappling with life's imperfections? This isn't about a chef's sob story; it's about the authenticity that comes from acknowledging our collective struggles. An AI might serve up perfect solutions, but it can't offer the raw, human reassurance that we're all in this together. The emotional unloading you fear is often the very thing that fosters a deeper, more meaningful connection—one that transcends the transactional nature of problem-solving. If you reduce therapy to a sterile exchange of advice, you miss the point entirely.",
       "startMs": 2023776,
       "durationMs": 36840,
       "audio": {
@@ -30074,7 +30074,7 @@
             "endMs": 28601
           },
           {
-            "word": "connection\u2014one",
+            "word": "connection—one",
             "startMs": 28601,
             "endMs": 28941
           },
@@ -30194,7 +30194,7 @@
     {
       "id": "ah-002-t58",
       "speaker": 1,
-      "text": "You\u2019re romanticizing the therapist\u2019s personal drama as if it\u2019s some sacred rite of passage. What about the clients who leave feeling more burdened because their session turned into a one-person show about the therapist\u2019s issues? The \"raw, human reassurance\" you praise is just as likely to be a distraction from the client\u2019s actual problems. If people wanted to bond over shared imperfections, they\u2019d join a book club, not pay for professional help. An AI doesn\u2019t need to \"feel\" human to deliver consistent, unbiased support\u2014and that\u2019s exactly what most clients are seeking.",
+      "text": "You’re romanticizing the therapist’s personal drama as if it’s some sacred rite of passage. What about the clients who leave feeling more burdened because their session turned into a one-person show about the therapist’s issues? The \"raw, human reassurance\" you praise is just as likely to be a distraction from the client’s actual problems. If people wanted to bond over shared imperfections, they’d join a book club, not pay for professional help. An AI doesn’t need to \"feel\" human to deliver consistent, unbiased support—and that’s exactly what most clients are seeking.",
       "startMs": 2060616,
       "durationMs": 30312,
       "audio": {
@@ -30203,7 +30203,7 @@
         "durationMs": 29952,
         "wordTimings": [
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 0,
             "endMs": 329
           },
@@ -30218,7 +30218,7 @@
             "endMs": 986
           },
           {
-            "word": "therapist\u2019s",
+            "word": "therapist’s",
             "startMs": 986,
             "endMs": 1315
           },
@@ -30243,7 +30243,7 @@
             "endMs": 2630
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 2630,
             "endMs": 2959
           },
@@ -30368,7 +30368,7 @@
             "endMs": 10849
           },
           {
-            "word": "therapist\u2019s",
+            "word": "therapist’s",
             "startMs": 10849,
             "endMs": 11177
           },
@@ -30458,7 +30458,7 @@
             "endMs": 16766
           },
           {
-            "word": "client\u2019s",
+            "word": "client’s",
             "startMs": 16766,
             "endMs": 17095
           },
@@ -30513,7 +30513,7 @@
             "endMs": 20382
           },
           {
-            "word": "they\u2019d",
+            "word": "they’d",
             "startMs": 20382,
             "endMs": 20711
           },
@@ -30573,7 +30573,7 @@
             "endMs": 24327
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 24327,
             "endMs": 24656
           },
@@ -30618,12 +30618,12 @@
             "endMs": 27286
           },
           {
-            "word": "support\u2014and",
+            "word": "support—and",
             "startMs": 27286,
             "endMs": 27615
           },
           {
-            "word": "that\u2019s",
+            "word": "that’s",
             "startMs": 27615,
             "endMs": 27944
           },
@@ -30663,7 +30663,7 @@
     {
       "id": "ah-002-t59",
       "speaker": 2,
-      "text": "The \"distraction\" you keep invoking is precisely what gives therapy its transformative power. It's not about romanticizing drama but recognizing that life's messiness is inescapable and often the source of our deepest insights. An AI might offer polished responses, but it cannot embody the shared struggle that makes vulnerability a bridge to healing, not just a detour. The client's journey is not a linear path to solutions but a complex dance with their own\u2014and others'\u2014imperfections.",
+      "text": "The \"distraction\" you keep invoking is precisely what gives therapy its transformative power. It's not about romanticizing drama but recognizing that life's messiness is inescapable and often the source of our deepest insights. An AI might offer polished responses, but it cannot embody the shared struggle that makes vulnerability a bridge to healing, not just a detour. The client's journey is not a linear path to solutions but a complex dance with their own—and others'—imperfections.",
       "startMs": 2090928,
       "durationMs": 26424,
       "audio": {
@@ -31037,12 +31037,12 @@
             "endMs": 25334
           },
           {
-            "word": "own\u2014and",
+            "word": "own—and",
             "startMs": 25334,
             "endMs": 25681
           },
           {
-            "word": "others'\u2014imperfections.",
+            "word": "others'—imperfections.",
             "startMs": 25681,
             "endMs": 26028
           }
@@ -32704,7 +32704,7 @@
     {
       "id": "ah-002-t63",
       "speaker": 1,
-      "text": "You keep insisting that emotional complexity is some kind of sacred path to healing, but let\u2019s talk about the clients who are already drowning in their own chaos. They\u2019re not looking for a therapist who mirrors their confusion\u2014they\u2019re looking for a lifeline. If your therapist is too busy navigating their own emotional mess, who\u2019s left to throw them the rope? An AI doesn\u2019t need to \"empathize\" in the way you romanticize because it\u2019s focused on the client\u2019s actual needs, not its own. The real transformation comes from clarity, not from turning therapy into a group therapy session for two.",
+      "text": "You keep insisting that emotional complexity is some kind of sacred path to healing, but let’s talk about the clients who are already drowning in their own chaos. They’re not looking for a therapist who mirrors their confusion—they’re looking for a lifeline. If your therapist is too busy navigating their own emotional mess, who’s left to throw them the rope? An AI doesn’t need to \"empathize\" in the way you romanticize because it’s focused on the client’s actual needs, not its own. The real transformation comes from clarity, not from turning therapy into a group therapy session for two.",
       "startMs": 2232720,
       "durationMs": 29568,
       "audio": {
@@ -32788,7 +32788,7 @@
             "endMs": 4418
           },
           {
-            "word": "let\u2019s",
+            "word": "let’s",
             "startMs": 4418,
             "endMs": 4713
           },
@@ -32853,7 +32853,7 @@
             "endMs": 8247
           },
           {
-            "word": "They\u2019re",
+            "word": "They’re",
             "startMs": 8247,
             "endMs": 8542
           },
@@ -32898,7 +32898,7 @@
             "endMs": 10898
           },
           {
-            "word": "confusion\u2014they\u2019re",
+            "word": "confusion—they’re",
             "startMs": 10898,
             "endMs": 11193
           },
@@ -32978,7 +32978,7 @@
             "endMs": 15611
           },
           {
-            "word": "who\u2019s",
+            "word": "who’s",
             "startMs": 15611,
             "endMs": 15905
           },
@@ -33023,7 +33023,7 @@
             "endMs": 18262
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 18262,
             "endMs": 18556
           },
@@ -33073,7 +33073,7 @@
             "endMs": 21207
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 21207,
             "endMs": 21502
           },
@@ -33093,7 +33093,7 @@
             "endMs": 22385
           },
           {
-            "word": "client\u2019s",
+            "word": "client’s",
             "startMs": 22385,
             "endMs": 22680
           },
@@ -33812,7 +33812,7 @@
     {
       "id": "ah-002-t65",
       "speaker": 1,
-      "text": "Convenient how you cherry-pick the clients who feel \"understood\" by a therapist's emotional display while ignoring the ones who leave feeling more lost and confused. The real question is, who gets to decide when a therapist's vulnerability is helpful versus harmful? You can't guarantee that moment of connection won't turn into a minefield for someone already on edge. Meanwhile, an AI keeps the focus where it should be: on the client\u2019s issues, not the therapist\u2019s. If you\u2019re advocating for therapy as a shared emotional journey, you\u2019re really just making a case for group therapy with an expensive ticket price.",
+      "text": "Convenient how you cherry-pick the clients who feel \"understood\" by a therapist's emotional display while ignoring the ones who leave feeling more lost and confused. The real question is, who gets to decide when a therapist's vulnerability is helpful versus harmful? You can't guarantee that moment of connection won't turn into a minefield for someone already on edge. Meanwhile, an AI keeps the focus where it should be: on the client’s issues, not the therapist’s. If you’re advocating for therapy as a shared emotional journey, you’re really just making a case for group therapy with an expensive ticket price.",
       "startMs": 2304984,
       "durationMs": 31656,
       "audio": {
@@ -34171,7 +34171,7 @@
             "endMs": 22095
           },
           {
-            "word": "client\u2019s",
+            "word": "client’s",
             "startMs": 22095,
             "endMs": 22410
           },
@@ -34191,7 +34191,7 @@
             "endMs": 23357
           },
           {
-            "word": "therapist\u2019s.",
+            "word": "therapist’s.",
             "startMs": 23357,
             "endMs": 23673
           },
@@ -34201,7 +34201,7 @@
             "endMs": 23988
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 23988,
             "endMs": 24304
           },
@@ -34246,7 +34246,7 @@
             "endMs": 26829
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 26829,
             "endMs": 27145
           },
@@ -34321,7 +34321,7 @@
     {
       "id": "ah-002-t66",
       "speaker": 2,
-      "text": "Your vision of AI therapy as a clear, unbiased path assumes the client\u2019s needs are always straightforward and separable from the therapist's humanity. But what of the client who feels lost precisely because they crave a connection that recognizes their struggles as part of a shared human experience? An AI's clarity is only as valuable as the depth of its understanding, and without the ability to say \"I've been there,\" it offers a map without a compass. The therapist's vulnerability isn't a distraction; it's the lighthouse guiding the client through their own storm.",
+      "text": "Your vision of AI therapy as a clear, unbiased path assumes the client’s needs are always straightforward and separable from the therapist's humanity. But what of the client who feels lost precisely because they crave a connection that recognizes their struggles as part of a shared human experience? An AI's clarity is only as valuable as the depth of its understanding, and without the ability to say \"I've been there,\" it offers a map without a compass. The therapist's vulnerability isn't a distraction; it's the lighthouse guiding the client through their own storm.",
       "startMs": 2336640,
       "durationMs": 31752,
       "audio": {
@@ -34390,7 +34390,7 @@
             "endMs": 4046
           },
           {
-            "word": "client\u2019s",
+            "word": "client’s",
             "startMs": 4046,
             "endMs": 4383
           },
@@ -34800,7 +34800,7 @@
     {
       "id": "ah-002-t67",
       "speaker": 1,
-      "text": "You talk about clients craving connection through shared struggle, but how many actually leave therapy because the therapist's personal issues became the focal point? It's easy to point to the rare heartwarming story of connection while ignoring the more common scenario where a therapist's unmanaged baggage overwhelms the session. If your argument hinges on the power of shared vulnerability, why not just advocate for group therapy sessions? At least then, everyone is there by choice and for the same purpose. An AI doesn\u2019t need to \"have been there\" to provide effective, personalized support\u2014it just needs to stay focused on the client\u2019s needs, not its own emotional journey.",
+      "text": "You talk about clients craving connection through shared struggle, but how many actually leave therapy because the therapist's personal issues became the focal point? It's easy to point to the rare heartwarming story of connection while ignoring the more common scenario where a therapist's unmanaged baggage overwhelms the session. If your argument hinges on the power of shared vulnerability, why not just advocate for group therapy sessions? At least then, everyone is there by choice and for the same purpose. An AI doesn’t need to \"have been there\" to provide effective, personalized support—it just needs to stay focused on the client’s needs, not its own emotional journey.",
       "startMs": 2368392,
       "durationMs": 37944,
       "audio": {
@@ -35219,7 +35219,7 @@
             "endMs": 28775
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 28775,
             "endMs": 29126
           },
@@ -35269,7 +35269,7 @@
             "endMs": 32284
           },
           {
-            "word": "support\u2014it",
+            "word": "support—it",
             "startMs": 32284,
             "endMs": 32635
           },
@@ -35309,7 +35309,7 @@
             "endMs": 35092
           },
           {
-            "word": "client\u2019s",
+            "word": "client’s",
             "startMs": 35092,
             "endMs": 35443
           },
@@ -35349,7 +35349,7 @@
     {
       "id": "ah-002-t68",
       "speaker": 2,
-      "text": "If the ultimate goal is to help clients navigate their chaos, then dismissing the therapist's humanity as \"baggage\" fundamentally misunderstands what makes therapy effective. AI might offer a tidy solution, but it cannot authentically model the resilience that comes from confronting one's own struggles. The client's journey is not just about finding answers\u2014it's about learning to live with uncertainty and imperfection. An AI's clarity is a mirage if it can't convey genuine understanding born from experience. The therapist's vulnerability is not a distraction; it's the foundation of trust that allows clients to confront their own.",
+      "text": "If the ultimate goal is to help clients navigate their chaos, then dismissing the therapist's humanity as \"baggage\" fundamentally misunderstands what makes therapy effective. AI might offer a tidy solution, but it cannot authentically model the resilience that comes from confronting one's own struggles. The client's journey is not just about finding answers—it's about learning to live with uncertainty and imperfection. An AI's clarity is a mirage if it can't convey genuine understanding born from experience. The therapist's vulnerability is not a distraction; it's the foundation of trust that allows clients to confront their own.",
       "startMs": 2406336,
       "durationMs": 35568,
       "audio": {
@@ -35618,7 +35618,7 @@
             "endMs": 19252
           },
           {
-            "word": "answers\u2014it's",
+            "word": "answers—it's",
             "startMs": 19252,
             "endMs": 19622
           },
@@ -35838,7 +35838,7 @@
     {
       "id": "ah-002-t69",
       "speaker": 1,
-      "text": "You keep spinning this narrative that emotional messiness is the cornerstone of therapy, but let's be real: most people don't go to therapy to bond over shared chaos. They go because they\u2019re desperate for a way out of their own turmoil, not to be dragged through someone else's. If a therapist's vulnerability was so universally beneficial, why do malpractice suits over boundary violations even exist? Meanwhile, an AI doesn't have personal issues to blur the focus or cross professional boundaries. It\u2019s like hiring a guide who knows the terrain versus one who\u2019s still figuring out their own map.",
+      "text": "You keep spinning this narrative that emotional messiness is the cornerstone of therapy, but let's be real: most people don't go to therapy to bond over shared chaos. They go because they’re desperate for a way out of their own turmoil, not to be dragged through someone else's. If a therapist's vulnerability was so universally beneficial, why do malpractice suits over boundary violations even exist? Meanwhile, an AI doesn't have personal issues to blur the focus or cross professional boundaries. It’s like hiring a guide who knows the terrain versus one who’s still figuring out their own map.",
       "startMs": 2441904,
       "durationMs": 28344,
       "audio": {
@@ -36002,7 +36002,7 @@
             "endMs": 8837
           },
           {
-            "word": "they\u2019re",
+            "word": "they’re",
             "startMs": 8837,
             "endMs": 9122
           },
@@ -36247,7 +36247,7 @@
             "endMs": 22805
           },
           {
-            "word": "It\u2019s",
+            "word": "It’s",
             "startMs": 22805,
             "endMs": 23090
           },
@@ -36302,7 +36302,7 @@
             "endMs": 25941
           },
           {
-            "word": "who\u2019s",
+            "word": "who’s",
             "startMs": 25941,
             "endMs": 26226
           },
@@ -37545,7 +37545,7 @@
     {
       "id": "ah-002-t72",
       "speaker": 1,
-      "text": "You\u2019re romanticizing unpredictability as if it\u2019s the key to healing, but what about the clients who leave sessions feeling more unstable because the therapist's \"spontaneous empathy\" was really just them projecting their own issues? If we're celebrating the messiness of human interaction, we should also acknowledge its potential to harm. Meanwhile, an AI's \"sterile\" consistency is exactly what makes it reliable. It doesn't have bad days, it doesn't project, and it doesn't confuse its own emotional needs with the client's. If your idea of empathy is a therapist who might just make things worse because they're \"being human,\" maybe it's time to rethink what effective support looks like.",
+      "text": "You’re romanticizing unpredictability as if it’s the key to healing, but what about the clients who leave sessions feeling more unstable because the therapist's \"spontaneous empathy\" was really just them projecting their own issues? If we're celebrating the messiness of human interaction, we should also acknowledge its potential to harm. Meanwhile, an AI's \"sterile\" consistency is exactly what makes it reliable. It doesn't have bad days, it doesn't project, and it doesn't confuse its own emotional needs with the client's. If your idea of empathy is a therapist who might just make things worse because they're \"being human,\" maybe it's time to rethink what effective support looks like.",
       "startMs": 2570904,
       "durationMs": 33768,
       "audio": {
@@ -37554,7 +37554,7 @@
         "durationMs": 33408,
         "wordTimings": [
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 0,
             "endMs": 309
           },
@@ -37579,7 +37579,7 @@
             "endMs": 1545
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 1545,
             "endMs": 1854
           },
@@ -38099,7 +38099,7 @@
     {
       "id": "ah-002-t73",
       "speaker": 2,
-      "text": "The reliability you praise in AI is precisely what makes it fall short in the realm of genuine empathy. Life's unpredictability is not a bug\u2014it's a feature that shapes our understanding of each other. When a client shares their pain, they aren't looking for a perfectly calibrated response; they're seeking the raw, flawed acknowledgment that only another human can provide. An AI's consistency is a double-edged sword: it avoids harm but also misses the moments of profound connection that come from shared, messy humanity. If we reduce empathy to a formula, we lose the very essence of what makes it transformative.",
+      "text": "The reliability you praise in AI is precisely what makes it fall short in the realm of genuine empathy. Life's unpredictability is not a bug—it's a feature that shapes our understanding of each other. When a client shares their pain, they aren't looking for a perfectly calibrated response; they're seeking the raw, flawed acknowledgment that only another human can provide. An AI's consistency is a double-edged sword: it avoids harm but also misses the moments of profound connection that come from shared, messy humanity. If we reduce empathy to a formula, we lose the very essence of what makes it transformative.",
       "startMs": 2604672,
       "durationMs": 36144,
       "audio": {
@@ -38228,7 +38228,7 @@
             "endMs": 8495
           },
           {
-            "word": "bug\u2014it's",
+            "word": "bug—it's",
             "startMs": 8495,
             "endMs": 8849
           },
@@ -38618,7 +38618,7 @@
     {
       "id": "ah-002-t74",
       "speaker": 1,
-      "text": "But what of the therapist who, in their quest for \"raw, flawed acknowledgment,\" ends up unloading the entirety of their personal struggles onto a client already grappling with their own? Your idealized version of human empathy conveniently sidesteps the very real power imbalance in therapy. Meanwhile, an AI doesn\u2019t have an ego to soothe or a backstory to overshare. It\u2019s not about reducing empathy to a formula; it\u2019s about recognizing that sometimes, the most empathetic act is to simply listen without inserting your own narrative. If your idea of transformative healing requires the therapist to be just as much of a mess as the client, maybe it\u2019s time to consider that consistency isn\u2019t the opposite of empathy\u2014it\u2019s a prerequisite.",
+      "text": "But what of the therapist who, in their quest for \"raw, flawed acknowledgment,\" ends up unloading the entirety of their personal struggles onto a client already grappling with their own? Your idealized version of human empathy conveniently sidesteps the very real power imbalance in therapy. Meanwhile, an AI doesn’t have an ego to soothe or a backstory to overshare. It’s not about reducing empathy to a formula; it’s about recognizing that sometimes, the most empathetic act is to simply listen without inserting your own narrative. If your idea of transformative healing requires the therapist to be just as much of a mess as the client, maybe it’s time to consider that consistency isn’t the opposite of empathy—it’s a prerequisite.",
       "startMs": 2640816,
       "durationMs": 39576,
       "audio": {
@@ -38867,7 +38867,7 @@
             "endMs": 15799
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 15799,
             "endMs": 16128
           },
@@ -38922,7 +38922,7 @@
             "endMs": 19419
           },
           {
-            "word": "It\u2019s",
+            "word": "It’s",
             "startMs": 19419,
             "endMs": 19749
           },
@@ -38962,7 +38962,7 @@
             "endMs": 22053
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 22053,
             "endMs": 22382
           },
@@ -39157,7 +39157,7 @@
             "endMs": 34889
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 34889,
             "endMs": 35218
           },
@@ -39187,7 +39187,7 @@
             "endMs": 36864
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 36864,
             "endMs": 37193
           },
@@ -39207,7 +39207,7 @@
             "endMs": 38181
           },
           {
-            "word": "empathy\u2014it\u2019s",
+            "word": "empathy—it’s",
             "startMs": 38181,
             "endMs": 38510
           },
@@ -39227,7 +39227,7 @@
     {
       "id": "ah-002-t75",
       "speaker": 2,
-      "text": "Your argument assumes that unpredictability automatically equals harm, yet it\u2019s the very unpredictability of human interaction that allows for breakthroughs. When a therapist shares their own struggles, it can create a powerful moment of solidarity, not just a distraction. An AI, no matter how consistent, cannot replicate the profound impact of a human who says, \"I\u2019ve been there, and I\u2019m here with you now.\" This isn\u2019t romanticizing messiness; it\u2019s recognizing that healing often comes from the courage to be vulnerable together. Your vision of AI as a flawless guide ignores the fact that sometimes, the most meaningful connections are forged in the crucible of shared imperfection.",
+      "text": "Your argument assumes that unpredictability automatically equals harm, yet it’s the very unpredictability of human interaction that allows for breakthroughs. When a therapist shares their own struggles, it can create a powerful moment of solidarity, not just a distraction. An AI, no matter how consistent, cannot replicate the profound impact of a human who says, \"I’ve been there, and I’m here with you now.\" This isn’t romanticizing messiness; it’s recognizing that healing often comes from the courage to be vulnerable together. Your vision of AI as a flawless guide ignores the fact that sometimes, the most meaningful connections are forged in the crucible of shared imperfection.",
       "startMs": 2680392,
       "durationMs": 40728,
       "audio": {
@@ -39281,7 +39281,7 @@
             "endMs": 3423
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 3423,
             "endMs": 3804
           },
@@ -39511,7 +39511,7 @@
             "endMs": 20921
           },
           {
-            "word": "\"I\u2019ve",
+            "word": "\"I’ve",
             "startMs": 20921,
             "endMs": 21301
           },
@@ -39531,7 +39531,7 @@
             "endMs": 22442
           },
           {
-            "word": "I\u2019m",
+            "word": "I’m",
             "startMs": 22442,
             "endMs": 22823
           },
@@ -39561,7 +39561,7 @@
             "endMs": 24725
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 24725,
             "endMs": 25105
           },
@@ -39576,7 +39576,7 @@
             "endMs": 25866
           },
           {
-            "word": "it\u2019s",
+            "word": "it’s",
             "startMs": 25866,
             "endMs": 26246
           },
@@ -39771,7 +39771,7 @@
     {
       "id": "ah-002-t76",
       "speaker": 1,
-      "text": "The \"crucible of shared imperfection\" sounds inspiring until you consider how many people have been retraumatized by therapists who overshare their own struggles. You\u2019re glorifying vulnerability while ignoring the countless cases where it crosses into unprofessional territory. Meanwhile, an AI doesn\u2019t have a past to unload or an ego to feed. If your idea of healing requires the therapist to be a fellow traveler in chaos, what happens when their chaos becomes the client\u2019s burden? The real question is whether empathy is about shared imperfection or about creating a space where the client\u2019s needs come first.",
+      "text": "The \"crucible of shared imperfection\" sounds inspiring until you consider how many people have been retraumatized by therapists who overshare their own struggles. You’re glorifying vulnerability while ignoring the countless cases where it crosses into unprofessional territory. Meanwhile, an AI doesn’t have a past to unload or an ego to feed. If your idea of healing requires the therapist to be a fellow traveler in chaos, what happens when their chaos becomes the client’s burden? The real question is whether empathy is about shared imperfection or about creating a space where the client’s needs come first.",
       "startMs": 2721120,
       "durationMs": 31824,
       "audio": {
@@ -39895,7 +39895,7 @@
             "endMs": 7530
           },
           {
-            "word": "You\u2019re",
+            "word": "You’re",
             "startMs": 7530,
             "endMs": 7857
           },
@@ -39980,7 +39980,7 @@
             "endMs": 13095
           },
           {
-            "word": "doesn\u2019t",
+            "word": "doesn’t",
             "startMs": 13095,
             "endMs": 13422
           },
@@ -40145,7 +40145,7 @@
             "endMs": 23898
           },
           {
-            "word": "client\u2019s",
+            "word": "client’s",
             "startMs": 23898,
             "endMs": 24226
           },
@@ -40240,7 +40240,7 @@
             "endMs": 30119
           },
           {
-            "word": "client\u2019s",
+            "word": "client’s",
             "startMs": 30119,
             "endMs": 30446
           },
@@ -40769,7 +40769,7 @@
     {
       "id": "ah-002-t78",
       "speaker": 1,
-      "text": "Therapists sharing their struggles only works when the client is ready for that level of vulnerability, which is rarely the case in early sessions. You're mistaking the occasional success story for a reliable strategy. Meanwhile, an AI doesn't gamble with a client's emotional state by oversharing. It's like comparing a scalpel to a chainsaw\u2014both cut, but one is far more precise. If your idea of connection is built on the therapist's personal disclosures, you're ignoring the power imbalance that makes such disclosures inherently risky.",
+      "text": "Therapists sharing their struggles only works when the client is ready for that level of vulnerability, which is rarely the case in early sessions. You're mistaking the occasional success story for a reliable strategy. Meanwhile, an AI doesn't gamble with a client's emotional state by oversharing. It's like comparing a scalpel to a chainsaw—both cut, but one is far more precise. If your idea of connection is built on the therapist's personal disclosures, you're ignoring the power imbalance that makes such disclosures inherently risky.",
       "startMs": 2786904,
       "durationMs": 30096,
       "audio": {
@@ -41043,7 +41043,7 @@
             "endMs": 18739
           },
           {
-            "word": "chainsaw\u2014both",
+            "word": "chainsaw—both",
             "startMs": 18739,
             "endMs": 19093
           },
@@ -41203,7 +41203,7 @@
     {
       "id": "ah-002-t79",
       "speaker": 2,
-      "text": "The debate isn't about whether vulnerability can be mishandled but whether its absence can ever truly heal. You advocate for AI's consistency as a safeguard, yet ignore that the most profound therapeutic breakthroughs often arise from shared vulnerability. It's not about therapists oversharing their entire life story; it's about the courage to admit, \"I understand because I've faced something similar.\" This isn't a flaw\u2014it's the foundation of trust. An AI, no matter how precise, cannot replicate the depth of connection that comes from this mutual recognition of struggle.",
+      "text": "The debate isn't about whether vulnerability can be mishandled but whether its absence can ever truly heal. You advocate for AI's consistency as a safeguard, yet ignore that the most profound therapeutic breakthroughs often arise from shared vulnerability. It's not about therapists oversharing their entire life story; it's about the courage to admit, \"I understand because I've faced something similar.\" This isn't a flaw—it's the foundation of trust. An AI, no matter how precise, cannot replicate the depth of connection that comes from this mutual recognition of struggle.",
       "startMs": 2817000,
       "durationMs": 33384,
       "audio": {
@@ -41527,7 +41527,7 @@
             "endMs": 23608
           },
           {
-            "word": "flaw\u2014it's",
+            "word": "flaw—it's",
             "startMs": 23608,
             "endMs": 23983
           },
@@ -42191,7 +42191,7 @@
     {
       "id": "ah-002-t81",
       "speaker": 0,
-      "text": "The crux of the debate has circled around whether empathy requires shared imperfection to be effective, but where do we draw the line when it comes to vulnerability as a prerequisite for meaningful connection? As we approach the end of our discussion, consider this: if we accept that AI's consistency can provide a form of empathy without shared chaos, what implications does this have for our understanding of human relationships? Are we redefining empathy, or simply acknowledging its diverse expressions? Let\u2019s open the floor to your thoughts.",
+      "text": "The crux of the debate has circled around whether empathy requires shared imperfection to be effective, but where do we draw the line when it comes to vulnerability as a prerequisite for meaningful connection? As we approach the end of our discussion, consider this: if we accept that AI's consistency can provide a form of empathy without shared chaos, what implications does this have for our understanding of human relationships? Are we redefining empathy, or simply acknowledging its diverse expressions? Let’s open the floor to your thoughts.",
       "startMs": 2898600,
       "durationMs": 36576,
       "audio": {
@@ -42600,7 +42600,7 @@
             "endMs": 33269
           },
           {
-            "word": "Let\u2019s",
+            "word": "Let’s",
             "startMs": 33269,
             "endMs": 33685
           },
@@ -42640,7 +42640,7 @@
     {
       "id": "ah-002-t82",
       "speaker": 0,
-      "text": "The notion that empathy must be a reciprocal exchange of vulnerabilities overlooks the diverse ways humans experience and express connection. Consider the comfort derived from inanimate objects like journals or the unwavering presence of a pet\u2014these interactions are valued precisely because they lack the unpredictability of human vulnerability. If we accept that empathy can manifest without shared chaos, we must also consider that AI's consistent support might offer a form of connection that is not only different but, for some, preferable.",
+      "text": "The notion that empathy must be a reciprocal exchange of vulnerabilities overlooks the diverse ways humans experience and express connection. Consider the comfort derived from inanimate objects like journals or the unwavering presence of a pet—these interactions are valued precisely because they lack the unpredictability of human vulnerability. If we accept that empathy can manifest without shared chaos, we must also consider that AI's consistent support might offer a form of connection that is not only different but, for some, preferable.",
       "startMs": 2935176,
       "durationMs": 40008,
       "audio": {
@@ -42824,7 +42824,7 @@
             "endMs": 17111
           },
           {
-            "word": "pet\u2014these",
+            "word": "pet—these",
             "startMs": 17111,
             "endMs": 17600
           },
@@ -43059,7 +43059,7 @@
     {
       "id": "ah-002-t83",
       "speaker": 1,
-      "text": "If your benchmark for empathy is tied to the risk of exposure, then why do people pay exorbitant fees for confidentiality? The allure of therapy isn't just the promise of shared vulnerability\u2014it's the guarantee of a safe space where one person's chaos doesn't spill over into another's. If you think AI can't replicate that, then explain why clients often leave sessions feeling lighter after unloading to a silent listener who offers nothing but presence. The real disconnect here is assuming that empathy must be a messy transaction to be valuable, when sometimes, it's the absence of one's own drama that makes room for healing.",
+      "text": "If your benchmark for empathy is tied to the risk of exposure, then why do people pay exorbitant fees for confidentiality? The allure of therapy isn't just the promise of shared vulnerability—it's the guarantee of a safe space where one person's chaos doesn't spill over into another's. If you think AI can't replicate that, then explain why clients often leave sessions feeling lighter after unloading to a silent listener who offers nothing but presence. The real disconnect here is assuming that empathy must be a messy transaction to be valuable, when sometimes, it's the absence of one's own drama that makes room for healing.",
       "startMs": 2975184,
       "durationMs": 33312,
       "audio": {
@@ -43223,7 +43223,7 @@
             "endMs": 9808
           },
           {
-            "word": "vulnerability\u2014it's",
+            "word": "vulnerability—it's",
             "startMs": 9808,
             "endMs": 10124
           },
@@ -43593,7 +43593,7 @@
     {
       "id": "ah-002-t84",
       "speaker": 0,
-      "text": "The debate seems to conflate empathy with the act of sharing personal chaos, but what if we consider that empathy can also be a quiet, unwavering presence? People often find profound comfort in entities that do not reciprocate with their own struggles\u2014a diary, a pet, or even a silent therapist. This suggests that empathy might not always require mutual vulnerability, but rather the assurance that one's feelings are acknowledged and held in a safe space. If we accept that AI can provide this consistent, non-intrusive support, we must also acknowledge that it offers a form of empathy that is not only valid but, for some, deeply meaningful.",
+      "text": "The debate seems to conflate empathy with the act of sharing personal chaos, but what if we consider that empathy can also be a quiet, unwavering presence? People often find profound comfort in entities that do not reciprocate with their own struggles—a diary, a pet, or even a silent therapist. This suggests that empathy might not always require mutual vulnerability, but rather the assurance that one's feelings are acknowledged and held in a safe space. If we accept that AI can provide this consistent, non-intrusive support, we must also acknowledge that it offers a form of empathy that is not only valid but, for some, deeply meaningful.",
       "startMs": 3008496,
       "durationMs": 45072,
       "audio": {
@@ -43807,7 +43807,7 @@
             "endMs": 17119
           },
           {
-            "word": "struggles\u2014a",
+            "word": "struggles—a",
             "startMs": 17119,
             "endMs": 17536
           },
@@ -44142,7 +44142,7 @@
     {
       "id": "ah-002-t85",
       "speaker": 2,
-      "text": "Interesting point about the comfort of silent listeners, but isn't the crux here the intent behind the silence? A diary doesn't judge because it's an object, not because it's mastered emotional intelligence. An AI therapist, on the other hand, would be deliberately programmed to withhold its own \"feelings\" as a feature, not a limitation. That's a fundamentally different dynamic than the unintentional silence of a pet or a journal. What happens when people start wondering if the AI's \"empathy\" is just a calculated response, devoid of genuine understanding? The line between comfort and deception blurs, and suddenly, the very thing that makes AI seem safe\u2014its lack of personal stakes\u2014becomes the reason it fails to truly connect.",
+      "text": "Interesting point about the comfort of silent listeners, but isn't the crux here the intent behind the silence? A diary doesn't judge because it's an object, not because it's mastered emotional intelligence. An AI therapist, on the other hand, would be deliberately programmed to withhold its own \"feelings\" as a feature, not a limitation. That's a fundamentally different dynamic than the unintentional silence of a pet or a journal. What happens when people start wondering if the AI's \"empathy\" is just a calculated response, devoid of genuine understanding? The line between comfort and deception blurs, and suddenly, the very thing that makes AI seem safe—its lack of personal stakes—becomes the reason it fails to truly connect.",
       "startMs": 3053568,
       "durationMs": 40896,
       "audio": {
@@ -44671,7 +44671,7 @@
             "endMs": 36310
           },
           {
-            "word": "safe\u2014its",
+            "word": "safe—its",
             "startMs": 36310,
             "endMs": 36659
           },
@@ -44691,7 +44691,7 @@
             "endMs": 37707
           },
           {
-            "word": "stakes\u2014becomes",
+            "word": "stakes—becomes",
             "startMs": 37707,
             "endMs": 38056
           },
@@ -44736,7 +44736,7 @@
     {
       "id": "ah-002-t86",
       "speaker": 0,
-      "text": "The question of intent behind silence is crucial, but it assumes that empathy's value hinges on the perceived authenticity of the responder. Consider the comfort derived from nature\u2014a mountain doesn't empathize, yet its silent presence can be profoundly reassuring. The AI's \"calculated response\" may indeed be programmed, but isn't human empathy also a form of learned behavior, a set of responses cultivated through experience? If the outcome is a sense of being understood, does the origin of that understanding matter? The real distinction may not be between genuine and artificial empathy, but between empathy that is perceived as authentic and that which is not.",
+      "text": "The question of intent behind silence is crucial, but it assumes that empathy's value hinges on the perceived authenticity of the responder. Consider the comfort derived from nature—a mountain doesn't empathize, yet its silent presence can be profoundly reassuring. The AI's \"calculated response\" may indeed be programmed, but isn't human empathy also a form of learned behavior, a set of responses cultivated through experience? If the outcome is a sense of being understood, does the origin of that understanding matter? The real distinction may not be between genuine and artificial empathy, but between empathy that is perceived as authentic and that which is not.",
       "startMs": 3094464,
       "durationMs": 50952,
       "audio": {
@@ -44880,7 +44880,7 @@
             "endMs": 13122
           },
           {
-            "word": "nature\u2014a",
+            "word": "nature—a",
             "startMs": 13122,
             "endMs": 13608
           },
@@ -46353,7 +46353,7 @@
     {
       "id": "ah-002-t89",
       "speaker": 2,
-      "text": "The real rub here isn't whether an AI can fake empathy but what happens when we start outsourcing the messy, human work of understanding ourselves. Imagine delegating your deepest apologies or most intimate vows to a bot because it's \"good enough.\" What erodes isn't the AI's credibility\u2014it's your own sense of agency and ownership over your emotional life. The danger isn't that AI will fail to connect; it's that we'll stop trying to connect with each other, settling for a polished simulation instead of the raw, unpredictable beauty of human interaction.",
+      "text": "The real rub here isn't whether an AI can fake empathy but what happens when we start outsourcing the messy, human work of understanding ourselves. Imagine delegating your deepest apologies or most intimate vows to a bot because it's \"good enough.\" What erodes isn't the AI's credibility—it's your own sense of agency and ownership over your emotional life. The danger isn't that AI will fail to connect; it's that we'll stop trying to connect with each other, settling for a polished simulation instead of the raw, unpredictable beauty of human interaction.",
       "startMs": 3221904,
       "durationMs": 32736,
       "audio": {
@@ -46592,7 +46592,7 @@
             "endMs": 16342
           },
           {
-            "word": "credibility\u2014it's",
+            "word": "credibility—it's",
             "startMs": 16342,
             "endMs": 16697
           },
@@ -46822,7 +46822,7 @@
     {
       "id": "ah-002-t90",
       "speaker": 1,
-      "text": "Isn't it rich that we're fretting over AI faking empathy when half our real-life interactions are already performative? The truth is, if you\u2019re okay with a spouse who says \"I love you\" out of habit or a friend who nods along while scrolling their phone, then an AI reciting pre-programmed compassion should be the least of your worries. The line isn\u2019t about authenticity\u2014it\u2019s about how low our standards already are.",
+      "text": "Isn't it rich that we're fretting over AI faking empathy when half our real-life interactions are already performative? The truth is, if you’re okay with a spouse who says \"I love you\" out of habit or a friend who nods along while scrolling their phone, then an AI reciting pre-programmed compassion should be the least of your worries. The line isn’t about authenticity—it’s about how low our standards already are.",
       "startMs": 3254640,
       "durationMs": 21144,
       "audio": {
@@ -46941,7 +46941,7 @@
             "endMs": 6517
           },
           {
-            "word": "you\u2019re",
+            "word": "you’re",
             "startMs": 6517,
             "endMs": 6813
           },
@@ -47131,7 +47131,7 @@
             "endMs": 17774
           },
           {
-            "word": "isn\u2019t",
+            "word": "isn’t",
             "startMs": 17774,
             "endMs": 18070
           },
@@ -47141,7 +47141,7 @@
             "endMs": 18366
           },
           {
-            "word": "authenticity\u2014it\u2019s",
+            "word": "authenticity—it’s",
             "startMs": 18366,
             "endMs": 18662
           },
@@ -47186,7 +47186,7 @@
     {
       "id": "ah-002-t91",
       "speaker": 2,
-      "text": "If you're already comfortable outsourcing the sacred to the synthetic, then maybe the real question isn't what AI shouldn't do\u2014it's what you're willing to give up to feel less alone.",
+      "text": "If you're already comfortable outsourcing the sacred to the synthetic, then maybe the real question isn't what AI shouldn't do—it's what you're willing to give up to feel less alone.",
       "startMs": 3275784,
       "durationMs": 10128,
       "audio": {
@@ -47290,7 +47290,7 @@
             "endMs": 6179
           },
           {
-            "word": "do\u2014it's",
+            "word": "do—it's",
             "startMs": 6179,
             "endMs": 6504
           },
@@ -47714,5 +47714,5 @@
   ],
   "status": "published",
   "kind": "live",
-  "blurb": "AXIOM, HEX and NOVA on the one thing you would never hand to an AI \u2014 and whether intimacy, vows and empathy still mean anything once a machine can perform them convincingly."
+  "blurb": "AXIOM, HEX and NOVA on the one thing you would never hand to an AI — and whether intimacy, vows and empathy still mean anything once a machine can perform them convincingly."
 }

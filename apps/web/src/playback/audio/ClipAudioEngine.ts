@@ -10,16 +10,42 @@ const SILENT_WAV =
  * production voice path — high-quality TTS or, later, live-streamed audio. The
  * player's clock stays authoritative; the clip is started/stopped to match.
  */
+interface QueuedClip {
+  turn: Turn
+  rate: number
+}
+
+/**
+ * In a LIVE show, guest clips often arrive late from the CDN (a fresh, uncached
+ * voice). The old behaviour cut the current clip off the instant the next turn
+ * landed — so a guest got clipped mid-sentence and turns audibly overlapped. We
+ * keep a small play QUEUE: `enqueue()` plays clips back-to-back (each waits for the
+ * previous to `ended`), so nothing is cut. `play()` stays the immediate-interrupt
+ * path for a seek / live-edge jump (it clears the queue). A safety cap keeps the
+ * backlog from growing without bound if turns ever outrun real time.
+ */
+const MAX_BACKLOG = 6
+
 export class ClipAudioEngine implements AudioEngine {
   readonly supported = typeof Audio !== 'undefined'
   private el: HTMLAudioElement | null = this.supported ? new Audio() : null
   private unlocked = false
+  private queue: QueuedClip[] = []
+  private busy = false
 
   constructor() {
     if (this.el) {
       // iOS/Safari: play inline (don't hijack to fullscreen) and let it preload.
       this.el.setAttribute('playsinline', '')
       this.el.preload = 'auto'
+      // Advance the queue when a clip finishes — or fails to load (404 / decode
+      // error), so one bad guest clip can't stall the whole live stream.
+      this.el.addEventListener('ended', () => this.advance())
+      // Only a genuine load/decode failure (el.error set) advances — NOT the benign
+      // abort that fires when we swap src for the next clip.
+      this.el.addEventListener('error', () => {
+        if (this.el?.error) this.advance()
+      })
     }
   }
 
@@ -47,8 +73,29 @@ export class ClipAudioEngine implements AudioEngine {
     }
   }
 
+  /** Immediate: interrupt whatever's playing and start this clip now (seek / jump). */
   play(turn: Turn, _speaker: Participant, rate: number): void {
     if (!this.el || !turn.audio) return
+    this.queue = []
+    this.start(turn, rate)
+  }
+
+  /** Sequential: voice this turn after the current clip ends — never cut it off. */
+  enqueue(turn: Turn, _speaker: Participant, rate: number): void {
+    if (!this.el || !turn.audio) return
+    if (!this.busy) {
+      this.start(turn, rate)
+      return
+    }
+    this.queue.push({ turn, rate })
+    // Don't let a backlog grow unbounded: keep only the most recent clips so audio
+    // can't drift minutes behind the live edge (drops the oldest unplayed turns).
+    if (this.queue.length > MAX_BACKLOG) this.queue.splice(0, this.queue.length - MAX_BACKLOG)
+  }
+
+  private start(turn: Turn, rate: number): void {
+    if (!this.el || !turn.audio) return
+    this.busy = true
     this.el.pause()
     this.el.src = turn.audio.url
     this.el.playbackRate = rate
@@ -56,7 +103,15 @@ export class ClipAudioEngine implements AudioEngine {
     void this.el.play().catch(() => {})
   }
 
+  private advance(): void {
+    const next = this.queue.shift()
+    if (next) this.start(next.turn, next.rate)
+    else this.busy = false
+  }
+
   stop(): void {
+    this.queue = []
+    this.busy = false
     if (!this.el) return
     this.el.pause()
   }

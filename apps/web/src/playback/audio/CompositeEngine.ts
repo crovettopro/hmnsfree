@@ -30,6 +30,17 @@ export class CompositeEngine implements AudioEngine {
     next.play(turn, speaker, rate)
   }
 
+  /** Live sequential path: queue behind the current clip on the SAME backend; if the
+   *  turn needs the other backend, fall back to an immediate switch (play). */
+  enqueue(turn: Turn, speaker: Participant, rate: number): void {
+    const next = this.choose(turn)
+    if (this.active === next && next.enqueue) {
+      next.enqueue(turn, speaker, rate)
+      return
+    }
+    this.play(turn, speaker, rate)
+  }
+
   /** Unlock both backends from a user gesture (mobile audio gate). */
   unlock(): void {
     this.clip.unlock?.()

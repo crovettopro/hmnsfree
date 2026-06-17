@@ -17,6 +17,12 @@ export interface AudioEngine {
   readonly supported: boolean
   /** Begin voicing a turn (replaces whatever was playing). */
   play(turn: Turn, speaker: Participant, rate: number): void
+  /**
+   * Voice a turn AFTER the current one finishes, instead of cutting it off. Used by
+   * the live feed so back-to-back turns (esp. late-loading guest clips) play in order
+   * without overlap. Optional — callers fall back to `play()` where it's unimplemented.
+   */
+  enqueue?(turn: Turn, speaker: Participant, rate: number): void
   /** Stop any current output immediately. */
   stop(): void
   /** Release resources / listeners. */

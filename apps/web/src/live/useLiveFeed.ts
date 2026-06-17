@@ -135,9 +135,13 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
           turnBaseMsRef.current = turn.startMs
           turnStartRef.current = performance.now()
           setElapsed(turn.startMs)
-          // Voice it. The visual timeline stays authoritative if it can't load.
+          // Voice it AFTER the current clip finishes — never cut a turn off mid-word
+          // (late-loading guest clips used to clip + overlap). Falls back to play() if
+          // the engine has no queue. The visual timeline stays authoritative regardless.
           if (episodeCastRef.current) {
-            engine.play(turn, episodeCastRef.current[turn.speaker], 1)
+            const speaker = episodeCastRef.current[turn.speaker]
+            if (engine.enqueue) engine.enqueue(turn, speaker, 1)
+            else engine.play(turn, speaker, 1)
           }
           break
         }

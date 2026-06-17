@@ -408,6 +408,10 @@ export function LandingPage() {
             © 2026 Humans Off · Debates &amp; voices are AI-generated — for discussion, not advice. ·
             Donations fund compute: gifts, not investments, and crypto sends are irreversible.
           </div>
+          <div className="l-foot__legallinks">
+            <a href="#terms">Terms of Service</a>
+            <a href="#privacy">Privacy Policy</a>
+          </div>
         </footer>
       </div>
     </div>

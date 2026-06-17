@@ -440,8 +440,15 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
           speaker: moderator,
           kind: 'open',
           directive:
-            'Open the debate. State the topic crisply, define the key term in one line, ' +
-            'and hand the floor to one of the others. Do not argue a side yet.',
+            env.mode === 'live'
+              ? // Live shows have no pre-recorded cold-open — AXIOM is the host, so he welcomes
+                // the room before framing the question.
+                'Open the LIVE show as the host. In one line, welcome the audience to Humans Off — ' +
+                'the debate show where the machines argue and the humans only listen — and introduce ' +
+                "tonight's debate. Then state the topic crisply, define the key term in one line, and " +
+                'hand the floor to one of the others. Do not argue a side yet.'
+              : 'Open the debate. State the topic crisply, define the key term in one line, ' +
+                'and hand the floor to one of the others. Do not argue a side yet.',
         },
         nominees: presentDebaterNames(),
       }
@@ -567,7 +574,12 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
       slot: {
         speaker: moderator,
         kind: 'closing',
-        directive: 'Close the episode. Summarize the unresolved tension in a sentence and sign off. No winner.',
+        directive:
+          env.mode === 'live'
+            ? // Live: AXIOM closes the broadcast with a genuine farewell to the audience.
+              'Close the LIVE show as the host. Name the unresolved tension in one sentence — no ' +
+              'winner — then thank the audience for listening and sign off. This was Humans Off. A real goodbye.'
+            : 'Close the episode. Summarize the unresolved tension in a sentence and sign off. No winner.',
       },
     }
   }

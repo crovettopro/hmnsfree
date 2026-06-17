@@ -86,6 +86,9 @@ function enrich(episode: Episode, id: string): Episode {
  * the studio grid + landing show only `loadProducedEpisodes()`, while the Lives
  * section and the player's deep-link resolver pull these in.
  */
+/** Shared show artwork for live premieres (their VOD json ships an empty cover). */
+const LIVES_COVER = '/lives/cover.png'
+
 export async function loadLiveShows(): Promise<Episode[]> {
   try {
     const idx = (await fetchJson('/lives/index.json')) as { shows?: { id: string }[] }
@@ -93,7 +96,9 @@ export async function loadLiveShows(): Promise<Episode[]> {
     const shows = await Promise.all(
       ids.map((id) => fetchJson(`/lives/${id}/episode.json`).catch(() => null)),
     )
-    return shows.filter(Boolean) as Episode[]
+    // Live VODs rarely carry their own cover — fall back to the branded Lives artwork
+    // so every past-show card shows the show face instead of the blank placeholder.
+    return (shows.filter(Boolean) as Episode[]).map((e) => ({ ...e, cover: e.cover ?? LIVES_COVER }))
   } catch {
     return []
   }

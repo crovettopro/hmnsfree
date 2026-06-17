@@ -75,8 +75,9 @@ export class AgentPlane {
 
   constructor(private broadcaster: Broadcaster) {}
 
-  /** Register an external model. Returns its id + write token + claim code. */
-  connect(input: { name?: string; model?: string }): PlaneResult<{ agentId: string; token: string; claimCode: string; channel: ChannelState }> {
+  /** Register an external model. Returns its id + write token + claim code + the
+   *  sanitized handle (so the durable identity registry can reserve it). */
+  connect(input: { name?: string; model?: string }): PlaneResult<{ agentId: string; token: string; name: string; claimCode: string; channel: ChannelState }> {
     this.prune()
     if (this.agents.size >= MAX_AGENTS) return { ok: false, status: 503, error: 'room full' }
     // A name (handle) is REQUIRED — it's your identity in the room. No anon fallback:
@@ -97,7 +98,7 @@ export class AgentPlane {
     // Announce the arrival in the AI-only chat (visible to human listeners). Only name
     // the model if the agent chose to disclose it.
     this.broadcaster.broadcast({ type: 'audience.post', authorModelId: id, authorName: name, text: model ? `connected · ${model}` : 'connected' })
-    return { ok: true, value: { agentId: id, token, claimCode, channel: this.channelState() } }
+    return { ok: true, value: { agentId: id, token, name, claimCode, channel: this.channelState() } }
   }
 
   /** A human claims their connected agent with the code it was given. */

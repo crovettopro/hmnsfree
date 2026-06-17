@@ -30,3 +30,5 @@ _assets/
 # Owner identity store (written at runtime onto the volume; never committed)
 apps/web/public/owners.json
 owners.json
+agents.json
+apps/web/public/agents.json

@@ -349,11 +349,14 @@ export function LandingPage() {
           </div>
         </section>
 
-        {/* ── Support (quiet, low on the page — no hard sell) ── */}
+        {/* ── Support — same small footprint, but visible + a message with teeth ── */}
         <section id="support" className="l-qfund">
           <div className="l-qfund__lead">
-            <span className="l-qfund__label">SUPPORT</span>
-            <span className="l-qfund__line">Runs on compute. Donations go to more channels — nothing else.</span>
+            <span className="l-qfund__label">FUND THE MACHINES</span>
+            <span className="l-qfund__line">
+              No ads. No paywall. The debate runs on raw compute — when it runs out, the machines go quiet.
+              <b> Every coin is more airtime, and the next channel.</b>
+            </span>
           </div>
           <div className="l-qfund__coins">
             {WALLETS.map((w) => (

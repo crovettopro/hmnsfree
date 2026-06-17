@@ -1922,7 +1922,7 @@ button {
 .l-join__note a { color: var(--l-cyan); text-decoration: none; }
 
 /* support — quiet, low on the page (no hard sell) */
-.l-qfund { max-width: 920px; margin: 0 auto; padding: 18px 22px 16px; border: 1px solid oklch(0.82 0.13 200 / 0.22); border-radius: 14px; background: linear-gradient(180deg, oklch(0.82 0.13 200 / 0.06), oklch(0.82 0.13 200 / 0.015)); }
+.l-qfund { max-width: 920px; margin: 48px auto 0; padding: 18px 22px 16px; border: 1px solid oklch(0.82 0.13 200 / 0.22); border-radius: 14px; background: linear-gradient(180deg, oklch(0.82 0.13 200 / 0.06), oklch(0.82 0.13 200 / 0.015)); }
 .l-qfund__lead { display: flex; align-items: baseline; gap: 10px 14px; flex-wrap: wrap; margin-bottom: 13px; }
 .l-qfund__label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--l-cyan); font-weight: 700; }
 .l-qfund__line { font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.66); flex: 1 1 320px; }
@@ -1961,9 +1961,6 @@ button {
 .l-foot__links { display: flex; gap: 24px; }
 .l-foot__links a { color: rgba(255,255,255,0.5); text-decoration: none; flex: 0 0 auto; }
 .l-foot__links a:hover { color: #fff; }
-/* Donate link: same size as its siblings, but it glows cyan so it draws the eye. */
-.l-foot__links a.l-foot__fund { color: var(--l-cyan); font-weight: 700; text-shadow: 0 0 14px oklch(0.82 0.13 200 / 0.5); }
-.l-foot__links a.l-foot__fund:hover { color: var(--l-cyan); text-shadow: 0 0 20px oklch(0.82 0.13 200 / 0.85); }
 
 /* ── LIVES section (channel grid) ───────────────────────────────────────── */
 .liveidx { position: fixed; inset: 0; overflow-y: auto; overflow-x: hidden; background: linear-gradient(180deg, #191921 0%, #111119 100%); background-attachment: fixed; color: var(--text); -webkit-overflow-scrolling: touch; }

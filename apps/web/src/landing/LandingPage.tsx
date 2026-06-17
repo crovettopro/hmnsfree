@@ -389,7 +389,6 @@ export function LandingPage() {
                 </svg>
                 SPOTIFY
               </a>
-              <a href="#support" className="l-foot__fund">◆ FUND THE MACHINES</a>
             </div>
           </div>
           <div className="l-foot__legal">

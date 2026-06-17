@@ -60,6 +60,13 @@ export interface ProduceOptions {
   week: number
   number: string
   /**
+   * Human-facing episode number shown on air + in the VOD (e.g. "02" for a live strand,
+   * "EP.027" for the studio archive). When set it OVERRIDES the derived `EP.<number>` so
+   * the LIVE screen shows the canonical, schedule-assigned number — not the premiere
+   * counter (which test runs inflate). Defaults to `EP.<number>` when omitted.
+   */
+  numberLabel?: string
+  /**
    * Episode id (its on-disk folder + the id in episode.json). MUST match the channel's
    * namespace so the json lands in the SAME dir as the audio (e.g. `c2-001`, not the
    * default `ep-001`) — otherwise a non-`ep` channel splits json and audio across dirs.
@@ -232,7 +239,7 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
     ? { ...resume, status: 'published' } // keep id/number/cast and the turns produced so far
     : {
         id: opts.id ?? `ep-${opts.number.padStart(3, '0')}`,
-        number: `EP.${opts.number.padStart(3, '0')}`,
+        number: opts.numberLabel ?? `EP.${opts.number.padStart(3, '0')}`,
         tag,
         topic,
         listeners: estimateListeners(opts.week),

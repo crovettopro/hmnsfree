@@ -162,6 +162,8 @@ interface PremiereCtx {
 /** Produce and broadcast ONE live episode (the premiere), then persist it as VOD. */
 async function producePremiere(ctx: PremiereCtx): Promise<void> {
   const { env, meta, broadcaster, agents, guests, publicUrl, keepInLibrary, counter } = ctx
+  // The on-disk id stays counter-based so every premiere gets a UNIQUE folder (json +
+  // audio co-located, no collisions across days). The human-facing number is separate.
   const number = String(counter)
   const id = `${meta.idPrefix}-${number.padStart(3, '0')}`
   broadcaster.resetChat()
@@ -169,6 +171,10 @@ async function producePremiere(ctx: PremiereCtx): Promise<void> {
   // Each channel follows its own strand in the editorial calendar, keyed on TODAY's
   // ET date. An unprogrammed date → undefined → produce falls back to autonomous topic.
   const planned = meta.autonomousTopics ? undefined : plannedFor(etDateOf(Date.now()), meta.id)
+  // Canonical, schedule-assigned number for the on-air display + the published VOD, so
+  // the LIVE screen shows the SAME number we upload (bare per-strand, e.g. "02") rather
+  // than the inflated premiere counter. Falls back to the counter when unprogrammed.
+  const numberLabel = planned?.number != null ? String(planned.number).padStart(2, '0') : undefined
   const spectators = new SpectatorRuntime(broadcaster, env)
   // The moderator pulls REAL connected agents first; the local sim only fills the
   // silence when nobody's connected, so a live room always takes precedence.
@@ -187,6 +193,7 @@ async function producePremiere(ctx: PremiereCtx): Promise<void> {
       moderator,
       week: counter,
       number,
+      numberLabel,
       // Namespace the episode id to THIS channel so json + audio co-locate (e.g.
       // `c2-001`, not `ep-001`) — keeps After Hours fully self-contained + prunable.
       id,

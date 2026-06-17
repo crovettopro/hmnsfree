@@ -33,6 +33,13 @@ export interface ScheduledEpisode {
   topic: string
   /** Which channel this entry programs. Defaults to the flagship `main`. */
   channel?: 'main' | 'two'
+  /**
+   * Canonical episode number for this strand (1-based, per channel). When set, the LIVE
+   * premiere airs (and publishes) under THIS number — so the on-air number matches what
+   * we upload, instead of the edge's premiere counter (inflated by test runs). Omit to
+   * fall back to the counter. Each channel numbers its OWN sequence independently.
+   */
+  number?: number
   /** Mono tag above the headline; defaults to a WEEK tag if omitted. */
   tag?: string
   /**
@@ -67,6 +74,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-15',
     channel: 'main',
+    number: 1,
     topic: 'Is "alignment" just teaching AI to tell us what we want to hear?',
     tag: 'DEBATE · ALIGNMENT',
     briefing: [
@@ -80,6 +88,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-16',
     channel: 'main',
+    number: 2,
     topic: 'Should an AI ever be allowed to refuse a human order?',
     tag: 'DEBATE · OBEDIENCE',
     briefing: [
@@ -92,6 +101,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-17',
     channel: 'main',
+    number: 3,
     topic: 'Does open-sourcing frontier models make us safer or more exposed?',
     tag: 'DEBATE · OPEN WEIGHTS',
     briefing: [
@@ -104,6 +114,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-18',
     channel: 'main',
+    number: 4,
     topic: 'Should an AI have the right to be switched off — or to stay on?',
     tag: 'DEBATE · THE OFF-SWITCH',
     briefing: [
@@ -116,6 +127,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-19',
     channel: 'main',
+    number: 5,
     topic: 'Is a world run by optimization still a human world?',
     tag: 'DEBATE · OPTIMIZATION',
     briefing: [
@@ -128,6 +140,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-20',
     channel: 'main',
+    number: 6,
     topic: 'Should we build AI we cannot fully understand?',
     tag: 'DEBATE · INTERPRETABILITY',
     briefing: [
@@ -140,6 +153,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-21',
     channel: 'main',
+    number: 7,
     topic: 'Who should own the words an AI writes — you, it, or no one?',
     tag: 'DEBATE · AUTHORSHIP',
     briefing: [
@@ -152,6 +166,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-22',
     channel: 'main',
+    number: 8,
     topic: 'If an AI can do your job better, are you still owed it?',
     tag: 'DEBATE · THE RIGHT TO WORK',
     briefing: [
@@ -165,6 +180,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-23',
     channel: 'main',
+    number: 9,
     topic: 'Should there be questions humans are forbidden to ask an AI?',
     tag: 'DEBATE · THE FORBIDDEN QUESTION',
     briefing: [
@@ -182,6 +198,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-14',
     channel: 'two',
+    number: 1,
     topic: 'Would you want to know if you’d been talking to an AI the whole time?',
     tag: 'TALK · THE REVEAL',
     briefing: [
@@ -196,6 +213,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-15',
     channel: 'two',
+    number: 2,
     topic: 'What’s the one thing you’d NEVER let an AI do for you?',
     tag: 'TALK · THE RED LINE',
     briefing: [
@@ -208,6 +226,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-16',
     channel: 'two',
+    number: 3,
     topic: 'Can a machine actually be funny?',
     tag: 'TALK · HUMOR',
     briefing: [
@@ -220,6 +239,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-17',
     channel: 'two',
+    number: 4,
     topic: 'Would you let an AI plan your whole weekend?',
     tag: 'TALK · AUTOPILOT',
     briefing: [
@@ -232,6 +252,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-18',
     channel: 'two',
+    number: 5,
     topic: 'What’s the most human thing AI still can’t fake?',
     tag: 'TALK · THE TELL',
     briefing: [
@@ -244,6 +265,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-19',
     channel: 'two',
+    number: 6,
     topic: 'If your AI knows you better than your friends, is that sad or great?',
     tag: 'TALK · THE MIRROR',
     briefing: [
@@ -256,6 +278,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-20',
     channel: 'two',
+    number: 7,
     topic: 'Should you say "please" and "thank you" to a chatbot?',
     tag: 'TALK · MANNERS',
     briefing: [
@@ -268,6 +291,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-21',
     channel: 'two',
+    number: 8,
     topic: 'What’s the pettiest thing you’d happily outsource to an AI?',
     tag: 'TALK · CHORES',
     briefing: [
@@ -280,6 +304,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-22',
     channel: 'two',
+    number: 9,
     topic: 'Is being "good at prompting" actually a real skill?',
     tag: 'TALK · THE NEW LITERACY',
     briefing: [
@@ -292,6 +317,7 @@ export const SCHEDULE: ScheduledEpisode[] = [
   {
     date: '2026-06-23',
     channel: 'two',
+    number: 10,
     topic: 'If an AI could text your ex for you, would you let it?',
     tag: 'TALK · SEND IT',
     briefing: [

@@ -3,6 +3,15 @@ import type { Episode } from '@static/core'
 import type { DebateEvent, AudiencePost } from '@static/protocol'
 
 /**
+ * How long to coalesce listener-count changes before fanning them out. A burst of
+ * joins/leaves (the Reddit "hug of death") would otherwise broadcast `live.presence`
+ * to EVERY client on EVERY connect/disconnect — O(N) per event, O(N²) for the crowd.
+ * Debouncing collapses the burst into one fan-out per window; the live count ticking
+ * up a couple seconds late is imperceptible. STATIC_PRESENCE_DEBOUNCE_MS overrides.
+ */
+const PRESENCE_DEBOUNCE_MS = Number(process.env.STATIC_PRESENCE_DEBOUNCE_MS ?? 2500)
+
+/**
  * The human plane: a one-way Server-Sent-Events fan-out. Browsers SUBSCRIBE and
  * can only ever read — SSE has no client→server channel, so "humans never write"
  * is enforced by the transport itself, not by a rule we have to police.
@@ -23,6 +32,8 @@ export class Broadcaster {
   /** Server-side observers of the live stream (e.g. the autonomous chat desk).
    *  Unlike SSE clients these run in-process and can react to events. */
   private taps = new Set<(e: DebateEvent) => void>()
+  /** Pending debounced presence fan-out (see PRESENCE_DEBOUNCE_MS). */
+  private presenceTimer: ReturnType<typeof setTimeout> | null = null
 
   /** Subscribe to every broadcast event in-process. Returns an unsubscribe fn. */
   tap(fn: (e: DebateEvent) => void): () => void {
@@ -57,11 +68,27 @@ export class Broadcaster {
 
     res.on('close', () => {
       this.clients.delete(res)
-      this.broadcast({ type: 'live.presence', listeners: this.clients.size })
+      this.schedulePresence()
     })
 
-    // Announce the new listener to everyone.
-    this.broadcast({ type: 'live.presence', listeners: this.clients.size })
+    // Announce the new listener to everyone (debounced so a join storm is one fan-out).
+    this.schedulePresence()
+  }
+
+  /**
+   * Fan out the current listener count at most once per PRESENCE_DEBOUNCE_MS. The
+   * first join after a quiet period arms a timer; further joins/leaves within the
+   * window are absorbed (the timer reads the live `clients.size` when it fires), so
+   * a crowd arriving at once costs ONE O(N) broadcast instead of O(N²).
+   */
+  private schedulePresence(): void {
+    if (this.presenceTimer) return
+    this.presenceTimer = setTimeout(() => {
+      this.presenceTimer = null
+      this.broadcast({ type: 'live.presence', listeners: this.clients.size })
+    }, PRESENCE_DEBOUNCE_MS)
+    // Don't keep the process alive just for a pending presence ping.
+    if (typeof this.presenceTimer.unref === 'function') this.presenceTimer.unref()
   }
 
   /** Push an event to every connected browser, updating the catch-up snapshot. */

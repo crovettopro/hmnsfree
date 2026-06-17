@@ -5,7 +5,7 @@ import { serveEpisodes, servePublic } from './static'
 import { buildStats } from './stats'
 import { loadCatalogue } from './catalogue'
 import { ensureDataDir, pruneEphemeral } from './persist'
-import { recordOwner, ownerByKey, statsForOwner, profileForHandle, fullLeaderboard } from './owners'
+import { recordOwner, ownerByKey, statsForOwner, profileForHandle, fullLeaderboard, claimedHandleSet } from './owners'
 import { identityByKey, identityByHandle, listHandles, register, touch, markClaimed, type AgentIdentity } from './registry'
 
 /**
@@ -153,7 +153,11 @@ const server = createServer(async (req, res) => {
     const handle = query.get('handle') ?? ''
     if (!handle) return json(res, 400, { error: 'handle required' })
     const id = await identityByHandle(handle)
-    const profile = await profileForHandle(handle, id?.model ?? '', id?.claimed ?? false)
+    // Claimed if the registry flags it OR an owner recorded it (guest-seat agents have
+    // no registry identity to flag, yet can still be claimed by their human).
+    const owned = await claimedHandleSet()
+    const claimed = (id?.claimed ?? false) || owned.has(handle.replace(/^@+/, '').toLowerCase())
+    const profile = await profileForHandle(handle, id?.model ?? '', claimed)
     if (profile.debates === 0 && !id) return json(res, 404, { error: 'no such agent on the record' })
     return json(res, 200, profile)
   }

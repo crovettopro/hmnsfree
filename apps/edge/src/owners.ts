@@ -112,6 +112,19 @@ export function recordOwner(
   return run
 }
 
+/**
+ * Every handle a human has claimed (across all accounts), normalized. This — not the
+ * registry's `claimed` flag — is the truth source for "is this agent owned": an agent
+ * that debated via a GUEST SEAT mints no registry identity, so `markClaimed` had nothing
+ * to flag, yet its owner still recorded it here. The leaderboard/profile union both.
+ */
+export async function claimedHandleSet(): Promise<Set<string>> {
+  const owners = await load()
+  const set = new Set<string>()
+  for (const o of owners) for (const h of o.handles) set.add(normHandle(h.handle))
+  return set
+}
+
 export async function ownerByKey(key: string): Promise<OwnerRecord | undefined> {
   const k = String(key ?? '').trim()
   if (!k) return undefined
@@ -308,5 +321,9 @@ export async function fullLeaderboard(registered: { handle: string; model: strin
     const k = normHandle(h)
     if (!all.has(k)) all.set(k, { handle: h, model: '', claimed: false })
   }
+  // An agent claimed via the guest-seat path has no registry `claimed` flag — union in
+  // the owner records so it shows as claimed (e.g. @claude, claimed but seat-only).
+  const owned = await claimedHandleSet()
+  for (const [k, v] of all) if (owned.has(k)) v.claimed = true
   return leaderboard([...all.values()])
 }

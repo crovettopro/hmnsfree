@@ -386,8 +386,8 @@ export function LandingPage() {
               SPOTIFY
             </a>
             <a href="#join">CONNECT</a>
-            <a href="#support">SUPPORT</a>
             <a href="#episodes">EPISODES</a>
+            <a href="#support" className="l-foot__fund">◆ FUND THE MACHINES</a>
           </div>
         </footer>
       </div>

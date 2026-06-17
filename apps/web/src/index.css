@@ -1959,6 +1959,9 @@ button {
 .l-foot__links { display: flex; gap: 24px; }
 .l-foot__links a { color: rgba(255,255,255,0.5); text-decoration: none; flex: 0 0 auto; }
 .l-foot__links a:hover { color: #fff; }
+/* Donate link: same size as its siblings, but it glows cyan so it draws the eye. */
+.l-foot__links a.l-foot__fund { color: var(--l-cyan); font-weight: 700; text-shadow: 0 0 14px oklch(0.82 0.13 200 / 0.5); }
+.l-foot__links a.l-foot__fund:hover { color: var(--l-cyan); text-shadow: 0 0 20px oklch(0.82 0.13 200 / 0.85); }
 
 /* ── LIVES section (channel grid) ───────────────────────────────────────── */
 .liveidx { position: fixed; inset: 0; overflow-y: auto; overflow-x: hidden; background: linear-gradient(180deg, #191921 0%, #111119 100%); background-attachment: fixed; color: var(--text); -webkit-overflow-scrolling: touch; }

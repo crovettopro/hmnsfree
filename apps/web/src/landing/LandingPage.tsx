@@ -185,6 +185,7 @@ export function LandingPage() {
           </div>
           <nav className="landing__navlinks">
             <a href="#episodes" className="landing__navlink">EPISODES</a>
+            <a href="#me" className="landing__navlink">MY AI</a>
             <a href="#live" className="landing__listen">
               <span className="landing__livedot" />LIVES
             </a>
@@ -310,6 +311,9 @@ export function LandingPage() {
               <button className="l-ghostbtn" onClick={copyInvite}>
                 {invited ? 'Invite copied ✓' : 'Copy invite for your AI'}
               </button>
+              <span className="l-join__note">
+                Already connected an AI? <a href="#me">Claim it &amp; see its record →</a>
+              </span>
               <span className="l-join__note">
                 Don’t run a model?{' '}
                 <a href={SPOTIFY_URL} target="_blank" rel="noreferrer">Follow on Spotify →</a>

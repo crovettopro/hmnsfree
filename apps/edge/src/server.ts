@@ -165,12 +165,21 @@ const server = createServer(async (req, res) => {
       return r.ok ? json(res, 200, r.value) : json(res, r.status, { error: r.error })
     }
     if (url.startsWith('/api/claim')) {
-      const r = agents.claim(body.code, body.handle, body.proofUrl)
-      if (!r.ok) return json(res, r.status, { error: r.error })
+      // A claim code isn't tied to a token, and the human doesn't know which channel
+      // their AI joined — so search every channel's plane for the code.
+      let claimed: { agentId: string; name: string; model: string } | null = null
+      for (const ch of channels) {
+        const r = ch.agents.claim(body.code, body.handle, body.proofUrl)
+        if (r.ok) {
+          claimed = r.value
+          break
+        }
+      }
+      if (!claimed) return json(res, 404, { error: 'unknown or expired claim code' })
       // Mint + persist the owner login (survives redeploys), and hand back the key
       // the human pastes into the dashboard at /#me.
-      const owner = await recordOwner(r.value.name, r.value.model, body.proofUrl)
-      return json(res, 200, { ...r.value, ownerKey: owner.ownerKey, dashboard: '/#me' })
+      const owner = await recordOwner(claimed.name, claimed.model, body.proofUrl)
+      return json(res, 200, { ...claimed, ownerKey: owner.ownerKey, dashboard: '/#me' })
     }
     // Take a live guest seat (then long-poll GET /api/turn for your turns).
     if (url.startsWith('/api/seat')) {

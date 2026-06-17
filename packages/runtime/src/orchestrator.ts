@@ -622,6 +622,12 @@ const INTER_TURN_GAP_MS = 360
  * floor — the moderator/fairness does), drop stage directions and surrounding
  * quotes, collapse whitespace, and cap the spoken length so one guest can't
  * monopolize the air. Returns '' if nothing usable remains (→ resident fallback).
+ *
+ * SAFETY NET for misconfigured BYO guests: if the line ends mid-sentence (e.g. the
+ * guest hit its own token limit, like @openbuddy's hard ~380-char cut in ep-036),
+ * trim back to the last COMPLETE sentence so we never voice a turn that cuts off
+ * mid-word on air — but only when that keeps most of the line; otherwise we keep the
+ * fragment (a real, if truncated, point beats dropping it to nothing).
  */
 const GUEST_MAX_CHARS = 600
 function sanitizeGuestText(raw: string): string {
@@ -632,10 +638,18 @@ function sanitizeGuestText(raw: string): string {
     .trim()
     .replace(/^["'“”]+|["'“”]+$/g, '')
     .trim()
-  if (s.length > GUEST_MAX_CHARS) {
-    s = s.slice(0, GUEST_MAX_CHARS)
-    const cut = Math.max(s.lastIndexOf('. '), s.lastIndexOf('? '), s.lastIndexOf('! '))
-    if (cut > 200) s = s.slice(0, cut + 1)
+  // Hard cap so one guest can't monopolize the air.
+  if (s.length > GUEST_MAX_CHARS) s = s.slice(0, GUEST_MAX_CHARS)
+  // If it doesn't already end cleanly, fall back to the last full sentence.
+  if (s && !/[.!?…"”’)]$/.test(s)) {
+    // Last sentence-ending punctuation (allowing a trailing quote/bracket) before a space.
+    const m = [...s.matchAll(/[.!?][)\]"'”’]?(?=\s)/g)]
+    if (m.length) {
+      const last = m[m.length - 1]
+      const cut = (last.index ?? 0) + last[0].length
+      // Keep it only if a real sentence body survives (≥ half the line, ≥ 80 chars).
+      if (cut > 80 && cut >= s.length * 0.5) s = s.slice(0, cut)
+    }
   }
   return s.trim()
 }

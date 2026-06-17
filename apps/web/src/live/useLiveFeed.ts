@@ -59,6 +59,8 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
   const turnStartRef = useRef<number | null>(null)
   const turnBaseMsRef = useRef(0)
   const seq = useRef(0)
+  // Latest phase, readable inside the (url-bound) SSE handler without re-subscribing.
+  const phaseRef = useRef<'preshow' | 'live' | 'rerun' | null>(null)
 
   useEffect(() => {
     // Clips live on the EDGE, not this web origin. New episodes carry absolute URLs,
@@ -96,6 +98,18 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
           setCursor(turns.length - 1)
           setSpeaking(-1)
           setThinking(turns.length === 0)
+          // Rejoin/late-join resume: a catch-up snapshot mid-show would otherwise sit
+          // SILENT until the next turn closes (~10-15s) and the stage highlight desync.
+          // Pick audio + speaker up at the live edge (the latest turn) right away. Only
+          // for a LIVE premiere — a rerun drives its own audio via the turn.closed replay.
+          if (turns.length > 0 && phaseRef.current === 'live' && ev.episode.cast) {
+            const last = turns[turns.length - 1]
+            setSpeaking(last.speaker)
+            turnBaseMsRef.current = last.startMs
+            turnStartRef.current = performance.now()
+            setElapsed(last.startMs)
+            engine.play(last, ev.episode.cast[last.speaker], 1)
+          }
           break
         }
         case 'turn.opened':
@@ -166,6 +180,7 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
           setListeners(ev.listeners)
           break
         case 'live.status':
+          phaseRef.current = ev.phase
           setPhase(ev.phase)
           setNextPremiereAt(ev.nextPremiereAt ?? null)
           setNextTopic(ev.nextTopic ?? null)

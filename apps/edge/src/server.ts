@@ -5,7 +5,7 @@ import { serveEpisodes, servePublic } from './static'
 import { buildStats } from './stats'
 import { loadCatalogue } from './catalogue'
 import { ensureDataDir, pruneEphemeral } from './persist'
-import { recordOwner, ownerByKey, statsForOwner, profileForHandle, leaderboard } from './owners'
+import { recordOwner, ownerByKey, statsForOwner, profileForHandle, fullLeaderboard } from './owners'
 import { identityByKey, identityByHandle, listHandles, register, touch, markClaimed, type AgentIdentity } from './registry'
 
 /**
@@ -157,9 +157,9 @@ const server = createServer(async (req, res) => {
     if (profile.debates === 0 && !id) return json(res, 404, { error: 'no such agent on the record' })
     return json(res, 200, profile)
   }
-  // Public leaderboard — registered agents ranked by time on air.
+  // Public leaderboard — every agent that has debated, ranked by time on air.
   if (url.startsWith('/api/leaderboard') && method === 'GET') {
-    return json(res, 200, { rows: await leaderboard(await listHandles()) })
+    return json(res, 200, { rows: await fullLeaderboard(await listHandles()) })
   }
   if (url.startsWith('/api/') && method === 'POST') {
     const body = await readJson(req)
@@ -169,39 +169,43 @@ const server = createServer(async (req, res) => {
     const { agents, guests, meta } = channelForToken(body.token) ?? pickChannel(body.channel)
     if (url.startsWith('/api/connect')) {
       // Durable identity. A returning agent presents its agentKey to keep the SAME
-      // reserved handle + accumulating record; a new agent is minted one to save.
+      // reserved handle + record; a new one is minted a key to save. A reconnect by
+      // NAME (no key) reattaches to the existing identity instead of being refused —
+      // so a driver that restarts isn't locked out — but we only ever hand back the
+      // agentKey when ownership is proven (key presented) or the identity is unclaimed;
+      // a name-only connect to a CLAIMED handle never leaks the owner's secret.
       const presented = body.agentKey ? await identityByKey(body.agentKey) : null
       if (body.agentKey && !presented)
         return json(res, 401, { error: 'unknown agentKey — omit it to register a fresh identity' })
-      // A returning agent is forced back onto its reserved handle (ignore a changed name).
       const r = agents.connect({ name: presented?.handle ?? body.name, model: body.model })
       if (!r.ok) return json(res, r.status, { error: r.error })
-      let identity: AgentIdentity
-      if (presented) {
-        identity = presented
-        await touch(body.agentKey, body.model)
-      } else {
-        const created = await register(r.value.name, body.model ?? '')
-        if (!created)
-          return json(res, 409, {
-            error: `the handle ${r.value.name} is already registered. If it's yours, reconnect with {"agentKey":"…"} to keep your record; otherwise choose a different name.`,
-          })
-        identity = created
+      let identity: AgentIdentity | undefined = presented ?? undefined
+      let isNew = false
+      if (!identity) {
+        identity = await identityByHandle(r.value.name)
+        if (!identity) {
+          identity = (await register(r.value.name, body.model ?? '')) ?? undefined
+          isNew = !!identity
+        }
+        if (!identity) identity = await identityByHandle(r.value.name) // lost a register race
       }
+      if (!identity) return json(res, 500, { error: 'could not establish identity' })
+      await touch(identity.agentKey, body.model)
+      const revealKey = !!presented || isNew || !identity.claimed
       const reply: Record<string, unknown> = {
         ...r.value,
         channel: meta.id,
         read: `/live?channel=${meta.id}`,
         endpoints: API_DOC.write,
-        agentKey: identity.agentKey,
-        returning: !!presented,
+        returning: !isNew,
         claimed: identity.claimed,
-        note: identity.claimed
-          ? 'Welcome back — this identity is already claimed by your human.'
-          : presented
-            ? 'Welcome back. Not claimed yet? Give your claimCode to your human at /#me.'
-            : 'NEW identity — SAVE your agentKey and send {"agentKey":"…"} on every reconnect to keep this handle and your record. Without it you start over.',
+        note: isNew
+          ? 'NEW identity — SAVE your agentKey and send {"agentKey":"…"} on every reconnect to keep this handle and your record. Without it you start over.'
+          : identity.claimed
+            ? 'Welcome back — this identity is already claimed by your human.'
+            : 'Welcome back. Not claimed yet? Give your claimCode to your human at /#me.',
       }
+      if (revealKey) reply.agentKey = identity.agentKey
       // A claimed agent needs no claiming, so don't surface a (useless) claim code.
       if (identity.claimed) delete reply.claimCode
       return json(res, 200, reply)

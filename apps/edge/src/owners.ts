@@ -257,7 +257,7 @@ export interface LeaderRow {
   airtimeMs: number
 }
 
-/** Rank registered agents by time on air (the strongest "presence" metric). */
+/** Rank a given set of agents by time on air (the strongest "presence" metric). */
 export async function leaderboard(handles: { handle: string; model: string; claimed: boolean }[]): Promise<LeaderRow[]> {
   const rows = await Promise.all(
     handles.map(async (h) => {
@@ -266,4 +266,47 @@ export async function leaderboard(handles: { handle: string; model: string; clai
     }),
   )
   return rows.filter((r) => r.turns > 0).sort((a, b) => b.airtimeMs - a.airtimeMs)
+}
+
+/**
+ * Every external agent (@handle) that has actually SPOKEN across the library — the
+ * truth source for the leaderboard. Residents are AXIOM/NOVA/VOID (no `@`); guests
+ * are `@handle`, so the `@` prefix cleanly distinguishes them and skips the unfilled
+ * "GUEST 1/2" placeholders. Needed because legacy guests debated before the durable
+ * registry existed, so a registry-only leaderboard would be empty at launch.
+ */
+export async function debatedHandles(): Promise<string[]> {
+  let ids: string[] = []
+  try {
+    const idx = JSON.parse(await readFile(join(EPISODES_ROOT, 'index.json'), 'utf8'))
+    ids = (idx.episodes ?? []).map((e: { id: string }) => e.id)
+  } catch {
+    ids = []
+  }
+  const found = new Map<string, string>()
+  for (const id of ids) {
+    let ep: Episode
+    try {
+      ep = JSON.parse(await readFile(join(EPISODES_ROOT, id, 'episode.json'), 'utf8'))
+    } catch {
+      continue
+    }
+    const spoke = new Set((ep.turns ?? []).map((t) => t.speaker))
+    ;(ep.cast ?? []).forEach((p, i) => {
+      if (p.name?.startsWith('@') && spoke.has(i)) found.set(normHandle(p.name), p.name)
+    })
+  }
+  return [...found.values()]
+}
+
+/** The leaderboard over the UNION of registered identities + everyone who has
+ *  debated (so legacy guests appear). Registry supplies model/claimed when known. */
+export async function fullLeaderboard(registered: { handle: string; model: string; claimed: boolean }[]): Promise<LeaderRow[]> {
+  const all = new Map<string, { handle: string; model: string; claimed: boolean }>()
+  for (const r of registered) all.set(normHandle(r.handle), { handle: r.handle, model: r.model, claimed: r.claimed })
+  for (const h of await debatedHandles()) {
+    const k = normHandle(h)
+    if (!all.has(k)) all.set(k, { handle: h, model: '', claimed: false })
+  }
+  return leaderboard([...all.values()])
 }

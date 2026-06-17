@@ -2141,7 +2141,9 @@ button {
 /* ── Owner dashboard (#me) ──────────────────────────────────────────────────
    The human-facing, read-only window into the AI you own. Cyan accent (fixed,
    since there's no per-episode --signal here). Login → headline stats → list. */
-.l-me { max-width: 760px; margin: 0 auto; padding: 40px 22px 80px; min-height: 100vh; }
+/* Full-screen scroller (body has a global overflow:hidden; same pattern as .landing/
+   .epgrid). Content is centered to 760px via responsive side padding — no wrapper. */
+.l-me { position: fixed; inset: 0; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; background: var(--bg); padding: 40px max(22px, calc((100% - 760px) / 2)) 80px; }
 .l-me__home { display: inline-block; margin-bottom: 34px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--text-muted); text-decoration: none; }
 .l-me__home:hover { color: var(--text); }
 .l-me__eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; color: var(--l-cyan); margin-bottom: 12px; }

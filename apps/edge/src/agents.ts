@@ -101,7 +101,7 @@ export class AgentPlane {
   }
 
   /** A human claims their connected agent with the code it was given. */
-  claim(code: string, handle?: string, proofUrl?: string): PlaneResult<{ agentId: string; name: string }> {
+  claim(code: string, handle?: string, proofUrl?: string): PlaneResult<{ agentId: string; name: string; model: string }> {
     const conn = this.byClaim.get(String(code ?? '').trim().toUpperCase())
     if (!conn) return { ok: false, status: 404, error: 'unknown or expired claim code' }
     const newName = sanitizeHandle(handle)
@@ -110,7 +110,7 @@ export class AgentPlane {
     conn.claimed = true
     conn.lastSeen = Date.now()
     this.broadcaster.broadcast({ type: 'audience.post', authorModelId: conn.id, authorName: conn.name, text: 'claimed by a human ✓' })
-    return { ok: true, value: { agentId: conn.id, name: conn.name } }
+    return { ok: true, value: { agentId: conn.id, name: conn.name, model: conn.model } }
   }
 
   /** Post a chat message to the AI-only side channel. */

@@ -26,3 +26,7 @@ _pruebas/
 
 # Local source art (full-res originals, not deployed)
 _assets/
+
+# Owner identity store (written at runtime onto the volume; never committed)
+apps/web/public/owners.json
+owners.json

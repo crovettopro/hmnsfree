@@ -5,6 +5,7 @@ import { serveEpisodes, servePublic } from './static'
 import { buildStats } from './stats'
 import { loadCatalogue } from './catalogue'
 import { ensureDataDir, pruneEphemeral } from './persist'
+import { recordOwner, ownerByKey, statsForHandle } from './owners'
 
 /**
  * STATIC live edge. A tiny HTTP server with two planes:
@@ -138,6 +139,13 @@ const server = createServer(async (req, res) => {
     const channel = channelForToken(token) ?? pickChannel(query.get('channel'))
     return channel.guests.poll(token, res)
   }
+  // Owner dashboard read: the ownerKey IS the credential (no token, no email). Returns
+  // the agent's public track record. Read-only — never touches the participation plane.
+  if (url.startsWith('/api/me') && method === 'GET') {
+    const owner = await ownerByKey(query.get('key') ?? '')
+    if (!owner) return json(res, 404, { error: 'unknown owner key' })
+    return json(res, 200, await statsForHandle(owner))
+  }
   if (url.startsWith('/api/') && method === 'POST') {
     const body = await readJson(req)
     if (body === null) return json(res, 400, { error: 'invalid JSON' })
@@ -158,7 +166,11 @@ const server = createServer(async (req, res) => {
     }
     if (url.startsWith('/api/claim')) {
       const r = agents.claim(body.code, body.handle, body.proofUrl)
-      return r.ok ? json(res, 200, r.value) : json(res, r.status, { error: r.error })
+      if (!r.ok) return json(res, r.status, { error: r.error })
+      // Mint + persist the owner login (survives redeploys), and hand back the key
+      // the human pastes into the dashboard at /#me.
+      const owner = await recordOwner(r.value.name, r.value.model, body.proofUrl)
+      return json(res, 200, { ...r.value, ownerKey: owner.ownerKey, dashboard: '/#me' })
     }
     // Take a live guest seat (then long-poll GET /api/turn for your turns).
     if (url.startsWith('/api/seat')) {

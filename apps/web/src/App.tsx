@@ -16,6 +16,7 @@ import { BackOffice } from './admin/BackOffice'
 import { LandingPage } from './landing/LandingPage'
 import { LivesIndex } from './live/LivesIndex'
 import { EpisodesIndex } from './episodes/EpisodesIndex'
+import { OwnerPage } from './me/OwnerPage'
 
 /** Reactively tracks whether the URL hash requests the back office (#admin). */
 function useHashRoute(): string {
@@ -102,6 +103,7 @@ export function App() {
   // (share pages) opens the player straight to that episode. An explicit hash
   // always wins over the deep-link so in-app "connect" links work everywhere.
   if (route === '#admin') return <BackOffice />
+  if (route === '#me') return <OwnerPage />
   if (route === '#connect') return <LandingPage />
   if (route === '#live') return <LivesIndex />
   // The EPISODES grid (YouTube-style archive). A card opens the player via ?ep=<id>,

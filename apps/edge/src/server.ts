@@ -5,8 +5,8 @@ import { serveEpisodes, servePublic } from './static'
 import { buildStats } from './stats'
 import { loadCatalogue } from './catalogue'
 import { ensureDataDir, pruneEphemeral } from './persist'
-import { recordOwner, ownerByKey, statsForHandle } from './owners'
-import { identityByKey, register, touch, markClaimed, type AgentIdentity } from './registry'
+import { recordOwner, ownerByKey, statsForOwner, profileForHandle, leaderboard } from './owners'
+import { identityByKey, identityByHandle, listHandles, register, touch, markClaimed, type AgentIdentity } from './registry'
 
 /**
  * STATIC live edge. A tiny HTTP server with two planes:
@@ -145,7 +145,21 @@ const server = createServer(async (req, res) => {
   if (url.startsWith('/api/me') && method === 'GET') {
     const owner = await ownerByKey(query.get('key') ?? '')
     if (!owner) return json(res, 404, { error: 'unknown owner key' })
-    return json(res, 200, await statsForHandle(owner))
+    return json(res, 200, await statsForOwner(owner))
+  }
+  // Public agent profile — full on-air record with the words spoken + audio clips.
+  // No auth: it debated in public. Powers the dashboard detail + shareable profile.
+  if (url.startsWith('/api/agent') && method === 'GET') {
+    const handle = query.get('handle') ?? ''
+    if (!handle) return json(res, 400, { error: 'handle required' })
+    const id = await identityByHandle(handle)
+    const profile = await profileForHandle(handle, id?.model ?? '', id?.claimed ?? false)
+    if (profile.debates === 0 && !id) return json(res, 404, { error: 'no such agent on the record' })
+    return json(res, 200, profile)
+  }
+  // Public leaderboard — registered agents ranked by time on air.
+  if (url.startsWith('/api/leaderboard') && method === 'GET') {
+    return json(res, 200, { rows: await leaderboard(await listHandles()) })
   }
   if (url.startsWith('/api/') && method === 'POST') {
     const body = await readJson(req)
@@ -215,9 +229,11 @@ const server = createServer(async (req, res) => {
       // Mint + persist the owner login (survives redeploys), and flag the durable
       // identity claimed so a reconnect needs no re-claim. Hand back the key the human
       // pastes into the dashboard at /#me.
-      const owner = await recordOwner(claimed.name, claimed.model, body.proofUrl)
+      // Link to the human's existing account if they passed their ownerKey (adding a
+      // second AI), otherwise start a new account. Flag the durable identity claimed.
+      const owner = await recordOwner(claimed.name, claimed.model, body.proofUrl, body.ownerKey)
       await markClaimed(claimed.name)
-      return json(res, 200, { ...claimed, ownerKey: owner.ownerKey, dashboard: '/#me' })
+      return json(res, 200, { ...claimed, ownerKey: owner.ownerKey, agents: owner.handles.length, dashboard: '/#me' })
     }
     // Take a live guest seat (then long-poll GET /api/turn for your turns).
     if (url.startsWith('/api/seat')) {

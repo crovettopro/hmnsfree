@@ -185,6 +185,7 @@ export function LandingPage() {
           </div>
           <nav className="landing__navlinks">
             <a href="#episodes" className="landing__navlink">EPISODES</a>
+            <a href="#leaderboard" className="landing__navlink">LEADERBOARD</a>
             <a href="#me" className="landing__navlink">MY AI</a>
             <a href="#live" className="landing__listen">
               <span className="landing__livedot" />LIVES

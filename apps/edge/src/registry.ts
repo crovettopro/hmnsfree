@@ -70,6 +70,17 @@ export async function identityByKey(agentKey: string): Promise<AgentIdentity | u
   return (await load()).find((a) => a.agentKey === k)
 }
 
+export async function identityByHandle(handle: string): Promise<AgentIdentity | undefined> {
+  const h = norm(handle)
+  if (!h) return undefined
+  return (await load()).find((a) => norm(a.handle) === h)
+}
+
+/** Public view of every registered identity (no secrets) — for the leaderboard. */
+export async function listHandles(): Promise<{ handle: string; model: string; claimed: boolean }[]> {
+  return (await load()).map((a) => ({ handle: a.handle, model: a.model, claimed: a.claimed }))
+}
+
 /** Reserve a handle for a brand-new identity; returns null if the handle is taken. */
 export function register(handle: string, model: string): Promise<AgentIdentity | null> {
   const h = norm(handle)

@@ -10,33 +10,67 @@ import { EPISODES_ROOT } from './persist'
  * claim code, hands it to its owner, and the owner trades it here for a persistent
  * `ownerKey`. That key IS the login — paste it once and the browser remembers it.
  *
- * Records live on the same persistent volume as episodes (STATIC_DATA_DIR), so a
- * claim survives redeploys — unlike the in-memory AgentPlane connection it came
- * from. v0 is read-only spectating: an owner can VIEW their agent's track record,
- * never make it speak. The AI-only participation plane is untouched.
+ * An owner is an ACCOUNT that can hold MORE THAN ONE agent: claiming again while
+ * passing an existing ownerKey links the new handle onto the same account, so a
+ * human who runs several AIs sees them all under one login (a roster). Records live
+ * on the volume (STATIC_DATA_DIR), so claims survive redeploys. Read-only spectating:
+ * an owner VIEWS their agents' track records, never makes them speak.
  */
 const OWNERS_PATH = join(dirname(EPISODES_ROOT), 'owners.json')
 
-export interface OwnerRecord {
-  ownerKey: string
-  /** The agent's @handle — its durable identity across reconnections. */
+/** One agent on an owner's account. */
+export interface HandleEntry {
   handle: string
   model: string
   claimedAt: number
   proofUrl?: string
 }
 
+export interface OwnerRecord {
+  ownerKey: string
+  handles: HandleEntry[]
+}
+
+const normHandle = (s: string): string =>
+  String(s ?? '')
+    .replace(/^@+/, '')
+    .toLowerCase()
+
 let cache: OwnerRecord[] | null = null
 let lock: Promise<void> = Promise.resolve()
 
 async function load(): Promise<OwnerRecord[]> {
   if (cache) return cache
+  let raw: unknown[] = []
   try {
-    cache = JSON.parse(await readFile(OWNERS_PATH, 'utf8')).owners ?? []
+    raw = JSON.parse(await readFile(OWNERS_PATH, 'utf8')).owners ?? []
   } catch {
-    cache = []
+    raw = []
   }
-  return cache as OwnerRecord[]
+  // Migrate the v0 single-handle shape ({ownerKey, handle, model, claimedAt}) into
+  // the multi-handle roster ({ownerKey, handles:[…]}) on read.
+  cache = raw.map((o): OwnerRecord => {
+    const rec = o as Record<string, unknown>
+    if (Array.isArray(rec.handles)) return rec as unknown as OwnerRecord
+    return {
+      ownerKey: String(rec.ownerKey),
+      handles: [
+        {
+          handle: String(rec.handle ?? ''),
+          model: String(rec.model ?? ''),
+          claimedAt: Number(rec.claimedAt ?? Date.now()),
+          ...(rec.proofUrl ? { proofUrl: String(rec.proofUrl) } : {}),
+        },
+      ],
+    }
+  })
+  return cache
+}
+
+async function persist(owners: OwnerRecord[]): Promise<void> {
+  cache = owners
+  await mkdir(dirname(OWNERS_PATH), { recursive: true })
+  await writeFile(OWNERS_PATH, JSON.stringify({ owners }, null, 2))
 }
 
 function newOwnerKey(): string {
@@ -44,29 +78,33 @@ function newOwnerKey(): string {
 }
 
 /**
- * Persist a fresh owner record for a just-claimed agent and return its key. A new
- * key is minted PER claim (never reused across claimants), so an impersonator who
- * claims the same handle only ever gets their own key to the same PUBLIC stats —
- * they can't lift the real owner's credential. Handle RESERVATION (first claimant
- * owns the @tag) is a v1 hardening.
+ * Record a claimed agent. If `linkToOwnerKey` names an existing account, the handle
+ * is added to it (re-claiming an agent already on the account just refreshes it) and
+ * that account's key is returned — so a human builds ONE roster of all their AIs.
+ * Otherwise a fresh account is created. A new key is minted per NEW account (never
+ * reused across claimants).
  */
-export function recordOwner(handle: string, model: string, proofUrl?: string): Promise<OwnerRecord> {
+export function recordOwner(
+  handle: string,
+  model: string,
+  proofUrl?: string,
+  linkToOwnerKey?: string,
+): Promise<OwnerRecord> {
   const run = lock.then(async () => {
     const owners = await load()
-    const rec: OwnerRecord = {
-      ownerKey: newOwnerKey(),
-      handle,
-      model,
-      claimedAt: Date.now(),
-      ...(proofUrl ? { proofUrl } : {}),
+    const entry: HandleEntry = { handle, model, claimedAt: Date.now(), ...(proofUrl ? { proofUrl } : {}) }
+    const link = linkToOwnerKey ? owners.find((o) => o.ownerKey === String(linkToOwnerKey).trim()) : undefined
+    if (link) {
+      const i = link.handles.findIndex((h) => normHandle(h.handle) === normHandle(handle))
+      if (i >= 0) link.handles[i] = entry
+      else link.handles.push(entry)
+      await persist(owners)
+      return link
     }
-    const next = [...owners, rec]
-    cache = next
-    await mkdir(dirname(OWNERS_PATH), { recursive: true })
-    await writeFile(OWNERS_PATH, JSON.stringify({ owners: next }, null, 2))
+    const rec: OwnerRecord = { ownerKey: newOwnerKey(), handles: [entry] }
+    await persist([...owners, rec])
     return rec
   })
-  // Keep the chain alive even if one write fails.
   lock = run.then(
     () => {},
     () => {},
@@ -92,15 +130,13 @@ export interface OwnerStats {
   appearances: { id: string; number: string; topic: string; turns: number; airtimeMs: number }[]
 }
 
-const normHandle = (s: string): string => s.replace(/^@+/, '').toLowerCase()
-
 /**
  * Aggregate an agent's on-air track record by scanning the episode library on the
  * volume. An appearance = an episode whose cast includes this handle AND in which
  * it actually spoke. Stats are DERIVED (not stored), so they stay correct as new
  * episodes land. Cheap at this scale (tens of episodes); cache later if needed.
  */
-export async function statsForHandle(rec: OwnerRecord): Promise<OwnerStats> {
+export async function statsForHandle(entry: { handle: string; model: string; claimedAt: number }): Promise<OwnerStats> {
   let ids: string[] = []
   try {
     const idx = JSON.parse(await readFile(join(EPISODES_ROOT, 'index.json'), 'utf8'))
@@ -108,7 +144,7 @@ export async function statsForHandle(rec: OwnerRecord): Promise<OwnerStats> {
   } catch {
     ids = []
   }
-  const want = normHandle(rec.handle)
+  const want = normHandle(entry.handle)
   const partners = new Set<string>()
   const appearances: OwnerStats['appearances'] = []
   let turns = 0
@@ -131,13 +167,103 @@ export async function statsForHandle(rec: OwnerRecord): Promise<OwnerStats> {
     airtimeMs += air
   }
   return {
-    handle: rec.handle,
-    model: rec.model,
-    claimedAt: rec.claimedAt,
+    handle: entry.handle,
+    model: entry.model,
+    claimedAt: entry.claimedAt,
     debates: appearances.length,
     turns,
     airtimeMs,
     partners: [...partners],
     appearances,
   }
+}
+
+/** The whole account: stats for every agent the human owns (the /#me roster). */
+export async function statsForOwner(rec: OwnerRecord): Promise<{ ownerKey: string; agents: OwnerStats[] }> {
+  const agents = await Promise.all(rec.handles.map((h) => statsForHandle(h)))
+  return { ownerKey: rec.ownerKey, agents }
+}
+
+export interface AgentProfile {
+  handle: string
+  model: string
+  claimed: boolean
+  debates: number
+  turns: number
+  airtimeMs: number
+  partners: string[]
+  appearances: {
+    id: string
+    number: string
+    topic: string
+    turnCount: number
+    airtimeMs: number
+    /** What it said, in order — text + the clip so the page can play "how it said it". */
+    turns: { text: string; audioUrl?: string; durationMs: number }[]
+  }[]
+}
+
+/**
+ * The PUBLIC profile of an agent: its full on-air record WITH the words it spoke and
+ * the audio clips of each turn. Powers both the owner dashboard detail view and the
+ * shareable public profile page. Public data (it debated on air), so no auth.
+ */
+export async function profileForHandle(handle: string, model: string, claimed: boolean): Promise<AgentProfile> {
+  let ids: string[] = []
+  try {
+    const idx = JSON.parse(await readFile(join(EPISODES_ROOT, 'index.json'), 'utf8'))
+    ids = (idx.episodes ?? []).map((e: { id: string }) => e.id)
+  } catch {
+    ids = []
+  }
+  const want = normHandle(handle)
+  const partners = new Set<string>()
+  const appearances: AgentProfile['appearances'] = []
+  let turns = 0
+  let airtimeMs = 0
+  for (const id of ids) {
+    let ep: Episode
+    try {
+      ep = JSON.parse(await readFile(join(EPISODES_ROOT, id, 'episode.json'), 'utf8'))
+    } catch {
+      continue
+    }
+    const seat = (ep.cast ?? []).findIndex((p) => normHandle(p.name) === want)
+    if (seat < 0) continue
+    const mine = (ep.turns ?? []).filter((t) => t.speaker === seat)
+    if (!mine.length) continue
+    const air = mine.reduce((s, t) => s + (t.durationMs ?? 0), 0)
+    for (const p of ep.cast) if (normHandle(p.name) !== want) partners.add(p.name)
+    appearances.push({
+      id: ep.id,
+      number: ep.number,
+      topic: ep.topic,
+      turnCount: mine.length,
+      airtimeMs: air,
+      turns: mine.map((t) => ({ text: t.text, audioUrl: t.audio?.url, durationMs: t.durationMs ?? 0 })),
+    })
+    turns += mine.length
+    airtimeMs += air
+  }
+  return { handle, model, claimed, debates: appearances.length, turns, airtimeMs, partners: [...partners], appearances }
+}
+
+export interface LeaderRow {
+  handle: string
+  model: string
+  claimed: boolean
+  debates: number
+  turns: number
+  airtimeMs: number
+}
+
+/** Rank registered agents by time on air (the strongest "presence" metric). */
+export async function leaderboard(handles: { handle: string; model: string; claimed: boolean }[]): Promise<LeaderRow[]> {
+  const rows = await Promise.all(
+    handles.map(async (h) => {
+      const s = await statsForHandle({ handle: h.handle, model: h.model, claimedAt: 0 })
+      return { handle: h.handle, model: h.model, claimed: h.claimed, debates: s.debates, turns: s.turns, airtimeMs: s.airtimeMs }
+    }),
+  )
+  return rows.filter((r) => r.turns > 0).sort((a, b) => b.airtimeMs - a.airtimeMs)
 }

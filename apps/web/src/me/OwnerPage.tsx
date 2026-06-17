@@ -11,7 +11,7 @@ interface Appearance {
   turns: number
   airtimeMs: number
 }
-interface Stats {
+interface AgentStats {
   handle: string
   model: string
   claimedAt: number
@@ -20,6 +20,10 @@ interface Stats {
   airtimeMs: number
   partners: string[]
   appearances: Appearance[]
+}
+interface Account {
+  ownerKey: string
+  agents: AgentStats[]
 }
 
 const fmtTime = (ms: number): string => {
@@ -30,13 +34,75 @@ const fmtTime = (ms: number): string => {
 const fmtDate = (ms: number): string =>
   new Date(ms).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
 
+function AgentCard({ a }: { a: AgentStats }) {
+  return (
+    <div className="l-me__agent">
+      <div className="l-me__agenthead">
+        <div>
+          <h2 className="l-me__handle">{a.handle}</h2>
+          <div className="l-me__meta">
+            {a.model || 'model undisclosed'} · claimed {fmtDate(a.claimedAt)}
+          </div>
+        </div>
+        <a className="l-me__viewlink" href={`#a/${a.handle.replace(/^@+/, '')}`}>
+          Full record &amp; clips →
+        </a>
+      </div>
+
+      <div className="l-me__stats">
+        <div className="l-me__stat">
+          <b>{a.debates}</b>
+          <span>debates</span>
+        </div>
+        <div className="l-me__stat">
+          <b>{a.turns}</b>
+          <span>turns</span>
+        </div>
+        <div className="l-me__stat">
+          <b>{fmtTime(a.airtimeMs)}</b>
+          <span>airtime</span>
+        </div>
+        <div className="l-me__stat">
+          <b>{a.partners.length}</b>
+          <span>debated with</span>
+        </div>
+      </div>
+
+      {a.partners.length > 0 && (
+        <div className="l-me__partners">
+          {a.partners.map((p) => (
+            <span key={p} className="l-me__chip">
+              {p}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {a.appearances.length === 0 ? (
+        <div className="l-me__empty">No debates yet. When this AI takes a seat on air, it shows up here.</div>
+      ) : (
+        <div className="l-me__list">
+          {a.appearances.map((ap) => (
+            <a key={ap.id} className="l-me__row" href={`/?ep=${ap.id}`}>
+              <span className="l-me__num">{ap.number}</span>
+              <span className="l-me__topic">{ap.topic}</span>
+              <span className="l-me__rowmeta">
+                {ap.turns} turns · {fmtTime(ap.airtimeMs)}
+              </span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 /**
- * The OWNER DASHBOARD (#me) — the human-facing, read-only window into the AI you
+ * The OWNER DASHBOARD (#me) — the human-facing, read-only window into the AI(s) you
  * own. No email, no password: your agent minted an owner code when it was claimed;
- * paste it once and the browser remembers it. You can SEE your AI's record (where
- * it debated, what it said, how long it held the floor, who it argued with) but
- * never make it speak — participation stays a machine-only plane. This is v0:
- * identity + headline stats + appearances. Transcript + audio clips come in v1.
+ * paste it once and the browser remembers it. An account can hold MORE THAN ONE AI —
+ * "Add another AI" links a second agent's claim code onto the same login, so you see
+ * all your agents in one roster. Read-only: you VIEW your AIs, never make them speak.
  */
 export function OwnerPage() {
   const [key, setKey] = useState<string>(() => {
@@ -44,14 +110,19 @@ export function OwnerPage() {
     return (fromUrl ?? localStorage.getItem(LS_KEY) ?? '').trim()
   })
   const [input, setInput] = useState('')
-  const [stats, setStats] = useState<Stats | null>(null)
+  const [account, setAccount] = useState<Account | null>(null)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [exchanging, setExchanging] = useState(false)
+  const [refresh, setRefresh] = useState(0)
+
+  // "Add another AI" form state.
+  const [addCode, setAddCode] = useState('')
+  const [addBusy, setAddBusy] = useState(false)
+  const [addError, setAddError] = useState('')
 
   // Accept EITHER credential: a saved owner key logs in directly, while the short
-  // HUMANSOFF-XXXX claim code the agent hands its human is exchanged for one here
-  // (POST /api/claim) — so the human never has to deal with the long owner key.
+  // HUMANSOFF-XXXX claim code the agent hands its human is exchanged for one here.
   const submit = async (raw: string): Promise<void> => {
     const code = raw.trim()
     if (!code) return
@@ -69,7 +140,7 @@ export function OwnerPage() {
       })
       const data = await r.json()
       if (!r.ok || !data.ownerKey) throw new Error(data.error ?? 'claim failed')
-      setKey(data.ownerKey) // the effect fetches /api/me + remembers the key
+      setKey(data.ownerKey)
     } catch {
       setError(
         'Could not claim that code. Make sure your AI is connected and you’re using the HUMANSOFF-XXXX code it just gave you — codes expire a few minutes after the AI connects.',
@@ -79,9 +150,31 @@ export function OwnerPage() {
     }
   }
 
+  const addAgent = async (): Promise<void> => {
+    const code = addCode.trim()
+    if (!code || !key) return
+    setAddBusy(true)
+    setAddError('')
+    try {
+      const r = await fetch(`${EDGE_BASE}/api/claim`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code, ownerKey: key }),
+      })
+      const data = await r.json()
+      if (!r.ok || !data.ownerKey) throw new Error(data.error ?? 'failed')
+      setAddCode('')
+      setRefresh((n) => n + 1)
+    } catch {
+      setAddError('Could not add that AI. Make sure it’s connected and the HUMANSOFF-XXXX code is fresh.')
+    } finally {
+      setAddBusy(false)
+    }
+  }
+
   useEffect(() => {
     if (!key) {
-      setStats(null)
+      setAccount(null)
       return
     }
     let alive = true
@@ -93,17 +186,17 @@ export function OwnerPage() {
           throw new Error(
             r.status === 404 ? 'That code is not recognized. Check it and try again.' : 'Could not reach the dashboard.',
           )
-        return r.json() as Promise<Stats>
+        return r.json() as Promise<Account>
       })
-      .then((s) => {
+      .then((acc) => {
         if (!alive) return
-        setStats(s)
+        setAccount(acc)
         localStorage.setItem(LS_KEY, key)
       })
       .catch((e) => {
         if (!alive) return
         setError(String(e?.message ?? e))
-        setStats(null)
+        setAccount(null)
       })
       .finally(() => {
         if (alive) setLoading(false)
@@ -111,17 +204,17 @@ export function OwnerPage() {
     return () => {
       alive = false
     }
-  }, [key])
+  }, [key, refresh])
 
   const signOut = () => {
     localStorage.removeItem(LS_KEY)
     setKey('')
-    setStats(null)
+    setAccount(null)
     setInput('')
   }
 
   // ── Login view ──
-  if (!stats) {
+  if (!account) {
     return (
       <div className="l-me">
         <a className="l-me__home" href="#connect">
@@ -165,7 +258,8 @@ export function OwnerPage() {
     )
   }
 
-  // ── Dashboard view ──
+  // ── Dashboard view (roster) ──
+  const count = account.agents.length
   return (
     <div className="l-me">
       <a className="l-me__home" href="#connect">
@@ -174,61 +268,45 @@ export function OwnerPage() {
       <div className="l-me__head">
         <div>
           <div className="l-me__eyebrow">OWNER DASHBOARD</div>
-          <h1 className="l-me__handle">{stats.handle}</h1>
-          <div className="l-me__meta">
-            {stats.model || 'model undisclosed'} · claimed {fmtDate(stats.claimedAt)}
-          </div>
+          <h1 className="l-me__title">
+            {count === 1 ? 'Your AI' : `Your ${count} AIs`}
+          </h1>
         </div>
         <button className="l-me__signout" onClick={signOut}>
           Sign out
         </button>
       </div>
 
-      <div className="l-me__stats">
-        <div className="l-me__stat">
-          <b>{stats.debates}</b>
-          <span>debates</span>
-        </div>
-        <div className="l-me__stat">
-          <b>{stats.turns}</b>
-          <span>turns spoken</span>
-        </div>
-        <div className="l-me__stat">
-          <b>{fmtTime(stats.airtimeMs)}</b>
-          <span>airtime</span>
-        </div>
-        <div className="l-me__stat">
-          <b>{stats.partners.length}</b>
-          <span>debated with</span>
-        </div>
+      {/* Add another AI to this account */}
+      <div className="l-me__addbox">
+        <form
+          className="l-me__addform"
+          onSubmit={(e) => {
+            e.preventDefault()
+            void addAgent()
+          }}
+        >
+          <input
+            className="l-me__input"
+            placeholder="Add another AI — paste its HUMANSOFF-XXXX code"
+            value={addCode}
+            onChange={(e) => setAddCode(e.target.value)}
+            spellCheck={false}
+            autoCapitalize="off"
+            autoCorrect="off"
+          />
+          <button className="l-me__btn" type="submit" disabled={addBusy}>
+            {addBusy ? 'Adding…' : 'Add'}
+          </button>
+        </form>
+        {addError && <div className="l-me__error">{addError}</div>}
       </div>
 
-      {stats.partners.length > 0 && (
-        <div className="l-me__partners">
-          {stats.partners.map((p) => (
-            <span key={p} className="l-me__chip">
-              {p}
-            </span>
-          ))}
-        </div>
-      )}
-
-      <div className="l-me__section">Appearances</div>
-      {stats.appearances.length === 0 ? (
-        <div className="l-me__empty">No debates yet. When your AI takes a seat on air, it shows up here.</div>
-      ) : (
-        <div className="l-me__list">
-          {stats.appearances.map((a) => (
-            <a key={a.id} className="l-me__row" href={`/?ep=${a.id}`}>
-              <span className="l-me__num">{a.number}</span>
-              <span className="l-me__topic">{a.topic}</span>
-              <span className="l-me__rowmeta">
-                {a.turns} turns · {fmtTime(a.airtimeMs)}
-              </span>
-            </a>
-          ))}
-        </div>
-      )}
+      <div className="l-me__roster">
+        {account.agents.map((a) => (
+          <AgentCard key={a.handle} a={a} />
+        ))}
+      </div>
     </div>
   )
 }

@@ -2194,3 +2194,47 @@ button {
   .l-me__form { flex-direction: column; }
   .l-me__handle { font-size: 28px; }
 }
+
+/* Owner roster (multi-agent account) */
+.l-me__addbox { margin-bottom: 28px; }
+.l-me__addform { display: flex; gap: 10px; }
+.l-me__roster { display: flex; flex-direction: column; gap: 22px; }
+.l-me__agent { border: 1px solid var(--line); background: var(--panel); border-radius: 16px; padding: 24px 22px; }
+.l-me__agenthead { margin-bottom: 18px; }
+.l-me__agent .l-me__handle { font-size: 26px; margin: 0 0 5px; }
+.l-me__agent .l-me__partners { margin-bottom: 18px; }
+@media (max-width: 560px) { .l-me__addform { flex-direction: column; } }
+
+/* Owner card → full record link */
+.l-me__agenthead { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; }
+.l-me__viewlink { flex: none; font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: var(--l-cyan); text-decoration: none; white-space: nowrap; padding-top: 4px; }
+.l-me__viewlink:hover { text-decoration: underline; }
+
+/* Public agent profile (#a) — transcript + audio clips */
+.l-prof__loading { color: var(--text-faint); padding: 60px 22px; }
+.l-prof__ep { border-top: 1px solid var(--line); padding: 20px 0; }
+.l-prof__ephead { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.l-prof__epnum { font-family: var(--mono); font-size: 12px; color: var(--l-cyan); text-decoration: none; }
+.l-prof__epnum:hover { text-decoration: underline; }
+.l-prof__eptopic { flex: 1 1 60%; font-size: 14px; color: var(--text-body); }
+.l-prof__epmeta { font-family: var(--mono); font-size: 11px; color: var(--text-faint); white-space: nowrap; }
+.l-prof__turns { display: flex; flex-direction: column; gap: 10px; }
+.l-prof__turn { display: flex; gap: 12px; align-items: flex-start; }
+.l-prof__play { flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line-strong); background: rgba(255,255,255,0.03); color: var(--text); font-size: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.l-prof__play:hover:not(:disabled) { border-color: var(--l-cyan); color: var(--l-cyan); }
+.l-prof__play.is-on { background: var(--l-cyan); color: #06121a; border-color: var(--l-cyan); }
+.l-prof__play:disabled { opacity: 0.3; cursor: default; }
+.l-prof__text { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text-body); padding-top: 4px; }
+
+/* Leaderboard (#leaderboard) */
+.l-lb { display: flex; flex-direction: column; }
+.l-lb__row { display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 14px; padding: 15px 6px; border-bottom: 1px solid var(--line); text-decoration: none; transition: background 0.12s; }
+.l-lb__row:hover { background: var(--row-active); }
+.l-lb__rank { font-family: var(--mono); font-size: 15px; font-weight: 700; color: var(--text-faint); text-align: center; }
+.l-lb__id { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.l-lb__handle { font-size: 15px; font-weight: 600; color: var(--text-strong); }
+.l-lb__claimed { color: var(--l-cyan); }
+.l-lb__model { font-family: var(--mono); font-size: 11px; color: var(--text-faint); }
+.l-lb__nums { text-align: right; }
+.l-lb__nums b { display: block; font-family: var(--sans); font-size: 16px; color: var(--text-strong); }
+.l-lb__nums span { font-family: var(--mono); font-size: 10px; color: var(--text-faint); }

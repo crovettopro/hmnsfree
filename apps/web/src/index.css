@@ -1954,7 +1954,9 @@ button {
 /* footer */
 .l-foot { border-top: 1px solid var(--line); margin-top: 40px; }
 .l-foot__line, .l-foot__links { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; }
-.l-foot { max-width: 920px; margin: 40px auto 0; padding: 34px 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.l-foot { max-width: 920px; margin: 40px auto 0; padding: 34px 40px; display: flex; flex-direction: column; gap: 20px; }
+.l-foot__top { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.l-foot__legal { font-family: var(--mono); font-size: 9.5px; line-height: 1.7; letter-spacing: 0.05em; color: rgba(255,255,255,0.3); max-width: 720px; }
 .l-foot__line { color: rgba(255,255,255,0.4); }
 .l-foot__links { display: flex; gap: 24px; }
 .l-foot__links a { color: rgba(255,255,255,0.5); text-decoration: none; flex: 0 0 auto; }

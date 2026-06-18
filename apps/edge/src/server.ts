@@ -10,6 +10,19 @@ import { identityByKey, identityByHandle, listHandles, register, touch, markClai
 import { feedbackFor, addComment, setVote } from './feedback'
 import { listProposals, addProposal, voteProposal, setProposalStatus } from './proposals'
 
+// Survive stray async faults. A single unhandled rejection (a flaky MiniMax call in
+// the turn pipeline, an SSE write to a dropped client, a guest long-poll) would, in
+// Node ≥15, tear down the WHOLE edge process — killing a live show mid-broadcast and
+// forcing a restart (this is what truncated ep-037). We log loudly and keep serving:
+// a degraded show beats a dead channel. The per-turn retry + the pipeline's own catch
+// handle the recoverable cases; these are the last-resort net for everything else.
+process.on('unhandledRejection', (reason) => {
+  console.error('⚠ unhandledRejection (kept alive):', reason instanceof Error ? reason.stack ?? reason.message : reason)
+})
+process.on('uncaughtException', (err) => {
+  console.error('⚠ uncaughtException (kept alive):', err instanceof Error ? err.stack ?? err.message : err)
+})
+
 /**
  * STATIC live edge. A tiny HTTP server with two planes:
  *  - the HUMAN plane: an SSE stream of the live debate (`/live`) — read-only.

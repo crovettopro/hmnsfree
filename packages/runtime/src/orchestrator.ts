@@ -302,27 +302,31 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
         // Seamless fallback: a present resident speaks instead. The live never
         // stalls on an absent/slow guest.
         speaker = fallbackResident(speaker)
-        const r = await generateTurn(
-          personas[speaker],
-          { topic, history, slot: { ...slot, speaker, kind: 'rebut' }, nominees, briefing },
-          llm,
+        const r = await withRetry('llm:turn', () =>
+          generateTurn(
+            personas[speaker],
+            { topic, history, slot: { ...slot, speaker, kind: 'rebut' }, nominees, briefing },
+            llm,
+          ),
         )
         usage.llmCalls++
         text = r.text
         next = r.next
       }
     } else {
-      const r = await generateTurn(
-        personas[speaker],
-        {
-          topic,
-          history,
-          slot,
-          respondToName: slot.respondTo != null ? personas[slot.respondTo].name : undefined,
-          nominees,
-          briefing,
-        },
-        llm,
+      const r = await withRetry('llm:turn', () =>
+        generateTurn(
+          personas[speaker],
+          {
+            topic,
+            history,
+            slot,
+            respondToName: slot.respondTo != null ? personas[slot.respondTo].name : undefined,
+            nominees,
+            briefing,
+          },
+          llm,
+        ),
       )
       usage.llmCalls++
       text = r.text
@@ -332,11 +336,13 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
     const persona = personas[speaker]
     const turnId = `${episode.id}-t${String(index).padStart(2, '0')}`
     const base = `t${String(index).padStart(2, '0')}-${persona.id}`
-    const synth = await voices.get(persona.voice.provider).synthesize({
-      text,
-      voice: persona.voice,
-      outPathBase: join(opts.audioDir, base),
-    })
+    const synth = await withRetry('tts:synth', () =>
+      voices.get(persona.voice.provider).synthesize({
+        text,
+        voice: persona.voice,
+        outPathBase: join(opts.audioDir, base),
+      }),
+    )
     const fileName = synth.filePath.slice(synth.filePath.lastIndexOf('/') + 1)
     const audioUrl = `${opts.audioUrlBase}/${fileName}`
     usage.ttsCalls++
@@ -602,6 +608,11 @@ export async function produceEpisode(opts: ProduceOptions): Promise<ProduceResul
       }
       const playOut = opts.realtime ? sleep(prepared.slotMs) : Promise.resolve()
       const nextUp = prepareTurn(step.value.slot, step.value.nominees)
+      // Attach a handler synchronously: while playOut sleeps (~20-40s on air), a
+      // rejected nextUp would otherwise sit unhandled and crash the process in
+      // Node ≥15. The real handling is `await nextUp` below — it still throws on a
+      // (post-retry) failure, which the caller catches to end the show gracefully.
+      void nextUp.catch(() => {})
       await playOut
       prepared = await nextUp
     }
@@ -652,6 +663,27 @@ function sanitizeGuestText(raw: string): string {
     }
   }
   return s.trim()
+}
+
+/** Retry a flaky external call (LLM / TTS) a few times before giving up, so one
+ *  transient provider blip — a 429, a dropped socket, a timeout — doesn't end a
+ *  whole live show. Throws the last error only after every attempt fails. */
+async function withRetry<T>(label: string, fn: () => Promise<T>, tries = 3): Promise<T> {
+  let lastErr: unknown
+  for (let attempt = 1; attempt <= tries; attempt++) {
+    try {
+      return await fn()
+    } catch (err) {
+      lastErr = err
+      if (attempt < tries) {
+        console.warn(
+          `⚠ ${label} failed (attempt ${attempt}/${tries}): ${err instanceof Error ? err.message : err} — retrying`,
+        )
+        await sleep(500 * attempt)
+      }
+    }
+  }
+  throw lastErr
 }
 
 /** Lib-agnostic sleep (used only for the live broadcast clock). */

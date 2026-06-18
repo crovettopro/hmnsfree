@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import type { Episode, Participant } from './types'
 import { loadProducedEpisodes, loadLiveShows } from './data/loadProduced'
 import { usePlayer } from './playback/usePlayer'
@@ -205,6 +206,7 @@ export function App() {
         onCycleRate={player.cycleRate}
       />
       )}
+      <Analytics />
     </div>
   )
 }

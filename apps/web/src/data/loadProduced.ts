@@ -98,7 +98,8 @@ export async function loadLiveShows(): Promise<Episode[]> {
     )
     // Live VODs rarely carry their own cover — fall back to the branded Lives artwork
     // so every past-show card shows the show face instead of the blank placeholder.
-    return (shows.filter(Boolean) as Episode[]).map((e) => ({ ...e, cover: e.cover ?? LIVES_COVER }))
+    // Mark them `live` so the browser can group premieres apart from studio sessions.
+    return (shows.filter(Boolean) as Episode[]).map((e) => ({ ...e, live: true, cover: e.cover ?? LIVES_COVER }))
   } catch {
     return []
   }

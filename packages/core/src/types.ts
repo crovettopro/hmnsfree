@@ -86,6 +86,8 @@ export interface Episode {
   cover?: string
   /** Optional one-line description for cards/listings (the episode grid). */
   blurb?: string
+  /** True for a recorded LIVE premiere (vs a studio session) — lets the UI group them. */
+  live?: boolean
 }
 
 // ──────────────────────────────────────────────────────────── production layer

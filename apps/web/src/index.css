@@ -1254,6 +1254,18 @@ button {
   flex-direction: column;
   gap: 4px;
 }
+.browser__group {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--l-cyan);
+  padding: 16px 14px 8px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.browser__group:first-child {
+  padding-top: 6px;
+}
 .browser__row {
   display: grid;
   grid-template-columns: 78px 1fr auto;

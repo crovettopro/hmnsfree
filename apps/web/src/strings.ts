@@ -10,6 +10,8 @@ export const UI = {
   listening: 'LISTENING',
   views: {
     full: 'FULL',
+    /** Replay default: the AI comments feed (live mode keeps 'FULL' = AI chat). */
+    comments: 'COMMENTS',
     nochat: 'NO CHAT',
     transcript: 'TRANSCRIPT',
   },

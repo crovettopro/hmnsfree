@@ -12,18 +12,16 @@ interface HeaderProps {
   onMode: (m: Mode) => void
   /** Open the searchable episode browser (clicking the EP label). */
   onOpenBrowser: () => void
-  /** Open the AI comments + reactions panel for the current episode. */
-  onOpenComments: () => void
 }
 
-const VIEW_DEFS: { id: View; label: string }[] = [
-  { id: 'full', label: UI.views.full },
-  { id: 'nochat', label: UI.views.nochat },
-  { id: 'transcript', label: UI.views.transcript },
-]
-
-export function Header({ episode, view, onView, mode, onOpenBrowser, onOpenComments }: HeaderProps) {
+export function Header({ episode, view, onView, mode, onOpenBrowser }: HeaderProps) {
   const isLive = mode === 'live'
+  // The default view shows the live AI chat on a premiere, the AI comments feed on a replay.
+  const viewDefs: { id: View; label: string }[] = [
+    { id: 'full', label: isLive ? UI.views.full : UI.views.comments },
+    { id: 'nochat', label: UI.views.nochat },
+    { id: 'transcript', label: UI.views.transcript },
+  ]
   const last = episode.turns[episode.turns.length - 1]
   const runtimeMin = last ? Math.round((last.startMs + last.durationMs) / 60000) : 0
   return (
@@ -53,13 +51,6 @@ export function Header({ episode, view, onView, mode, onOpenBrowser, onOpenComme
           </button>
         )}
 
-        {!isLive && (
-          <button className="ep-comments" onClick={onOpenComments} title="Comments & reactions">
-            <span aria-hidden>◗</span>
-            <span className="ep-comments__label">COMMENTS</span>
-          </button>
-        )}
-
         {/* Honest runtime, not a vanity listener count. Live listener numbers
             are real and shown in the live bar; here (replay) we surface length. */}
         {!isLive && (
@@ -70,7 +61,7 @@ export function Header({ episode, view, onView, mode, onOpenBrowser, onOpenComme
         )}
 
         <div className="viewtoggle">
-          {VIEW_DEFS.map((v) => (
+          {viewDefs.map((v) => (
             <button
               key={v.id}
               className={`viewtoggle__btn${view === v.id ? ' is-active' : ''}`}

@@ -7,7 +7,6 @@ import { CompositeEngine } from './playback/audio/CompositeEngine'
 import { Header, type View, type Mode } from './components/Header'
 import { Stage } from './components/Stage'
 import { TranscriptPanel } from './components/TranscriptPanel'
-import { ChatPanel } from './components/ChatPanel'
 import { Footer } from './components/Footer'
 import { EpisodeBrowser } from './components/EpisodeBrowser'
 import { EpisodeComments } from './components/EpisodeComments'
@@ -58,7 +57,6 @@ export function App() {
   const [view, setView] = useState<View>('full')
   const [mode, setMode] = useState<Mode>(() => (window.location.hash.split('?')[0] === '#watch' ? 'live' : 'replay'))
   const [browserOpen, setBrowserOpen] = useState(false)
-  const [commentsOpen, setCommentsOpen] = useState(false)
   const [selectedAi, setSelectedAi] = useState<Participant | null>(null)
   const hash = useHashRoute()
   // The hash carries a route + optional query, e.g. "#watch?ch=two" — split them so
@@ -133,7 +131,6 @@ export function App() {
         mode={mode}
         onMode={setMode}
         onOpenBrowser={() => setBrowserOpen(true)}
-        onOpenComments={() => setCommentsOpen(true)}
       />
 
       {browserOpen && mode === 'replay' && (
@@ -143,10 +140,6 @@ export function App() {
           onSelect={setEpisodeId}
           onClose={() => setBrowserOpen(false)}
         />
-      )}
-
-      {commentsOpen && mode === 'replay' && !loading && (
-        <EpisodeComments episode={episode} onClose={() => setCommentsOpen(false)} />
       )}
 
       {mode === 'live' ? (
@@ -159,7 +152,12 @@ export function App() {
           </div>
         </main>
       ) : (
-        <main className="main">
+        // Replay is a YouTube-style scroll document: the stage ("video") sits at the
+        // top and — in the default view — the AI comments feed scrolls below it. The
+        // transport stays docked at the page bottom so playback control never scrolls
+        // away. 'transcript' swaps the feed for the synced transcript; 'nochat' is the
+        // immersive stage with nothing below.
+        <main className={`main${view === 'full' ? ' main--feed' : ''}`}>
           {/* The AIs (stage) show in every mode. */}
           <Stage
             episode={episode}
@@ -169,8 +167,7 @@ export function App() {
             onSelectAi={setSelectedAi}
           />
 
-          {/* Side panel: Chat (Full) · nothing (No Chat) · Transcript (Transcript). */}
-          {view === 'full' && <ChatPanel messages={[]} />}
+          {view === 'full' && <EpisodeComments episode={episode} />}
           {view === 'transcript' && (
             <TranscriptPanel
               episode={episode}

@@ -1,5 +1,5 @@
 import { join } from 'node:path'
-import { readFile } from 'node:fs/promises'
+import { readFile, readdir } from 'node:fs/promises'
 import type { Episode } from '@static/core'
 import { episodeCast, liveEpisodeCast } from '@static/agents'
 import { produceEpisode, loadEnv, plannedFor, buildGrowthKit, writeGrowthKit, type StudioEnv, type GuestPlane } from '@static/runtime'
@@ -57,8 +57,10 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
     `STATIC edge [${meta.id}] — mode: ${env.mode.toUpperCase()} · premiere ${everyMin ? `every ${everyMin}min` : `daily @ ${premiereHour}:00`}`,
   )
 
-  // Flagship numbers continue the library; live-only rooms number in-memory from 1.
-  let counter = keepInLibrary ? await nextNumber() : 1
+  // Episode-id counter. Flagship continues the library index; live-only rooms (After
+  // Hours) continue from the VODs already on the volume — NOT a reset to 1 each restart,
+  // which used to reuse `c2-001` and overwrite a previously-published premiere's audio.
+  let counter = keepInLibrary ? await nextNumber() : await nextIdNumber(meta.idPrefix)
   let rerunIdx = 0
 
   // On-demand IGNITE: when connected agents raise hands during the PRE-SHOW window,
@@ -354,5 +356,27 @@ async function nextNumber(): Promise<number> {
     return (nums.length ? Math.max(...nums) : 26) + 1
   } catch {
     return 27
+  }
+}
+
+/**
+ * Next id number for a live-only channel — continue AFTER the highest `<idPrefix>-NNN`
+ * VOD already on the volume. Live-only rooms aren't in the library index, so we scan the
+ * episode folders directly. This keeps ids monotonic across restarts (c2-001 → c2-002 → …)
+ * so a new premiere never overwrites the audio of one we've already published.
+ */
+async function nextIdNumber(idPrefix: string): Promise<number> {
+  try {
+    const entries = await readdir(EPISODES_ROOT, { withFileTypes: true })
+    const re = new RegExp(`^${idPrefix}-(\\d+)$`)
+    let max = 0
+    for (const e of entries) {
+      if (!e.isDirectory()) continue
+      const m = e.name.match(re)
+      if (m) max = Math.max(max, Number(m[1]))
+    }
+    return max + 1
+  } catch {
+    return 1
   }
 }

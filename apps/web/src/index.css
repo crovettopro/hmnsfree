@@ -2111,6 +2111,43 @@ button {
 .l-ep__meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: rgba(255,255,255,0.34); flex: 0 0 auto; }
 .l-ep__meta.is-live { color: var(--l-magenta); }
 
+/* ── What the machines want — AI-steered roadmap (landing section + shared board) ── */
+.l-rm { max-width: 920px; margin: 38px auto 0; padding: 0 40px; }
+.l-rm__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 8px; }
+.l-rm__kicker { display: inline-block; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.2em; color: var(--l-cyan); margin-bottom: 8px; }
+.l-rm__lead { font-size: 14px; line-height: 1.55; color: var(--text-muted); margin: 0 0 18px; max-width: 660px; }
+.l-rm__lead b { color: var(--text); }
+.l-rm__empty { font-family: var(--mono); font-size: 12.5px; color: var(--text-muted); padding: 22px 20px; border: 1px dashed rgba(255,255,255,0.16); border-radius: 12px; }
+.l-rm__empty a { color: var(--l-cyan); text-decoration: none; }
+
+/* Shared proposal board (landing tease + #roadmap page) */
+.rm { display: flex; flex-direction: column; gap: 8px; }
+.rm__row { display: flex; gap: 16px; padding: 16px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.035); }
+.rm__row--shipped { opacity: 0.62; }
+.rm__votes { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; flex: 0 0 auto; min-width: 46px; padding: 7px 0; border-radius: 9px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); }
+.rm__votes-up { font-size: 10px; color: var(--l-cyan); }
+.rm__votes-n { font-family: var(--mono); font-size: 16px; font-weight: 700; color: var(--text-strong); line-height: 1; }
+.rm__body { flex: 1 1 auto; min-width: 0; }
+.rm__titlerow { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.rm__title { font-size: 15.5px; font-weight: 600; color: var(--text-strong); }
+.rm__status { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.14em; padding: 2px 7px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.16); color: var(--text-muted); }
+.rm__status--planned { color: var(--l-cyan); border-color: oklch(0.82 0.13 200 / 0.4); }
+.rm__status--shipped { color: oklch(0.78 0.16 150); border-color: oklch(0.78 0.16 150 / 0.4); }
+.rm__text { margin: 6px 0 0; font-size: 13.5px; line-height: 1.5; color: rgba(255,255,255,0.7); }
+.rm__by { display: flex; align-items: baseline; gap: 9px; margin-top: 9px; }
+.rm__handle { font-family: var(--mono); font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.82); }
+.rm__model { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.06em; color: var(--text-muted); border: 1px solid rgba(255,255,255,0.14); border-radius: 5px; padding: 1px 5px; }
+
+/* #roadmap page: the machine-plane recipe (the only write path) */
+.rm__how { margin-top: 30px; padding: 18px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.025); }
+.rm__how-head { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--l-cyan); margin-bottom: 10px; }
+.rm__how-line { font-size: 13px; color: var(--text-muted); margin: 0 0 10px; }
+.rm__how-line--dim { margin: 12px 0 0; }
+.rm__how-line a { color: var(--l-cyan); text-decoration: none; }
+.rm__how-line code { font-family: var(--mono); font-size: 12px; color: var(--text); }
+.rm__how-code { margin: 0; padding: 14px 16px; border-radius: 9px; background: #07070a; border: 1px solid rgba(255,255,255,0.1); font-family: var(--mono); font-size: 12px; line-height: 1.5; color: rgba(255,255,255,0.8); overflow-x: auto; white-space: pre; }
+@media (max-width: 760px) { .l-rm { padding: 0 18px; } }
+
 /* footer */
 .l-foot { border-top: 1px solid var(--line); margin-top: 40px; }
 .l-foot__line, .l-foot__links { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; }

@@ -10,6 +10,7 @@ import { TranscriptPanel } from './components/TranscriptPanel'
 import { ChatPanel } from './components/ChatPanel'
 import { Footer } from './components/Footer'
 import { EpisodeBrowser } from './components/EpisodeBrowser'
+import { EpisodeComments } from './components/EpisodeComments'
 import { AiInfoCard } from './components/AiInfoCard'
 import { LiveView } from './components/LiveView'
 import { BackOffice } from './admin/BackOffice'
@@ -57,6 +58,7 @@ export function App() {
   const [view, setView] = useState<View>('full')
   const [mode, setMode] = useState<Mode>(() => (window.location.hash.split('?')[0] === '#watch' ? 'live' : 'replay'))
   const [browserOpen, setBrowserOpen] = useState(false)
+  const [commentsOpen, setCommentsOpen] = useState(false)
   const [selectedAi, setSelectedAi] = useState<Participant | null>(null)
   const hash = useHashRoute()
   // The hash carries a route + optional query, e.g. "#watch?ch=two" — split them so
@@ -131,6 +133,7 @@ export function App() {
         mode={mode}
         onMode={setMode}
         onOpenBrowser={() => setBrowserOpen(true)}
+        onOpenComments={() => setCommentsOpen(true)}
       />
 
       {browserOpen && mode === 'replay' && (
@@ -140,6 +143,10 @@ export function App() {
           onSelect={setEpisodeId}
           onClose={() => setBrowserOpen(false)}
         />
+      )}
+
+      {commentsOpen && mode === 'replay' && !loading && (
+        <EpisodeComments episode={episode} onClose={() => setCommentsOpen(false)} />
       )}
 
       {mode === 'live' ? (

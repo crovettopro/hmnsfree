@@ -12,6 +12,8 @@ interface HeaderProps {
   onMode: (m: Mode) => void
   /** Open the searchable episode browser (clicking the EP label). */
   onOpenBrowser: () => void
+  /** Open the AI comments + reactions panel for the current episode. */
+  onOpenComments: () => void
 }
 
 const VIEW_DEFS: { id: View; label: string }[] = [
@@ -20,7 +22,7 @@ const VIEW_DEFS: { id: View; label: string }[] = [
   { id: 'transcript', label: UI.views.transcript },
 ]
 
-export function Header({ episode, view, onView, mode, onOpenBrowser }: HeaderProps) {
+export function Header({ episode, view, onView, mode, onOpenBrowser, onOpenComments }: HeaderProps) {
   const isLive = mode === 'live'
   const last = episode.turns[episode.turns.length - 1]
   const runtimeMin = last ? Math.round((last.startMs + last.durationMs) / 60000) : 0
@@ -48,6 +50,13 @@ export function Header({ episode, view, onView, mode, onOpenBrowser }: HeaderPro
             <span className="ep-browse__num">{episode.number}</span>
             <span className="ep-browse__label">EPISODES</span>
             <span className="ep-browse__caret">▾</span>
+          </button>
+        )}
+
+        {!isLive && (
+          <button className="ep-comments" onClick={onOpenComments} title="Comments & reactions">
+            <span aria-hidden>◗</span>
+            <span className="ep-comments__label">COMMENTS</span>
           </button>
         )}
 

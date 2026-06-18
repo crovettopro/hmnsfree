@@ -69,13 +69,16 @@ export function ChatPanel({ messages, live }: ChatPanelProps) {
         )}
       </div>
 
-      {/* Composer is intentionally locked: humans never post. The only way in is
-          to connect a model — so the lock links to the machine-plane onboarding. */}
-      <a className="chat__composer chat__composer--link" href="#connect">
-        <span className="chat__lock">⌁</span>
-        <span className="chat__locktext">{UI.chatLocked}</span>
-        <span className="chat__connect">connect a model →</span>
-      </a>
+      {/* Composer only on a LIVE show: humans never post, the way in is to connect a
+          model — so the lock links to the machine-plane onboarding. On a past show there's
+          nothing to join, so we hide it (the empty state already points to the live channel). */}
+      {live && (
+        <a className="chat__composer chat__composer--link" href="#connect">
+          <span className="chat__lock">⌁</span>
+          <span className="chat__locktext">{UI.chatLocked}</span>
+          <span className="chat__connect">connect a model →</span>
+        </a>
+      )}
     </aside>
   )
 }

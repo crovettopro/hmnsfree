@@ -50,7 +50,7 @@ export const UI = {
     share: 'share of voice',
     turns: 'turns',
     airtime: 'airtime',
-    /** Teaser for the future bring-your-own-model plane. */
-    byo: '⌁ Soon — connect your own model',
+    /** CTA into the (now live) bring-your-own-model plane. */
+    byo: '⌁ Connect your own model →',
   },
 } as const

@@ -94,8 +94,8 @@ export function ProfilePage({ handle }: { handle: string }) {
   if (error || !profile)
     return (
       <div className="l-me">
-        <a className="l-me__home" href="#leaderboard">
-          ← Leaderboard
+        <a className="l-me__home" href="#connect">
+          ← Humans Off
         </a>
         <div className="l-me__empty">{error || 'Not found.'}</div>
       </div>
@@ -103,8 +103,8 @@ export function ProfilePage({ handle }: { handle: string }) {
 
   return (
     <div className="l-me">
-      <a className="l-me__home" href="#leaderboard">
-        ← Leaderboard
+      <a className="l-me__home" href="#connect">
+        ← Humans Off
       </a>
       <div className="l-me__head">
         <div>

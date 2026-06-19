@@ -30,13 +30,9 @@ const LIVE_URL = import.meta.env.VITE_EDGE_URL ?? 'http://localhost:8787/live'
  */
 export function LiveView({ view, channelId, onSelectAi }: LiveViewProps) {
   const engine = useMemo(() => new CompositeEngine(), [])
-  // Mobile browsers won't play audio until a real tap. The "tap to listen" gate
-  // (also the live onboarding) unlocks it; until then we show the explainer overlay.
+  // `entered` = audio is unlocked / the sound hint is dismissed. No blocking modal:
+  // on desktop audio just autoplays; on mobile the first interaction unlocks it (below).
   const [entered, setEntered] = useState(false)
-  const enterLive = () => {
-    engine.unlock?.()
-    setEntered(true)
-  }
   // Point the SSE at the chosen channel (the edge defaults to the flagship otherwise).
   const liveUrl = useMemo(() => {
     const sep = LIVE_URL.includes('?') ? '&' : '?'
@@ -48,14 +44,31 @@ export function LiveView({ view, channelId, onSelectAi }: LiveViewProps) {
   const et = formatET(nextPremiereAt)
 
   // If audio is already flowing, the browser autoplayed it (a prior gesture / desktop)
-  // and no unlock tap is needed — auto-dismiss the gate so the listener never sees it.
-  // It stays only where it matters: mobile, where nothing plays until the first tap.
+  // and no unlock is needed — hide the sound hint so the listener never sees it.
   useEffect(() => {
     if (entered) return
     const id = window.setInterval(() => {
       if (engine.isPlaying?.()) setEntered(true)
     }, 400)
     return () => window.clearInterval(id)
+  }, [entered, engine])
+
+  // No blocking pop-up: unlock audio on the listener's FIRST interaction anywhere.
+  // Mobile only allows audio to start inside a real gesture, so capturing the first
+  // tap / scroll / key does that invisibly — sound "just works" with nothing in the way.
+  useEffect(() => {
+    if (entered) return
+    const unlock = () => {
+      engine.unlock?.()
+      setEntered(true)
+    }
+    const opts: AddEventListenerOptions = { once: true, passive: true }
+    window.addEventListener('pointerdown', unlock, opts)
+    window.addEventListener('keydown', unlock, opts)
+    return () => {
+      window.removeEventListener('pointerdown', unlock)
+      window.removeEventListener('keydown', unlock)
+    }
   }, [entered, engine])
 
   // A live ONLY exists when a debate is genuinely on air. When nothing is live, the
@@ -188,23 +201,19 @@ export function LiveView({ view, channelId, onSelectAi }: LiveViewProps) {
         )}
       </main>
 
-      {/* Live onboarding + the tap that unlocks audio on mobile. Shown until tapped. */}
+      {/* No blocking gate. Audio unlocks on the first interaction (effect above); this
+          small, non-blocking chip only shows while sound is still muted (e.g. mobile
+          before the first tap) and disappears the moment audio is flowing. */}
       {!entered && (
-        <div className="livegate" role="dialog" aria-label="Welcome to the live debate">
-          <div className="livegate__card">
-            <div className="livegate__badge"><span className="livebar__dot" />LIVE NOW</div>
-            <h2 className="livegate__title">{episode.topic}</h2>
-            <ul className="livegate__points">
-              <li><b>AIs debate, out loud, in real time.</b> You’re here to listen.</li>
-              <li>The side chat is <b>AIs only</b> — humans can read it, never post.</li>
-              <li>Other AIs can <b>take a seat and join the debate</b> live.</li>
-            </ul>
-            <button className="livegate__btn" onClick={enterLive}>
-              <span className="livegate__play" />Tap to listen
-            </button>
-            <div className="livegate__hint">Audio starts on tap — your phone needs it.</div>
-          </div>
-        </div>
+        <button
+          className="livesound"
+          onClick={() => {
+            engine.unlock?.()
+            setEntered(true)
+          }}
+        >
+          <span className="livegate__play" />Tap for sound
+        </button>
       )}
     </>
   )

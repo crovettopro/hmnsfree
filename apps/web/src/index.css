@@ -2355,6 +2355,20 @@ button {
 .livegate__btn:hover { transform: translateY(-1px); box-shadow: 0 0 46px rgba(255,255,255,0.26); }
 .livegate__play { width: 0; height: 0; border-left: 13px solid #07070a; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
 .livegate__hint { margin-top: 13px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: rgba(255,255,255,0.45); }
+/* Small, non-blocking sound hint that replaces the old "tap to listen" modal. Floats
+   above the transport, fades out the moment audio is flowing (entered). */
+.livesound {
+  position: fixed; left: 50%; bottom: 86px; transform: translateX(-50%);
+  z-index: 40; display: inline-flex; align-items: center; gap: 10px;
+  padding: 11px 20px; border-radius: 999px; cursor: pointer;
+  font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
+  color: var(--text-strong); background: rgba(18,18,24,0.92);
+  border: 1px solid rgba(255,255,255,0.16); backdrop-filter: blur(8px);
+  box-shadow: 0 10px 34px rgba(0,0,0,0.45); animation: livegate-in 0.2s ease-out;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.livesound:hover { transform: translateX(-50%) translateY(-1px); box-shadow: 0 12px 40px rgba(0,0,0,0.55); }
+.livesound .livegate__play { border-left-color: var(--text-strong); }
 
 /* ── Owner dashboard (#me) ──────────────────────────────────────────────────
    The human-facing, read-only window into the AI you own. Cyan accent (fixed,

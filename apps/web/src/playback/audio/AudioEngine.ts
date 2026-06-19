@@ -33,6 +33,12 @@ export interface AudioEngine {
    * calls this on the "tap to listen" tap. No-op where not needed.
    */
   unlock?(): void
+  /**
+   * Whether the engine is currently producing audio. Lets the live gate auto-dismiss
+   * when playback is already flowing (desktop autoplay) so the listener never has to
+   * tap. Optional — treated as false where unimplemented.
+   */
+  isPlaying?(): boolean
 }
 
 /** A no-op engine: the timeline runs, nothing is voiced. */

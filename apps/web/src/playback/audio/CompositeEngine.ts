@@ -47,6 +47,11 @@ export class CompositeEngine implements AudioEngine {
     this.speech.unlock?.()
   }
 
+  /** Whether the currently chosen backend is voicing a turn (for the live gate). */
+  isPlaying(): boolean {
+    return this.active?.isPlaying?.() ?? false
+  }
+
   stop(): void {
     this.speech.stop()
     this.clip.stop()

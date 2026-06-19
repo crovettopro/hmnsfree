@@ -61,6 +61,12 @@ export class ClipAudioEngine implements AudioEngine {
     this.unlocked = true
     const el = this.el
     el.muted = false
+    // If a real clip is already sounding (desktop autoplay), the element is ALREADY
+    // unlocked — running the silent-WAV trick here would swap the live clip's src for
+    // silence, pause it, and never resume: the audio just dies. Mark unlocked and
+    // leave playback untouched. The trick only runs when nothing is playing (mobile,
+    // where the feed's play() calls were blocked until this gesture).
+    if (this.busy && !el.paused) return
     const prevSrc = el.src
     el.src = SILENT_WAV
     const p = el.play()
@@ -107,6 +113,11 @@ export class ClipAudioEngine implements AudioEngine {
     const next = this.queue.shift()
     if (next) this.start(next.turn, next.rate)
     else this.busy = false
+  }
+
+  /** True while a real clip is actively sounding (not paused / idle). */
+  isPlaying(): boolean {
+    return !!this.el && !this.el.paused && this.busy
   }
 
   stop(): void {

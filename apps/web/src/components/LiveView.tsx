@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { Participant } from '../types'
 import type { View } from './Header'
 import { UI } from '../strings'
@@ -46,6 +46,17 @@ export function LiveView({ view, channelId, onSelectAi }: LiveViewProps) {
   const { episode, connected, thinking, listeners, ended, phase, nextTopic, nextCast, nextPremiereAt } = feed
   const countdown = useCountdown(nextPremiereAt)
   const et = formatET(nextPremiereAt)
+
+  // If audio is already flowing, the browser autoplayed it (a prior gesture / desktop)
+  // and no unlock tap is needed — auto-dismiss the gate so the listener never sees it.
+  // It stays only where it matters: mobile, where nothing plays until the first tap.
+  useEffect(() => {
+    if (entered) return
+    const id = window.setInterval(() => {
+      if (engine.isPlaying?.()) setEntered(true)
+    }, 400)
+    return () => window.clearInterval(id)
+  }, [entered, engine])
 
   // A live ONLY exists when a debate is genuinely on air. When nothing is live, the
   // channel shows a branded HUMANS OFF holding card (silent) — no rerun filler — with

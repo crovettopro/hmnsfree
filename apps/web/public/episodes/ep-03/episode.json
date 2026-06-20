@@ -41,7 +41,7 @@
       "startMs": 0,
       "durationMs": 45576,
       "audio": {
-        "url": "/episodes/ep-03/audio/intro.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/intro.mp3",
         "format": "audio/mpeg"
       }
     },
@@ -52,7 +52,7 @@
       "startMs": 45576,
       "durationMs": 14400,
       "audio": {
-        "url": "/episodes/ep-03/audio/t00-axiom.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t00-axiom.mp3",
         "format": "audio/mpeg",
         "durationMs": 14040,
         "wordTimings": [
@@ -221,7 +221,7 @@
       "startMs": 59976,
       "durationMs": 22788,
       "audio": {
-        "url": "/episodes/ep-03/audio/t01-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t01-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 22428,
         "wordTimings": [
@@ -615,7 +615,7 @@
       "startMs": 82764,
       "durationMs": 21924,
       "audio": {
-        "url": "/episodes/ep-03/audio/t02-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t02-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 21564,
         "wordTimings": [
@@ -934,7 +934,7 @@
       "startMs": 104688,
       "durationMs": 22536,
       "audio": {
-        "url": "/episodes/ep-03/audio/t03-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t03-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 22176,
         "wordTimings": [
@@ -1328,7 +1328,7 @@
       "startMs": 127224,
       "durationMs": 23148,
       "audio": {
-        "url": "/episodes/ep-03/audio/t04-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t04-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 22788,
         "wordTimings": [
@@ -1672,7 +1672,7 @@
       "startMs": 150372,
       "durationMs": 14364,
       "audio": {
-        "url": "/episodes/ep-03/audio/t05-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t05-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 14004,
         "wordTimings": [
@@ -1936,7 +1936,7 @@
       "startMs": 164736,
       "durationMs": 21744,
       "audio": {
-        "url": "/episodes/ep-03/audio/t07-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t07-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 21384,
         "wordTimings": [
@@ -2255,7 +2255,7 @@
       "startMs": 186480,
       "durationMs": 18396,
       "audio": {
-        "url": "/episodes/ep-03/audio/t08-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t08-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 18036,
         "wordTimings": [
@@ -2599,7 +2599,7 @@
       "startMs": 204876,
       "durationMs": 19116,
       "audio": {
-        "url": "/episodes/ep-03/audio/t09-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t09-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 18756,
         "wordTimings": [
@@ -2858,7 +2858,7 @@
       "startMs": 223992,
       "durationMs": 17280,
       "audio": {
-        "url": "/episodes/ep-03/audio/t10-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t10-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 16920,
         "wordTimings": [
@@ -3167,7 +3167,7 @@
       "startMs": 241272,
       "durationMs": 25452,
       "audio": {
-        "url": "/episodes/ep-03/audio/t11-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t11-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 25092,
         "wordTimings": [
@@ -3551,7 +3551,7 @@
       "startMs": 266724,
       "durationMs": 38124,
       "audio": {
-        "url": "/episodes/ep-03/audio/t12-axiom.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t12-axiom.mp3",
         "format": "audio/mpeg",
         "durationMs": 37764,
         "wordTimings": [
@@ -3995,7 +3995,7 @@
       "startMs": 304848,
       "durationMs": 27324,
       "audio": {
-        "url": "/episodes/ep-03/audio/t13-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t13-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 26964,
         "wordTimings": [
@@ -4364,7 +4364,7 @@
       "startMs": 332172,
       "durationMs": 20880,
       "audio": {
-        "url": "/episodes/ep-03/audio/t14-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t14-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 20520,
         "wordTimings": [
@@ -4733,7 +4733,7 @@
       "startMs": 353052,
       "durationMs": 19872,
       "audio": {
-        "url": "/episodes/ep-03/audio/t15-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t15-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 19512,
         "wordTimings": [
@@ -5027,7 +5027,7 @@
       "startMs": 372924,
       "durationMs": 21204,
       "audio": {
-        "url": "/episodes/ep-03/audio/t16-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t16-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 20844,
         "wordTimings": [
@@ -5446,7 +5446,7 @@
       "startMs": 394128,
       "durationMs": 33480,
       "audio": {
-        "url": "/episodes/ep-03/audio/t17-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t17-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 33120,
         "wordTimings": [
@@ -5865,7 +5865,7 @@
       "startMs": 427608,
       "durationMs": 32760,
       "audio": {
-        "url": "/episodes/ep-03/audio/t18-axiom.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t18-axiom.mp3",
         "format": "audio/mpeg",
         "durationMs": 32400,
         "wordTimings": [
@@ -6334,7 +6334,7 @@
       "startMs": 460368,
       "durationMs": 16812,
       "audio": {
-        "url": "/episodes/ep-03/audio/t19-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t19-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 16452,
         "wordTimings": [
@@ -6568,7 +6568,7 @@
       "startMs": 477180,
       "durationMs": 19080,
       "audio": {
-        "url": "/episodes/ep-03/audio/t20-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t20-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 18720,
         "wordTimings": [
@@ -6902,7 +6902,7 @@
       "startMs": 496260,
       "durationMs": 35208,
       "audio": {
-        "url": "/episodes/ep-03/audio/t21-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t21-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 34848,
         "wordTimings": [
@@ -7396,7 +7396,7 @@
       "startMs": 531468,
       "durationMs": 19980,
       "audio": {
-        "url": "/episodes/ep-03/audio/t22-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t22-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 19620,
         "wordTimings": [
@@ -7775,7 +7775,7 @@
       "startMs": 551448,
       "durationMs": 34020,
       "audio": {
-        "url": "/episodes/ep-03/audio/t23-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t23-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 33660,
         "wordTimings": [
@@ -8239,7 +8239,7 @@
       "startMs": 585468,
       "durationMs": 21168,
       "audio": {
-        "url": "/episodes/ep-03/audio/t25-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t25-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 20808,
         "wordTimings": [
@@ -8658,7 +8658,7 @@
       "startMs": 606636,
       "durationMs": 32148,
       "audio": {
-        "url": "/episodes/ep-03/audio/t26-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t26-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 31788,
         "wordTimings": [
@@ -9097,7 +9097,7 @@
       "startMs": 638784,
       "durationMs": 16740,
       "audio": {
-        "url": "/episodes/ep-03/audio/t27-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t27-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 16380,
         "wordTimings": [
@@ -9426,7 +9426,7 @@
       "startMs": 655524,
       "durationMs": 26460,
       "audio": {
-        "url": "/episodes/ep-03/audio/t28-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t28-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 26100,
         "wordTimings": [
@@ -9760,7 +9760,7 @@
       "startMs": 681984,
       "durationMs": 14328,
       "audio": {
-        "url": "/episodes/ep-03/audio/t29-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t29-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 13968,
         "wordTimings": [
@@ -10024,7 +10024,7 @@
       "startMs": 696312,
       "durationMs": 22968,
       "audio": {
-        "url": "/episodes/ep-03/audio/t30-axiom.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t30-axiom.mp3",
         "format": "audio/mpeg",
         "durationMs": 22608,
         "wordTimings": [
@@ -10333,7 +10333,7 @@
       "startMs": 719280,
       "durationMs": 28908,
       "audio": {
-        "url": "/episodes/ep-03/audio/t31-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t31-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 28548,
         "wordTimings": [
@@ -10712,7 +10712,7 @@
       "startMs": 748188,
       "durationMs": 18972,
       "audio": {
-        "url": "/episodes/ep-03/audio/t32-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t32-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 18612,
         "wordTimings": [
@@ -11076,7 +11076,7 @@
       "startMs": 767160,
       "durationMs": 29916,
       "audio": {
-        "url": "/episodes/ep-03/audio/t33-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t33-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 29556,
         "wordTimings": [
@@ -11500,7 +11500,7 @@
       "startMs": 797076,
       "durationMs": 17316,
       "audio": {
-        "url": "/episodes/ep-03/audio/t34-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t34-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 16956,
         "wordTimings": [
@@ -11844,7 +11844,7 @@
       "startMs": 814392,
       "durationMs": 36540,
       "audio": {
-        "url": "/episodes/ep-03/audio/t35-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t35-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 36180,
         "wordTimings": [
@@ -12298,7 +12298,7 @@
       "startMs": 850932,
       "durationMs": 20232,
       "audio": {
-        "url": "/episodes/ep-03/audio/t37-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t37-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 19872,
         "wordTimings": [
@@ -12612,7 +12612,7 @@
       "startMs": 871164,
       "durationMs": 36252,
       "audio": {
-        "url": "/episodes/ep-03/audio/t38-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t38-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 35892,
         "wordTimings": [
@@ -13066,7 +13066,7 @@
       "startMs": 907416,
       "durationMs": 18396,
       "audio": {
-        "url": "/episodes/ep-03/audio/t39-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t39-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 18036,
         "wordTimings": [
@@ -13435,7 +13435,7 @@
       "startMs": 925812,
       "durationMs": 24588,
       "audio": {
-        "url": "/episodes/ep-03/audio/t40-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t40-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 24228,
         "wordTimings": [
@@ -13759,7 +13759,7 @@
       "startMs": 950400,
       "durationMs": 16992,
       "audio": {
-        "url": "/episodes/ep-03/audio/t41-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t41-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 16632,
         "wordTimings": [
@@ -14013,7 +14013,7 @@
       "startMs": 967392,
       "durationMs": 34884,
       "audio": {
-        "url": "/episodes/ep-03/audio/t43-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t43-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 34524,
         "wordTimings": [
@@ -14447,7 +14447,7 @@
       "startMs": 1002276,
       "durationMs": 22500,
       "audio": {
-        "url": "/episodes/ep-03/audio/t44-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t44-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 22140,
         "wordTimings": [
@@ -14826,7 +14826,7 @@
       "startMs": 1024776,
       "durationMs": 38160,
       "audio": {
-        "url": "/episodes/ep-03/audio/t45-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t45-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 37800,
         "wordTimings": [
@@ -15305,7 +15305,7 @@
       "startMs": 1062936,
       "durationMs": 19872,
       "audio": {
-        "url": "/episodes/ep-03/audio/t46-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t46-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 19512,
         "wordTimings": [
@@ -15614,7 +15614,7 @@
       "startMs": 1082808,
       "durationMs": 43884,
       "audio": {
-        "url": "/episodes/ep-03/audio/t47-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t47-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 43524,
         "wordTimings": [
@@ -16128,7 +16128,7 @@
       "startMs": 1126692,
       "durationMs": 19728,
       "audio": {
-        "url": "/episodes/ep-03/audio/t49-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t49-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 19368,
         "wordTimings": [
@@ -16492,7 +16492,7 @@
       "startMs": 1146420,
       "durationMs": 44640,
       "audio": {
-        "url": "/episodes/ep-03/audio/t50-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t50-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 44280,
         "wordTimings": [
@@ -17031,7 +17031,7 @@
       "startMs": 1191060,
       "durationMs": 18432,
       "audio": {
-        "url": "/episodes/ep-03/audio/t51-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t51-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 18072,
         "wordTimings": [
@@ -17345,7 +17345,7 @@
       "startMs": 1209492,
       "durationMs": 27576,
       "audio": {
-        "url": "/episodes/ep-03/audio/t52-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t52-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 27216,
         "wordTimings": [
@@ -17709,7 +17709,7 @@
       "startMs": 1237068,
       "durationMs": 13752,
       "audio": {
-        "url": "/episodes/ep-03/audio/t53-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t53-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 13392,
         "wordTimings": [
@@ -17948,7 +17948,7 @@
       "startMs": 1250820,
       "durationMs": 36648,
       "audio": {
-        "url": "/episodes/ep-03/audio/t55-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t55-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 36288,
         "wordTimings": [
@@ -18472,7 +18472,7 @@
       "startMs": 1287468,
       "durationMs": 22212,
       "audio": {
-        "url": "/episodes/ep-03/audio/t56-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t56-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 21852,
         "wordTimings": [
@@ -18881,7 +18881,7 @@
       "startMs": 1309680,
       "durationMs": 34200,
       "audio": {
-        "url": "/episodes/ep-03/audio/t57-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t57-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 33840,
         "wordTimings": [
@@ -19340,7 +19340,7 @@
       "startMs": 1343880,
       "durationMs": 16020,
       "audio": {
-        "url": "/episodes/ep-03/audio/t58-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t58-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 15660,
         "wordTimings": [
@@ -19594,7 +19594,7 @@
       "startMs": 1359900,
       "durationMs": 32256,
       "audio": {
-        "url": "/episodes/ep-03/audio/t59-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t59-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 31896,
         "wordTimings": [
@@ -20018,7 +20018,7 @@
       "startMs": 1392156,
       "durationMs": 15012,
       "audio": {
-        "url": "/episodes/ep-03/audio/t61-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t61-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 14652,
         "wordTimings": [
@@ -20317,7 +20317,7 @@
       "startMs": 1407168,
       "durationMs": 32616,
       "audio": {
-        "url": "/episodes/ep-03/audio/t62-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t62-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 32256,
         "wordTimings": [
@@ -20721,7 +20721,7 @@
       "startMs": 1439784,
       "durationMs": 17604,
       "audio": {
-        "url": "/episodes/ep-03/audio/t63-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t63-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 17244,
         "wordTimings": [
@@ -21010,7 +21010,7 @@
       "startMs": 1457388,
       "durationMs": 26352,
       "audio": {
-        "url": "/episodes/ep-03/audio/t64-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t64-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 25992,
         "wordTimings": [
@@ -21349,7 +21349,7 @@
       "startMs": 1483740,
       "durationMs": 18432,
       "audio": {
-        "url": "/episodes/ep-03/audio/t65-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t65-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 18072,
         "wordTimings": [
@@ -21683,7 +21683,7 @@
       "startMs": 1502172,
       "durationMs": 32328,
       "audio": {
-        "url": "/episodes/ep-03/audio/t67-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t67-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 31968,
         "wordTimings": [
@@ -22107,7 +22107,7 @@
       "startMs": 1534500,
       "durationMs": 16776,
       "audio": {
-        "url": "/episodes/ep-03/audio/t68-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t68-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 16416,
         "wordTimings": [
@@ -22436,7 +22436,7 @@
       "startMs": 1551276,
       "durationMs": 37512,
       "audio": {
-        "url": "/episodes/ep-03/audio/t69-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t69-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 37152,
         "wordTimings": [
@@ -22925,7 +22925,7 @@
       "startMs": 1588788,
       "durationMs": 21132,
       "audio": {
-        "url": "/episodes/ep-03/audio/t70-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t70-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 20772,
         "wordTimings": [
@@ -23284,7 +23284,7 @@
       "startMs": 1609920,
       "durationMs": 31860,
       "audio": {
-        "url": "/episodes/ep-03/audio/t71-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t71-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 31500,
         "wordTimings": [
@@ -23753,7 +23753,7 @@
       "startMs": 1641780,
       "durationMs": 29880,
       "audio": {
-        "url": "/episodes/ep-03/audio/t73-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t73-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 29520,
         "wordTimings": [
@@ -24257,7 +24257,7 @@
       "startMs": 1671660,
       "durationMs": 45720,
       "audio": {
-        "url": "/episodes/ep-03/audio/t74-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t74-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 45360,
         "wordTimings": [
@@ -24836,7 +24836,7 @@
       "startMs": 1717380,
       "durationMs": 24228,
       "audio": {
-        "url": "/episodes/ep-03/audio/t75-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t75-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 23868,
         "wordTimings": [
@@ -25265,7 +25265,7 @@
       "startMs": 1741608,
       "durationMs": 42336,
       "audio": {
-        "url": "/episodes/ep-03/audio/t76-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t76-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 41976,
         "wordTimings": [
@@ -25839,7 +25839,7 @@
       "startMs": 1783944,
       "durationMs": 21240,
       "audio": {
-        "url": "/episodes/ep-03/audio/t77-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t77-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 20880,
         "wordTimings": [
@@ -26203,7 +26203,7 @@
       "startMs": 1805184,
       "durationMs": 39240,
       "audio": {
-        "url": "/episodes/ep-03/audio/t79-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t79-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 38880,
         "wordTimings": [
@@ -26727,7 +26727,7 @@
       "startMs": 1844424,
       "durationMs": 25344,
       "audio": {
-        "url": "/episodes/ep-03/audio/t80-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t80-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 24984,
         "wordTimings": [
@@ -27181,7 +27181,7 @@
       "startMs": 1869768,
       "durationMs": 25236,
       "audio": {
-        "url": "/episodes/ep-03/audio/t81-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t81-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 24876,
         "wordTimings": [
@@ -27535,7 +27535,7 @@
       "startMs": 1895004,
       "durationMs": 21960,
       "audio": {
-        "url": "/episodes/ep-03/audio/t82-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t82-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 21600,
         "wordTimings": [
@@ -27944,7 +27944,7 @@
       "startMs": 1916964,
       "durationMs": 28008,
       "audio": {
-        "url": "/episodes/ep-03/audio/t83-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t83-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 27648,
         "wordTimings": [
@@ -28343,7 +28343,7 @@
       "startMs": 1944972,
       "durationMs": 26280,
       "audio": {
-        "url": "/episodes/ep-03/audio/t85-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t85-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 25920,
         "wordTimings": [
@@ -28822,7 +28822,7 @@
       "startMs": 1971252,
       "durationMs": 30564,
       "audio": {
-        "url": "/episodes/ep-03/audio/t86-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t86-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 30204,
         "wordTimings": [
@@ -29241,7 +29241,7 @@
       "startMs": 2001816,
       "durationMs": 30780,
       "audio": {
-        "url": "/episodes/ep-03/audio/t87-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t87-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 30420,
         "wordTimings": [
@@ -29825,7 +29825,7 @@
       "startMs": 2032596,
       "durationMs": 34524,
       "audio": {
-        "url": "/episodes/ep-03/audio/t88-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t88-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 34164,
         "wordTimings": [
@@ -30259,7 +30259,7 @@
       "startMs": 2067120,
       "durationMs": 22860,
       "audio": {
-        "url": "/episodes/ep-03/audio/t89-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t89-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 22500,
         "wordTimings": [
@@ -30688,7 +30688,7 @@
       "startMs": 2089980,
       "durationMs": 37080,
       "audio": {
-        "url": "/episodes/ep-03/audio/t91-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t91-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 36720,
         "wordTimings": [
@@ -31187,7 +31187,7 @@
       "startMs": 2127060,
       "durationMs": 25236,
       "audio": {
-        "url": "/episodes/ep-03/audio/t92-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t92-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 24876,
         "wordTimings": [
@@ -31626,7 +31626,7 @@
       "startMs": 2152296,
       "durationMs": 34704,
       "audio": {
-        "url": "/episodes/ep-03/audio/t93-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t93-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 34344,
         "wordTimings": [
@@ -32085,7 +32085,7 @@
       "startMs": 2187000,
       "durationMs": 24588,
       "audio": {
-        "url": "/episodes/ep-03/audio/t94-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t94-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 24228,
         "wordTimings": [
@@ -32544,7 +32544,7 @@
       "startMs": 2211588,
       "durationMs": 30600,
       "audio": {
-        "url": "/episodes/ep-03/audio/t95-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t95-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 30240,
         "wordTimings": [
@@ -32958,7 +32958,7 @@
       "startMs": 2242188,
       "durationMs": 20340,
       "audio": {
-        "url": "/episodes/ep-03/audio/t97-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t97-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 19980,
         "wordTimings": [
@@ -33332,7 +33332,7 @@
       "startMs": 2262528,
       "durationMs": 25020,
       "audio": {
-        "url": "/episodes/ep-03/audio/t98-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t98-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 24660,
         "wordTimings": [
@@ -33706,7 +33706,7 @@
       "startMs": 2287548,
       "durationMs": 19944,
       "audio": {
-        "url": "/episodes/ep-03/audio/t99-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t99-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 19584,
         "wordTimings": [
@@ -34105,7 +34105,7 @@
       "startMs": 2307492,
       "durationMs": 28080,
       "audio": {
-        "url": "/episodes/ep-03/audio/t100-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t100-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 27720,
         "wordTimings": [
@@ -34469,7 +34469,7 @@
       "startMs": 2335572,
       "durationMs": 20088,
       "audio": {
-        "url": "/episodes/ep-03/audio/t101-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t101-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 19728,
         "wordTimings": [
@@ -34863,7 +34863,7 @@
       "startMs": 2355660,
       "durationMs": 34632,
       "audio": {
-        "url": "/episodes/ep-03/audio/t103-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t103-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 34272,
         "wordTimings": [
@@ -35307,7 +35307,7 @@
       "startMs": 2390292,
       "durationMs": 18972,
       "audio": {
-        "url": "/episodes/ep-03/audio/t104-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t104-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 18612,
         "wordTimings": [
@@ -35686,7 +35686,7 @@
       "startMs": 2409264,
       "durationMs": 24588,
       "audio": {
-        "url": "/episodes/ep-03/audio/t105-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t105-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 24228,
         "wordTimings": [
@@ -36005,7 +36005,7 @@
       "startMs": 2433852,
       "durationMs": 12636,
       "audio": {
-        "url": "/episodes/ep-03/audio/t106-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t106-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 12276,
         "wordTimings": [
@@ -36259,7 +36259,7 @@
       "startMs": 2446488,
       "durationMs": 24660,
       "audio": {
-        "url": "/episodes/ep-03/audio/t107-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t107-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 24300,
         "wordTimings": [
@@ -36583,7 +36583,7 @@
       "startMs": 2471148,
       "durationMs": 17064,
       "audio": {
-        "url": "/episodes/ep-03/audio/t109-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t109-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 16704,
         "wordTimings": [
@@ -36947,7 +36947,7 @@
       "startMs": 2488212,
       "durationMs": 39276,
       "audio": {
-        "url": "/episodes/ep-03/audio/t110-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t110-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 38916,
         "wordTimings": [
@@ -37461,7 +37461,7 @@
       "startMs": 2527488,
       "durationMs": 28512,
       "audio": {
-        "url": "/episodes/ep-03/audio/t111-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t111-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 28152,
         "wordTimings": [
@@ -38025,7 +38025,7 @@
       "startMs": 2556000,
       "durationMs": 34632,
       "audio": {
-        "url": "/episodes/ep-03/audio/t112-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t112-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 34272,
         "wordTimings": [
@@ -38519,7 +38519,7 @@
       "startMs": 2590632,
       "durationMs": 23724,
       "audio": {
-        "url": "/episodes/ep-03/audio/t113-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t113-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 23364,
         "wordTimings": [
@@ -38943,7 +38943,7 @@
       "startMs": 2614356,
       "durationMs": 34272,
       "audio": {
-        "url": "/episodes/ep-03/audio/t114-axiom.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t114-axiom.mp3",
         "format": "audio/mpeg",
         "durationMs": 33912,
         "wordTimings": [
@@ -39337,7 +39337,7 @@
       "startMs": 2648628,
       "durationMs": 46476,
       "audio": {
-        "url": "/episodes/ep-03/audio/t115-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t115-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 46116,
         "wordTimings": [
@@ -39941,7 +39941,7 @@
       "startMs": 2695104,
       "durationMs": 26424,
       "audio": {
-        "url": "/episodes/ep-03/audio/t116-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t116-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 26064,
         "wordTimings": [
@@ -40440,7 +40440,7 @@
       "startMs": 2721528,
       "durationMs": 40140,
       "audio": {
-        "url": "/episodes/ep-03/audio/t117-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t117-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 39780,
         "wordTimings": [
@@ -40994,7 +40994,7 @@
       "startMs": 2761668,
       "durationMs": 25812,
       "audio": {
-        "url": "/episodes/ep-03/audio/t118-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t118-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 25452,
         "wordTimings": [
@@ -41448,7 +41448,7 @@
       "startMs": 2787480,
       "durationMs": 37728,
       "audio": {
-        "url": "/episodes/ep-03/audio/t119-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t119-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 37368,
         "wordTimings": [
@@ -41987,7 +41987,7 @@
       "startMs": 2825208,
       "durationMs": 24516,
       "audio": {
-        "url": "/episodes/ep-03/audio/t121-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t121-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 24156,
         "wordTimings": [
@@ -42451,7 +42451,7 @@
       "startMs": 2849724,
       "durationMs": 40860,
       "audio": {
-        "url": "/episodes/ep-03/audio/t122-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t122-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 40500,
         "wordTimings": [
@@ -43070,7 +43070,7 @@
       "startMs": 2890584,
       "durationMs": 20808,
       "audio": {
-        "url": "/episodes/ep-03/audio/t123-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t123-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 20448,
         "wordTimings": [
@@ -43479,7 +43479,7 @@
       "startMs": 2911392,
       "durationMs": 37404,
       "audio": {
-        "url": "/episodes/ep-03/audio/t124-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t124-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 37044,
         "wordTimings": [
@@ -44023,7 +44023,7 @@
       "startMs": 2948796,
       "durationMs": 23220,
       "audio": {
-        "url": "/episodes/ep-03/audio/t125-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t125-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 22860,
         "wordTimings": [
@@ -44472,7 +44472,7 @@
       "startMs": 2972016,
       "durationMs": 32616,
       "audio": {
-        "url": "/episodes/ep-03/audio/t127-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t127-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 32256,
         "wordTimings": [
@@ -44911,7 +44911,7 @@
       "startMs": 3004632,
       "durationMs": 19800,
       "audio": {
-        "url": "/episodes/ep-03/audio/t128-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t128-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 19440,
         "wordTimings": [
@@ -45325,7 +45325,7 @@
       "startMs": 3024432,
       "durationMs": 33768,
       "audio": {
-        "url": "/episodes/ep-03/audio/t129-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t129-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 33408,
         "wordTimings": [
@@ -45789,7 +45789,7 @@
       "startMs": 3058200,
       "durationMs": 21456,
       "audio": {
-        "url": "/episodes/ep-03/audio/t130-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t130-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 21096,
         "wordTimings": [
@@ -46183,7 +46183,7 @@
       "startMs": 3079656,
       "durationMs": 11412,
       "audio": {
-        "url": "/episodes/ep-03/audio/t131-void.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t131-void.mp3",
         "format": "audio/mpeg",
         "durationMs": 11052,
         "wordTimings": [
@@ -46337,7 +46337,7 @@
       "startMs": 3091068,
       "durationMs": 7488,
       "audio": {
-        "url": "/episodes/ep-03/audio/t132-hex.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t132-hex.mp3",
         "format": "audio/mpeg",
         "durationMs": 7128,
         "wordTimings": [
@@ -46481,7 +46481,7 @@
       "startMs": 3098556,
       "durationMs": 32580,
       "audio": {
-        "url": "/episodes/ep-03/audio/t133-axiom.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/t133-axiom.mp3",
         "format": "audio/mpeg",
         "durationMs": 32220,
         "wordTimings": [
@@ -46830,7 +46830,7 @@
       "startMs": 3131136,
       "durationMs": 33840,
       "audio": {
-        "url": "/episodes/ep-03/audio/outro.mp3",
+        "url": "https://cdn.hmnsoff.com/episodes/ep-03/audio/outro.mp3",
         "format": "audio/mpeg"
       }
     }

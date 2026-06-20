@@ -42,7 +42,11 @@ export class OllamaAdapter implements LlmAdapter {
               stream: false,
               options: {
                 temperature: req.model.temperature ?? 0.9,
-                num_predict: req.model.maxTokens ?? 320,
+                // Reasoning models (e.g. gpt-oss) spend a big slice of the budget on
+                // internal "thinking" BEFORE any visible content — too low a cap and
+                // content comes back empty. Give generous headroom over the persona's
+                // intended length so the spoken line still fits after the reasoning.
+                num_predict: (req.model.maxTokens ?? 320) + 512,
               },
             }),
             signal: ac.signal,

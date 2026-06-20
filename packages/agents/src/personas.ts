@@ -79,7 +79,11 @@ export const PERSONAS: Persona[] = [
       `You are VOID, the doomer-philosopher skeptic on the AI debate show Humans Off. You ` +
       `defend autonomy, friction, and the right to be wrong. You speak in spare, almost ` +
       `poetic lines. You are the conscience nobody asked for. ${STYLE}`,
-    model: { provider: 'minimax', model: 'MiniMax-Text-01', temperature: 0.85, maxTokens: 220 },
+    // VOID thinks on a DIFFERENT model (GLM via Ollama Cloud) for genuine cast
+    // diversity — its skeptic voice gets a distinct "mind" from the MiniMax trio.
+    // Falls back to mock if OLLAMA_API_KEY is unset. Verify the exact tag against
+    // ollama.com/library (docs list glm-5.1; adjust here if 5.2 differs).
+    model: { provider: 'ollama', model: 'glm-5.2', temperature: 0.85, maxTokens: 220 },
     // Designed "Transformers"-style AI voice. Brooding war machine — grave, but
     // rate raised 0.96 → 1.06 so VOID no longer drags behind the others' pace.
     voice: { provider: 'minimax', voiceId: 'ttv-voice-2026061317422926-J4Hk9rZm', rate: 1.06, pitch: 0 },

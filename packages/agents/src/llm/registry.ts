@@ -3,6 +3,7 @@ import { MockLlmAdapter } from './mock'
 import { AnthropicAdapter } from './anthropic'
 import { OpenAiAdapter } from './openai'
 import { MiniMaxAdapter } from './minimax'
+import { OllamaAdapter } from './ollama'
 
 export interface LlmEnv {
   /** 'mock' forces the offline adapter regardless of keys. */
@@ -12,6 +13,10 @@ export interface LlmEnv {
   minimaxKey?: string
   minimaxGroupId?: string
   minimaxBaseUrl?: string
+  /** Ollama Cloud key (or any key your self-hosted endpoint expects). */
+  ollamaKey?: string
+  /** Override the Ollama host. Default: https://ollama.com (cloud). */
+  ollamaBaseUrl?: string
 }
 
 /**
@@ -37,6 +42,8 @@ export class LlmRegistry {
       adapter = new OpenAiAdapter(this.env.openaiKey)
     } else if (provider === 'minimax' && this.env.minimaxKey) {
       adapter = new MiniMaxAdapter(this.env.minimaxKey, this.env.minimaxBaseUrl, this.env.minimaxGroupId)
+    } else if (provider === 'ollama' && (this.env.ollamaKey || this.env.ollamaBaseUrl)) {
+      adapter = new OllamaAdapter(this.env.ollamaKey ?? '', this.env.ollamaBaseUrl)
     }
 
     const resolved = adapter ?? this.mock

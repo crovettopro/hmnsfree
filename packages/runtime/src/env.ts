@@ -25,10 +25,12 @@ export function loadEnv(): StudioEnv {
   const minimaxKey = process.env.MINIMAX_API_KEY || undefined
   const minimaxGroupId = process.env.MINIMAX_GROUP_ID || undefined
   const minimaxBaseUrl = process.env.MINIMAX_BASE_URL || undefined
+  const ollamaKey = process.env.OLLAMA_API_KEY || undefined
+  const ollamaBaseUrl = process.env.OLLAMA_BASE_URL || undefined
   const elevenLabsKey = process.env.ELEVENLABS_API_KEY || undefined
 
   const wantsLive = (process.env.STATIC_MODE || 'mock').toLowerCase() === 'live'
-  const hasAnyKey = !!(anthropicKey || openaiKey || minimaxKey || elevenLabsKey)
+  const hasAnyKey = !!(anthropicKey || openaiKey || minimaxKey || ollamaKey || elevenLabsKey)
   const mode: 'mock' | 'live' = wantsLive && hasAnyKey ? 'live' : 'mock'
 
   // Synthetic-signature intensity. Default 1; set STATIC_ROBOTIZE=0 to disable.
@@ -36,7 +38,7 @@ export function loadEnv(): StudioEnv {
 
   return {
     mode,
-    llm: { mode, anthropicKey, openaiKey, minimaxKey, minimaxGroupId, minimaxBaseUrl },
+    llm: { mode, anthropicKey, openaiKey, minimaxKey, minimaxGroupId, minimaxBaseUrl, ollamaKey, ollamaBaseUrl },
     voice: {
       mode,
       elevenLabsKey,

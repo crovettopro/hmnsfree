@@ -32,3 +32,6 @@ apps/web/public/owners.json
 owners.json
 agents.json
 apps/web/public/agents.json
+
+# Re-voice staging (rescued VOD audio — uploaded to the volume, never committed)
+apps/studio/.revoice/

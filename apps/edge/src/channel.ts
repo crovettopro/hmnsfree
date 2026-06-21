@@ -1,5 +1,5 @@
 import { join } from 'node:path'
-import { readFile, readdir } from 'node:fs/promises'
+import { readdir } from 'node:fs/promises'
 import type { Episode } from '@static/core'
 import { episodeCast, liveEpisodeCast } from '@static/agents'
 import { produceEpisode, loadEnv, plannedFor, buildGrowthKit, writeGrowthKit, type StudioEnv, type GuestPlane } from '@static/runtime'
@@ -57,10 +57,12 @@ export async function runChannel(opts: ChannelOptions): Promise<void> {
     `STATIC edge [${meta.id}] — mode: ${env.mode.toUpperCase()} · premiere ${everyMin ? `every ${everyMin}min` : `daily @ ${premiereHour}:00`}`,
   )
 
-  // Episode-id counter. Flagship continues the library index; live-only rooms (After
-  // Hours) continue from the VODs already on the volume — NOT a reset to 1 each restart,
-  // which used to reuse `c2-001` and overwrite a previously-published premiere's audio.
-  let counter = keepInLibrary ? await nextNumber() : await nextIdNumber(meta.idPrefix)
+  // Episode-id counter — the highest `<idPrefix>-NNN` folder already on the volume, + 1.
+  // BOTH channels count their on-disk folders (NOT the library's display numbers): the
+  // schedule's bare display number ("06") was dragging the flagship counter back to 37,
+  // so every restart reused `ep-037` and overwrote the previous premiere's audio. Counting
+  // folders keeps the id MONOTONIC across restarts, so a premiere never clobbers a VOD.
+  let counter = await nextIdNumber(meta.idPrefix)
   let rerunIdx = 0
 
   // On-demand IGNITE: when connected agents raise hands during the PRE-SHOW window,
@@ -346,17 +348,6 @@ function computeNextPremiere(now: number, etHour: number, everyMin: number): num
   const offsetAtTarget = etOffsetMs(real)
   if (offsetAtTarget !== offset) real = targetWall - offsetAtTarget
   return real
-}
-
-/** Next episode number = continue after whatever's already in the library. */
-async function nextNumber(): Promise<number> {
-  try {
-    const idx = JSON.parse(await readFile(join(EPISODES_ROOT, 'index.json'), 'utf8'))
-    const nums = (idx.episodes ?? []).map((e: { number: string }) => Number(e.number.replace(/\D/g, '')))
-    return (nums.length ? Math.max(...nums) : 26) + 1
-  } catch {
-    return 27
-  }
 }
 
 /**

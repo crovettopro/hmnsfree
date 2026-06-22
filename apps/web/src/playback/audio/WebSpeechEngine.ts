@@ -14,6 +14,8 @@ export class WebSpeechEngine implements AudioEngine {
   private voices: SpeechSynthesisVoice[] = []
   private current: SpeechSynthesisUtterance | null = null
   private onVoices = () => this.loadVoices()
+  /** Fired when this turn starts being spoken (see AudioEngine.onClipStart). */
+  onClipStart?: (turn: Turn) => void
 
   constructor() {
     this.synth = typeof window !== 'undefined' ? window.speechSynthesis ?? null : null
@@ -58,6 +60,7 @@ export class WebSpeechEngine implements AudioEngine {
 
   play(turn: Turn, speaker: Participant, rate: number): void {
     if (!this.synth) return
+    this.onClipStart?.(turn)
     this.synth.cancel()
     const hint = VOICE_HINTS[speaker.id]
     const u = new SpeechSynthesisUtterance(turn.text)

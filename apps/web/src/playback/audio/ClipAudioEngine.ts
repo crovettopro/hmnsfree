@@ -32,6 +32,8 @@ export class ClipAudioEngine implements AudioEngine {
   private unlocked = false
   private queue: QueuedClip[] = []
   private busy = false
+  /** Fired when a clip becomes the on-air one (see AudioEngine.onClipStart). */
+  onClipStart?: (turn: Turn) => void
 
   constructor() {
     if (this.el) {
@@ -102,6 +104,9 @@ export class ClipAudioEngine implements AudioEngine {
   private start(turn: Turn, rate: number): void {
     if (!this.el || !turn.audio) return
     this.busy = true
+    // This clip is now the on-air turn — tell the live feed so the highlight/transcript
+    // advance with the SOUND, not with the (far faster) turn.closed event feed.
+    this.onClipStart?.(turn)
     this.el.pause()
     this.el.src = turn.audio.url
     this.el.playbackRate = rate

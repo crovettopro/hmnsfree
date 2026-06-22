@@ -61,6 +61,12 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
   const seq = useRef(0)
   // Latest phase, readable inside the (url-bound) SSE handler without re-subscribing.
   const phaseRef = useRef<'preshow' | 'live' | 'rerun' | null>(null)
+  // Turn ids already handed to the audio engine — guards against re-voicing the SAME
+  // clip (snapshot turns on reconnect, or a replayed turn.closed), which doubled audio.
+  const enqueuedRef = useRef<Set<string>>(new Set())
+  // Live mirror of episode.turns, kept in sync SYNCHRONOUSLY inside the SSE handler so
+  // engine.onClipStart can map a just-started clip → its index before React re-renders.
+  const turnsRef = useRef<Turn[]>([])
 
   useEffect(() => {
     // Clips live on the EDGE, not this web origin. New episodes carry absolute URLs,
@@ -93,21 +99,21 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
         case 'episode.scheduled': {
           // A new (or in-progress) episode. Reset to its current state.
           const turns: Turn[] = (ev.episode.turns ?? []).map(resolveTurn)
+          turnsRef.current = turns
+          // Everything in the snapshot is HISTORY — mark it already-voiced so a reconnect
+          // replay (or the catch-up below) can't enqueue it again and double the audio.
+          enqueuedRef.current = new Set(turns.map((t) => t.id))
           setEpisode({ ...ev.episode, turns })
           setEnded(false)
           setCursor(turns.length - 1)
           setSpeaking(-1)
           setThinking(turns.length === 0)
           // Rejoin/late-join resume: a catch-up snapshot mid-show would otherwise sit
-          // SILENT until the next turn closes (~10-15s) and the stage highlight desync.
-          // Pick audio + speaker up at the live edge (the latest turn) right away. Only
-          // for a LIVE premiere — a rerun drives its own audio via the turn.closed replay.
+          // SILENT until the next turn closes (~10-15s). Start voicing at the live edge
+          // right away; engine.onClipStart then advances the cursor/clock so the highlight
+          // tracks the SOUND. Only for a LIVE premiere — a rerun drives its own audio.
           if (turns.length > 0 && phaseRef.current === 'live' && ev.episode.cast) {
             const last = turns[turns.length - 1]
-            setSpeaking(last.speaker)
-            turnBaseMsRef.current = last.startMs
-            turnStartRef.current = performance.now()
-            setElapsed(last.startMs)
             engine.play(last, ev.episode.cast[last.speaker], 1)
           }
           break
@@ -118,11 +124,14 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
           // `playing = !thinking` blinked off every turn — the speaker highlight + a
           // "thinking…" overlay flickered on every single turn, making it unwatchable.)
           setThinking(false)
-          // Highlight who's on air now (works for live + for a mid-turn rejoin).
-          if (typeof ev.speaker === 'number') setSpeaking(ev.speaker)
+          // NOTE: we deliberately do NOT highlight the speaker here. turn.opened fires
+          // when the turn is GENERATED, far ahead of when its clip plays — highlighting
+          // now made the stage race ahead of the audio. The highlight is driven by
+          // engine.onClipStart instead, so it lands exactly when the voice starts.
           break
         case 'turn.closed': {
           const turn: Turn = resolveTurn(ev.turn)
+          if (!turnsRef.current.some((t) => t.id === turn.id)) turnsRef.current = [...turnsRef.current, turn]
           setEpisode((prev) => {
             if (!prev) return prev
             // Append if it isn't already there (snapshot may include it).
@@ -130,15 +139,14 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
             return { ...prev, turns: [...prev.turns, turn] }
           })
           setThinking(false)
-          setSpeaking(-1) // the cursor now points at this same speaker — no flicker
-          setCursor((c) => c + 1)
-          turnBaseMsRef.current = turn.startMs
-          turnStartRef.current = performance.now()
-          setElapsed(turn.startMs)
           // Voice it AFTER the current clip finishes — never cut a turn off mid-word
-          // (late-loading guest clips used to clip + overlap). Falls back to play() if
-          // the engine has no queue. The visual timeline stays authoritative regardless.
-          if (episodeCastRef.current) {
+          // (late-loading guest clips used to clip + overlap). The cursor / speaker
+          // highlight / transcript advance when THIS clip actually starts playing
+          // (engine.onClipStart) so they follow the sound, not this faster event feed.
+          // Dedup: never hand the same turn to the engine twice (snapshot / replay) —
+          // that was doubling the audio.
+          if (episodeCastRef.current && !enqueuedRef.current.has(turn.id)) {
+            enqueuedRef.current.add(turn.id)
             const speaker = episodeCastRef.current[turn.speaker]
             if (engine.enqueue) engine.enqueue(turn, speaker, 1)
             else engine.play(turn, speaker, 1)
@@ -207,6 +215,24 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
   useEffect(() => {
     episodeCastRef.current = episode?.cast ?? null
   }, [episode])
+
+  // AUDIO drives the stage: when a clip actually starts sounding, move the on-air
+  // cursor to ITS turn. This is what keeps "who's speaking" + the transcript reveal
+  // locked to the voice instead of racing ahead (turns arrive far faster than they play).
+  useEffect(() => {
+    engine.onClipStart = (turn: Turn) => {
+      const idx = turnsRef.current.findIndex((t) => t.id === turn.id)
+      if (idx >= 0) setCursor(idx)
+      setSpeaking(-1) // activeSpeaker now derives from the cursor (the playing turn)
+      setThinking(false)
+      turnBaseMsRef.current = turn.startMs
+      turnStartRef.current = performance.now()
+      setElapsed(turn.startMs)
+    }
+    return () => {
+      engine.onClipStart = undefined
+    }
+  }, [engine])
 
   // Tick the word-reveal clock while a turn is on air.
   useEffect(() => {

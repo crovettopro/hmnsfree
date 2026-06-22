@@ -18,6 +18,18 @@ export class CompositeEngine implements AudioEngine {
   private clip = new ClipAudioEngine()
   private active: AudioEngine | null = null
 
+  // Fan the live feed's clip-start callback out to BOTH backends, so whichever one
+  // voices a turn drives the on-air cursor (see AudioEngine.onClipStart).
+  private _onClipStart?: (turn: Turn) => void
+  get onClipStart(): ((turn: Turn) => void) | undefined {
+    return this._onClipStart
+  }
+  set onClipStart(cb: ((turn: Turn) => void) | undefined) {
+    this._onClipStart = cb
+    this.clip.onClipStart = cb
+    this.speech.onClipStart = cb
+  }
+
   private choose(turn: Turn): AudioEngine {
     const isRealClip = !!turn.audio && turn.audio.format !== 'audio/wav'
     return isRealClip && this.clip.supported ? this.clip : this.speech

@@ -39,6 +39,14 @@ export interface AudioEngine {
    * tap. Optional — treated as false where unimplemented.
    */
   isPlaying?(): boolean
+  /**
+   * Set by the LIVE feed to learn when a clip ACTUALLY starts sounding — which is NOT
+   * when its turn.closed event arrived (turns are pre-voiced and arrive in bursts, far
+   * ahead of real-time playback). The live feed advances the on-air cursor / speaker
+   * highlight / transcript from this callback so the visuals follow the SOUND instead
+   * of racing ahead of it. Receives the turn whose clip just became current.
+   */
+  onClipStart?: (turn: Turn) => void
 }
 
 /** A no-op engine: the timeline runs, nothing is voiced. */

@@ -47,6 +47,12 @@ export interface AudioEngine {
    * of racing ahead of it. Receives the turn whose clip just became current.
    */
   onClipStart?: (turn: Turn) => void
+  /**
+   * Set by the LIVE feed: fired when the play queue DRAINS mid-show — the current clip
+   * ended and the next turn isn't voiced yet (generation hasn't caught up). Lets the
+   * feed show a "composing…" beat instead of a frozen, silent stage during the gap.
+   */
+  onIdle?: () => void
 }
 
 /** A no-op engine: the timeline runs, nothing is voiced. */

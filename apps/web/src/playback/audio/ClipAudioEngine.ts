@@ -34,6 +34,8 @@ export class ClipAudioEngine implements AudioEngine {
   private busy = false
   /** Fired when a clip becomes the on-air one (see AudioEngine.onClipStart). */
   onClipStart?: (turn: Turn) => void
+  /** Fired when the queue drains mid-show (see AudioEngine.onIdle). */
+  onIdle?: () => void
 
   constructor() {
     if (this.el) {
@@ -116,8 +118,14 @@ export class ClipAudioEngine implements AudioEngine {
 
   private advance(): void {
     const next = this.queue.shift()
-    if (next) this.start(next.turn, next.rate)
-    else this.busy = false
+    if (next) {
+      this.start(next.turn, next.rate)
+    } else {
+      // Queue drained: the clip ended but the next turn isn't voiced yet. Tell the live
+      // feed so it can show a "composing…" beat instead of a frozen, silent stage.
+      this.busy = false
+      this.onIdle?.()
+    }
   }
 
   /** True while a real clip is actively sounding (not paused / idle). */

@@ -30,6 +30,15 @@ export class CompositeEngine implements AudioEngine {
     this.speech.onClipStart = cb
   }
 
+  private _onIdle?: () => void
+  get onIdle(): (() => void) | undefined {
+    return this._onIdle
+  }
+  set onIdle(cb: (() => void) | undefined) {
+    this._onIdle = cb
+    this.clip.onIdle = cb
+  }
+
   private choose(turn: Turn): AudioEngine {
     const isRealClip = !!turn.audio && turn.audio.format !== 'audio/wav'
     return isRealClip && this.clip.supported ? this.clip : this.speech

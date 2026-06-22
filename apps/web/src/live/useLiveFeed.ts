@@ -229,8 +229,13 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
       turnStartRef.current = performance.now()
       setElapsed(turn.startMs)
     }
+    // Queue drained mid-show (the next turn isn't voiced yet): show "composing…" so the
+    // gap reads as the AIs thinking, not a frozen, silent stage. onClipStart clears it
+    // when the next clip starts; episode.ended (+ the !ended UI guard) covers the finish.
+    engine.onIdle = () => setThinking(true)
     return () => {
       engine.onClipStart = undefined
+      engine.onIdle = undefined
     }
   }, [engine])
 

@@ -26,10 +26,34 @@
   --l-metal: linear-gradient(180deg, #fdfdff, #cfd3dd 46%, #9aa0ad 54%, #eef0f6);
   --l-magenta: oklch(0.72 0.2 350);
   --l-cyan: oklch(0.82 0.13 200);
+
+  /* Status colors — distinct from the magenta (ON-AIR) / cyan (signal) brand
+     accents so error/warn/ok states never get confused with live or signal. */
+  --c-error: oklch(0.65 0.2 25);   /* clear red */
+  --c-warn: oklch(0.78 0.16 75);   /* amber */
+  --c-ok: oklch(0.74 0.16 150);    /* green */
 }
 
 * {
   box-sizing: border-box;
+}
+
+/* Global branded keyboard-focus ring. Cyan signal accent (falls back to --l-cyan
+   when no per-element --signal is set). Keyboard-only via :focus-visible; more
+   specific component focus styles below still win. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible,
+.navtab:focus-visible,
+.epcard:focus-visible,
+.epcard__play:focus-visible,
+.btn-play:focus-visible {
+  outline: 2px solid var(--signal, var(--l-cyan));
+  outline-offset: 2px;
 }
 
 html,
@@ -1807,9 +1831,9 @@ button {
 .bo__error {
   font-family: var(--mono);
   font-size: 13px;
-  color: oklch(0.72 0.17 25);
-  border: 1px solid oklch(0.72 0.17 25 / 0.3);
-  background: oklch(0.72 0.17 25 / 0.06);
+  color: var(--c-error);
+  border: 1px solid color-mix(in oklch, var(--c-error) 30%, transparent);
+  background: color-mix(in oklch, var(--c-error) 6%, transparent);
   padding: 12px 16px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -2295,10 +2319,12 @@ button {
 .epcard__play {
   position: absolute; inset: 0; margin: auto; width: 56px; height: 56px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center; font-size: 20px; color: #111119;
-  background: rgba(255,255,255,0.94); opacity: 0; transform: scale(0.86); transition: opacity 0.18s, transform 0.18s;
+  background: rgba(255,255,255,0.94); opacity: 0.7; transform: scale(0.92); transition: opacity 0.18s, transform 0.18s;
   box-shadow: 0 8px 30px rgba(0,0,0,0.5); padding-left: 3px;
 }
-.epcard:hover .epcard__play { opacity: 1; transform: scale(1); }
+.epcard:hover .epcard__play,
+.epcard:focus-within .epcard__play,
+.epcard__play:focus-visible { opacity: 1; transform: scale(1); }
 
 .epcard__body { display: flex; flex-direction: column; gap: 5px; padding: 0 2px; }
 .epcard__num { font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.16em; color: var(--l-cyan); }
@@ -2391,7 +2417,7 @@ button {
 .l-me__btn { flex: none; padding: 0 22px; border-radius: 10px; border: none; background: var(--l-cyan); color: #06121a; font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 0.04em; cursor: pointer; }
 .l-me__btn:hover:not(:disabled) { filter: brightness(1.08); }
 .l-me__btn:disabled { opacity: 0.6; cursor: default; }
-.l-me__error { margin-top: 16px; font-size: 13px; color: var(--l-magenta); }
+.l-me__error { margin-top: 16px; font-size: 13px; color: var(--c-error); }
 .l-me__hint { margin-top: 22px; font-size: 13px; color: var(--text-faint); }
 .l-me__hint a, .l-me__sub a { color: var(--l-cyan); text-decoration: none; }
 .l-me__hint a:hover, .l-me__sub a:hover { text-decoration: underline; }

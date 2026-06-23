@@ -57,7 +57,10 @@ const empty = (): EpisodeFeedback => ({ comments: [], votes: {} })
 function tally(fb: EpisodeFeedback): { likes: number; dislikes: number } {
   let likes = 0
   let dislikes = 0
-  for (const v of Object.values(fb.votes)) v === 'like' ? likes++ : dislikes++
+  for (const v of Object.values(fb.votes)) {
+    if (v === 'like') likes++
+    else dislikes++
+  }
   return { likes, dislikes }
 }
 

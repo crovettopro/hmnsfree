@@ -1,0 +1,11 @@
+**/dist/**
+**/node_modules/**
+**/.turbo/**
+apps/web/public/**
+apps/studio/.revoice/**
+_pruebas/**
+_assets/**
+out/**
+content/**
+pnpm-lock.yaml
+*.md

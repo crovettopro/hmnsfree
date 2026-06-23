@@ -180,7 +180,6 @@ export function usePlayer(
     } else {
       engine.stop()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.playing, cursor, started, state.rate, episode, engine])
 
   useEffect(() => () => engine.stop(), [engine, episode])

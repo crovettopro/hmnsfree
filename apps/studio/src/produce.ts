@@ -89,11 +89,19 @@ async function main() {
   const baseWeek = 27 // produced episodes continue after the 3 hand-authored seeds
   const week = Number(arg('week') ?? baseWeek + existing.length)
   const number = resumeFrom ? resumeFrom.number.replace(/^EP\./, '') : arg('number') ?? String(week)
-  const id = resumeFrom ? resumeFrom.id : `ep-${number.padStart(3, '0')}`
+  const id = resumeFrom ? resumeFrom.id : `ep-${number.padStart(2, '0')}`
 
   // Editorial calendar: use the programmed topic + briefing for --date (default
   // today). Falls back to autonomous selection when nothing's scheduled.
-  const planned = resumeFrom ? undefined : plannedFor(arg('date') ?? new Date().toISOString().slice(0, 10))
+  // --planned-file <path>: an ad-hoc ScheduledEpisode JSON (topic/tag/briefing) for a
+  // one-off episode, WITHOUT writing to the shared calendar (which the live edge also
+  // reads). Takes precedence over the programmed slate.
+  const plannedFile = arg('planned-file')
+  const planned = resumeFrom
+    ? undefined
+    : plannedFile
+      ? JSON.parse(await readFile(plannedFile, 'utf8'))
+      : plannedFor(arg('date') ?? new Date().toISOString().slice(0, 10))
 
   console.log(`STATIC studio — mode: ${env.mode.toUpperCase()}${env.mode === 'mock' ? ' (no API keys; deterministic)' : ''}`)
   if (resumeFrom) {
@@ -133,6 +141,8 @@ async function main() {
       moderator,
       week,
       number,
+      id,
+      numberLabel: `EP.${number.padStart(2, '0')}`,
       audioDir,
       audioUrlBase: `/episodes/${id}/audio`,
       recentTopics: existing.slice(-5).map((e) => e.topic),

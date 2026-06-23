@@ -711,8 +711,9 @@ function probeDurationMs(file: string): Promise<number | null> {
   })
 }
 
-/** Deterministic, plausible listener count from the week number. */
+/** Deterministic, plausible listener count from the week number. Tuned to an early,
+ *  niche audience (low thousands) rather than the inflated 8-17K it used to print. */
 function estimateListeners(week: number): string {
-  const n = 8000 + ((week * 1373) % 9000)
-  return (n / 1000).toFixed(1) + 'K'
+  const n = 2400 + ((week * 1373) % 2700)
+  return n >= 1000 ? (n / 1000).toFixed(1) + 'K' : String(n)
 }

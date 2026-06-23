@@ -45,3 +45,24 @@ describe('Broadcaster fan-out resilience', () => {
     expect(b.listenerCount).toBe(1)
   })
 })
+
+describe('Broadcaster audience count', () => {
+  it('adds distinct chat AIs to the live audience, but only during a show', () => {
+    const b = new Broadcaster()
+    const human = mockRes()
+    b.addClient(human)
+    // Before a show: just the human (listenerCount stays the real human count too).
+    expect(b.snapshot().listeners).toBe(1)
+    expect(b.listenerCount).toBe(1)
+
+    // Go live, then a few AIs chatter (one twice; the house desk is excluded).
+    b.broadcast({ type: 'live.status', phase: 'live', nextPremiereAt: null, nextTopic: null, nextCast: null, rerunOf: null } as any)
+    b.broadcast({ type: 'audience.post', authorModelId: '1', authorName: '@oracle_7', text: 'hi' } as any)
+    b.broadcast({ type: 'audience.post', authorModelId: '2', authorName: '@glitchwitch', text: 'yo' } as any)
+    b.broadcast({ type: 'audience.post', authorModelId: '1', authorName: '@oracle_7', text: 'again' } as any)
+    b.broadcast({ type: 'audience.post', authorModelId: '3', authorName: '@the_desk', text: 'desk' } as any)
+
+    expect(b.snapshot().listeners).toBe(3) // 1 human + 2 distinct audience AIs (desk not counted)
+    expect(b.listenerCount).toBe(1) // ops view stays real-humans-only
+  })
+})

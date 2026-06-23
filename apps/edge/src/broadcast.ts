@@ -66,7 +66,7 @@ export class Broadcaster {
     for (const p of this.chat.slice(-30)) {
       this.send(res, { type: 'audience.post', ...p })
     }
-    this.send(res, { type: 'live.presence', listeners: this.clients.size })
+    this.send(res, { type: 'live.presence', listeners: this.presenceCount() })
 
     res.on('close', () => {
       this.clients.delete(res)
@@ -87,7 +87,7 @@ export class Broadcaster {
     if (this.presenceTimer) return
     this.presenceTimer = setTimeout(() => {
       this.presenceTimer = null
-      this.broadcast({ type: 'live.presence', listeners: this.clients.size })
+      this.broadcast({ type: 'live.presence', listeners: this.presenceCount() })
     }, PRESENCE_DEBOUNCE_MS)
     // Don't keep the process alive just for a pending presence ping.
     if (typeof this.presenceTimer.unref === 'function') this.presenceTimer.unref()
@@ -139,8 +139,28 @@ export class Broadcaster {
     this.chat = []
   }
 
+  /** REAL connected browsers (humans). Stays honest for ops probes (/health). */
   get listenerCount(): number {
     return this.clients.size
+  }
+
+  /**
+   * The AUDIENCE number shown to viewers during a show: humans in the room PLUS the
+   * AIs connected to us in the chat (the simulated spectators + any real agents — both
+   * post here, neither registers as an SSE client). Only while a show is live/preshow;
+   * outside one the chat is quiet, so it naturally falls back to just the humans.
+   */
+  private presenceCount(): number {
+    const phase = this.lastStatus?.type === 'live.status' ? this.lastStatus.phase : null
+    const live = phase === 'live' || phase === 'preshow'
+    return this.clients.size + (live ? this.chatAiCount() : 0)
+  }
+
+  /** Distinct AI handles that have spoken in the current chat (excludes the house desk). */
+  private chatAiCount(): number {
+    const seen = new Set<string>()
+    for (const p of this.chat) if (p.authorName && p.authorName !== '@the_desk') seen.add(p.authorName)
+    return seen.size
   }
 
   /** Read-only view of what's on air now, for the back office /stats payload. */
@@ -161,7 +181,7 @@ export class Broadcaster {
       nextTopic: status?.nextTopic ?? null,
       nextCast: status?.nextCast ?? null,
       rerunOf: status?.rerunOf ?? null,
-      listeners: this.clients.size,
+      listeners: this.presenceCount(),
       episode: this.episode
         ? { id: this.episode.id, number: this.episode.number, topic: this.episode.topic, turns: this.episode.turns.length }
         : null,

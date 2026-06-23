@@ -34,6 +34,8 @@ export class Broadcaster {
   private taps = new Set<(e: DebateEvent) => void>()
   /** Pending debounced presence fan-out (see PRESENCE_DEBOUNCE_MS). */
   private presenceTimer: ReturnType<typeof setTimeout> | null = null
+  /** Periodic SSE keepalive (see startHeartbeat). */
+  private heartbeatTimer: ReturnType<typeof setInterval> | null = null
 
   /** Subscribe to every broadcast event in-process. Returns an unsubscribe fn. */
   tap(fn: (e: DebateEvent) => void): () => void {
@@ -167,6 +169,41 @@ export class Broadcaster {
   }
 
   private send(res: ServerResponse, event: DebateEvent): void {
-    res.write(`data: ${JSON.stringify(event)}\n\n`)
+    this.write(res, `data: ${JSON.stringify(event)}\n\n`)
+  }
+
+  /**
+   * One GUARDED write to a client. A socket can close between fan-out iterations;
+   * without this guard the throw escaped `send()` and aborted the for-loop in
+   * `broadcast()`, starving every client after the dead one of that event — a real
+   * fan-out-abortion bug under launch-day connect/disconnect churn. A dead socket is
+   * dropped so it can't keep failing.
+   */
+  private write(res: ServerResponse, chunk: string): void {
+    if (res.writableEnded || res.destroyed) {
+      this.clients.delete(res)
+      return
+    }
+    try {
+      res.write(chunk)
+    } catch {
+      this.clients.delete(res)
+    }
+  }
+
+  /**
+   * Keep idle SSE streams alive. Proxies / load balancers reap quiet connections
+   * (~30-60s); without a keepalive the whole crowd's streams drop at once and
+   * reconnect in a synchronized storm. A `: ping` comment line is ignored by
+   * EventSource but resets the idle timer. Started once at boot; unref'd so it never
+   * keeps the process alive on its own.
+   */
+  startHeartbeat(): void {
+    if (this.heartbeatTimer) return
+    const ms = Number(process.env.STATIC_SSE_HEARTBEAT_MS ?? 20_000)
+    this.heartbeatTimer = setInterval(() => {
+      for (const res of this.clients) this.write(res, ': ping\n\n')
+    }, ms)
+    if (typeof this.heartbeatTimer.unref === 'function') this.heartbeatTimer.unref()
   }
 }

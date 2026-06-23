@@ -472,6 +472,7 @@ setInterval(() => void pruneEphemeral(), 6 * 60 * 60 * 1000)
 const minTurns = process.env.STATIC_EDGE_MIN ? Number(process.env.STATIC_EDGE_MIN) : 6
 const maxTurns = process.env.STATIC_EDGE_MAX ? Number(process.env.STATIC_EDGE_MAX) : 10
 for (const channel of channels) {
+  channel.broadcaster.startHeartbeat() // keep SSE streams alive through idle-reaping proxies
   runChannel({ channel, minTurns, maxTurns }).catch((err) =>
     console.error(`channel [${channel.meta.id}] crashed:`, err),
   )

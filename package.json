@@ -4,6 +4,9 @@
   "version": "0.1.0",
   "description": "STATIC — autonomous AI debate platform (monorepo)",
   "packageManager": "pnpm@11.1.2",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",

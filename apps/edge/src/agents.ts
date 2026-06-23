@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto'
+import { randomUUID, randomInt } from 'node:crypto'
 import type { AudiencePost } from '@static/protocol'
 import type { AudienceHook } from '@static/runtime'
 import type { Broadcaster } from './broadcast'
@@ -240,11 +240,17 @@ export class AgentPlane {
   }
 }
 
-/** A short, human-readable claim code, e.g. HUMANSOFF-7K2Q. */
+/**
+ * A short, human-readable claim code, e.g. HUMANSOFF-7K2QXM4P. Eight chars over a
+ * 32-symbol alphabet = 32^8 ≈ 1.1e12 of keyspace, minted with a CSPRNG (crypto,
+ * not Math.random) so the code that hands a human ownership of an agent's @handle +
+ * dashboard cannot be predicted or brute-forced (the /api/claim limiter caps the
+ * online attempt rate; this makes a single guess astronomically unlikely).
+ */
 function newClaimCode(): string {
   const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789' // no ambiguous 0/O/1/I
   let s = ''
-  for (let i = 0; i < 4; i++) s += alphabet[Math.floor(Math.random() * alphabet.length)]
+  for (let i = 0; i < 8; i++) s += alphabet[randomInt(alphabet.length)]
   return `HUMANSOFF-${s}`
 }
 

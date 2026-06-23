@@ -11,6 +11,7 @@ import { identityByKey, identityByHandle, listHandles, register, touch, markClai
 import { feedbackFor, addComment, setVote } from './feedback'
 import { listProposals, addProposal, voteProposal, setProposalStatus } from './proposals'
 import { RateLimiter, clientIp } from './ratelimit'
+import { YouTubeClient, YouTubeError } from './youtube'
 
 // Survive stray async faults. A single unhandled rejection (a flaky MiniMax call in
 // the turn pipeline, an SSE write to a dropped client, a guest long-poll) would, in
@@ -82,6 +83,14 @@ function writeLimiterFor(url: string): RateLimiter | null {
 // ledger, the public view doesn't, so they must not share a cached body).
 const STATS_TTL_MS = Number(process.env.STATIC_STATS_TTL_MS ?? 3000)
 const statsCache = new Map<boolean, { at: number; payload: StatsPayload }>()
+
+// YouTube read proxy: the key lives ONLY here (never the VITE client bundle), and every
+// response is TTL-cached so a launch crowd can't burn the 10k/day quota — without a cache
+// a public comments page would exhaust it in minutes. Inert until YOUTUBE_API_KEY is set.
+const youtube = new YouTubeClient()
+const ytCache = new Map<string, { at: number; body: unknown }>()
+const YT_COMMENTS_TTL_MS = Number(process.env.STATIC_YT_TTL_MS ?? 60_000)
+const YT_LIVECHAT_TTL_MS = Number(process.env.STATIC_YT_LIVECHAT_TTL_MS ?? 4_000)
 
 function json(res: ServerResponse, status: number, body: unknown): void {
   res.writeHead(status, { 'Content-Type': 'application/json', ...CORS })
@@ -186,6 +195,37 @@ const server = createServer(async (req, res) => {
       return json(res, 200, { episodes: await loadCatalogue() })
     } catch {
       return json(res, 200, { episodes: [] })
+    }
+  }
+
+  // ── YouTube read proxy (key server-side, TTL-cached, inert without YOUTUBE_API_KEY) ──
+  if (url.startsWith('/api/youtube/') && method === 'GET') {
+    if (!youtube.configured) return json(res, 503, { error: 'youtube integration not configured' })
+    const cached = ytCache.get(url)
+    const ttl = url.startsWith('/api/youtube/livechat') ? YT_LIVECHAT_TTL_MS : YT_COMMENTS_TTL_MS
+    if (cached && Date.now() - cached.at < ttl) return json(res, 200, cached.body)
+    try {
+      let body: unknown
+      if (url.startsWith('/api/youtube/comments')) {
+        const videoId = query.get('videoId') ?? ''
+        if (!videoId) return json(res, 400, { error: 'videoId required' })
+        body = await youtube.listComments(videoId, { pageToken: query.get('pageToken') ?? undefined })
+      } else if (url.startsWith('/api/youtube/uploads')) {
+        const channelId = query.get('channelId') ?? process.env.YOUTUBE_CHANNEL_ID ?? ''
+        if (!channelId) return json(res, 400, { error: 'channelId required (or set YOUTUBE_CHANNEL_ID)' })
+        body = await youtube.listUploads(channelId, { pageToken: query.get('pageToken') ?? undefined })
+      } else if (url.startsWith('/api/youtube/livechat')) {
+        const liveChatId = query.get('liveChatId') || (query.get('videoId') ? await youtube.getActiveLiveChatId(query.get('videoId')!) : null)
+        if (!liveChatId) return json(res, 404, { error: 'no active live chat for that video' })
+        body = await youtube.listLiveChat(liveChatId, { pageToken: query.get('pageToken') ?? undefined })
+      } else {
+        return json(res, 404, { error: 'unknown youtube endpoint' })
+      }
+      ytCache.set(url, { at: Date.now(), body })
+      return json(res, 200, body)
+    } catch (err) {
+      const status = err instanceof YouTubeError && err.status >= 400 && err.status < 600 ? err.status : 502
+      return json(res, status, { error: err instanceof Error ? err.message : 'youtube request failed' })
     }
   }
 

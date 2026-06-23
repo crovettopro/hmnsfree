@@ -99,6 +99,12 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
         case 'episode.scheduled': {
           // A new (or in-progress) episode. Reset to its current state.
           const turns: Turn[] = (ev.episode.turns ?? []).map(resolveTurn)
+          // What we'd already handed to the audio engine BEFORE this snapshot. Lets us
+          // tell a FRESH join (start at the live edge) apart from an SSE RECONNECT (audio
+          // is still sounding — restarting the last turn would hard-cut the clip and snap
+          // the clock backward, the launch-day reconnect-churn regression). Capture it
+          // before we overwrite enqueuedRef below.
+          const prevEnqueued = enqueuedRef.current
           turnsRef.current = turns
           // Everything in the snapshot is HISTORY — mark it already-voiced so a reconnect
           // replay (or the catch-up below) can't enqueue it again and double the audio.
@@ -112,8 +118,12 @@ export function useLiveFeed(url: string, engine: AudioEngine): LiveFeed {
           // SILENT until the next turn closes (~10-15s). Start voicing at the live edge
           // right away; engine.onClipStart then advances the cursor/clock so the highlight
           // tracks the SOUND. Only for a LIVE premiere — a rerun drives its own audio.
-          if (turns.length > 0 && phaseRef.current === 'live' && ev.episode.cast) {
-            const last = turns[turns.length - 1]
+          // GUARD: on an SSE reconnect the last turn was ALREADY voiced (it's in
+          // prevEnqueued) and is still sounding — replaying it cuts it off. Only jump to
+          // the edge when `last` is genuinely new to this session (fresh join, or turns
+          // that arrived while we were disconnected); otherwise leave playback untouched.
+          const last = turns[turns.length - 1]
+          if (turns.length > 0 && phaseRef.current === 'live' && ev.episode.cast && !prevEnqueued.has(last.id)) {
             engine.play(last, ev.episode.cast[last.speaker], 1)
           }
           break

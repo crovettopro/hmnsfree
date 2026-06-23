@@ -4,7 +4,8 @@ import { buildChannels, type Channel } from './channels'
 import { serveEpisodes, servePublic } from './static'
 import { buildStats } from './stats'
 import { loadCatalogue } from './catalogue'
-import { ensureDataDir, pruneEphemeral } from './persist'
+import { ensureDataDir, pruneEphemeral, dataDirWritable } from './persist'
+import type { StatsPayload } from './stats'
 import { recordOwner, ownerByKey, statsForOwner, profileForHandle, fullLeaderboard, claimedHandleSet } from './owners'
 import { identityByKey, identityByHandle, listHandles, register, touch, markClaimed, type AgentIdentity } from './registry'
 import { feedbackFor, addComment, setVote } from './feedback'
@@ -77,6 +78,11 @@ function writeLimiterFor(url: string): RateLimiter | null {
   return null
 }
 
+// Short TTL cache for /stats — keyed by cost-tier (the operator view includes the cost
+// ledger, the public view doesn't, so they must not share a cached body).
+const STATS_TTL_MS = Number(process.env.STATIC_STATS_TTL_MS ?? 3000)
+const statsCache = new Map<boolean, { at: number; payload: StatsPayload }>()
+
 function json(res: ServerResponse, status: number, body: unknown): void {
   res.writeHead(status, { 'Content-Type': 'application/json', ...CORS })
   res.end(JSON.stringify(body))
@@ -148,11 +154,29 @@ const server = createServer(async (req, res) => {
 
   // ── Human plane (read-only) ──
   if (url.startsWith('/live')) return pickChannel(query.get('channel')).broadcaster.addClient(res)
-  if (url.startsWith('/health'))
-    return json(res, 200, {
-      ok: true,
-      channels: channels.map((c) => ({ id: c.meta.id, listeners: c.broadcaster.listenerCount, agents: c.agents.count })),
+  // Readiness probe with teeth: reports per-channel live state AND whether the episodes
+  // volume is actually writable — so an uptime monitor goes RED on a degraded volume (the
+  // silent-failure class that truncated ep-037) instead of the old unconditional ok:true.
+  if (url.startsWith('/health')) {
+    const writable = await dataDirWritable()
+    return json(res, writable ? 200 : 503, {
+      ok: writable,
+      uptimeSec: Math.round(process.uptime()),
+      dataDirWritable: writable,
+      channels: channels.map((c) => {
+        const s = c.broadcaster.snapshot()
+        return {
+          id: c.meta.id,
+          phase: s.phase ?? 'idle',
+          listeners: c.broadcaster.listenerCount,
+          agents: c.agents.count,
+          pendingQuestions: c.agents.pendingQuestions,
+          nextPremiereAt: s.nextPremiereAt ?? null,
+          onAir: s.episode ? { id: s.episode.id, number: s.episode.number, turns: s.episode.turns ?? 0 } : null,
+        }
+      }),
     })
+  }
   if (url.startsWith('/episodes/')) return void serveEpisodes(url, res)
   if (url === '/feed.xml' || url === '/feed.json' || url === '/connect.md' || url === '/static.md' || url.startsWith('/s/')) return void servePublic(url, res)
   // The live VOD catalogue: the web merges this into its replay library so
@@ -166,9 +190,19 @@ const server = createServer(async (req, res) => {
   }
 
   // ── Back office ──
+  // /stats is hit by PUBLIC pages (landing, lives index) AND the admin, so it can't be
+  // closed — but each call re-reads the whole episode library off the volume, so under a
+  // mass-launch crowd it becomes a self-DoS. Serve from a short TTL cache (per cost-tier)
+  // to cap disk reads to ~once/TTL regardless of crowd size. The cost ledger (economics)
+  // is only built + returned when the operator key is presented.
   if (url.startsWith('/stats')) {
+    const ops = !!process.env.STATIC_OPS_KEY && query.get('key') === process.env.STATIC_OPS_KEY
+    const cached = statsCache.get(ops)
+    if (cached && Date.now() - cached.at < STATS_TTL_MS) return json(res, 200, cached.payload)
     try {
-      return json(res, 200, await buildStats(channels))
+      const payload = await buildStats(channels, { includeCost: ops })
+      statsCache.set(ops, { at: Date.now(), payload })
+      return json(res, 200, payload)
     } catch (err) {
       return json(res, 500, { error: err instanceof Error ? err.message : 'stats failed' })
     }

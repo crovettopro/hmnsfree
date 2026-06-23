@@ -56,6 +56,24 @@ export async function ensureDataDir(): Promise<void> {
 }
 
 /**
+ * Liveness probe for /health: can we actually WRITE to the episodes volume? A
+ * read-only or unmounted volume is the silent-failure class that truncated ep-037 —
+ * the show keeps "running" in memory but nothing persists. Writes + deletes a tiny
+ * marker so an uptime monitor can go red on a degraded volume instead of false-green.
+ */
+export async function dataDirWritable(): Promise<boolean> {
+  const probe = join(EPISODES_ROOT, '.health-probe')
+  try {
+    await mkdir(EPISODES_ROOT, { recursive: true })
+    await writeFile(probe, String(Date.now()))
+    await rm(probe, { force: true })
+    return true
+  } catch {
+    return false
+  }
+}
+
+/**
  * Audio retention. Ephemeral rooms (After Hours `c2-*`, ignites `ig-*`) write a full
  * episode's audio (~100-150MB) to the volume on every show but are NEVER part of the
  * library — with reruns off, that audio is dead weight the moment the show ends. This

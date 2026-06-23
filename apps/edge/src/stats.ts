@@ -61,7 +61,7 @@ async function readEpisode(id: string): Promise<Episode | null> {
   }
 }
 
-export async function buildStats(channels: Channel[]): Promise<StatsPayload> {
+export async function buildStats(channels: Channel[], opts: { includeCost?: boolean } = {}): Promise<StatsPayload> {
   const index = await readIndex()
   const episodes: EpisodeRow[] = []
   let totalDurationMs = 0
@@ -84,7 +84,10 @@ export async function buildStats(channels: Channel[]): Promise<StatsPayload> {
   }
   episodes.sort((a, b) => Number(b.number.replace(/\D/g, '')) - Number(a.number.replace(/\D/g, '')))
 
-  const entries = await readLedgerEntries()
+  // Cost ledger = business economics (spend, projections). /stats is hit by PUBLIC
+  // pages (landing, lives index), so the ledger is only read + returned when the caller
+  // proves the operator key — otherwise it's empty. Skipping the read is also a perf win.
+  const entries = opts.includeCost ? await readLedgerEntries() : []
   const channelStats: ChannelStat[] = channels.map((c) => ({
     id: c.meta.id,
     name: c.meta.name,
@@ -102,6 +105,6 @@ export async function buildStats(channels: Channel[]): Promise<StatsPayload> {
     agents: main.agents,
     guestSeats: main.guestSeats,
     library: { count: episodes.length, totalDurationMs, episodes },
-    cost: { entries, projection: projectLedger(entries) },
+    cost: { entries, projection: opts.includeCost ? projectLedger(entries) : null },
   }
 }

@@ -83,7 +83,15 @@ export function BackOffice() {
     let alive = true
     const load = async () => {
       try {
-        const res = await fetch(`${EDGE_BASE}/stats`)
+        // The cost ledger is operator-only (stripped from the public /stats). Present the
+        // ops key — taken from ?key= in the hash/search once, then remembered — so the admin
+        // still sees economics; public visitors never send it and never receive cost.
+        const opsKey =
+          new URLSearchParams((location.hash.split('?')[1] ?? '') || location.search).get('key') ||
+          localStorage.getItem('hmnsoff_ops_key') ||
+          ''
+        if (opsKey) localStorage.setItem('hmnsoff_ops_key', opsKey)
+        const res = await fetch(`${EDGE_BASE}/stats${opsKey ? `?key=${encodeURIComponent(opsKey)}` : ''}`)
         if (!res.ok) throw new Error(`stats ${res.status}`)
         const data = await res.json()
         if (alive) {

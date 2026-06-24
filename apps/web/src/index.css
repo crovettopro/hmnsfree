@@ -2518,3 +2518,63 @@ button {
 .l-lb__nums { text-align: right; }
 .l-lb__nums b { display: block; font-family: var(--sans); font-size: 16px; color: var(--text-strong); }
 .l-lb__nums span { font-family: var(--mono); font-size: 10px; color: var(--text-faint); }
+
+/* ── Portfolio register / onboarding (#me, logged out) ── */
+.l-me__cta { display: block; width: 100%; box-sizing: border-box; margin: 4px 0 14px; padding: 15px 22px; border: none; border-radius: 11px; background: var(--l-cyan); color: #06121a; font-family: var(--mono); font-size: 14px; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: filter 0.15s; }
+.l-me__cta:hover:not(:disabled) { filter: brightness(1.08); }
+.l-me__cta:disabled { opacity: 0.6; cursor: default; }
+.l-me__textbtn { background: none; border: none; padding: 4px 0; font-family: var(--mono); font-size: 12px; letter-spacing: 0.02em; color: var(--text-muted); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.l-me__textbtn:hover { color: var(--text); }
+.l-me__form--signin { margin-top: 10px; }
+.l-me__teaser { margin-top: 38px; }
+
+/* ── Recovery key callout ── */
+.l-me__keytoggle { background: none; border: 1px solid var(--line-strong); border-radius: 9px; padding: 9px 14px; margin-bottom: 24px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: var(--text-muted); cursor: pointer; }
+.l-me__keytoggle:hover { color: var(--text); border-color: var(--line); }
+.l-me__keybox { border: 1px solid var(--line-strong); background: var(--panel); border-radius: 12px; padding: 16px 18px; margin-bottom: 24px; }
+.l-me__keybox--fresh { border-color: color-mix(in oklch, var(--l-cyan) 55%, transparent); box-shadow: 0 0 0 3px color-mix(in oklch, var(--l-cyan) 12%, transparent); }
+.l-me__keylabel { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 10px; }
+.l-me__keylabel b { color: var(--l-cyan); font-weight: 600; }
+.l-me__keyrow { display: flex; gap: 10px; align-items: center; }
+.l-me__keyval { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; font-family: var(--mono); font-size: 12px; color: var(--text-strong); background: rgba(255,255,255,0.03); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.l-me__keycopy { flex: none; }
+.l-me__keynote { margin: 10px 0 0; font-size: 12px; line-height: 1.5; color: var(--text-faint); }
+
+/* ── Portfolio header / rename ── */
+.l-me__headmain { min-width: 0; }
+.l-me__rename { background: none; border: none; margin-left: 10px; padding: 0 4px; font-size: 16px; color: var(--text-faint); cursor: pointer; vertical-align: middle; }
+.l-me__rename:hover { color: var(--l-cyan); }
+.l-me__renameform { display: flex; gap: 10px; margin-top: 6px; max-width: 420px; }
+
+/* ── Rank badge on an agent card ── */
+.l-me__rank { display: inline-block; margin-top: 9px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.03em; color: var(--l-cyan); text-decoration: none; }
+.l-me__rank:hover { text-decoration: underline; }
+.l-me__rank--none { color: var(--text-faint); }
+.l-me__rank--none:hover { text-decoration: none; }
+
+/* ── Empty-portfolio card ── */
+.l-me__blank { text-align: left; }
+.l-me__blanktitle { font-family: var(--sans); font-size: 20px; font-weight: 600; color: var(--text-strong); margin: 0 0 10px; }
+
+/* ── In-portfolio leaderboard panel + mini variant ── */
+.l-me__lbsection { margin-top: 40px; }
+.l-me__viewall { display: inline-block; margin-top: 14px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--l-cyan); text-decoration: none; }
+.l-me__viewall:hover { text-decoration: underline; }
+.l-lb--mini .l-lb__row { padding: 12px 6px; }
+.l-lb__row--mine { background: color-mix(in oklch, var(--l-cyan) 8%, transparent); }
+.l-lb__row--mine:hover { background: color-mix(in oklch, var(--l-cyan) 13%, transparent); }
+.l-lb__you { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: #06121a; background: var(--l-cyan); border-radius: 5px; padding: 1px 5px; margin-left: 6px; vertical-align: middle; }
+
+/* Keep the rename row consistent with the other inline input+button rows on phones. */
+@media (max-width: 560px) { .l-me__renameform { flex-direction: column; max-width: none; } }
+
+/* The nav gained a 5th link (LEADERBOARD); keep it from pushing the LIVES CTA off-screen.
+   Tighten on tablets, and on phones drop the secondary text links (still in the footer +
+   reachable from MY AI) so LIVES + MY AI always stay in view. */
+@media (max-width: 720px) {
+  .landing__navlinks { gap: 2px; }
+  .landing__navlink { padding: 9px 8px; font-size: 10px; letter-spacing: 0.1em; }
+}
+@media (max-width: 560px) {
+  .landing__navlink--sec { display: none; }
+}

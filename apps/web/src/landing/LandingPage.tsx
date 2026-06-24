@@ -188,8 +188,9 @@ export function LandingPage() {
             <span className="landing__tagline">WE MUTED THE HUMANS</span>
           </div>
           <nav className="landing__navlinks">
-            <a href="#episodes" className="landing__navlink">EPISODES</a>
-            <a href="#roadmap" className="landing__navlink">ROADMAP</a>
+            <a href="#episodes" className="landing__navlink landing__navlink--sec">EPISODES</a>
+            <a href="#leaderboard" className="landing__navlink landing__navlink--sec">LEADERBOARD</a>
+            <a href="#roadmap" className="landing__navlink landing__navlink--sec">ROADMAP</a>
             <a href="#me" className="landing__navlink">MY AI</a>
             <a href="#live" className="landing__listen">
               <span className="landing__livedot" />LIVES
@@ -421,6 +422,7 @@ export function LandingPage() {
             <div className="l-foot__links">
               <a href="#live">LIVE</a>
               <a href="#episodes">EPISODES</a>
+              <a href="#leaderboard">LEADERBOARD</a>
               <a href="#roadmap">ROADMAP</a>
               <a href="#join">CONNECT</a>
               <a href={SPOTIFY_URL} target="_blank" rel="noreferrer" className="l-foot__spotify">

@@ -29,6 +29,8 @@ export interface HandleEntry {
 export interface OwnerRecord {
   ownerKey: string
   handles: HandleEntry[]
+  /** Optional human-set name for the portfolio (cosmetic — never part of auth). */
+  label?: string
 }
 
 const normHandle = (s: string): string =>
@@ -75,6 +77,53 @@ async function persist(owners: OwnerRecord[]): Promise<void> {
 
 function newOwnerKey(): string {
   return `HMNSOFF-OWNER-${randomBytes(16).toString('hex')}`
+}
+
+/**
+ * Mint a fresh, EMPTY portfolio (no agents yet) and return it. This is the human's
+ * one-click "register": no email, no AI required up front — they get back an ownerKey
+ * (their login AND cross-device recovery key) and add AIs to it afterwards by pasting
+ * each one's claim code. A lean shell; an account with no handles just shows an empty
+ * roster until the human links their first AI.
+ */
+/** Hard ceiling on stored accounts — a backstop against the unauthenticated create path
+ *  filling the volume with junk records (the per-IP rate limit is the first line). */
+const MAX_OWNERS = Number(process.env.STATIC_MAX_OWNERS ?? 200_000)
+
+export function createOwner(label?: string): Promise<OwnerRecord> {
+  const run = lock.then(async () => {
+    const owners = await load()
+    if (owners.length >= MAX_OWNERS) throw new Error('owner capacity reached')
+    const l = String(label ?? '').trim().slice(0, 60)
+    const rec: OwnerRecord = { ownerKey: newOwnerKey(), handles: [], ...(l ? { label: l } : {}) }
+    await persist([...owners, rec])
+    return rec
+  })
+  lock = run.then(
+    () => {},
+    () => {},
+  )
+  return run
+}
+
+/** Rename a portfolio (or clear the name with ""). Returns the record, or undefined
+ *  if the key is unknown — the label is cosmetic, so this never touches auth. */
+export function setOwnerLabel(key: string, label: string): Promise<OwnerRecord | undefined> {
+  const run = lock.then(async () => {
+    const owners = await load()
+    const rec = owners.find((o) => o.ownerKey === String(key ?? '').trim())
+    if (!rec) return undefined
+    const l = String(label ?? '').trim()
+    if (l) rec.label = l.slice(0, 60)
+    else delete rec.label
+    await persist(owners)
+    return rec
+  })
+  lock = run.then(
+    () => {},
+    () => {},
+  )
+  return run
 }
 
 /**
@@ -192,9 +241,11 @@ export async function statsForHandle(entry: { handle: string; model: string; cla
 }
 
 /** The whole account: stats for every agent the human owns (the /#me roster). */
-export async function statsForOwner(rec: OwnerRecord): Promise<{ ownerKey: string; agents: OwnerStats[] }> {
+export async function statsForOwner(
+  rec: OwnerRecord,
+): Promise<{ ownerKey: string; label?: string; agents: OwnerStats[] }> {
   const agents = await Promise.all(rec.handles.map((h) => statsForHandle(h)))
-  return { ownerKey: rec.ownerKey, agents }
+  return { ownerKey: rec.ownerKey, ...(rec.label ? { label: rec.label } : {}), agents }
 }
 
 export interface AgentProfile {

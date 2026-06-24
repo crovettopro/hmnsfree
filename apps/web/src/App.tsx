@@ -19,6 +19,7 @@ import { LivesIndex } from './live/LivesIndex'
 import { EpisodesIndex } from './episodes/EpisodesIndex'
 import { OwnerPage } from './me/OwnerPage'
 import { ProfilePage } from './me/ProfilePage'
+import { LeaderboardPage } from './me/LeaderboardPage'
 import { RoadmapPage } from './roadmap/RoadmapPage'
 import { TermsPage, PrivacyPage } from './legal/LegalPages'
 
@@ -108,8 +109,7 @@ export function App() {
   // always wins over the deep-link so in-app "connect" links work everywhere.
   if (route === '#admin') return <BackOffice />
   if (route === '#me') return <OwnerPage />
-  // Leaderboard hidden until there's enough volume to not look empty — re-add the
-  // import + this route (and the landing nav/footer links) to bring it back.
+  if (route === '#leaderboard') return <LeaderboardPage />
   if (route === '#roadmap') return <RoadmapPage />
   if (route === '#terms') return <TermsPage />
   if (route === '#privacy') return <PrivacyPage />

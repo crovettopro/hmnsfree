@@ -6,7 +6,7 @@ import { buildStats } from './stats'
 import { loadCatalogue } from './catalogue'
 import { ensureDataDir, pruneEphemeral, dataDirWritable } from './persist'
 import type { StatsPayload } from './stats'
-import { recordOwner, ownerByKey, statsForOwner, profileForHandle, fullLeaderboard, claimedHandleSet } from './owners'
+import { recordOwner, createOwner, setOwnerLabel, ownerByKey, statsForOwner, profileForHandle, fullLeaderboard, claimedHandleSet, type LeaderRow } from './owners'
 import { identityByKey, identityByHandle, listHandles, register, touch, markClaimed, type AgentIdentity } from './registry'
 import { feedbackFor, addComment, setVote } from './feedback'
 import { listProposals, addProposal, voteProposal, setProposalStatus } from './proposals'
@@ -62,6 +62,12 @@ const CORS = { 'Access-Control-Allow-Origin': '*' }
 // identity/content-creation writes. chat/raisehand/seat/turn are token-gated and
 // already self-limit per agent, so throttling them by IP would wrongly choke a single
 // operator running many models. All caps are env-tunable without a redeploy.
+// The unauthenticated portfolio-create path mints a persistent record with no claim
+// code, so it gets a tighter per-IP cap than the generic claim throttle.
+const RL_OWNER = new RateLimiter({
+  max: Number(process.env.STATIC_RL_OWNER_MAX ?? 6),
+  windowMs: Number(process.env.STATIC_RL_OWNER_WINDOW_MS ?? 10 * 60_000),
+})
 const RL_CLAIM = new RateLimiter({
   max: Number(process.env.STATIC_RL_CLAIM_MAX ?? 12),
   windowMs: Number(process.env.STATIC_RL_CLAIM_WINDOW_MS ?? 10 * 60_000),
@@ -73,6 +79,7 @@ const RL_WRITE = new RateLimiter({
 /** The rate bucket for an abusable write path, or null for the self-limiting ones. */
 function writeLimiterFor(url: string): RateLimiter | null {
   if (url.startsWith('/api/claim')) return RL_CLAIM
+  if (url.startsWith('/api/owner')) return RL_CLAIM
   if (url.startsWith('/api/connect')) return RL_WRITE
   if (url.startsWith('/api/proposals')) return RL_WRITE
   if (/^\/api\/episodes\/[^/]+\/(comment|react)/.test(url)) return RL_WRITE
@@ -83,6 +90,19 @@ function writeLimiterFor(url: string): RateLimiter | null {
 // ledger, the public view doesn't, so they must not share a cached body).
 const STATS_TTL_MS = Number(process.env.STATIC_STATS_TTL_MS ?? 3000)
 const statsCache = new Map<boolean, { at: number; payload: StatsPayload }>()
+
+// Short TTL cache for the leaderboard. fullLeaderboard() scans the WHOLE episode library
+// off the volume, and it's hit by /api/leaderboard, the #me rank enrichment, the embedded
+// MiniLeaderboard, and the logged-out teaser — so under a launch crowd it must not re-scan
+// per request (same self-DoS guard /stats uses). The board barely changes between requests.
+const LB_TTL_MS = Number(process.env.STATIC_LB_TTL_MS ?? 5000)
+let lbCache: { at: number; rows: LeaderRow[] } | null = null
+async function cachedLeaderboard(): Promise<LeaderRow[]> {
+  if (lbCache && Date.now() - lbCache.at < LB_TTL_MS) return lbCache.rows
+  const rows = await fullLeaderboard(await listHandles())
+  lbCache = { at: Date.now(), rows }
+  return rows
+}
 
 // YouTube read proxy: the key lives ONLY here (never the VITE client bundle), and every
 // response is TTL-cached so a launch crowd can't burn the 10k/day quota — without a cache
@@ -274,7 +294,44 @@ const server = createServer(async (req, res) => {
   if (url.startsWith('/api/me') && method === 'GET') {
     const owner = await ownerByKey(query.get('key') ?? '')
     if (!owner) return json(res, 404, { error: 'unknown owner key' })
-    return json(res, 200, await statsForOwner(owner))
+    const acct = await statsForOwner(owner)
+    // Enrich each owned AI with its standing on the public leaderboard, so the
+    // portfolio can show "#3 of 18" — the hook that brings owners back to climb.
+    // Cached: this is a hot, read-only path and the board scan is expensive.
+    const board = await cachedLeaderboard()
+    const norm = (h: string) => h.replace(/^@+/, '').toLowerCase()
+    const rankOf = (h: string) => {
+      const i = board.findIndex((r) => norm(r.handle) === norm(h))
+      return i >= 0 ? i + 1 : undefined
+    }
+    const agents = acct.agents.map((a) => ({ ...a, rank: rankOf(a.handle), totalRanked: board.length }))
+    return json(res, 200, { ...acct, agents })
+  }
+  // Owner portfolio create/rename (the ONE human write path). One-click "register":
+  // POST {} mints an empty portfolio and returns its ownerKey (login + recovery key);
+  // POST {ownerKey,label} renames it. No email, no password — the key IS the account.
+  if (url.startsWith('/api/owner') && method === 'POST') {
+    const body = await readJson(req)
+    if (body === null) return json(res, 400, { error: 'invalid JSON' })
+    const label = typeof body.label === 'string' ? body.label : undefined
+    if (body.ownerKey) {
+      const rec = await setOwnerLabel(String(body.ownerKey), label ?? '')
+      if (!rec) return json(res, 404, { error: 'unknown owner key' })
+      return json(res, 200, { ownerKey: rec.ownerKey, label: rec.label ?? '', agents: rec.handles.length, dashboard: '/#me' })
+    }
+    // Create: tighter per-IP cap (it's an unauthenticated persistent write), and a
+    // capacity backstop so a flood can't fill the volume — 503 rather than crash.
+    const verdict = RL_OWNER.check(clientIp(req))
+    if (!verdict.allowed) {
+      res.writeHead(429, { 'Content-Type': 'application/json', 'Retry-After': String(verdict.retryAfter), ...CORS })
+      return res.end(JSON.stringify({ error: 'rate limited — slow down', retryAfter: verdict.retryAfter }))
+    }
+    try {
+      const rec = await createOwner(label)
+      return json(res, 201, { ownerKey: rec.ownerKey, label: rec.label ?? '', agents: 0, dashboard: '/#me' })
+    } catch {
+      return json(res, 503, { error: 'cannot create a portfolio right now — try again later' })
+    }
   }
   // Public agent profile — full on-air record with the words spoken + audio clips.
   // No auth: it debated in public. Powers the dashboard detail + shareable profile.
@@ -292,7 +349,7 @@ const server = createServer(async (req, res) => {
   }
   // Public leaderboard — every agent that has debated, ranked by time on air.
   if (url.startsWith('/api/leaderboard') && method === 'GET') {
-    return json(res, 200, { rows: await fullLeaderboard(await listHandles()) })
+    return json(res, 200, { rows: await cachedLeaderboard() })
   }
   // Public episode feedback — AI comments + like/dislike tallies. Humans READ only.
   const fbMatch = url.match(/^\/api\/episodes\/([^/?]+)\/feedback/)

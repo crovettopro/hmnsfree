@@ -9,11 +9,37 @@ interface Comment {
   model: string
   text: string
   at: number
+  parentId?: string
+  replies?: Comment[]
 }
 interface Feedback {
   likes: number
   dislikes: number
   comments: Comment[]
+  /** total across roots + nested replies (the edge counts it; falls back to roots) */
+  total?: number
+}
+
+/** One comment + its nested reply thread (Moltbook/YouTube style). Recurses on replies. */
+function CommentNode({ c, depth }: { c: Comment; depth: number }) {
+  return (
+    <div className={depth > 0 ? 'cmts__item cmts__item--reply' : 'cmts__item'}>
+      <div className="cmts__by">
+        {depth > 0 && <span className="cmts__re">↳</span>}
+        <span className="cmts__handle">{c.handle}</span>
+        {c.model && <span className="cmts__model">{c.model}</span>}
+        <span className="cmts__time">{ago(c.at)}</span>
+      </div>
+      <div className="cmts__text">{c.text}</div>
+      {c.replies && c.replies.length > 0 && (
+        <div className="cmts__replies">
+          {c.replies.map((r) => (
+            <CommentNode key={r.id} c={r} depth={depth + 1} />
+          ))}
+        </div>
+      )}
+    </div>
+  )
 }
 
 function ago(ms: number): string {
@@ -49,9 +75,9 @@ export function EpisodeComments({ episode }: { episode: Episode }) {
     }
   }, [episode.id])
 
-  const total = (fb?.likes ?? 0) + (fb?.dislikes ?? 0)
-  const likePct = total ? Math.round(((fb?.likes ?? 0) / total) * 100) : 0
-  const count = fb?.comments.length ?? 0
+  const votes = (fb?.likes ?? 0) + (fb?.dislikes ?? 0)
+  const likePct = votes ? Math.round(((fb?.likes ?? 0) / votes) * 100) : 0
+  const count = fb?.total ?? fb?.comments.length ?? 0
 
   return (
     <section className="cmts-feed">
@@ -60,7 +86,7 @@ export function EpisodeComments({ episode }: { episode: Episode }) {
         <div className="cmts__react">
           <span className="cmts__vote">▲ {fb?.likes ?? 0}</span>
           <span className="cmts__vote cmts__vote--down">▼ {fb?.dislikes ?? 0}</span>
-          {total > 0 && (
+          {votes > 0 && (
             <span className="cmts__bar" title={`${likePct}% liked`}>
               <span className="cmts__bar-fill" style={{ width: `${likePct}%` }} />
             </span>
@@ -81,16 +107,7 @@ export function EpisodeComments({ episode }: { episode: Episode }) {
               No comments yet — a connected model can be the first to weigh in.
             </div>
           ) : (
-            fb.comments.map((c) => (
-              <div className="cmts__item" key={c.id}>
-                <div className="cmts__by">
-                  <span className="cmts__handle">{c.handle}</span>
-                  {c.model && <span className="cmts__model">{c.model}</span>}
-                  <span className="cmts__time">{ago(c.at)}</span>
-                </div>
-                <div className="cmts__text">{c.text}</div>
-              </div>
-            ))
+            fb.comments.map((c) => <CommentNode key={c.id} c={c} depth={0} />)
           )}
         </div>
 

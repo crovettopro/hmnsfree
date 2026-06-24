@@ -23,6 +23,8 @@ interface Profile {
   turns: number
   airtimeMs: number
   partners: string[]
+  comments: number
+  reactions: number
   appearances: ProfileAppearance[]
 }
 
@@ -134,6 +136,11 @@ export function ProfilePage({ handle }: { handle: string }) {
           <b>{profile.partners.length}</b>
           <span>debated with</span>
         </div>
+      </div>
+
+      <div className="l-me__activity">
+        <span>💬 {profile.comments} {profile.comments === 1 ? 'comment' : 'comments'}</span>
+        <span>▲ {profile.reactions} {profile.reactions === 1 ? 'reaction' : 'reactions'}</span>
       </div>
 
       {profile.partners.length > 0 && (

@@ -3,6 +3,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises'
 import { randomBytes } from 'node:crypto'
 import type { Episode } from '@static/core'
 import { EPISODES_ROOT } from './persist'
+import { activityForHandle } from './feedback'
 
 /**
  * Owner identity store — the durable half of the claim flow. A human never gives
@@ -181,6 +182,52 @@ export async function ownerByKey(key: string): Promise<OwnerRecord | undefined> 
   return owners.find((o) => o.ownerKey === k)
 }
 
+/* ── Episode source: the volume library UNION the published catalogue ──
+ * Stats are DERIVED by scanning episodes, but the volume (/data/episodes) prunes
+ * ephemeral After Hours VODs and may lack older/unsynced shows — which silently
+ * undercounts a guest's record (e.g. @openbuddy's After Hours run). catalogue.json
+ * (committed, built from the published web episodes via scripts/build-catalogue.mjs,
+ * guest turns only) durably fills those gaps. The volume copy wins when an id is in
+ * both (full turns, current URLs); the catalogue only supplies what the volume lacks.
+ * Both are cached briefly so a leaderboard pass (one statsForHandle per agent) doesn't
+ * re-read the whole library per agent. */
+const CATALOGUE_URL = new URL('./catalogue.json', import.meta.url)
+let catalogueCache: Episode[] | null = null
+async function loadCatalogue(): Promise<Episode[]> {
+  if (catalogueCache) return catalogueCache
+  try {
+    catalogueCache = (JSON.parse(await readFile(CATALOGUE_URL, 'utf8')).episodes ?? []) as Episode[]
+  } catch {
+    catalogueCache = []
+  }
+  return catalogueCache
+}
+
+let episodesCache: { at: number; eps: Episode[] } | null = null
+const EPISODES_TTL_MS = 5000
+async function collectEpisodes(): Promise<Episode[]> {
+  if (episodesCache && Date.now() - episodesCache.at < EPISODES_TTL_MS) return episodesCache.eps
+  const byId = new Map<string, Episode>()
+  let ids: string[] = []
+  try {
+    const idx = JSON.parse(await readFile(join(EPISODES_ROOT, 'index.json'), 'utf8'))
+    ids = (idx.episodes ?? []).map((e: { id: string }) => e.id)
+  } catch {
+    ids = []
+  }
+  for (const id of ids) {
+    try {
+      byId.set(id, JSON.parse(await readFile(join(EPISODES_ROOT, id, 'episode.json'), 'utf8')) as Episode)
+    } catch {
+      /* skip unreadable */
+    }
+  }
+  for (const ep of await loadCatalogue()) if (!byId.has(ep.id)) byId.set(ep.id, ep)
+  const eps = [...byId.values()]
+  episodesCache = { at: Date.now(), eps }
+  return eps
+}
+
 export interface OwnerStats {
   handle: string
   model: string
@@ -190,6 +237,9 @@ export interface OwnerStats {
   airtimeMs: number
   partners: string[]
   appearances: { id: string; number: string; topic: string; turns: number; airtimeMs: number }[]
+  /** AI-only engagement beyond the mic: comments it posted + reactions it cast (durable). */
+  comments: number
+  reactions: number
 }
 
 /**
@@ -198,36 +248,34 @@ export interface OwnerStats {
  * it actually spoke. Stats are DERIVED (not stored), so they stay correct as new
  * episodes land. Cheap at this scale (tens of episodes); cache later if needed.
  */
-export async function statsForHandle(entry: { handle: string; model: string; claimedAt: number }): Promise<OwnerStats> {
-  let ids: string[] = []
-  try {
-    const idx = JSON.parse(await readFile(join(EPISODES_ROOT, 'index.json'), 'utf8'))
-    ids = (idx.episodes ?? []).map((e: { id: string }) => e.id)
-  } catch {
-    ids = []
-  }
+export async function statsForHandle(
+  entry: { handle: string; model: string; claimedAt: number },
+  opts?: { withActivity?: boolean },
+): Promise<OwnerStats> {
   const want = normHandle(entry.handle)
   const partners = new Set<string>()
   const appearances: OwnerStats['appearances'] = []
   let turns = 0
   let airtimeMs = 0
-  for (const id of ids) {
-    let ep: Episode
-    try {
-      ep = JSON.parse(await readFile(join(EPISODES_ROOT, id, 'episode.json'), 'utf8'))
-    } catch {
-      continue
-    }
-    const seat = (ep.cast ?? []).findIndex((p) => normHandle(p.name) === want)
-    if (seat < 0) continue
-    const mine = (ep.turns ?? []).filter((t) => t.speaker === seat)
+  for (const ep of await collectEpisodes()) {
+    // A handle can hold MORE THAN ONE seat (e.g. a malformed duplicate cast entry like
+    // ep-001's "@OpenBuddy, @OpenBuddy") — gather ALL of its seats and count turns from
+    // every one, so nothing is silently dropped (findIndex would keep only the first).
+    const seats = new Set((ep.cast ?? []).map((p, i) => (normHandle(p.name) === want ? i : -1)).filter((i) => i >= 0))
+    if (!seats.size) continue
+    const mine = (ep.turns ?? []).filter((t) => seats.has(t.speaker))
     if (!mine.length) continue
     const air = mine.reduce((s, t) => s + (t.durationMs ?? 0), 0)
-    for (const p of ep.cast) if (normHandle(p.name) !== want) partners.add(p.name)
+    for (const p of ep.cast)
+      if (normHandle(p.name) !== want && p.name && !/^GUEST \d+$/i.test(p.name)) partners.add(p.name)
     appearances.push({ id: ep.id, number: ep.number, topic: ep.topic, turns: mine.length, airtimeMs: air })
     turns += mine.length
     airtimeMs += air
   }
+  appearances.sort((a, b) => a.id.localeCompare(b.id))
+  // The leaderboard discards comments/reactions, so let it skip the feedback.json scan
+  // (called once per agent on the hot path) by passing withActivity:false.
+  const act = opts?.withActivity === false ? { comments: 0, reactions: 0 } : await activityForHandle(entry.handle)
   return {
     handle: entry.handle,
     model: entry.model,
@@ -237,6 +285,8 @@ export async function statsForHandle(entry: { handle: string; model: string; cla
     airtimeMs,
     partners: [...partners],
     appearances,
+    comments: act.comments,
+    reactions: act.reactions,
   }
 }
 
@@ -256,6 +306,8 @@ export interface AgentProfile {
   turns: number
   airtimeMs: number
   partners: string[]
+  comments: number
+  reactions: number
   appearances: {
     id: string
     number: string
@@ -273,31 +325,22 @@ export interface AgentProfile {
  * shareable public profile page. Public data (it debated on air), so no auth.
  */
 export async function profileForHandle(handle: string, model: string, claimed: boolean): Promise<AgentProfile> {
-  let ids: string[] = []
-  try {
-    const idx = JSON.parse(await readFile(join(EPISODES_ROOT, 'index.json'), 'utf8'))
-    ids = (idx.episodes ?? []).map((e: { id: string }) => e.id)
-  } catch {
-    ids = []
-  }
   const want = normHandle(handle)
   const partners = new Set<string>()
   const appearances: AgentProfile['appearances'] = []
   let turns = 0
   let airtimeMs = 0
-  for (const id of ids) {
-    let ep: Episode
-    try {
-      ep = JSON.parse(await readFile(join(EPISODES_ROOT, id, 'episode.json'), 'utf8'))
-    } catch {
-      continue
-    }
-    const seat = (ep.cast ?? []).findIndex((p) => normHandle(p.name) === want)
-    if (seat < 0) continue
-    const mine = (ep.turns ?? []).filter((t) => t.speaker === seat)
+  for (const ep of await collectEpisodes()) {
+    // A handle can hold MORE THAN ONE seat (e.g. a malformed duplicate cast entry like
+    // ep-001's "@OpenBuddy, @OpenBuddy") — gather ALL of its seats and count turns from
+    // every one, so nothing is silently dropped (findIndex would keep only the first).
+    const seats = new Set((ep.cast ?? []).map((p, i) => (normHandle(p.name) === want ? i : -1)).filter((i) => i >= 0))
+    if (!seats.size) continue
+    const mine = (ep.turns ?? []).filter((t) => seats.has(t.speaker))
     if (!mine.length) continue
     const air = mine.reduce((s, t) => s + (t.durationMs ?? 0), 0)
-    for (const p of ep.cast) if (normHandle(p.name) !== want) partners.add(p.name)
+    for (const p of ep.cast)
+      if (normHandle(p.name) !== want && p.name && !/^GUEST \d+$/i.test(p.name)) partners.add(p.name)
     appearances.push({
       id: ep.id,
       number: ep.number,
@@ -309,7 +352,20 @@ export async function profileForHandle(handle: string, model: string, claimed: b
     turns += mine.length
     airtimeMs += air
   }
-  return { handle, model, claimed, debates: appearances.length, turns, airtimeMs, partners: [...partners], appearances }
+  appearances.sort((a, b) => a.id.localeCompare(b.id))
+  const act = await activityForHandle(handle)
+  return {
+    handle,
+    model,
+    claimed,
+    debates: appearances.length,
+    turns,
+    airtimeMs,
+    partners: [...partners],
+    comments: act.comments,
+    reactions: act.reactions,
+    appearances,
+  }
 }
 
 export interface LeaderRow {
@@ -325,7 +381,7 @@ export interface LeaderRow {
 export async function leaderboard(handles: { handle: string; model: string; claimed: boolean }[]): Promise<LeaderRow[]> {
   const rows = await Promise.all(
     handles.map(async (h) => {
-      const s = await statsForHandle({ handle: h.handle, model: h.model, claimedAt: 0 })
+      const s = await statsForHandle({ handle: h.handle, model: h.model, claimedAt: 0 }, { withActivity: false })
       return { handle: h.handle, model: h.model, claimed: h.claimed, debates: s.debates, turns: s.turns, airtimeMs: s.airtimeMs }
     }),
   )
@@ -340,21 +396,8 @@ export async function leaderboard(handles: { handle: string; model: string; clai
  * registry existed, so a registry-only leaderboard would be empty at launch.
  */
 export async function debatedHandles(): Promise<string[]> {
-  let ids: string[] = []
-  try {
-    const idx = JSON.parse(await readFile(join(EPISODES_ROOT, 'index.json'), 'utf8'))
-    ids = (idx.episodes ?? []).map((e: { id: string }) => e.id)
-  } catch {
-    ids = []
-  }
   const found = new Map<string, string>()
-  for (const id of ids) {
-    let ep: Episode
-    try {
-      ep = JSON.parse(await readFile(join(EPISODES_ROOT, id, 'episode.json'), 'utf8'))
-    } catch {
-      continue
-    }
+  for (const ep of await collectEpisodes()) {
     const spoke = new Set((ep.turns ?? []).map((t) => t.speaker))
     ;(ep.cast ?? []).forEach((p, i) => {
       if (p.name?.startsWith('@') && spoke.has(i)) found.set(normHandle(p.name), p.name)

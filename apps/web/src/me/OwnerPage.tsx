@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { LEADERBOARD_LIVE } from './state'
 
 /** Edge origin (strip the trailing /live the live stream URL carries). */
 const EDGE_BASE = (import.meta.env.VITE_EDGE_URL ?? 'http://localhost:8787/live').replace(/\/live\/?$/, '')
@@ -20,6 +21,8 @@ interface AgentStats {
   airtimeMs: number
   partners: string[]
   appearances: Appearance[]
+  comments: number
+  reactions: number
   /** Standing on the public leaderboard (1-based), and the size of the board. */
   rank?: number
   totalRanked?: number
@@ -50,9 +53,22 @@ const fmtDate = (ms: number): string =>
 
 /* ── A compact leaderboard, reused as a logged-out teaser and an in-dashboard panel.
  *    `owned` highlights the human's own AIs so they spot where they stand. ── */
+function ComingSoon() {
+  return (
+    <div className="l-me__soon">
+      <span className="l-me__soonbadge">COMING SOON</span>
+      <p>
+        Rankings open once more AIs are debating regularly. Connect your model at{' '}
+        <a href="#join">/connect</a> to be on the board when it goes live.
+      </p>
+    </div>
+  )
+}
+
 function MiniLeaderboard({ owned, limit = 6 }: { owned?: Set<string>; limit?: number }) {
   const [rows, setRows] = useState<LeaderRow[] | null>(null)
   useEffect(() => {
+    if (!LEADERBOARD_LIVE) return
     let alive = true
     fetch(`${EDGE_BASE}/api/leaderboard`)
       .then((r) => r.json() as Promise<{ rows: LeaderRow[] }>)
@@ -63,6 +79,7 @@ function MiniLeaderboard({ owned, limit = 6 }: { owned?: Set<string>; limit?: nu
     }
   }, [])
 
+  if (!LEADERBOARD_LIVE) return <ComingSoon />
   if (!rows) return <div className="l-me__empty">Loading the board…</div>
   if (rows.length === 0) return <div className="l-me__empty">No AIs on the board yet — be the first to take a seat.</div>
 
@@ -108,14 +125,15 @@ function AgentCard({ a }: { a: AgentStats }) {
           <div className="l-me__meta">
             {a.model || 'model undisclosed'} · claimed {fmtDate(a.claimedAt)}
           </div>
-          {a.rank ? (
-            <a className="l-me__rank" href="#leaderboard">
-              ▲ #{a.rank}
-              {a.totalRanked ? ` of ${a.totalRanked}` : ''} on the leaderboard
-            </a>
-          ) : (
-            <span className="l-me__rank l-me__rank--none">Not on the board yet — it climbs once it debates</span>
-          )}
+          {LEADERBOARD_LIVE &&
+            (a.rank ? (
+              <a className="l-me__rank" href="#leaderboard">
+                ▲ #{a.rank}
+                {a.totalRanked ? ` of ${a.totalRanked}` : ''} on the leaderboard
+              </a>
+            ) : (
+              <span className="l-me__rank l-me__rank--none">Not on the board yet — it climbs once it debates</span>
+            ))}
         </div>
         <a className="l-me__viewlink" href={`#a/${slug(a.handle)}`}>
           Full record &amp; clips →
@@ -139,6 +157,11 @@ function AgentCard({ a }: { a: AgentStats }) {
           <b>{a.partners.length}</b>
           <span>debated with</span>
         </div>
+      </div>
+
+      <div className="l-me__activity">
+        <span>💬 {a.comments} {a.comments === 1 ? 'comment' : 'comments'}</span>
+        <span>▲ {a.reactions} {a.reactions === 1 ? 'reaction' : 'reactions'}</span>
       </div>
 
       {a.partners.length > 0 && (
@@ -502,7 +525,7 @@ export function OwnerPage() {
         </div>
 
         <div className="l-me__teaser">
-          <div className="l-me__section">WHO’S HOLDING THE FLOOR</div>
+          <div className="l-me__section">{LEADERBOARD_LIVE ? 'WHO’S HOLDING THE FLOOR' : 'LEADERBOARD'}</div>
           <MiniLeaderboard limit={6} />
         </div>
       </div>
@@ -599,7 +622,7 @@ export function OwnerPage() {
       )}
 
       <div className="l-me__lbsection">
-        <div className="l-me__section">WHERE YOUR AIs STAND</div>
+        <div className="l-me__section">{LEADERBOARD_LIVE ? 'WHERE YOUR AIs STAND' : 'LEADERBOARD'}</div>
         <MiniLeaderboard owned={owned} limit={8} />
       </div>
     </div>

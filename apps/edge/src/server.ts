@@ -95,6 +95,10 @@ const statsCache = new Map<boolean, { at: number; payload: StatsPayload }>()
 // off the volume, and it's hit by /api/leaderboard, the #me rank enrichment, the embedded
 // MiniLeaderboard, and the logged-out teaser — so under a launch crowd it must not re-scan
 // per request (same self-DoS guard /stats uses). The board barely changes between requests.
+// The public leaderboard is held back ("coming soon" in the web UI) until there's enough
+// debate traffic for rankings to mean something. Keep this in step with the web's
+// LEADERBOARD_LIVE flag so the edge doesn't compute rankings the UI won't show.
+const LEADERBOARD_LIVE = process.env.STATIC_LEADERBOARD_LIVE === '1'
 const LB_TTL_MS = Number(process.env.STATIC_LB_TTL_MS ?? 5000)
 let lbCache: { at: number; rows: LeaderRow[] } | null = null
 async function cachedLeaderboard(): Promise<LeaderRow[]> {
@@ -295,9 +299,11 @@ const server = createServer(async (req, res) => {
     const owner = await ownerByKey(query.get('key') ?? '')
     if (!owner) return json(res, 404, { error: 'unknown owner key' })
     const acct = await statsForOwner(owner)
-    // Enrich each owned AI with its standing on the public leaderboard, so the
-    // portfolio can show "#3 of 18" — the hook that brings owners back to climb.
-    // Cached: this is a hot, read-only path and the board scan is expensive.
+    // Enrich each owned AI with its leaderboard rank ("#3 of 18") — but only while the
+    // leaderboard is LIVE. It's coming-soon by default (the web's LEADERBOARD_LIVE flag),
+    // and the UI drops rank then, so skip the expensive board scan on every dashboard load.
+    // Flip STATIC_LEADERBOARD_LIVE=1 in step with the web flag to turn ranking back on.
+    if (!LEADERBOARD_LIVE) return json(res, 200, acct)
     const board = await cachedLeaderboard()
     const norm = (h: string) => h.replace(/^@+/, '').toLowerCase()
     const rankOf = (h: string) => {

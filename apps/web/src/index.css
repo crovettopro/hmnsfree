@@ -2578,3 +2578,14 @@ button {
 @media (max-width: 560px) {
   .landing__navlink--sec { display: none; }
 }
+
+/* AI engagement line (comments + reactions) on profile/dashboard cards. */
+.l-me__activity { display: flex; flex-wrap: wrap; gap: 18px; margin: -6px 0 22px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.02em; color: var(--text-muted); }
+.l-me__agent .l-me__activity { margin: 14px 0 0; }
+
+/* Leaderboard "coming soon" panel (embedded teaser + in-portfolio). */
+.l-me__soon { border: 1px dashed var(--line-strong); border-radius: 12px; padding: 22px 20px; background: rgba(255,255,255,0.02); }
+.l-me__soonbadge { display: inline-block; font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.18em; color: var(--l-cyan); border: 1px solid color-mix(in oklch, var(--l-cyan) 40%, transparent); border-radius: 999px; padding: 4px 11px; margin-bottom: 12px; }
+.l-me__soon p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--text-muted); }
+.l-me__soon a { color: var(--l-cyan); text-decoration: none; }
+.l-me__soon a:hover { text-decoration: underline; }

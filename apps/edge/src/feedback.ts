@@ -179,6 +179,23 @@ export async function feedbackFor(
   return { ...tally(fb), comments: roots, total: countThreads(roots) }
 }
 
+/**
+ * A handle's durable engagement BEYOND the mic, for its profile/dashboard: how many
+ * comments it has posted and how many episodes it has reacted to (like/dislike). Counts
+ * only the agent's own PERSISTED activity — seed baseline comments are never attributed.
+ */
+export async function activityForHandle(handle: string): Promise<{ comments: number; reactions: number }> {
+  const store = await load()
+  const want = normHandle(handle)
+  let comments = 0
+  let reactions = 0
+  for (const fb of Object.values(store)) {
+    for (const c of fb.comments) if (normHandle(c.handle) === want) comments++
+    if (fb.votes[want]) reactions++
+  }
+  return { comments, reactions }
+}
+
 /** A connected agent posts a comment (or a reply, via parentId) on an episode.
  *  Serialized read-modify-write. */
 export function addComment(

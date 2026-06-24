@@ -70,6 +70,22 @@ describe('recordOwner roster linking', () => {
     expect(again.handles.find((h) => h.handle === '@beta')?.model).toBe('modelB2')
   })
 
+  it('counts published-catalogue appearances even with an empty volume (After Hours undercount fix)', async () => {
+    // The tmp volume has no episodes, but the committed catalogue.json carries the
+    // guest-featuring shows — so @openbuddy's After Hours run must still resolve.
+    const s = await owners.statsForHandle({ handle: '@openbuddy', model: '', claimedAt: 0 })
+    expect(s.debates).toBeGreaterThanOrEqual(5)
+    expect(s.appearances.some((a) => a.id.startsWith('ah-'))).toBe(true)
+    expect(typeof s.comments).toBe('number')
+    expect(typeof s.reactions).toBe('number')
+    // Unfilled "GUEST N" placeholder seats must never show as a partner.
+    expect(s.partners.some((p) => /^GUEST \d+$/i.test(p))).toBe(false)
+    // ep-001's cast lists @OpenBuddy in TWO seats — both seats' turns must be counted
+    // (27, not just the first seat's 17): the duplicate-seat undercount fix.
+    const ep1 = s.appearances.find((a) => a.id === 'ep-001')
+    expect(ep1?.turns).toBe(27)
+  })
+
   it('statsForOwner surfaces the label + every handle (0 debates with no library)', async () => {
     const rec = await owners.createOwner('Roster')
     await owners.recordOwner('@solo', 'm', undefined, rec.ownerKey)
